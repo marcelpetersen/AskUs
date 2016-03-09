@@ -7,7 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var gulpNgConfig = require('gulp-ng-config');
-
+var jshint = require('gulp-jshint');
 var runSequence = require('run-sequence');
 var notify = require("gulp-notify");
 var plumber = require('gulp-plumber');
@@ -50,6 +50,16 @@ gulp.task('compress', function() {
     .pipe(gulp.dest('www/js'));
 });
 
+gulp.task('lint', function() {
+  return gulp.src(DEVELOPMENT_FILES)
+    //.pipe(plumber())
+    .pipe(plumber({errorHandler: errorAlertLint}))
+    .pipe(jshint())
+    // .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
+});
+
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
@@ -64,11 +74,11 @@ gulp.task('sass', function(done) {
 });
 
 gulp.task('build', function(cb) {
-  runSequence('copy', 'concat', 'sass', cb);
+  runSequence('lint', 'copy', 'concat', 'sass', cb);
 });
 
 gulp.task('build:js', function(cb) {
-  runSequence('copy', 'concat', cb);
+  runSequence('lint', 'copy', 'concat', cb);
 });
 
 gulp.task('watch', function() {
