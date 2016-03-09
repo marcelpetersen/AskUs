@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['myApp.env'])
 
 .controller('DashCtrl', function($scope) {})
 
@@ -32,7 +32,6 @@ angular.module('starter.controllers', [])
   $scope.friendsList;
 
   var userInfo = $localstorage.get('firebase:session::ionic-fboauth');
-  console.log('call');
 
   if (userInfo) {
     userInfo = JSON.parse(userInfo);
@@ -43,7 +42,7 @@ angular.module('starter.controllers', [])
         if (response && !response.error) {
           $scope.friendsList = response.data;
           $scope.$apply();
-          console.log(response.data);
+          // console.log(response.data);
         } else {
           console.log('error', response.error)
         }
@@ -52,75 +51,31 @@ angular.module('starter.controllers', [])
   } else {
     $scope.noFriend = true;
   }
-
-
-  // var userInfo = $localstorage.get('userFB');
-  // console.log('call');
-
-  // if (userInfo) {
-  //   userInfo = JSON.parse(userInfo);
-  //   // FACEBOOK GET FRIENDS LIST
-  //   FB.api(
-  //     "/" + userInfo.facebook.id + "/friends?access_token=" + userInfo.facebook.accessToken + "&fields=name,id,email,picture",
-  //     function (response) {
-  //       if (response && !response.error) {
-  //         $scope.friendsList = response.data;
-  //         $scope.$apply();
-  //         console.log(response.data);
-  //       } else {
-  //         console.log('error', response.error)
-  //       }
-  //     }
-  //   );
-  // } else {
-  //   $scope.noFriend = true;
-  // }
 })
 
-.controller('LoginCtrl', LoginCtrl);
+.controller('LoginCtrl', function(Auth, $state, $localstorage) {
 
-function LoginCtrl(Auth, $state, $localstorage) {
   this.loginWithFacebook = function loginWithFacebook() {
     Auth.$authWithOAuthPopup('facebook',{rememberMe: true, scope: 'email, user_friends'})
       .then(function(authData) {
         console.log('auth data', authData);
-        // Get Facebook friends
-
-        // $localstorage.set('userFB', JSON.stringify(authData));
-
-       // $http.get("https://graph.facebook.com/"+authData.facebook.id+"/friends?access_token="+authData.facebook.accessToken)
-       //  .then(function(response) {
-       //      console.log(response);
-       //  });
-      // FB.init({ 
-      //   appId: '743485582448268',
-      //   status: true, 
-      //   cookie: true, 
-      //   xfbml: true,
-      //   version: 'v2.5'
-      // });
-
-        // FB.api(
-        //     "/" + authData.facebook.id + "/friends?access_token=" + authData.facebook.accessToken + "&fields=name,id,email,picture",
-        //     function (response) {
-        //       if (response && !response.error) {
-        //         console.log('facebook response', response);
-        //       } else {
-        //         console.log('error', response.error)
-        //       }
-        //     }
-        // );
         $state.go('tab.friends');
       });
   };
-  this.logWithFacebookAnotherAccount = function logWithFacebookAnotherAccount() {
-      Auth.$unauth();
-      // localstorage.set('user_id', "");
-      $localstorage.clear();
-  };
+
     this.logoutFacebook = function logoutFacebook() {
       Auth.$unauth();
+      // FB.api('/me/permissions', 'delete', function(response) {
+      //   console.log(response);
+      // })
       $state.go('tab.dash');
   };
-}
-LoginCtrl.$inject = ['Auth', '$state', '$localstorage'];
+
+    this.suspendAccountFacebook = function suspendAccountFacebook() {
+      Auth.$unauth();
+      FB.api('/me/permissions', 'delete', function(response) {
+        console.log(response);
+      })
+      $state.go('tab.dash');
+  };
+});

@@ -4,3 +4,5 @@
 node_modules/
 platforms/
 plugins/
+configFile.json
+www/configFile.js

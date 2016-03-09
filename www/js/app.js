@@ -5,10 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'firebase'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'firebase', 'myApp.env'])
 .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
 .service('rootRef', ['FirebaseUrl', Firebase])
-.run(function($ionicPlatform, $window) { 
+.run(function($ionicPlatform, $window, FBAppId) { 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,22 +23,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   });
 
-        FB.init({ 
-        appId: '743485582448268',
-        status: true, 
-        cookie: true, 
-        xfbml: true,
-        version: 'v2.5'
-      });
+  FB.init({ 
+    appId: FBAppId,
+    status: true, 
+    cookie: true, 
+    xfbml: true,
+    version: 'v2.5'
+  });
 
   //   $window.fbAsyncInit = function() {
-  //     // FB.init({ 
-  //     //   appId: '743485582448268',
-  //     //   status: true, 
-  //     //   cookie: true, 
-  //     //   xfbml: true,
-  //     //   version: 'v2.5'
-  //     // });
+  //     FB.init({ 
+  //       appId: '743485582448268',
+  //       status: true, 
+  //       cookie: true, 
+  //       xfbml: true,
+  //       version: 'v2.5'
+  //     });
   // };
 })
 

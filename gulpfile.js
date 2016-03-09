@@ -6,10 +6,17 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var gulpNgConfig = require('gulp-ng-config');
 
 var paths = {
   sass: ['./scss/**/*.scss']
 };
+
+gulp.task('config-files', function () {
+  gulp.src('configFile.json')
+  .pipe(gulpNgConfig('myApp.env'))
+  .pipe(gulp.dest('./www/js'))
+});
 
 gulp.task('default', ['sass']);
 
