@@ -1,14 +1,10 @@
-// Ionic Starter App
+// Ionic App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
 angular.module('myApp', [
   'ionic',
   'firebase',
   'myApp.acountTab',
+  'myApp.splash',
   'myApp.chatsTab',
   'myApp.chat',
   'myApp.dashTab',
@@ -41,7 +37,7 @@ angular.module('myApp', [
       if (toState.authRequired && !userAuth.isAuth()){ //Assuming the AuthService holds authentication logic
         // User isn’t authenticated
         console.log('Please Login');
-        $state.go("tab.dash");
+        $state.go("splash");
         event.preventDefault(); 
       }
     });
@@ -67,7 +63,6 @@ angular.module('myApp', [
 
   
 
-
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -83,6 +78,14 @@ angular.module('myApp', [
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
+  })
+
+  // Splash Screen & Login
+  .state('splash', {
+    authRequired: false,
+    templateUrl: 'templates/splash.html',
+    url: '/splash',
+    controller: 'splashCtrl'
   })
 
   // Each tab has its own nav history stack:
