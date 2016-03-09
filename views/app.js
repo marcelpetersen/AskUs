@@ -3,6 +3,9 @@
 angular.module('myApp', [
   'ionic',
   'firebase',
+  'myApp.authService',
+  'myApp.routingService',
+  'myApp.facebookService',
   'myApp.acountTab',
   'myApp.splash',
   'myApp.chatsTab',
@@ -11,9 +14,7 @@ angular.module('myApp', [
   'myApp.friends',
   'myApp.login',
   'myApp.services',
-  'myApp.env',
-  'myApp.authService',
-  'myApp.routingService'
+  'myApp.env'
 ])
 
 
@@ -35,7 +36,7 @@ angular.module('myApp', [
 
     // Redirect the user if authenticate
     if (userAuth.isAuth()){ 
-      // $state.go("tab.dash"); 
+      //$state.go("tab.dash"); 
     } else {
       $state.go("splash");
     }

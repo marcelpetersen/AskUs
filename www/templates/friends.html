@@ -1,5 +1,9 @@
 <ion-view view-title="Friends">
   <ion-content>
+    <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
     <div class="padding">
     <div ng-show="noFriend">No friends</div>
     <div class="friends-list">
