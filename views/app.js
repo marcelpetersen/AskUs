@@ -15,13 +15,14 @@ angular.module('myApp', [
   'myApp.friends',
   'myApp.login',
   'myApp.services',
-  'myApp.env'
+  'myApp.env',
+  'myApp.authService'
 ])
 
 
 .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
 .service('rootRef', ['FirebaseUrl', Firebase])
-.run(function($ionicPlatform, $window, FBAppId) { 
+.run(function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state) { 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -34,6 +35,16 @@ angular.module('myApp', [
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+        //stateChange event
+      $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+      if (toState.authRequired && !userAuth.isAuth()){ //Assuming the AuthService holds authentication logic
+        // User isn’t authenticated
+        console.log('Please Login');
+        $state.go("tab.dash");
+        event.preventDefault(); 
+      }
+    });
   });
 
   FB.init({ 
@@ -53,6 +64,10 @@ angular.module('myApp', [
   //       version: 'v2.5'
   //     });
   // };
+
+  
+
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -73,6 +88,7 @@ angular.module('myApp', [
   // Each tab has its own nav history stack:
 
   .state('tab.dash', {
+    authRequired: true,
     url: '/dash',
     views: {
       'tab-dash': {
@@ -83,15 +99,17 @@ angular.module('myApp', [
   })
 
   .state('tab.chats', {
+      authRequired: true,
       url: '/chats',
       views: {
         'tab-chats': {
           templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+          controller: 'ChatsCtrl',
         }
       }
     })
     .state('tab.chat-detail', {
+      authRequired: true,
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
@@ -102,6 +120,7 @@ angular.module('myApp', [
     })
 
     .state('tab.login', {
+      authRequired: true,
       url: '/login',
       views:{
         'tab-login' : {
@@ -112,6 +131,7 @@ angular.module('myApp', [
     })
 
     .state('tab.friends', {
+      authRequired: true,
       cache: false,
       url: '/friends',
       views:{
@@ -123,6 +143,7 @@ angular.module('myApp', [
     })
 
   .state('tab.account', {
+    authRequired: true,
     url: '/account',
     views: {
       'tab-account': {
