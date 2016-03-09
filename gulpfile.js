@@ -8,17 +8,47 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var gulpNgConfig = require('gulp-ng-config');
 
+var runSequence = require('run-sequence');
+var notify = require("gulp-notify");
+var plumber = require('gulp-plumber');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+
+var DEVELOPMENT_FILES = ['views/**/*.js', 'services/**/*.js'];
+var HTML_FILES = ['views/**/*.html'];
+
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
+gulp.task('copy', function() {
+    gulp.src(['views/**/*.html'])
+      .pipe(rename({dirname: ''}))
+      .pipe(gulp.dest('www/templates/'))
+});
+
 gulp.task('config-files', function () {
   gulp.src('configFile.json')
   .pipe(gulpNgConfig('myApp.env'))
-  .pipe(gulp.dest('./www/js'))
+  .pipe(gulp.dest('./views'))
 });
 
 gulp.task('default', ['sass']);
+
+gulp.task('concat', function() {
+  return gulp.src(DEVELOPMENT_FILES)
+    .pipe(plumber({errorHandler: errorAlertConcat}))
+    .pipe(concat('app.concat.js'))
+    .pipe(gulp.dest('www/js'));
+});
+
+gulp.task('compress', function() {
+  return gulp.src('www/app.concat.js')
+    .pipe(plumber({errorHandler: errorAlertUgly}))
+    .pipe(uglify())
+    .pipe(rename('app.min.js'))
+    .pipe(gulp.dest('www/js'));
+});
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -33,7 +63,16 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
+gulp.task('build', function(cb) {
+  runSequence('copy', 'concat', 'sass', cb);
+});
+
+gulp.task('build:js', function(cb) {
+  runSequence('copy', 'concat', cb);
+});
+
 gulp.task('watch', function() {
+  gulp.watch([DEVELOPMENT_FILES,HTML_FILES], ['build']);
   gulp.watch(paths.sass, ['sass']);
 });
 
@@ -56,3 +95,28 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+// Error notification functions
+function errorAlertLint(error){
+  notify.onError({title: "Lint Error", message: "Check your terminal", sound: "Sosumi"})(error); //Error Notification
+  console.log(error.toString());//Prints Error to Console
+  this.emit("end"); //End function
+};
+
+function errorAlertSass(error){
+  notify.onError({title: "Sass Error", message: "Check your terminal", sound: "Sosumi"})(error); //Error Notification
+  console.log(error.toString());//Prints Error to Console
+  this.emit("end"); //End function
+};
+
+function errorAlertConcat(error){
+  notify.onError({title: "Concat Error", message: "Check your terminal", sound: "Sosumi"})(error); //Error Notification
+  console.log(error.toString());//Prints Error to Console
+  this.emit("end"); //End function
+};
+
+function errorAlertUgly(error){
+  notify.onError({title: "Uglify Error", message: "Check your terminal", sound: "Sosumi"})(error); //Error Notification
+  console.log(error.toString());//Prints Error to Console
+  this.emit("end"); //End function
+};

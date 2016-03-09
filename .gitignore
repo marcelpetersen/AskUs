@@ -6,3 +6,5 @@ platforms/
 plugins/
 configFile.json
 www/configFile.js
+www/js/
+configFile.js

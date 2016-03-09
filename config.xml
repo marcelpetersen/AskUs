@@ -19,6 +19,15 @@
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
+
+    <!-- Allow links to example.com -->
+    <allow-navigation href="https://www.facebook.com/*" />
+    <allow-navigation href="*://staticxx.facebook.com/*" />
+    <allow-navigation href="*://*.firebaseio.com/*" />
+    <allow-navigation href="about:*" />
+    <allow-navigation href="about:blank" />
+    <!-- <allow-navigation href="*" /> -->
+
     <platform name="ios">
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />

@@ -5,7 +5,20 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'firebase', 'myApp.env'])
+angular.module('myApp', [
+  'ionic',
+  'firebase',
+  'myApp.acountTab',
+  'myApp.chatsTab',
+  'myApp.chat',
+  'myApp.dashTab',
+  'myApp.friends',
+  'myApp.login',
+  'myApp.services',
+  'myApp.env'
+])
+
+
 .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
 .service('rootRef', ['FirebaseUrl', Firebase])
 .run(function($ionicPlatform, $window, FBAppId) { 
