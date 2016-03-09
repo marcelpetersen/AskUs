@@ -11,15 +11,17 @@ angular.module('myApp.facebookService', [])
             function (response) {
               if (response && !response.error) {
                 $scope.friendsList = response.data;
-                $scope.$apply();
-                // console.log(response.data);
+                $scope.$apply();                
+                $scope.$broadcast('scroll.refreshComplete');
               } else {
                 console.log('error', response.error)
+                $scope.$broadcast('scroll.refreshComplete');
               }
             }
           );
         } else {
           $scope.noFriend = true;
+          $scope.$broadcast('scroll.refreshComplete');
         }
     }
   }
