@@ -1,0 +1,15 @@
+<ion-view view-title="Friends">
+  <ion-content>
+    <div class="padding">
+    <div ng-show="noFriend">No friends</div>
+    <div class="friends-list">
+      <ul>
+        <li ng-repeat="friend in friendsList">
+          <div class="pic" style="background-image:url({{friend.picture.data.url}});background-size: cover; width: 30px; height: 30px"></div>
+          {{friend.name}}
+        </li>
+      </ul>
+    </div>
+    </div>
+  </ion-content>
+</ion-view>
