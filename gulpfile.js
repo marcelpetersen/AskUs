@@ -15,11 +15,12 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
 var DEVELOPMENT_FILES = ['views/**/*.js', 'services/**/*.js'];
+var SASS_FILES = ['./scss/ionic.app.scss', './scss/app.scss', 'views/**/*.scss'];
 var HTML_FILES = ['views/**/*.html'];
 
-var paths = {
-  sass: ['./scss/**/*.scss']
-};
+// var paths = {
+//   sass: ['./scss/**/*.scss']
+// };
 
 gulp.task('copy', function() {
     gulp.src(['views/**/*.html'])
@@ -61,7 +62,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+  gulp.src(SASS_FILES)
     .pipe(sass())
     .on('error', sass.logError)
     .pipe(gulp.dest('./www/css/'))
@@ -83,7 +84,7 @@ gulp.task('build:js', function(cb) {
 
 gulp.task('watch', function() {
   gulp.watch([DEVELOPMENT_FILES,HTML_FILES], ['build']);
-  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(SASS_FILES, ['sass']);
 });
 
 gulp.task('install', ['git-check'], function() {

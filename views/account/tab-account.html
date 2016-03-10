@@ -1,9 +1,40 @@
-<ion-view view-title="Account">
+<ion-view view-title="Account" id="account-page">
   <ion-content>
     <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
+
+      <ion-item class="account-tab-user">
+        <h2>User Name</h2>
+      </ion-item>
+
+      <a class="item item-icon-left" href="#">
+        <i class="icon ion-person"></i>
+        My Page
+      </a>
+
+      <a class="item item-icon-left" href="#">
+        <i class="icon ion-star"></i>
+        Activity
+        <span class="badge badge-assertive">2</span>
+      </a>
+
+      <a class="item item-icon-left" href="#">
+        <i class="icon ion-ios-information"></i>
+        Support
+      </a>
+
+      <a class="item item-icon-left" href="#/tab/preferences">
+        <i class="icon ion-ios-gear"></i>
+        Preferences
+      </a>
+
+      <ion-item class="item-icon-right" on-touch="logoutFacebook()">
+        Logout
+        <i class="icon ion-log-out"></i>
+      </ion-item>
+
     </ion-list>
+
   </ion-content>
 </ion-view>
+
+

@@ -3,18 +3,18 @@
 angular.module('myApp', [
   'ionic',
   'firebase',
+  'myApp.env',
   'myApp.authService',
   'myApp.routingService',
   'myApp.facebookService',
+  'myApp.usersServices',
   'myApp.acountTab',
+  'myApp.preferences',
   'myApp.splash',
-  'myApp.chatsTab',
-  'myApp.chat',
   'myApp.dashTab',
   'myApp.friends',
-  'myApp.login',
   'myApp.services',
-  'myApp.env'
+  'myApp.userPage'
 ])
 
 

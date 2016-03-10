@@ -1,19 +1,23 @@
-<ion-view view-title="Friends">
+<ion-view view-title="Friends" id="friends-page">
   <ion-content>
-    <ion-refresher
+
+  <ion-refresher
     pulling-text="Pull to refresh..."
     on-refresh="doRefresh()">
   </ion-refresher>
-    <div class="padding">
-    <div ng-show="noFriend">No friends</div>
-    <div class="friends-list">
-      <ul>
-        <li ng-repeat="friend in friendsList">
-          <div class="pic" style="background-image:url({{friend.picture.data.url}});background-size: cover; width: 30px; height: 30px"></div>
-          {{friend.name}}
-        </li>
-      </ul>
-    </div>
-    </div>
+
+
+    <ion-list>
+      <ion-item class="item-avatar item-icon-right" ng-repeat="friend in friendsList" on-touch="friendPage(friend)" type="item-text-wrap" href="#/tab/friends/{{friend.name}}">
+        <img ng-src="{{friend.picture.data.url}}">
+        <h2>{{friend.name}}</h2>
+        
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

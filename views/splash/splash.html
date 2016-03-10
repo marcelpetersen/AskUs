@@ -1,8 +1,8 @@
-<ion-view hide-nav-bar="true" view-title="splashscreen" ng-controller="LoginCtrl as ctrl">
+<ion-view hide-nav-bar="true" view-title="splashscreen">
   <ion-content class="padding">
     <h2>Welcome to my App</h2>
     <div class="padding">
-      <button class="button button-block button-assertive" ng-click="ctrl.loginWithFacebook()">
+      <button class="button button-block button-assertive" on-touch="login()">
         Facebook
       </button>
     </div>
