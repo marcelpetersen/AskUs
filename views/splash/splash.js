@@ -1,7 +1,12 @@
 angular.module('myApp.splash', ['myApp.env'])
 
 .controller('splashCtrl', function($scope, userAuth) {
-  console.log('splash');
+  
+  // Set first section height
+  var windowHeight = $(window).height();
+  $('.section.first').height(windowHeight);
+
+
   $scope.login = function() {
     userAuth.loginWithFacebook();
   }

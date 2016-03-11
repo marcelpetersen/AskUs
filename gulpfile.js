@@ -13,6 +13,7 @@ var notify = require("gulp-notify");
 var plumber = require('gulp-plumber');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var exec = require('child_process').exec;
 
 var DEVELOPMENT_FILES = ['views/**/*.js', 'services/**/*.js'];
 var SASS_FILES = ['./scss/ionic.app.scss', './scss/app.scss', 'views/**/*.scss'];
@@ -21,6 +22,14 @@ var HTML_FILES = ['views/**/*.html'];
 // var paths = {
 //   sass: ['./scss/**/*.scss']
 // };
+
+gulp.task('ios', function (cb) {
+  exec('ionic run ios --target="iPhone-6"', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+})
 
 gulp.task('copy', function() {
     gulp.src(['views/**/*.html'])

@@ -15,7 +15,9 @@ angular.module('myApp.friends', ['myApp.env'])
     facebook.getFriends($scope, userInfo).then(function(data) {
       $scope.friendsList = data;
       $scope.$broadcast('scroll.refreshComplete');
-      angular.element('.icon-refreshing').removeClass('spin');
+      $timeout(function(){
+        angular.element('.icon-refreshing').removeClass('spin');
+      }, 500);
     }); 
   };
 

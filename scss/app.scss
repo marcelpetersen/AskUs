@@ -16,11 +16,10 @@ $dark:                            #444 !default;
 */
 
 // Views
+@import "views/splash/splash";
 @import "views/friends/friends";
 @import "views/account/account";
 @import "views/account/preferences/preferences";
-
-
 
 .spin {
   -webkit-animation: spin 2s linear infinite;

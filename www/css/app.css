@@ -14,6 +14,25 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+#splash-page .page-content .section.first {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url("../img/account-bg.jpg");
+  background-size: cover;
+  background-position: 50% 50%; }
+  #splash-page .page-content .section.first h2 {
+    color: white; }
+  #splash-page .page-content .section.first button {
+    width: 80%;
+    background-color: #3b5998;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: 1px solid #8b9dc3; }
+    #splash-page .page-content .section.first button i {
+      margin-right: 20px; }
+
 #friends-page h2 {
   margin-top: 10px; }
 
