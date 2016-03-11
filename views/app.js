@@ -19,7 +19,7 @@ angular.module('myApp', [
 ])
 
 
-.constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
+// .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
 .service('rootRef', ['FirebaseUrl', Firebase])
 .run(function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate) { 
   $ionicPlatform.ready(function() {

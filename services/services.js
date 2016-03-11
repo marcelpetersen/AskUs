@@ -18,10 +18,6 @@ angular.module('myApp.services', [])
         $window.localStorage.clear();
     }
   }
-}])
-
-.factory('Auth', function(rootRef, $firebaseAuth) {
-  return $firebaseAuth(rootRef);
-});
+}]);
 
 

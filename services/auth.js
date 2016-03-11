@@ -1,6 +1,10 @@
 angular.module('myApp.authService', [])
 
-.factory('userAuth', function(Auth, $http, $localstorage, $state, currentUserInfos) {
+.factory('Auth', function(rootRef, $firebaseAuth) {
+  return $firebaseAuth(rootRef);
+})
+
+.factory('userAuth', function(Auth, $http, $localstorage, $state, FirebaseUrl, $window) {
 
   var isAuth = function() {
     return !!$localstorage.get('firebase:session::ionic-fboauth');
@@ -9,15 +13,34 @@ angular.module('myApp.authService', [])
   var loginWithFacebook = function() {
     Auth.$authWithOAuthPopup('facebook',{rememberMe: true, scope: 'email, user_friends'})
     .then(function(authData) {
-      console.log('auth data', authData);
-      // currentUserInfos.currentUserInfoSet(authData.facebook);
+
+      var userDataToSave = authData.facebook;
+      var firebase = new Firebase(FirebaseUrl + '/');
+      var userRef = firebase.child("users");
+
+      // Check if the user exist in the DB
+      userRef.orderByChild("id").equalTo(authData.facebook.id).once("value", function(snapshot) {
+        console.log(snapshot.exists());
+        if (!snapshot.exists()) {
+          // Create new user in the database
+          userRef.push(userDataToSave, function(error, authData) {
+            if (error) {
+              console.log("saving Failed!", error);
+            } else {
+              console.log('saving ok');
+            }
+          });
+        } else {
+          console.log('user already exists');
+        }
+      });
       $state.go('tab.dash');
     });
   };
 
   var logoutFacebook = function() {
     Auth.$unauth();
-    $state.go('splash');
+    $window.location.href = '#/splash';
   };
 
   var suspendAccountFacebook = function() {
@@ -25,7 +48,7 @@ angular.module('myApp.authService', [])
     FB.api('/me/permissions', 'delete', function(response) {
       console.log(response);
     });
-    $state.go('tab.dash');
+    $window.location.href = '#/splash';
   };
 
   return {
@@ -36,3 +59,5 @@ angular.module('myApp.authService', [])
   };
 
 });
+
+
