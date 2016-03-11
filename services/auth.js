@@ -1,6 +1,6 @@
 angular.module('myApp.authService', [])
 
-.factory('userAuth', function(Auth, $http, $localstorage, $state) {
+.factory('userAuth', function(Auth, $http, $localstorage, $state, currentUserInfos) {
 
   var isAuth = function() {
     return !!$localstorage.get('firebase:session::ionic-fboauth');
@@ -10,6 +10,7 @@ angular.module('myApp.authService', [])
     Auth.$authWithOAuthPopup('facebook',{rememberMe: true, scope: 'email, user_friends'})
     .then(function(authData) {
       console.log('auth data', authData);
+      // currentUserInfos.currentUserInfoSet(authData.facebook);
       $state.go('tab.dash');
     });
   };

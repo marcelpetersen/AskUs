@@ -1,3 +1,63 @@
 #account-page {
+  .page-content {
+    .list {
+      .account-tab-user {
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction:column;
+
+        padding-top: 60px;
+        padding-bottom: 60px;
+
+        position: relative;
+        .background-picture {
+          position: absolute;
+          top: 0px;
+          bottom: 0px;
+          left: 0px;
+          right: 0px;
+          background-image:url('../img/account-bg.jpg');
+          background-size: cover;
+          background-position: 50% 50%;
+          -webkit-filter: blur(2px);
+          -moz-filter: blur(2px);
+          -o-filter: blur(2px);
+          -ms-filter: blur(2px);
+          filter: blur(2px);
+          z-index: -1;
+        }
+        .user-pic {
+          background-size: cover;
+          background-position: 50% 50%;
+          border-radius: 50%;
+          width: 30%;
+          // padding-bottom: 30%;
+          &:after {
+            content:"";
+            display: block;
+            margin-top: 100%;
+          }
+        }
+        h2 {
+          margin-top: 20px;
+          color: white;
+          font-weight: bold;
+        }
+      }
+      .item {
+        &.logout-item {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          min-height: 54px;
+          button {
+            min-height: 0px;
+            line-height: 30px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }

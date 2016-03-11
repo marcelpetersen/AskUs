@@ -1,9 +1,12 @@
-<ion-view view-title="Account" id="account-page">
-  <ion-content>
+<ion-view view-title="Account" id="account-page" autoscroll="true">
+  <ion-content class="page-content">
     <ion-list>
 
       <ion-item class="account-tab-user">
-        <h2>User Name</h2>
+        <div class="background-picture"></div>
+
+        <div class="user-pic" ng-style="{'background-image':'url({{currentUser.profileImageURL}})'}"></div>
+        <h2>{{currentUser.displayName}}</h2>
       </ion-item>
 
       <a class="item item-icon-left" href="#">
@@ -27,8 +30,10 @@
         Preferences
       </a>
 
-      <ion-item class="item-icon-right" on-touch="logoutFacebook()">
-        Logout
+      <ion-item class="item-icon-right logout-item" on-touch="logoutFacebook()">
+        <button class="button button-assertive">
+          Logout
+        </button>
         <i class="icon ion-log-out"></i>
       </ion-item>
 

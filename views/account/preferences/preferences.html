@@ -1,14 +1,16 @@
 <ion-view view-title="Preferences" id="preferences-page">
-  <ion-content>
+  <ion-content class="page-content">
     <ion-list>
 
       <ion-toggle  ng-model="settings.enableNotifications">
         Notifications
       </ion-toggle>
 
-      <ion-item class="item-icon-right" on-touch="suspendAccountFacebook()">
+      <ion-item class="item-icon-right suspend-item" on-touch="suspendAccountFacebook()">
+        <button class="button button-assertive">
           Suspend my account
-          <i class="icon ion-close"></i>
+        </button>
+        <i class="icon ion-close"></i>
       </ion-item>
 
     </ion-list>

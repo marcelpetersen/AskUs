@@ -1,4 +1,19 @@
 #preferences-page {
-
+  .page-content {
+    .list {
+      .item {
+        &.suspend-item {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          min-height: 54px;
+          button {
+            min-height: 0px;
+            line-height: 30px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 
 }

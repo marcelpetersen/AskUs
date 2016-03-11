@@ -32,38 +32,6 @@ angular.module('myApp.routingService', [])
     }
   })
 
-  // .state('tab.chats', {
-  //     authRequired: true,
-  //     url: '/chats',
-  //     views: {
-  //       'tab-chats': {
-  //         templateUrl: 'templates/tab-chats.html',
-  //         controller: 'ChatsCtrl',
-  //       }
-  //     }
-  //   })
-  //   .state('tab.chat-detail', {
-  //     authRequired: true,
-  //     url: '/chats/:chatId',
-  //     views: {
-  //       'tab-chats': {
-  //         templateUrl: 'templates/chat-detail.html',
-  //         controller: 'ChatDetailCtrl'
-  //       }
-  //     }
-  //   })
-
-    // .state('tab.login', {
-    //   authRequired: true,
-    //   url: '/login',
-    //   views:{
-    //     'tab-login' : {
-    //       templateUrl: 'templates/login.html',
-    //       controller: 'LoginCtrl as ctrl'
-    //     }
-    //   }
-    // })
-
     .state('tab.friends', {
       authRequired: true,
       cache: false,
@@ -90,6 +58,7 @@ angular.module('myApp.routingService', [])
     })
 
   .state('tab.account', {
+    cache:false,
     authRequired: true,
     url: '/account',
     views: {

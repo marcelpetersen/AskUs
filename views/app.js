@@ -7,6 +7,7 @@ angular.module('myApp', [
   'myApp.authService',
   'myApp.routingService',
   'myApp.facebookService',
+  'myApp.currentUserServices',
   'myApp.usersServices',
   'myApp.acountTab',
   'myApp.preferences',
@@ -20,7 +21,7 @@ angular.module('myApp', [
 
 .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
 .service('rootRef', ['FirebaseUrl', Firebase])
-.run(function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state) { 
+.run(function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate) { 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -51,6 +52,11 @@ angular.module('myApp', [
       event.preventDefault(); 
     }
   });
+
+  // // Scroll Auto top
+  // $rootScope.$on("$stateChangeSuccess", function(){
+  //   $ionicScrollDelegate.scrollTop();
+  // });
 
   // Facebook Init
   FB.init({ 

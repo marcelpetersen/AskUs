@@ -5,7 +5,7 @@ angular.module('myApp.userPage', ['myApp.env'])
 
 
 
-  // $scope.user = usersInfos.singleUserInfoGet();
+  $scope.user = usersInfos.singleUserInfoGet();
   // console.log($scope.user);
 
   // Test User page
