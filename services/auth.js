@@ -16,14 +16,17 @@ angular.module('myApp.authService', [])
 
       var userDataToSave = authData.facebook;
       var firebase = new Firebase(FirebaseUrl + '/');
-      var userRef = firebase.child("users");
+      var userRef = firebase.child("users/" + authData.facebook.id );
+      // Previous
+      // var userRef = firebase.child("users/");
 
       // Check if the user exist in the DB
       userRef.orderByChild("id").equalTo(authData.facebook.id).once("value", function(snapshot) {
         console.log(snapshot.exists());
         if (!snapshot.exists()) {
           // Create new user in the database
-          userRef.push(userDataToSave, function(error, authData) {
+          // ******** Previous used push() *********
+          userRef.set(userDataToSave, function(error, authData) {
             if (error) {
               console.log("saving Failed!", error);
             } else {

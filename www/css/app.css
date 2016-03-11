@@ -3,16 +3,6 @@ To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
 
 For example, you might change some of the default colors:
-
-$light:                           #fff !default;
-$stable:                          #f8f8f8 !default;
-$positive:                        #387ef5 !default;
-$calm:                            #11c1f3 !default;
-$balanced:                        #33cd5f !default;
-$energized:                       #ffc900 !default;
-$assertive:                       #ef473a !default;
-$royal:                           #886aea !default;
-$dark:                            #444 !default;
 */
 #splash-page .page-content .section.first {
   display: flex;
@@ -35,6 +25,19 @@ $dark:                            #444 !default;
 
 #friends-page h2 {
   margin-top: 10px; }
+
+#post-add-page .page-content form .list textarea {
+  padding-top: 10px; }
+
+#post-add-page .page-content form .list span, #post-add-page .page-content form .list input, #post-add-page .page-content form .list textarea {
+  background: none; }
+
+#post-add-page .page-content form .list .no-errors {
+  background-color: #33cd5f;
+  transition: all 1s ease; }
+  #post-add-page .page-content form .list .no-errors span, #post-add-page .page-content form .list .no-errors input, #post-add-page .page-content form .list .no-errors textarea {
+    color: white;
+    transition: all 0.2s ease; }
 
 #account-page .page-content .list .account-tab-user {
   display: flex;

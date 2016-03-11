@@ -20,14 +20,25 @@ angular.module('myApp.routingService', [])
   })
 
   // Each tab has its own nav history stack:
-
   .state('tab.dash', {
+    cache:true,
     authRequired: true,
     url: '/dash',
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
         controller: 'DashCtrl'
+      }
+    }
+  })
+
+    .state('tab.add', {
+    authRequired: false,
+    url: '/add',
+    views: {
+      'tab-add': {
+        templateUrl: 'templates/tab-add.html',
+        controller: 'addCtrl'
       }
     }
   })

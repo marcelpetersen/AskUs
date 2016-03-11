@@ -1,0 +1,23 @@
+#post-add-page {
+  .page-content {
+
+    form {
+      .list {
+        textarea {
+          padding-top: 10px;
+        }
+        span, input, textarea {
+            background: none;
+          }
+        .no-errors {
+          background-color: $balanced;
+          transition: all 1s ease;
+          span, input, textarea {
+            color: white;
+            transition: all 0.2s ease;
+          }
+        }
+      }
+    }
+  }
+}

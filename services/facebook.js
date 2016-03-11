@@ -1,6 +1,6 @@
 angular.module('myApp.facebookService', [])
 
-.factory('facebook', function($q, $rootScope) {
+.factory('facebook', function($q, $rootScope, FirebaseUrl, currentUserInfos) {
 
  resolve = function(errval, retval, deferred) {
     $rootScope.$apply(function() {
@@ -13,8 +13,6 @@ angular.module('myApp.facebookService', [])
     });
   }
   return {
-
-
     getFriends: function($scope, userDetail) {
         var deferred = $q.defer();
         if (userDetail) {
@@ -32,37 +30,24 @@ angular.module('myApp.facebookService', [])
           );
         } else {
           resolve(null, "no friend", deferred);
-          // $scope.noFriend = true;
-          // $scope.$broadcast('scroll.refreshComplete');
         }
          promise = deferred.promise;
     
       return promise;
+    },
+    updateFriendsList: function(friendsList) {
+      if (friendsList.length > 0) {
+      var userId = currentUserInfos.currentUserInfoGet();
+      userId = userId.id;
+
+      var firebase = new Firebase(FirebaseUrl + '/');
+      var userRef = firebase.child("users/" + userId + "/friends/");
+      userRef.set(friendsList, function(snapshot) {
+        console.log('friend list saved');
+      });
+    } else {
+      console.log('no friend to store');
+    }
     }
   }
-
-  // return {
-    // getFriends: function($scope, userDetail) {
-    //     if (userDetail) {
-    //       userDetail = JSON.parse(userDetail);
-    //       // FACEBOOK GET FRIENDS LIST
-    //       FB.api(
-    //         "/" + userDetail.facebook.id + "/friends?access_token=" + userDetail.facebook.accessToken + "&fields=name,id,email,picture",
-    //         function (response) {
-    //           if (response && !response.error) {
-    //             $scope.friendsList = response.data;
-    //             $scope.$apply();                
-    //             $scope.$broadcast('scroll.refreshComplete');
-    //           } else {
-    //             console.log('error', response.error)
-    //             $scope.$broadcast('scroll.refreshComplete');
-    //           }
-    //         }
-    //       );
-    //     } else {
-    //       $scope.noFriend = true;
-    //       $scope.$broadcast('scroll.refreshComplete');
-    //     }
-    // }
-  // }
 });

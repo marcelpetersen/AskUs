@@ -8,6 +8,8 @@
     refreshing-icon="ion-load-c">
   </ion-refresher>
 
+  <p ng-show="noFriend">No Friends</p>
+
 
     <ion-list>
       <ion-item class="item-avatar item-icon-right" ng-repeat="friend in friendsList" on-touch="friendPage(friend)" type="item-text-wrap" href="#/tab/friends/{{friend.name}}">

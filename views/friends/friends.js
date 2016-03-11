@@ -8,12 +8,28 @@ angular.module('myApp.friends', ['myApp.env'])
 
   facebook.getFriends($scope, userInfo).then(function(data) {
     $scope.friendsList = data;
+    if (data.length === 0) {$scope.noFriend = true;}
+
+    // Save friends list into the user DB
+    var idList = [];
+    data.forEach(function(item) {
+      idList.push(item.id);
+    })
+    facebook.updateFriendsList(idList);
   })
 
   $scope.doRefresh = function() {
     angular.element('.icon-refreshing').addClass('spin');
     facebook.getFriends($scope, userInfo).then(function(data) {
       $scope.friendsList = data;
+
+      // Save friends list into the user DB
+      var idList = [];
+      data.forEach(function(item) {
+        idList.push(item.id);
+      })
+      facebook.updateFriendsList(idList);
+
       $scope.$broadcast('scroll.refreshComplete');
       $timeout(function(){
         angular.element('.icon-refreshing').removeClass('spin');
