@@ -34,7 +34,7 @@ angular.module('myApp.routingService', [])
 
     .state('tab.friends', {
       authRequired: true,
-      cache: false,
+      cache: true,
       url: '/friends',
       views:{
         'tab-friends' : {
@@ -58,7 +58,7 @@ angular.module('myApp.routingService', [])
     })
 
   .state('tab.account', {
-    cache:false,
+    cache:true,
     authRequired: true,
     url: '/account',
     views: {

@@ -1,9 +1,7 @@
 angular.module('myApp.userPage', ['myApp.env'])
 
-.controller('userPageCtrl', function($scope, $stateParams, Chats, usersInfos) {
+.controller('userPageCtrl', function($scope, $stateParams, usersInfos) {
   // $scope.chat = Chats.get($stateParams.chatId);
-
-
 
   $scope.user = usersInfos.singleUserInfoGet();
   // console.log($scope.user);

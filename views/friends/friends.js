@@ -11,9 +11,11 @@ angular.module('myApp.friends', ['myApp.env'])
   })
 
   $scope.doRefresh = function() {
+    angular.element('.icon-refreshing').addClass('spin');
     facebook.getFriends($scope, userInfo).then(function(data) {
       $scope.friendsList = data;
       $scope.$broadcast('scroll.refreshComplete');
+      angular.element('.icon-refreshing').removeClass('spin');
     }); 
   };
 
