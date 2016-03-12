@@ -39,6 +39,9 @@ For example, you might change some of the default colors:
     color: white;
     transition: all 0.2s ease; }
 
+#dash-page .page-content .posts-list-container .card:first-child {
+  margin-top: 0px; }
+
 #account-page .page-content .list .account-tab-user {
   display: flex;
   align-items: center;

@@ -1,0 +1,14 @@
+#dash-page {
+.page-content {
+  .posts-list-container {
+    .card {
+      &:first-child {
+        margin-top: 0px;
+      
+      }
+    }
+  }
+}
+
+
+}
