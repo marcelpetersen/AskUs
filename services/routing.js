@@ -32,7 +32,8 @@ angular.module('myApp.routingService', [])
     }
   })
 
-    .state('tab.add', {
+  .state('tab.add', {
+    cache: false,
     authRequired: false,
     url: '/add',
     views: {

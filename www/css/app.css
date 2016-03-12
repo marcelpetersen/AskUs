@@ -26,18 +26,44 @@ For example, you might change some of the default colors:
 #friends-page h2 {
   margin-top: 10px; }
 
-#post-add-page .page-content form .list textarea {
-  padding-top: 10px; }
+#post-add-page .page-content .picture-container {
+  max-width: 500%;
+  width: 100%;
+  background-color: #EEE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom: 10px; }
+  #post-add-page .page-content .picture-container:after {
+    content: "";
+    display: block;
+    margin-top: 50%; }
+  #post-add-page .page-content .picture-container button {
+    border-radius: 50%;
+    margin: 0px 40px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #EEE; }
 
-#post-add-page .page-content form .list span, #post-add-page .page-content form .list input, #post-add-page .page-content form .list textarea {
-  background: none; }
-
-#post-add-page .page-content form .list .no-errors {
-  background-color: #33cd5f;
-  transition: all 1s ease; }
-  #post-add-page .page-content form .list .no-errors span, #post-add-page .page-content form .list .no-errors input, #post-add-page .page-content form .list .no-errors textarea {
-    color: white;
-    transition: all 0.2s ease; }
+#post-add-page .page-content form {
+  padding-bottom: 20px; }
+  #post-add-page .page-content form .list textarea {
+    padding-top: 10px; }
+  #post-add-page .page-content form .list span, #post-add-page .page-content form .list input, #post-add-page .page-content form .list textarea {
+    background: none; }
+  #post-add-page .page-content form .list .no-errors {
+    background-color: #33cd5f;
+    transition: all 1s ease; }
+    #post-add-page .page-content form .list .no-errors span, #post-add-page .page-content form .list .no-errors input, #post-add-page .page-content form .list .no-errors textarea {
+      color: white;
+      transition: all 0.2s ease; }
+  #post-add-page .page-content form .btn-form-submit {
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 5px; }
 
 #dash-page .page-content .posts-list-container .card:first-child {
   margin-top: 0px; }

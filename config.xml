@@ -14,28 +14,18 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
-    <!-- <preference name="SplashScreen" value="screen" /> -->
-    <!-- <preference name="SplashScreenDelay" value="1000" /> -->
-    <preference name="ShowSplashScreenSpinner" value="false"/>
-    <preference name="FadeSplashScreenDuration" value="500"/>
-
-    <!-- iOS minimum version target -->
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="FadeSplashScreenDuration" value="500" />
     <preference name="deployment-target" value="9.0" />
-    <!-- Mobile device only -->
     <preference name="target-device" value="handset" />
-
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
-
-    <!-- Allow links to example.com -->
     <allow-navigation href="https://www.facebook.com/*" />
     <allow-navigation href="*://staticxx.facebook.com/*" />
     <allow-navigation href="*://*.firebaseio.com/*" />
     <allow-navigation href="about:*" />
     <allow-navigation href="about:blank" />
-    <!-- <allow-navigation href="*" /> -->
-
     <platform name="ios">
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
@@ -85,4 +75,5 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <plugin name="cordova-plugin-inappbrowser" spec="~1.2.1" />
+    <plugin name="cordova-plugin-camera" spec="~2.1.0" />
 </widget>

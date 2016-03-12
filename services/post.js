@@ -32,8 +32,6 @@ angular.module('myApp.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('timestamp').once("value", function(snapshot) {
-        console.log(snapshot.val());
-        // return snapshot.val();
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         // console.log("The read failed: " + errorObject.code);

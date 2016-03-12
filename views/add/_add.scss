@@ -1,23 +1,55 @@
 #post-add-page {
   .page-content {
 
-    form {
-      .list {
-        textarea {
-          padding-top: 10px;
+    .picture-container {
+      max-width: 500%;
+      width: 100%;
+        // height: 50%;
+        background-color: #EEE;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        background-position: 50% 50%;
+        margin-bottom: 10px;
+        &:after {
+          content:"";
+          display: block;
+          margin-top: 50%;
         }
-        span, input, textarea {
+        button {
+          border-radius: 50%;
+          margin: 0px 40px;
+          width: 50px;
+          height: 50px;
+          background-color: rgba(0,0,0,0.5);
+          color: #EEE;
+        }
+      }
+
+      form {
+        padding-bottom: 20px;
+        .list {
+          textarea {
+            padding-top: 10px;
+          }
+          span, input, textarea {
             background: none;
           }
-        .no-errors {
-          background-color: $balanced;
-          transition: all 1s ease;
-          span, input, textarea {
-            color: white;
-            transition: all 0.2s ease;
+          .no-errors {
+            background-color: $balanced;
+            transition: all 1s ease;
+            span, input, textarea {
+              color: white;
+              transition: all 0.2s ease;
+            }
           }
+        }
+        .btn-form-submit {
+          width: 60%;
+          margin: 0 auto;
+          border-radius: 5px;
         }
       }
     }
   }
-}
