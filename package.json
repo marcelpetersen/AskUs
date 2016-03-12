@@ -29,7 +29,9 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "org.apache.cordova.file",
+    "org.apache.cordova.file-transfer"
   ],
   "cordovaPlatforms": [
     "ios",
