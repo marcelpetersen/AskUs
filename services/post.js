@@ -15,6 +15,7 @@ angular.module('myApp.postService', [])
 
   return {
     addPost: function(postData) {
+      var deferred = $q.defer();
       var userInfo = currentUserInfos.currentUserInfoGet();
       postData.userId = userInfo.id;
       postData.userName = userInfo.displayName;
@@ -24,9 +25,16 @@ angular.module('myApp.postService', [])
       postData.time = n;
 
       var firebase = new Firebase(FirebaseUrl + '/posts');
-      firebase.push(postData, function(snapshot) {
-        console.log('post saved');
+      firebase.push(postData, function(snapshot, error) {
+        if(!error){
+          resolve(null, 'ok', deferred);
+        } else {
+          resolve(error, null, deferred);
+        }
       });
+
+      promise = deferred.promise;
+      return promise;
     },
     getAllPosts: function() {
       var deferred = $q.defer();
@@ -34,7 +42,6 @@ angular.module('myApp.postService', [])
       firebase.orderByChild('timestamp').once("value", function(snapshot) {
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
-        // console.log("The read failed: " + errorObject.code);
         resolve(errorObject.code, null, deferred);
       });
 

@@ -20,17 +20,10 @@ angular.module('myApp.addTab', ['myApp.env'])
 }])
 
 .factory('s3Uploader', ['$q','$http', function($q, $http) {
-
  
   var upload = function(imageURI, fileName) {
 
-
-
-      console.log('in upload factory function');
-
       var signingURI = "http://127.0.0.1:8000/api/sign_s3";
-
-
  
         var q = $q.defer();
         var ft = new FileTransfer();
@@ -45,15 +38,6 @@ angular.module('myApp.addTab', ['myApp.env'])
             .then(function (data) {
               console.log('http post data', JSON.stringify(data));
 
-
-        //              var ft = new FileTransfer();
-        // var options = new FileUploadOptions();
- 
-        // options.fileKey = "file";
-        // options.fileName = fileName;
-        // options.mimeType = "image/jpeg";
-        // options.chunkedMode = false;
-
                 options.params = {
                     "key": fileName,
                     "AWSAccessKeyId": data.data.awsKey,
@@ -65,7 +49,6 @@ angular.module('myApp.addTab', ['myApp.env'])
  
                 ft.upload(imageURI, "https://" + data.data.bucket + ".s3.amazonaws.com/",
                     function (e) {
-                      console.log('upload done');
                         q.resolve(e);
                     },
                     function (e) {
@@ -87,9 +70,7 @@ angular.module('myApp.addTab', ['myApp.env'])
 
 }])
 
-
-
-.controller('addCtrl', function($scope, $state, Post, Camera, s3Uploader, $http) {
+.controller('addCtrl', function($scope, $state, Post, Camera, s3Uploader, $http, $rootScope, $timeout) {
 
   $scope.imageOne;
   $scope.imageTwo;
@@ -106,38 +87,35 @@ angular.module('myApp.addTab', ['myApp.env'])
    
   $scope.submitPost = function(form) {
     if(form.$valid) {
-      console.log('ok to send', $scope.post);
-      Post.addPost($scope.post);
-      
-      $scope.post = {
-        title: '',
-        description : ''   
-      };  
 
       var fileOneName = fileNameGenerator();
       var fileTwoName = fileNameGenerator();
 
+      $scope.post.pictureA = 'https://s3-us-west-2.amazonaws.com/whichone-picture/' + fileOneName;
+      $scope.post.pictureB = 'https://s3-us-west-2.amazonaws.com/whichone-picture/' + fileTwoName;
+
       s3Uploader.upload($scope.imageOne, fileOneName).then(function() {
-        console.log('first done');
         s3Uploader.upload($scope.imageTwo, fileTwoName).then(function() {
-          console.log('two done');
-          $state.go('tab.dash');
+          Post.addPost($scope.post).then(function(){
+            $timeout(function(){$rootScope.$emit('dashRefresh');}, 200)
+            $state.go('tab.dash');
+          }, function() {
+            console.log("Saving post failed");
+          });
+        }, function() {
+          console.log("Upload Picture 2 failed");
         });
+      }, function() {
+        console.log("Upload Picture 1 failed")
       });
 
-      // s3Uploader.upload($scope.imageOne, fileTwoName);
-
-      // $state.go('tab.dash');
-
     } else {
-      console.log('error form submit');
+      console.log('Form submit error');
     }
   }; 
 
   var options = { 
     quality : 80, 
-    // destinationType : navigator.camera.DestinationType.DATA_URL, 
-    // sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY, 
     allowEdit : true,
     encodingType: navigator.camera.EncodingType.JPEG,
     targetWidth: 500,
@@ -149,10 +127,6 @@ angular.module('myApp.addTab', ['myApp.env'])
     options.sourceType = navigator.camera.PictureSourceType.CAMERA;
 
     Camera.getPicture(options).then(function(imageURI) {
-      console.log(imageURI);
-      // $scope.imgURI = "data:image/jpeg;base64," + imageURI;
-      // $scope.imgURI = imageURI;
-      // $scope.$apply();
       if (imageNumber === 'picture-one') {
         $scope.imageOne = imageURI;
       } else {
@@ -162,7 +136,7 @@ angular.module('myApp.addTab', ['myApp.env'])
       angular.element('.picture-container.' + imageNumber).css('background-image', 'url('+imageURI+')' );
 
     }, function(err) {
-      console.err('error in take picture', err);
+      console.err('error while taking picture', err);
     });
   };
 
@@ -170,19 +144,15 @@ angular.module('myApp.addTab', ['myApp.env'])
     options.sourceType = navigator.camera.PictureSourceType.PHOTOLIBRARY;
 
     Camera.getPicture(options).then(function(imageURI) {
-      console.log(imageURI);
-      // $scope.imgURI = "data:image/jpeg;base64," + imageURI;
-      // $scope.imgURI = imageURI;
       if (imageNumber === 'picture-one') {
         $scope.imageOne = imageURI;
       } else {
         $scope.imageTwo = imageURI;
       }
       angular.element('.picture-container.' + imageNumber).css('background-image', 'url('+imageURI+')' );
-      // $scope.$apply()
 
     }, function(err) {
-      console.err('error in take picture', err);
+      console.err('error while taking picture', err);
     });
   };
 

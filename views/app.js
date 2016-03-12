@@ -29,7 +29,7 @@ angular.module('myApp', [
 })
 .run(function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate) { 
   $ionicPlatform.ready(function() {
-
+    console.log("App launch Device Ready");
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -73,14 +73,4 @@ angular.module('myApp', [
     xfbml: true,
     version: 'v2.5'
   });
-
-  //   $window.fbAsyncInit = function() {
-  //     FB.init({ 
-  //       appId: '743485582448268',
-  //       status: true, 
-  //       cookie: true, 
-  //       xfbml: true,
-  //       version: 'v2.5'
-  //     });
-  // };
 });
