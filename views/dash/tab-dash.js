@@ -1,11 +1,11 @@
 angular.module('myApp.dashTab', ['myApp.env'])
 
-.controller('DashCtrl', function($scope, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate) {
-
+.controller('DashCtrl', function($ionicPlatform, $scope, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate) {
+  
   $scope.posts;
   $scope.aImages;
 
-  console.log('Dash Ctrl First call');
+  // console.log('Dash Ctrl First call');
 
   $rootScope.$on('dashRefresh', function() {
     $scope.doRefresh();
@@ -40,7 +40,9 @@ angular.module('myApp.dashTab', ['myApp.env'])
 
   $ionicModal.fromTemplateUrl('image-modal.html', {
     scope: $scope,
-    animation: 'slide-in-up'
+    // animation: 'slide-in-up'
+    animation: 'mh-slide'
+
   }).then(function(modal) {
     $scope.modal = modal;
   });

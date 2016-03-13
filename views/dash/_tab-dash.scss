@@ -28,6 +28,15 @@
   }
 }
 
+// Extra zoom
+.dash-modal {
+  .scroll {
+    width: 100%;
+    height: 100%;
+  }
+}
+// End Extra zoom
+
 .transparent {
   background: transparent !important;
 }
@@ -88,3 +97,25 @@
     opacity: 0;
   }
 }
+
+// test modal 
+.mh-slide {
+  -webkit-transform: translate3d(0, 0, 0) scale(0);
+  transform: translate3d(0, 0, 0) scale(0);
+  opacity: 0
+/*    transform: rotate(0deg) scale(0.761) skew(1deg) translate(0px);*/
+}
+
+.mh-slide.ng-enter, .mh-slide > .ng-enter {
+  -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
+  transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms; }
+
+.mh-slide.ng-enter-active, .mh-slide > .ng-enter-active {
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+}
+
+.mh-slide.ng-leave, .mh-slide > .ng-leave {
+  -webkit-transition: all ease-in-out 250ms;
+  transition: all ease-in-out 250ms; }

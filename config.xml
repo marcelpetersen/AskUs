@@ -16,8 +16,11 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreenDuration" value="500" />
+
     <preference name="deployment-target" value="9.0" />
     <preference name="target-device" value="handset" />
+    <preference name="Orientation" value="all" />
+
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
