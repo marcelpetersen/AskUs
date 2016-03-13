@@ -1,9 +1,7 @@
-angular.module('myApp.addTab', ['myApp.env'])
+angular.module('myApp.addTab', [])
 
 .factory('Camera', ['$q', function($q) {
-
   return {
-
     getPicture: function(options) {
       var q = $q.defer();
 
@@ -19,49 +17,45 @@ angular.module('myApp.addTab', ['myApp.env'])
   }
 }])
 
-.factory('s3Uploader', ['$q','$http', function($q, $http) {
+.factory('s3Uploader', ['$q','$http', 'DevelopmentAPI', 'ProductionAPI', function($q, $http, DevelopmentAPI, ProductionAPI) {
  
   var upload = function(imageURI, fileName) {
 
-      var signingURI = "http://127.0.0.1:8000/api/sign_s3";
+      var signingURI = ProductionAPI + "/api/sign_s3";
  
-        var q = $q.defer();
-        var ft = new FileTransfer();
-        var options = new FileUploadOptions();
- 
-        options.fileKey = "file";
-        options.fileName = fileName;
-        options.mimeType = "image/jpeg";
-        options.chunkedMode = false;
- 
-        $http.post(signingURI, {"fileName": fileName})
-            .then(function (data) {
-              console.log('http post data', JSON.stringify(data));
+      var q = $q.defer();
+      var ft = new FileTransfer();
+      var options = new FileUploadOptions();
 
-                options.params = {
-                    "key": fileName,
-                    "AWSAccessKeyId": data.data.awsKey,
-                    "acl": "public-read",
-                    "policy": data.data.policy,
-                    "signature": data.data.signature,
-                    "Content-Type": "image/jpeg"
-                };
+      options.fileKey = "file";
+      options.fileName = fileName;
+      options.mimeType = "image/jpeg";
+      options.chunkedMode = false;
  
-                ft.upload(imageURI, "https://" + data.data.bucket + ".s3.amazonaws.com/",
-                    function (e) {
-                        q.resolve(e);
-                    },
-                    function (e) {
-                        alert("Upload failed");
-                        q.reject(e);
-                    }, options);
- 
-            }, function (error) {
-                console.log('fail', JSON.stringify(error));
-            });
- 
-        return q.promise;
- 
+      $http.post(signingURI, {"fileName": fileName})
+          .then(function (data) {
+              options.params = {
+                  "key": fileName,
+                  "AWSAccessKeyId": data.data.awsKey,
+                  "acl": "public-read",
+                  "policy": data.data.policy,
+                  "signature": data.data.signature,
+                  "Content-Type": "image/jpeg"
+              };
+
+              ft.upload(imageURI, "https://" + data.data.bucket + ".s3.amazonaws.com/",
+                  function (e) {
+                      q.resolve(e);
+                  },
+                  function (e) {
+                      alert("Upload failed");
+                      q.reject(e);
+                  }, options);
+
+          }, function (error) {
+              console.log('fail', JSON.stringify(error));
+          });
+      return q.promise;
     }
  
     return {
@@ -70,7 +64,7 @@ angular.module('myApp.addTab', ['myApp.env'])
 
 }])
 
-.controller('addCtrl', function($scope, $state, Post, Camera, s3Uploader, $http, $rootScope, $timeout) {
+.controller('addCtrl', function($scope, $state, Post, Camera, s3Uploader, $http, $rootScope, $timeout, S3_CDN_URL) {
 
   $scope.imageOne;
   $scope.imageTwo;
@@ -91,8 +85,8 @@ angular.module('myApp.addTab', ['myApp.env'])
       var fileOneName = fileNameGenerator();
       var fileTwoName = fileNameGenerator();
 
-      $scope.post.pictureA = 'https://s3-us-west-2.amazonaws.com/whichone-picture/' + fileOneName;
-      $scope.post.pictureB = 'https://s3-us-west-2.amazonaws.com/whichone-picture/' + fileTwoName;
+      $scope.post.pictureA = S3_CDN_URL + fileOneName;
+      $scope.post.pictureB = S3_CDN_URL + fileTwoName;
 
       s3Uploader.upload($scope.imageOne, fileOneName).then(function() {
         s3Uploader.upload($scope.imageTwo, fileTwoName).then(function() {
@@ -116,7 +110,7 @@ angular.module('myApp.addTab', ['myApp.env'])
 
   var options = { 
     quality : 80, 
-    allowEdit : true,
+    allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
     encodingType: navigator.camera.EncodingType.JPEG,
     targetWidth: 500,
     targetHeight: 500,
