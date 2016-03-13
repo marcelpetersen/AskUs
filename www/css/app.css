@@ -135,8 +135,8 @@ For example, you might change some of the default colors:
   opacity: 0; }
 
 .mh-slide.ng-enter, .mh-slide > .ng-enter {
-  -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
-  transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms; }
+  -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 600ms;
+  transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 600ms; }
 
 .mh-slide.ng-enter-active, .mh-slide > .ng-enter-active {
   -webkit-transform: translate3d(0, 0, 0) scale(1);
