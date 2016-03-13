@@ -19,8 +19,8 @@
 
         <div class="item item-body">
           <div class="item item-image">
-            <div class="picture picture-A" ng-style="{'background-image':'url({{post.pictureA}})'}"></div>
-            <div class="picture picture-B" ng-style="{'background-image':'url({{post.pictureB}})'}"></div>
+            <div class="picture picture-A" ng-style="{'background-image':'url({{post.pictureA}})'}" ng-click="goToSlide(0); modalPictureUpdate(post)"></div>
+            <div class="picture picture-B" ng-style="{'background-image':'url({{post.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)"></div>
             <!-- <img ng-src="{{post.pictureA}}" style="width:50%;">
             <img ng-src="{{post.pictureB}}" style="width:50%;"> -->
           </div>
@@ -36,6 +36,18 @@
 
       </div>
     </section>
+
+    <script id="image-modal.html" type="text/ng-template">
+      <div class="modal image-modal transparent" ng-click="closeModal()">
+        <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true">
+          <ion-slide ng-repeat="oImage in aImages">
+            <img ng-src="{{oImage.src}}" class="fullscreen-image" />
+            <!-- <p class="info">{{oImage.msg}}</p> -->
+          </ion-slide>
+        </ion-slide-box>
+        <i class="icon ion-close-circled close-modal"></i>
+      </div>
+    </script>
 
   </ion-content>
 </ion-view>

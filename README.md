@@ -1,3 +1,6 @@
+
+ionic serve -p 8101
+
 Package
 "ios": "4.1.0"
 cordova platform add ios@4.1.0
