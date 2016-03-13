@@ -1,14 +1,29 @@
 #dash-page {
-.page-content {
-  .posts-list-container {
-    .card {
-      &:first-child {
-        margin-top: 0px;
-      
+  .page-content {
+    .posts-list-container {
+      .card {
+        &:first-child {
+          margin-top: 0px;
+        }
+        .item-body {
+          .item-image {
+            padding-bottom: 16px;
+            .picture {
+              width: 48%;
+              padding-bottom: 48%;
+              background-size: cover;
+              background-position: center center;
+              border-radius: 3px;
+              &.picture-A {
+                float: left;
+              }
+              &.picture-B {
+                float: right;
+              }
+            }
+          }
+        }
       }
     }
   }
-}
-
-
 }
