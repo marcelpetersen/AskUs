@@ -39,7 +39,19 @@ angular.module('myApp.postService', [])
     getAllPosts: function() {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
-      firebase.orderByChild('timestamp').once("value", function(snapshot) {
+      firebase.orderByChild('time').limitToLast(5).once("value", function(snapshot) {
+        resolve(null, snapshot.val(), deferred);
+      }, function (errorObject) {
+        resolve(errorObject.code, null, deferred);
+      });
+
+      promise = deferred.promise;
+      return promise;
+    },
+    getAllPostsInfinite: function(timestamp) {
+      var deferred = $q.defer();
+      var firebase = new Firebase(FirebaseUrl + '/posts');
+      firebase.orderByChild('time').endAt(timestamp).limitToLast(5).once("value", function(snapshot) {
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
