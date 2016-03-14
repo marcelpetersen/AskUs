@@ -5,6 +5,9 @@
         &:first-child {
           margin-top: 0px;
         }
+        &:last-child {
+            margin-bottom: 10px;
+        }
         .item-body {
           .item-image {
             padding-bottom: 16px;
@@ -25,6 +28,9 @@
           }
         }
       }
+    }
+    .no-more-cards {
+      text-align: center;
     }
   }
 }
@@ -120,3 +126,9 @@
 .mh-slide.ng-leave, .mh-slide > .ng-leave {
   -webkit-transition: all ease-in-out 250ms;
   transition: all ease-in-out 250ms; }
+
+
+
+
+
+

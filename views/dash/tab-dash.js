@@ -75,6 +75,8 @@ angular.module('myApp.dashTab', ['myApp.env'])
     var counterTest = 0;
 
     $scope.loadMore = function() {
+      angular.element('ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+
       angular.element('.icon-refreshing').addClass('spin');
       if (!$scope.currentLastPost) {
           Post.getAllPosts().then(function(postsData) {
@@ -87,6 +89,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
             $scope.posts = postsData;
 
             angular.element('.icon-refreshing').removeClass('spin');
+            angular.element('ion-infinite-scroll').css('margin-top', '0px');
             $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       } else {
@@ -108,8 +111,8 @@ angular.module('myApp.dashTab', ['myApp.env'])
           }
 
         angular.element('.icon-refreshing').removeClass('spin');
-
-          $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element('ion-infinite-scroll').css('margin-top', '0px');
+        $scope.$broadcast('scroll.infiniteScrollComplete');
       });
       }
   };

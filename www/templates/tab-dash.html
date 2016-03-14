@@ -1,5 +1,5 @@
 <ion-view view-title="Dashboard" id="dash-page">
-  <ion-content class="padding page-content">
+  <ion-content class="padding page-content" overflow-scroll="true">
 
     <ion-refresher
       pulling-text="Pull to refresh..."
@@ -44,7 +44,7 @@
       distance="1%">
     </ion-infinite-scroll>
 
-    <p ng-if="noMoreData">No more Cards to display</p>
+    <p class="no-more-cards" ng-if="noMoreData">No more cards</p>
 
     <script id="image-modal.html" type="text/ng-template">
       <div class="dash-modal modal image-modal transparent" ng-click="closeModal()">

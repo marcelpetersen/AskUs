@@ -68,6 +68,9 @@ For example, you might change some of the default colors:
 #dash-page .page-content .posts-list-container .card:first-child {
   margin-top: 0px; }
 
+#dash-page .page-content .posts-list-container .card:last-child {
+  margin-bottom: 10px; }
+
 #dash-page .page-content .posts-list-container .card .item-body .item-image {
   padding-bottom: 16px; }
   #dash-page .page-content .posts-list-container .card .item-body .item-image .picture {
@@ -81,6 +84,9 @@ For example, you might change some of the default colors:
       float: left; }
     #dash-page .page-content .posts-list-container .card .item-body .item-image .picture.picture-B {
       float: right; }
+
+#dash-page .page-content .no-more-cards {
+  text-align: center; }
 
 .dash-modal .scroll {
   width: 100%;
