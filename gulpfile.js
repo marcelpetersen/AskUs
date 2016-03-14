@@ -16,7 +16,7 @@ var uglify = require('gulp-uglify');
 var exec = require('child_process').exec;
 
 var DEVELOPMENT_FILES = ['views/**/*.js', 'services/**/*.js'];
-var SASS_FILES = ['./scss/ionic.app.scss', './scss/app.scss', 'views/**/*.scss'];
+var SASS_FILES = ['./scss/**/*.scss', 'views/**/*.scss'];
 var HTML_FILES = ['views/**/*.html'];
 
 // var paths = {

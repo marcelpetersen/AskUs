@@ -10,6 +10,8 @@ angular.module('myApp', [
   'myApp.currentUserServices',
   'myApp.usersServices',
   'myApp.postService',
+  'myApp.cameraServices',
+  'myApp.awsServices',
   'myApp.filters',
   'myApp.acountTab',
   'myApp.addTab',
