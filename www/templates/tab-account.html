@@ -5,8 +5,8 @@
       <ion-item class="account-tab-user">
         <div class="background-picture"></div>
 
-        <div class="user-pic" ng-style="{'background-image':'url({{currentUser.profileImageURL}})'}"></div>
-        <h2>{{currentUser.displayName}}</h2>
+        <div class="user-pic" ng-style="{'background-image':'url({{::currentUser.profileImageURL}})'}"></div>
+        <h2>{{::currentUser.displayName}}</h2>
       </ion-item>
 
       <a class="item item-icon-left" href="#">

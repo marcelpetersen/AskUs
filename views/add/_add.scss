@@ -6,9 +6,14 @@
       width: 100%;
         // height: 50%;
         background-color: #EEE;
+
         display: flex;
+        display: -webkit-flex;
         align-items: center;
+        -webkit-align-items: center;
         justify-content: center;
+        -webkit-justify-content: center;
+        
         background-size: cover;
         background-position: 50% 50%;
         margin-bottom: 10px;

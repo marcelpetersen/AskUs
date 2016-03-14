@@ -2,14 +2,17 @@
   .page-content {
     .list {
       .account-tab-user {
-
         display: flex;
+        display: -webkit-flex;
         align-items: center;
+        -webkit-align-items: center;
         justify-content: center;
+        -webkit-justify-content: center;
         flex-direction:column;
+        -webkit-flex-direction:column;
 
-        padding-top: 60px;
-        padding-bottom: 60px;
+        padding-top: 20px;
+        padding-bottom: 20px;
 
         position: relative;
         .background-picture {
@@ -18,14 +21,20 @@
           bottom: 0px;
           left: 0px;
           right: 0px;
-          background-image:url('../img/account-bg.jpg');
-          background-size: cover;
-          background-position: 50% 50%;
-          -webkit-filter: blur(2px);
-          -moz-filter: blur(2px);
-          -o-filter: blur(2px);
-          -ms-filter: blur(2px);
-          filter: blur(2px);
+          // background: -webkit-linear-gradient(45deg, #1e5799 0%,#2989d8 48%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
+          // background: linear-gradient(45deg, #1e5799 0%,#2989d8 48%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          background: -webkit-linear-gradient(45deg, #ea5507 1%,#f7bc5d 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(45deg, #ea5507 1%,#f7bc5d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+          // ***** With Image *****
+          // background-image:url('../img/account-bg.jpg');
+          // background-size: cover;
+          // background-position: 50% 50%;
+          // -webkit-filter: blur(2px);
+          // -moz-filter: blur(2px);
+          // -o-filter: blur(2px);
+          // -ms-filter: blur(2px);
+          // filter: blur(2px);
           z-index: -1;
         }
         .user-pic {

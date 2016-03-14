@@ -1,8 +1,8 @@
 <ion-view view-title="{{user.name}}">
   <ion-content class="padding">
 
-    <img ng-src="{{user.picture}}" style="width: 64px; height: 64px">
+    <img ng-src="{{::user.picture}}" style="width: 64px; height: 64px">
 
-      <p>test</p>
+      <p>{{::user.name}}</p>
   </ion-content>
 </ion-view>

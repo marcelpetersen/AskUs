@@ -17,7 +17,7 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreenDuration" value="500" />
 
-    <preference name="deployment-target" value="8.0" />
+    <preference name="deployment-target" value="8.1" />
     <preference name="target-device" value="handset" />
     <preference name="Orientation" value="portrait" />
 

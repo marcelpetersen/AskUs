@@ -12,9 +12,9 @@
 
 
     <ion-list>
-      <ion-item class="item-avatar item-icon-right" ng-repeat="friend in friendsList" on-touch="friendPage(friend)" type="item-text-wrap" href="#/tab/friends/{{friend.name}}">
-        <img ng-src="{{friend.picture.data.url}}">
-        <h2>{{friend.name}}</h2>
+      <ion-item class="item-avatar item-icon-right" ng-repeat="friend in friendsList" on-touch="friendPage(friend)" type="item-text-wrap" href="#/tab/friends/{{::friend.name}}">
+        <img ng-src="{{::friend.picture.data.url}}">
+        <h2>{{::friend.name}}</h2>
         
         <i class="icon ion-chevron-right icon-accessory"></i>
 
