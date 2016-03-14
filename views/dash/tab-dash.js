@@ -42,7 +42,6 @@ angular.module('myApp.dashTab', ['myApp.env'])
     scope: $scope,
     // animation: 'slide-in-up'
     animation: 'mh-slide'
-
   }).then(function(modal) {
     $scope.modal = modal;
   });
@@ -74,31 +73,26 @@ angular.module('myApp.dashTab', ['myApp.env'])
     $scope.noMoreData = false;
     $scope.currentLastPost;
     var counterTest = 0;
-    //     counterTest++;
-    // if (counterTest >= 1) {
-    //     $scope.noMoreData = false;
-    // }
-
-    // $scope.loadMore = function() {
-    //   console.log('load more data');
-    // }
 
     $scope.loadMore = function() {
+      angular.element('.icon-refreshing').addClass('spin');
       if (!$scope.currentLastPost) {
           Post.getAllPosts().then(function(postsData) {
-            console.log('first load');
+            console.log('Load first data');
             delete postsData.connected;
             for (var first in postsData) {
               $scope.currentLastPost = postsData[first].time;
               break;
             }
             $scope.posts = postsData;
+
+            angular.element('.icon-refreshing').removeClass('spin');
             $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       } else {
         Post.getAllPostsInfinite($scope.currentLastPost).then(function(postsData) {
           var currentLastPostTemp;
-          console.log('load more infinite');
+          console.log('Loading more data');
           delete postsData.connected;
           for (var first in postsData) {
               currentLastPostTemp = postsData[first].time;
@@ -109,25 +103,12 @@ angular.module('myApp.dashTab', ['myApp.env'])
             $scope.noMoreData = true;
           } else {
             $scope.currentLastPost = currentLastPostTemp;
-            console.log(postsData);
             var updatedPost = angular.extend({}, $scope.posts, postsData)
             $scope.posts = updatedPost;
           }
 
+        angular.element('.icon-refreshing').removeClass('spin');
 
-          // for (var first in postsData) {
-          //   $scope.currentLastPost = postsData[first].time;
-          //   break;
-          // }
-
-
-          // console.log(postsData);
-          // var updatedPost = angular.extend({}, $scope.posts, postsData)
-          // $scope.posts = updatedPost;
-          //     counterTest++;
-          // if (counterTest >= 2) {
-          //     $scope.noMoreData = false;
-          // }
           $scope.$broadcast('scroll.infiniteScrollComplete');
       });
       }
