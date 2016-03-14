@@ -1,10 +1,10 @@
 angular.module('myApp.authService', [])
 
-.factory('Auth', function(rootRef, $firebaseAuth) {
+.factory('Auth', ['rootRef', '$firebaseAuth', function(rootRef, $firebaseAuth) {
   return $firebaseAuth(rootRef);
-})
+}])
 
-.factory('userAuth', function(Auth, $http, $localstorage, $state, FirebaseUrl, $window) {
+.factory('userAuth', ['Auth', '$http', '$localstorage', '$state', 'FirebaseUrl', '$window', function(Auth, $http, $localstorage, $state, FirebaseUrl, $window) {
 
   var isAuth = function() {
     return !!$localstorage.get('firebase:session::ionic-fboauth');
@@ -17,16 +17,16 @@ angular.module('myApp.authService', [])
       var userDataToSave = authData.facebook;
       var firebase = new Firebase(FirebaseUrl + '/');
       // ********* Previous *********
-      // var userRef = firebase.child("users/");
-      var userRef = firebase.child("users/" + authData.facebook.id );
+      // var userRef = firebase.child("users/" + authData.facebook.id);
+      var userRef = firebase.child("users/");
 
       // Check if the user exist in the DB
       userRef.orderByChild("id").equalTo(authData.facebook.id).once("value", function(snapshot) {
         console.log(snapshot.exists());
         if (!snapshot.exists()) {
           // Create new user in the database
-          // ******** Previous used push() *********
-          userRef.set(userDataToSave, function(error, authData) {
+          // ******** Previous used push() otherwise set() *********
+          userRef.push(userDataToSave, function(error, authData) {
             if (error) {
               console.log("saving Failed!", error);
             } else {
@@ -61,6 +61,6 @@ angular.module('myApp.authService', [])
     suspendAccountFacebook: suspendAccountFacebook
   };
 
-});
+}]);
 
 

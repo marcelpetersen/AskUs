@@ -1,6 +1,6 @@
 angular.module('myApp.addTab', [])
 
-.controller('addCtrl', function($scope, $state, Post, Camera, s3Uploader, $http, $rootScope, $timeout, S3_CDN_URL) {
+.controller('addCtrl', ['$scope', '$state', 'Post', 'Camera', 's3Uploader', '$http', '$rootScope', '$timeout', 'S3_CDN_URL', function($scope, $state, Post, Camera, s3Uploader, $http, $rootScope, $timeout, S3_CDN_URL) {
 
   $scope.imageOne;
   $scope.imageTwo;
@@ -86,4 +86,4 @@ angular.module('myApp.addTab', [])
     });
   };
 
-});
+}]);

@@ -1,6 +1,6 @@
 angular.module('myApp.acountTab', ['myApp.env'])
 
-.controller('AccountCtrl', function($scope, userAuth, currentUserInfos) {
+.controller('AccountCtrl', ['$scope', 'userAuth', 'currentUserInfos',function($scope, userAuth, currentUserInfos) {
 
   $scope.currentUser = currentUserInfos.currentUserInfoGet();
 
@@ -21,4 +21,4 @@ angular.module('myApp.acountTab', ['myApp.env'])
     console.log(e.currentTarget);
  });
 
-});
+}]);

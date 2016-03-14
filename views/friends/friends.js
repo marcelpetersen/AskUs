@@ -1,6 +1,6 @@
 angular.module('myApp.friends', ['myApp.env'])
 
-.controller('friendsCtrl', function($scope, $localstorage, facebook, $timeout, usersInfos) {
+.controller('friendsCtrl', ['$scope', '$localstorage', 'facebook', '$timeout', 'usersInfos', function($scope, $localstorage, facebook, $timeout, usersInfos) {
   $scope.noFriend = false;
   $scope.friendsList;
 
@@ -40,4 +40,4 @@ angular.module('myApp.friends', ['myApp.env'])
   $scope.friendPage = function(user) {
     usersInfos.singleUserInfoSet(user);
   }
-});
+}]);

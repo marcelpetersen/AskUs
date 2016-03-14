@@ -1,6 +1,6 @@
 angular.module('myApp.preferences', ['myApp.env'])
 
-.controller('preferencesCtrl', function($scope, userAuth) {
+.controller('preferencesCtrl', ['$scope', 'userAuth', function($scope, userAuth) {
     $scope.settings = {
     enableNotifications: true
   };
@@ -10,4 +10,4 @@ angular.module('myApp.preferences', ['myApp.env'])
     userAuth.suspendAccountFacebook();
   };
 
-});
+}]);

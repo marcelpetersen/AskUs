@@ -1,6 +1,6 @@
 angular.module('myApp.dashTab', ['myApp.env'])
 
-.controller('DashCtrl', function($ionicPlatform, $scope, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('DashCtrl', ['$scope', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', function($scope, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate) {
 
   $scope.posts;
   $scope.aImages;
@@ -121,4 +121,4 @@ angular.module('myApp.dashTab', ['myApp.env'])
   // });
 
 
-});
+}]);

@@ -1,6 +1,6 @@
 angular.module('myApp.facebookService', [])
 
-.factory('facebook', function($q, $rootScope, FirebaseUrl, currentUserInfos) {
+.factory('facebook', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', function($q, $rootScope, FirebaseUrl, currentUserInfos) {
 
  resolve = function(errval, retval, deferred) {
     $rootScope.$apply(function() {
@@ -50,4 +50,4 @@ angular.module('myApp.facebookService', [])
     }
     }
   }
-});
+}]);

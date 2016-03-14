@@ -1,5 +1,4 @@
 // Ionic App
-
 angular.module('myApp', [
   'ionic',
   'firebase',
@@ -23,13 +22,12 @@ angular.module('myApp', [
   'myApp.userPage'
 ])
 
-
 // .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
 .service('rootRef', ['FirebaseUrl', Firebase])
-.config(function($compileProvider){
+.config(['$compileProvider', function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-})
-.run(function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate) { 
+}])
+.run(['$ionicPlatform', '$window', 'FBAppId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate) { 
   $ionicPlatform.ready(function() {
     console.log("App launch Device Ready");
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -75,4 +73,4 @@ angular.module('myApp', [
     xfbml: true,
     version: 'v2.5'
   });
-});
+}]);

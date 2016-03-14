@@ -53,7 +53,7 @@ gulp.task('concat', function() {
 });
 
 gulp.task('compress', function() {
-  return gulp.src('www/app.concat.js')
+  return gulp.src('www/js/app.concat.js')
     .pipe(plumber({errorHandler: errorAlertUgly}))
     .pipe(uglify())
     .pipe(rename('app.min.js'))
@@ -84,11 +84,11 @@ gulp.task('sass', function(done) {
 });
 
 gulp.task('build', function(cb) {
-  runSequence('lint', 'copy', 'concat', 'sass', cb);
+  runSequence('lint', 'copy', 'concat', 'compress', 'sass', cb);
 });
 
 gulp.task('build:js', function(cb) {
-  runSequence('lint', 'copy', 'concat', cb);
+  runSequence('lint', 'copy', 'concat', 'compress', cb);
 });
 
 gulp.task('watch', function() {

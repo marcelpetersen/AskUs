@@ -1,6 +1,6 @@
 angular.module('myApp.postService', [])
 
-.factory('Post', function($q, $rootScope, FirebaseUrl, currentUserInfos, $state) {
+.factory('Post', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', '$state', function($q, $rootScope, FirebaseUrl, currentUserInfos, $state) {
 
    resolve = function(errval, retval, deferred) {
     $rootScope.$apply(function() {
@@ -61,4 +61,4 @@ angular.module('myApp.postService', [])
       return promise;
     }
   }
-});
+}]);

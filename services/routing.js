@@ -1,6 +1,6 @@
 angular.module('myApp.routingService', [])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
 
@@ -95,4 +95,4 @@ angular.module('myApp.routingService', [])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
-});
+}]);
