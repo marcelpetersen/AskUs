@@ -9,6 +9,7 @@
           .item-image {
             padding-bottom: 16px;
             .picture {
+              background-color: #EEE;
               width: 48%;
               padding-bottom: 48%;
               background-size: cover;
@@ -88,7 +89,7 @@
 /* Fix modal backdrop for smaller devices */
 @media (max-width: 679px) {
   .active .modal-backdrop-bg {
-    opacity: .5;
+    opacity: .8;
   }
   .modal-backdrop-bg {
     -webkit-transition: opacity 300ms ease-in-out;
