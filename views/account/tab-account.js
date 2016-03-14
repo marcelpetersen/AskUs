@@ -3,6 +3,7 @@ angular.module('myApp.acountTab', ['myApp.env'])
 .controller('AccountCtrl', ['$scope', 'userAuth', 'currentUserInfos',function($scope, userAuth, currentUserInfos) {
 
   $scope.currentUser = currentUserInfos.currentUserInfoGet();
+  console.log($scope.currentUser.accessToken)
 
   $scope.logoutFacebook = function() {
     userAuth.logoutFacebook();

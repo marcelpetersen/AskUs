@@ -4,7 +4,7 @@ angular.module('myApp.authService', [])
   return $firebaseAuth(rootRef);
 }])
 
-.factory('userAuth', ['Auth', '$http', '$localstorage', '$state', 'FirebaseUrl', '$window', function(Auth, $http, $localstorage, $state, FirebaseUrl, $window) {
+.factory('userAuth', ['Auth', '$http', '$localstorage', '$state', 'FirebaseUrl', '$window', 'currentUserInfos', function(Auth, $http, $localstorage, $state, FirebaseUrl, $window, currentUserInfos) {
 
   var isAuth = function() {
     return !!$localstorage.get('firebase:session::ionic-fboauth');
@@ -43,15 +43,23 @@ angular.module('myApp.authService', [])
 
   var logoutFacebook = function() {
     Auth.$unauth();
-    $window.location.href = '#/splash';
+    // Remove facebook stored cookies
+    window.cookies.clear(function() {
+      $window.location.href = '#/splash';
+    });
   };
 
   var suspendAccountFacebook = function() {
-    Auth.$unauth();
-    FB.api('/me/permissions', 'delete', function(response) {
+    //Get FB access token for removeing app permission
+    var currentUser = currentUserInfos.currentUserInfoGet();
+    var currentUserFBToken = currentUser.accessToken;
+
+    FB.api('/me/permissions?access_token=' + currentUserFBToken, 'delete', function(response) {
       console.log(response);
+      Auth.$unauth();
+      // TODO DELETE ACCOUNT AND POST
+      $window.location.href = '#/splash';
     });
-    $window.location.href = '#/splash';
   };
 
   return {
