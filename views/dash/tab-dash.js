@@ -75,10 +75,9 @@ angular.module('myApp.dashTab', ['myApp.env'])
     var counterTest = 0;
 
     $scope.loadMore = function() {
-      angular.element('ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
-
       angular.element('.icon-refreshing').addClass('spin');
       if (!$scope.currentLastPost) {
+          angular.element('ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
           Post.getAllPosts().then(function(postsData) {
             console.log('Load first data');
             delete postsData.connected;
@@ -111,7 +110,6 @@ angular.module('myApp.dashTab', ['myApp.env'])
           }
 
         angular.element('.icon-refreshing').removeClass('spin');
-        angular.element('ion-infinite-scroll').css('margin-top', '0px');
         $scope.$broadcast('scroll.infiniteScrollComplete');
       });
       }
