@@ -1,7 +1,8 @@
 angular.module('myApp.userPage', ['myApp.env'])
 
 .controller('userPageCtrl', ['$scope', '$stateParams', 'usersInfos', 'Post', '$timeout', '$ionicModal', '$ionicSlideBoxDelegate', function($scope, $stateParams, usersInfos, Post, $timeout, $ionicModal, $ionicSlideBoxDelegate) {
-  // $scope.chat = Chats.get($stateParams.chatId);
+  $scope.parentCategory = $stateParams.parentCat;
+  console.log($scope.parentCategory);
   $scope.posts;
   $scope.noPost = false;
   $scope.user = usersInfos.singleUserInfoGet();

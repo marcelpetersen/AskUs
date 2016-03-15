@@ -60,7 +60,7 @@ angular.module('myApp.routingService', [])
   .state('tab.friend-page', {
       cache: true,
       authRequired: true,
-      url: '/friend/:userName',
+      url: '/friends/user/:userId/:parentCat',
       views: {
         'tab-friends': {
           templateUrl: 'templates/user-page.html',
@@ -68,14 +68,39 @@ angular.module('myApp.routingService', [])
         }
       }
     })
+
     .state('tab.user-page', {
       cache: true,
       authRequired: true,
-      url: '/user/:userName',
+      url: '/dash/user/:userId/:parentCat',
       views: {
         'tab-dash': {
           templateUrl: 'templates/user-page.html',
           controller: 'userPageCtrl'
+        }
+      }
+    })
+
+    .state('tab.dash-post-page', {
+      cache: true,
+      authRequired: true,
+      url: '/dash/post/:postId/:parentCat',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/post-page.html',
+          controller: 'postCtrl'
+        }
+      }
+    })
+
+    .state('tab.friend-post-page', {
+      cache: true,
+      authRequired: true,
+      url: '/friends/post/:postId/:parentCat',
+      views: {
+        'tab-friends': {
+          templateUrl: 'templates/post-page.html',
+          controller: 'postCtrl'
         }
       }
     })

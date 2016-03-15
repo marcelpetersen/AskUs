@@ -19,12 +19,15 @@ angular.module('myApp', [
   'myApp.dashTab',
   'myApp.friends',
   'myApp.services',
-  'myApp.userPage'
+  'myApp.userPage',
+  'myApp.postPage'
 ])
 
 // .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
 .service('rootRef', ['FirebaseUrl', Firebase])
-.config(['$compileProvider', function($compileProvider){
+.config(['$compileProvider', '$ionicConfigProvider', function($compileProvider, $ionicConfigProvider){
+  // Modify global animation ios/android/none
+  // $ionicConfigProvider.views.transition('android')
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 }])
 .run(['$ionicPlatform', '$window', 'FBAppId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate) { 

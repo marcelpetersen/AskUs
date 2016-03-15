@@ -33,7 +33,7 @@
           <!-- <h2>{{::post.userName}}</h2> -->
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
           <!-- Test Link -->
-          <a href="#/tab/post/1234" class="item post-link">
+          <a href="#/tab/{{::parentCategory}}/post/1234/{{::parentCategory}}" class="item post-link">
             <i class="icon ion-ios-arrow-right"></i>
           </a>
         </div>
