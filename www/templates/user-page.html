@@ -1,4 +1,4 @@
-<ion-view view-title="{{user.name}}" id="user-page">
+<ion-view view-title="{{::user.name}}" id="user-page">
   <ion-content class="page-content" overflow-scroll="true">
 
    <ion-refresher
@@ -10,7 +10,8 @@
 
       <div class="user-info">
         <div class="background-picture"></div>
-        <img ng-src="{{::user.picture}}" class='user-picture'>
+        <div class="user-picture" ng-style="{'background-image':'url({{::user.picture}})'}"></div>
+        <!-- <img ng-src="{{::user.picture}}" class='user-picture'> -->
         <h2>{{::user.name}}</h2>
       </div>
 

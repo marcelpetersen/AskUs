@@ -9891,10 +9891,6 @@ a.button {
   display: -webkit-flex;
   align-items: center;
   -webkit-align-items: center;
-  justify-content: center;
-  -webkit-justify-content: center;
-  flex-direction: column;
-  -webkit-flex-direction: column;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 10px; }
@@ -9911,10 +9907,16 @@ a.button {
     z-index: -1; }
   #user-page .page-content .user-info .user-picture {
     border-radius: 50%;
-    width: 30%; }
+    width: 20%;
+    padding-bottom: 20%;
+    margin-left: 5%;
+    background-size: cover;
+    background-position: center center; }
   #user-page .page-content .user-info h2 {
+    width: 75%;
+    padding: 0% 5%;
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
     color: white;
     font-weight: bold; }
 

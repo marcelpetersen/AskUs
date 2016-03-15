@@ -11,10 +11,10 @@ angular.module('myApp.friends', ['myApp.env'])
     if (data.length === 0) {$scope.noFriend = true;}
 
     // Save friends list into the user DB
-    var idList = [];
-    data.forEach(function(item) {
-      idList.push(item.id);
-    })
+    // var idList = [];
+    // data.forEach(function(item) {
+    //   idList.push(item.id);
+    // })
     // facebook.updateFriendsList(idList);
   })
 
@@ -24,10 +24,10 @@ angular.module('myApp.friends', ['myApp.env'])
       $scope.friendsList = data;
 
       // Save friends list into the user DB
-      var idList = [];
-      data.forEach(function(item) {
-        idList.push(item.id);
-      })
+      // var idList = [];
+      // data.forEach(function(item) {
+      //   idList.push(item.id);
+      // })
       // facebook.updateFriendsList(idList);
 
       $scope.$broadcast('scroll.refreshComplete');
@@ -38,9 +38,6 @@ angular.module('myApp.friends', ['myApp.env'])
   };
 
   $scope.friendPage = function(user) {
-    console.log(user);
-    // user.picture = user.picture.data.url;
-
     if (typeof(user.picture) !== "string") {
       user.picture = user.picture.data.url;
     }
