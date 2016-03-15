@@ -6,7 +6,7 @@ angular.module('myApp.usersServices', [])
     singleUserInfoSet: function(data) {
       singleUserInfo.id = data.id;
       singleUserInfo.name = data.name;
-      singleUserInfo.picture = data.picture.data.url;
+      singleUserInfo.picture = data.picture
     },
     singleUserInfoGet: function() {
       return singleUserInfo;

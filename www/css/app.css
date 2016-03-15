@@ -9856,6 +9856,18 @@ a.button {
 #dash-page .page-content .posts-list-container .card:last-child {
   margin-bottom: 10px; }
 
+#dash-page .page-content .posts-list-container .card .item-avatar .user-picture {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center; }
+
 #dash-page .page-content .posts-list-container .card .item-body .item-image {
   padding-bottom: 16px; }
   #dash-page .page-content .posts-list-container .card .item-body .item-image .picture {
@@ -9919,6 +9931,18 @@ a.button {
 
 #user-page .page-content .posts-list-container .card:last-child {
   margin-bottom: 10px; }
+
+#user-page .page-content .posts-list-container .card .item-avatar .user-picture {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center; }
 
 #user-page .page-content .posts-list-container .card .item-body .item-image {
   padding-bottom: 16px; }

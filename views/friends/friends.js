@@ -38,6 +38,12 @@ angular.module('myApp.friends', ['myApp.env'])
   };
 
   $scope.friendPage = function(user) {
+    console.log(user);
+    // user.picture = user.picture.data.url;
+
+    if (typeof(user.picture) !== "string") {
+      user.picture = user.picture.data.url;
+    }
     usersInfos.singleUserInfoSet(user);
   }
 }]);

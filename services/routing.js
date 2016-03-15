@@ -45,8 +45,8 @@ angular.module('myApp.routingService', [])
   })
 
     .state('tab.friends', {
-      authRequired: true,
       cache: true,
+      authRequired: true,
       url: '/friends',
       views:{
         'tab-friends' : {
@@ -57,12 +57,24 @@ angular.module('myApp.routingService', [])
     })
 
 
-  .state('tab.user-page', {
-    cache: true,
+  .state('tab.friend-page', {
+      cache: true,
+      authRequired: true,
+      url: '/friend/:userName',
+      views: {
+        'tab-friends': {
+          templateUrl: 'templates/user-page.html',
+          controller: 'userPageCtrl'
+        }
+      }
+    })
+
+    .state('tab.user-page', {
+      cache: true,
       authRequired: true,
       url: '/user/:userName',
       views: {
-        'tab-friends': {
+        'tab-dash': {
           templateUrl: 'templates/user-page.html',
           controller: 'userPageCtrl'
         }
@@ -81,7 +93,7 @@ angular.module('myApp.routingService', [])
     }
   })
 
-    .state('tab.preferences', {
+  .state('tab.preferences', {
     authRequired: true,
     url: '/preferences',
     views: {

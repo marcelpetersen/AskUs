@@ -7,7 +7,7 @@ angular.module('myApp.facebookService', [])
       if (errval) {
         deferred.reject(errval);
       } else {
-        retval.connected = true;
+        // retval.connected = true;
         deferred.resolve(retval);
       }
     });

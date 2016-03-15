@@ -1,4 +1,4 @@
-<ion-view view-title="Dashboard" id="dash-page">
+<ion-view view-title="Home" id="dash-page">
   <ion-content class="padding page-content" overflow-scroll="true">
 
     <ion-refresher
@@ -12,7 +12,7 @@
       <div class="list card" ng-repeat="post in posts | orderObjectBy:'time':true">
 
         <div class="item item-avatar">
-          <img ng-src="{{::post.userPicture}}">
+          <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" href="#/tab/user/{{::post.userName}}" on-touch="userPage(post.userId,post.userName,post.userPicture)"></a>
           <h2>{{::post.userName}}</h2>
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
         </div>

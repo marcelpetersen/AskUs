@@ -8,6 +8,20 @@
         &:last-child {
             margin-bottom: 10px;
         }
+        .item-avatar {
+          .user-picture {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            max-width: 40px;
+            max-height: 40px;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center center;
+          }
+        }
         .item-body {
           .item-image {
             padding-bottom: 16px;

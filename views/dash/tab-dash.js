@@ -1,6 +1,6 @@
 angular.module('myApp.dashTab', ['myApp.env'])
 
-.controller('DashCtrl', ['$scope', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', function($scope, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('DashCtrl', ['$scope', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', function($scope, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos) {
 
   $scope.posts;
   $scope.aImages;
@@ -46,29 +46,29 @@ angular.module('myApp.dashTab', ['myApp.env'])
     $scope.modal = modal;
   });
 
-   $scope.openModal = function() {
-      $ionicSlideBoxDelegate.slide(0);
-      $scope.modal.show();
-    };
+  $scope.openModal = function() {
+    $ionicSlideBoxDelegate.slide(0);
+    $scope.modal.show();
+  };
 
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-    };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
 
-    // Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
 
-    $scope.goToSlide = function(index) {
-      $scope.modal.show();
-      $ionicSlideBoxDelegate.slide(index);
-    }
-  
-    // Called each time the slide changes
-    $scope.slideChanged = function(index) {
-      $scope.slideIndex = index;
-    };
+  $scope.goToSlide = function(index) {
+    $scope.modal.show();
+    $ionicSlideBoxDelegate.slide(index);
+  }
+
+  // Called each time the slide changes
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
 
     $scope.noMoreData = false;
     $scope.currentLastPost;
@@ -114,6 +114,15 @@ angular.module('myApp.dashTab', ['myApp.env'])
       });
       }
   };
+
+  $scope.userPage = function(userId, userName, userPicture) {
+    var user = {
+      id: userId,
+      name: userName,
+      picture: userPicture
+    }
+    usersInfos.singleUserInfoSet(user);
+  }
 
   // $scope.$on('$stateChangeSuccess', function() {
   //   console.log('routeing');

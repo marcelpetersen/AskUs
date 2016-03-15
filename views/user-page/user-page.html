@@ -10,7 +10,6 @@
 
       <div class="user-info">
         <div class="background-picture"></div>
-
         <img ng-src="{{::user.picture}}" class='user-picture'>
         <h2>{{::user.name}}</h2>
       </div>
@@ -27,7 +26,8 @@
       <div class="list card" ng-repeat="post in posts | orderObjectBy:'time':true">
 
         <div class="item item-avatar">
-          <img ng-src="{{::post.userPicture}}" on-touch="friendPage(friend)" href="#/tab/user/{{::post.userName}}">
+         <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" href="#/tab/user/{{::post.userName}}" on-touch="userPage(post.userId,post.userName,post.userPicture)"></a>
+          <!-- <img ng-src="{{::post.userPicture}}" on-touch="friendPage(friend)" href="#/tab/user/{{::post.userName}}"> -->
           <h2>{{::post.userName}}</h2>
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
         </div>
@@ -51,5 +51,25 @@
 
       </div>
     </section>
+
+    <script id="image-modal.html" type="text/ng-template">
+      <div class="dash-modal modal image-modal transparent" ng-click="closeModal()">
+        <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true">
+          <ion-slide ng-repeat="oImage in aImages">
+            <!-- **** Before zoom **** -->
+            <!-- <img ng-src="{{oImage.src}}" class="fullscreen-image" /> -->
+            <!-- <p class="info">{{oImage.msg}}</p> -->
+            <!-- **** End Before zoom **** -->
+            <ion-scroll zooming="true" direction="xy" style="width: 100%; height: 100%" min-zoom="1">
+              <!-- <div style="width: 5000px; height: 5000px; background: url('{{oImage.src}}') repeat"></div> -->
+              <img ng-src="{{oImage.src}}" class="fullscreen-image"/>
+              <!-- <p class="info">{{oImage.msg}}</p> -->
+            </ion-scroll>
+
+          </ion-slide>
+        </ion-slide-box>
+        <i class="icon ion-close-circled close-modal"></i>
+      </div>
+    </script>
   </ion-content>
 </ion-view>
