@@ -26,11 +26,16 @@
      </div>
       <div class="list card" ng-repeat="post in posts | orderObjectBy:'time':true">
 
-        <div class="item item-avatar">
-         <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" href="#/tab/user/{{::post.userName}}" on-touch="userPage(post.userId,post.userName,post.userPicture)"></a>
-          <!-- <img ng-src="{{::post.userPicture}}" on-touch="friendPage(friend)" href="#/tab/user/{{::post.userName}}"> -->
-          <h2>{{::post.userName}}</h2>
+        <div class="item item-header">
+          <h2>{{::post.title}}</h2>
+
+         <!-- <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" href="#/tab/user/{{::post.userName}}" on-touch="userPage(post.userId,post.userName,post.userPicture)"></a> -->
+          <!-- <h2>{{::post.userName}}</h2> -->
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
+          <!-- Test Link -->
+          <a href="#/tab/post/1234" class="item post-link">
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
         </div>
 
         <div class="item item-body">

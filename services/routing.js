@@ -68,7 +68,6 @@ angular.module('myApp.routingService', [])
         }
       }
     })
-
     .state('tab.user-page', {
       cache: true,
       authRequired: true,

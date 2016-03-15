@@ -35,6 +35,7 @@ angular.module('myApp.userPage', ['myApp.env'])
   };
 
   $scope.userPage = function(userId, userName, userPicture) {
+    console.log('test');
     var user = {
       id: userId,
       name: userName,
