@@ -19,7 +19,7 @@ angular.module('myApp.facebookService', [])
           userDetail = JSON.parse(userDetail);
           // FACEBOOK GET FRIENDS LIST
           FB.api(
-            "/" + userDetail.facebook.id + "/friends?access_token=" + userDetail.facebook.accessToken + "&fields=name,id,email,picture",
+            "/" + userDetail.facebook.id + "/friends?access_token=" + userDetail.facebook.accessToken + "&fields=name,id,email,picture.width(200).height(200)",
             function (response) {
               if (response && !response.error) {
                 resolve(null, response.data, deferred);

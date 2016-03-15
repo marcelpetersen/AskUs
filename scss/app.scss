@@ -28,8 +28,16 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "views/friends/friends";
 @import "views/add/add";
 @import "views/dash/tab-dash";
+@import "views/user-page/user-page";
 @import "views/account/account";
 @import "views/account/preferences/preferences";
+
+.loading {
+  text-align: center;
+  .loading-icon {
+    font-size: 30px;
+  }
+}
 
 .spin {
   -webkit-animation: spin 2s linear infinite;

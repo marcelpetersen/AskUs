@@ -20,7 +20,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
     $scope.noMoreData = false;
     $scope.currentLastPost = null;
     Post.getAllPosts().then(function(postsData) {
-      delete postsData.connected;
+      // delete postsData.connected;
       $scope.posts = postsData;
 
       $scope.$broadcast('scroll.refreshComplete');

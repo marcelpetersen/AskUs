@@ -15,7 +15,7 @@ angular.module('myApp.friends', ['myApp.env'])
     data.forEach(function(item) {
       idList.push(item.id);
     })
-    facebook.updateFriendsList(idList);
+    // facebook.updateFriendsList(idList);
   })
 
   $scope.doRefresh = function() {
@@ -28,7 +28,7 @@ angular.module('myApp.friends', ['myApp.env'])
       data.forEach(function(item) {
         idList.push(item.id);
       })
-      facebook.updateFriendsList(idList);
+      // facebook.updateFriendsList(idList);
 
       $scope.$broadcast('scroll.refreshComplete');
       $timeout(function(){

@@ -7,7 +7,8 @@ angular.module('myApp.postService', [])
       if (errval) {
         deferred.reject(errval);
       } else {
-        retval.connected = true;
+        // No Need This
+        // retval.connected = true;
         deferred.resolve(retval);
       }
     });
@@ -52,6 +53,18 @@ angular.module('myApp.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('time').endAt(timestamp).limitToLast(5).once("value", function(snapshot) {
+        resolve(null, snapshot.val(), deferred);
+      }, function (errorObject) {
+        resolve(errorObject.code, null, deferred);
+      });
+
+      promise = deferred.promise;
+      return promise;
+    },
+     getPostsById: function(id) {
+      var deferred = $q.defer();
+      var firebase = new Firebase(FirebaseUrl + '/posts');
+      firebase.orderByChild('userId').equalTo(id).once("value", function(snapshot) {
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);

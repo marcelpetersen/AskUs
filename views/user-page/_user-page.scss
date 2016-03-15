@@ -1,0 +1,90 @@
+#user-page {
+  .page-content {
+    .user-info {
+      position: relative;
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      flex-direction:column;
+      -webkit-flex-direction:column;
+
+      padding-top: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 10px;
+
+      .background-picture {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        // background: -webkit-linear-gradient(45deg, #1e5799 0%,#2989d8 48%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
+        // background: linear-gradient(45deg, #1e5799 0%,#2989d8 48%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        background: -webkit-linear-gradient(45deg, #ea5507 1%,#f7bc5d 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(45deg, #ea5507 1%,#f7bc5d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+        // ***** With Image *****
+        // background-image:url('../img/account-bg.jpg');
+        // background-size: cover;
+        // background-position: 50% 50%;
+        // -webkit-filter: blur(2px);
+        // -moz-filter: blur(2px);
+        // -o-filter: blur(2px);
+        // -ms-filter: blur(2px);
+        // filter: blur(2px);
+        z-index: -1;
+      }
+      .user-picture {
+        border-radius: 50%;
+        width: 30%;
+      }
+      h2 {
+        font-size: 20px;
+        margin-top: 20px;
+        color: white;
+        font-weight: bold;
+      }
+    }
+
+    .posts-list-container {
+      .no-post {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 20px;
+      }
+      .loading {
+        margin-top: 40px;
+      }
+      .card {
+        &:first-child {
+          margin-top: 0px;
+        }
+        &:last-child {
+          margin-bottom: 10px;
+        }
+        .item-body {
+          .item-image {
+            padding-bottom: 16px;
+            .picture {
+              background-color: #EEE;
+              width: 48%;
+              padding-bottom: 48%;
+              background-size: cover;
+              background-position: center center;
+              border-radius: 3px;
+              &.picture-A {
+                float: left;
+              }
+              &.picture-B {
+                float: right;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

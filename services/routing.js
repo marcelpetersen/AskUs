@@ -60,7 +60,7 @@ angular.module('myApp.routingService', [])
   .state('tab.user-page', {
     cache: true,
       authRequired: true,
-      url: '/friends/:userName',
+      url: '/user/:userName',
       views: {
         'tab-friends': {
           templateUrl: 'templates/user-page.html',
