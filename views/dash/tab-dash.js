@@ -74,7 +74,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
           angular.element('ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
           Post.getAllPosts().then(function(postsData) {
             console.log('Load first data');
-            // delete postsData.connected;
+            delete postsData.connected;
             for (var first in postsData) {
               $scope.currentLastPost = postsData[first].time;
               break;
@@ -94,9 +94,9 @@ angular.module('myApp.dashTab', ['myApp.env'])
             currentLastPostTemp = postsData[first].time;
             break;
           }
-
           if ($scope.currentLastPost === currentLastPostTemp) {
             $scope.noMoreData = true;
+            // $scope.$broadcast('scroll.infiniteScrollComplete');
           } else {
             $scope.currentLastPost = currentLastPostTemp;
             var updatedPost = angular.extend({}, $scope.posts, postsData)
