@@ -126,10 +126,14 @@ angular.module('myApp.dashTab', ['myApp.env'])
     Post.singlePostInfoSet(postData);
   }
 
-  $scope.vote = function(postId, element) {
-    Vote.addVote(postId, element).then(function(){
+  $scope.vote = function(post, element) {
+    Vote.addVote(post.$key, element).then(function(){
       console.log("vote saved");
-      angular.element('.card[data-postid='+ postId +']').addClass('voted voted-'+ element);
+      angular.element('.card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
+
+      post.totalA = 30;
+      post.totalB = 70;
+
     }, function(){
       console.log("vote failed");
     })

@@ -78,6 +78,18 @@
                 }
               }
             }
+            .results-container {
+              margin-top: 20px;
+              overflow: hidden;
+              .results {
+                float: left;
+                width: 48%;
+                text-align: center;
+                &.results-B {
+                  float: right;
+                }
+              }
+            }
           }
         }
         &.voted {

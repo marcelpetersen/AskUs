@@ -9,6 +9,7 @@
     </ion-refresher>  
 
     <section class="posts-list-container">
+
       <div class="list card" ng-repeat="post in posts | toArray | orderBy : '-time'" data-postid="{{::post.$key}}" ng-init="checkVote(post.$key, post)">
         <!-- User infos and post redirection -->
         <div class="item item-avatar">
@@ -28,8 +29,17 @@
               <div class="picture picture-B" ng-style="{'background-image':'url({{::post.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)"></div>
             </div>
             <div class="vote-buttons-container">
-              <button class="button vote-A" on-touch="vote(post.$key, 'A')"><i class="ion-checkmark-circled"></i></button>
-              <button class="button vote-B" on-touch="vote(post.$key, 'B')"><i class="ion-checkmark-circled"></i></button>
+              <button class="button vote-A" on-tap="vote(post, 'A')"><i class="ion-checkmark-circled"></i></button>
+              <button class="button vote-B" on-tap="vote(post, 'B')"><i class="ion-checkmark-circled"></i></button>
+            </div>
+
+            <div class="results-container">
+              <div class="results results-A">
+                <radial percentage="post.totalA"></radial>
+              </div>
+              <div class="results results-B">
+                <radial percentage="post.totalB"></radial>
+              </div>
             </div>
           </div>
           <!-- Post content -->

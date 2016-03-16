@@ -21,7 +21,8 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.userPage',
   'myApp.postPage',
-  'myApp.voteService'
+  'myApp.voteService',
+  'myApp.radialDirective'
 ])
 
 // .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
