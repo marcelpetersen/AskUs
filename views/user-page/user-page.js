@@ -2,7 +2,6 @@ angular.module('myApp.userPage', ['myApp.env'])
 
 .controller('userPageCtrl', ['$scope', '$stateParams', 'usersInfos', 'Post', '$timeout', '$ionicModal', '$ionicSlideBoxDelegate', function($scope, $stateParams, usersInfos, Post, $timeout, $ionicModal, $ionicSlideBoxDelegate) {
   $scope.parentCategory = $stateParams.parentCat;
-  console.log($scope.parentCategory);
   $scope.posts;
   $scope.noPost = false;
   $scope.user = usersInfos.singleUserInfoGet();
@@ -36,7 +35,6 @@ angular.module('myApp.userPage', ['myApp.env'])
   };
 
   $scope.userPage = function(userId, userName, userPicture) {
-    console.log('test');
     var user = {
       id: userId,
       name: userName,
@@ -44,6 +42,14 @@ angular.module('myApp.userPage', ['myApp.env'])
     }
     console.log(user);
     usersInfos.singleUserInfoSet(user);
+  }
+
+  $scope.postPage = function(uid, data) {
+    var postData = {
+      uid: uid,
+      data: data
+    };
+    Post.singlePostInfoSet(postData);
   }
 
   $scope.modalPictureUpdate =  function(data) {

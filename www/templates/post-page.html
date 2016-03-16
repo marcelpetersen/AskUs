@@ -1,6 +1,38 @@
 <ion-view view-title="Post" id="post-page">
   <ion-content class="padding page-content" overflow-scroll="true">
-test
+
+    <section class="posts-list-container">
+      <div class="list card">
+        <!-- User infos and post redirection -->
+        <div class="item item-avatar">
+          <a class="user-picture" ng-style="{'background-image':'url({{::post.data.userPicture}})'}" on-touch="userPage(post.data.userId,post.data.userName,post.data.userPicture)" href="#/tab/{{::parentCategory}}/user/{{::post.data.userId}}/{{::parentCategory}}"></a>
+          <h2>{{::post.data.userName}}</h2>
+          <p>{{::post.data.time | date : 'MMM d, y HH:mm:ss'}}</p>
+        </div>
+
+        <div class="item item-body">
+        <!-- Pictures and vote action container -->
+          <div class="item item-image">
+            <div class="images-container">
+              <div class="picture picture-A" ng-style="{'background-image':'url({{::post.data.pictureA}})'}" ng-click="goToSlide(0); modalPictureUpdate(post)"></div>
+              <div class="picture picture-B" ng-style="{'background-image':'url({{::post.data.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)"></div>
+            </div>
+            <div class="vote-buttons-container">
+              <button class="button vote-A"><i class="ion-checkmark-circled"></i></button>
+              <button class="button vote-B"><i class="ion-checkmark-circled"></i></button>
+            </div>
+          </div>
+          <!-- Post content -->
+          <h2>{{::post.data.title}}</h2>
+          <p class:"description">{{::post.data.description}}</p>
+          <p>
+            <a href="#" class="subdued">1 Like</a>
+            <a href="#" class="subdued">5 Comments</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
 
   </ion-content>
 </ion-view>

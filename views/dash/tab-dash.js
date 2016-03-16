@@ -120,8 +120,16 @@ angular.module('myApp.dashTab', ['myApp.env'])
       id: userId,
       name: userName,
       picture: userPicture
-    }
+    };
     usersInfos.singleUserInfoSet(user);
+  }
+
+  $scope.postPage = function(uid, data) {
+    var postData = {
+      uid: uid,
+      data: data
+    };
+    Post.singlePostInfoSet(postData);
   }
 
   // $scope.$on('$stateChangeSuccess', function() {

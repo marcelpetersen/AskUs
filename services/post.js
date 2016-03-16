@@ -2,7 +2,9 @@ angular.module('myApp.postService', [])
 
 .factory('Post', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', '$state', function($q, $rootScope, FirebaseUrl, currentUserInfos, $state) {
 
-   resolve = function(errval, retval, deferred) {
+  var singlePostInfo = {};
+
+  resolve = function(errval, retval, deferred) {
     $rootScope.$apply(function() {
       if (errval) {
         deferred.reject(errval);
@@ -33,7 +35,6 @@ angular.module('myApp.postService', [])
           resolve(error, null, deferred);
         }
       });
-
       promise = deferred.promise;
       return promise;
     },
@@ -45,7 +46,6 @@ angular.module('myApp.postService', [])
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
       });
-
       promise = deferred.promise;
       return promise;
     },
@@ -57,7 +57,6 @@ angular.module('myApp.postService', [])
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
       });
-
       promise = deferred.promise;
       return promise;
     },
@@ -69,9 +68,14 @@ angular.module('myApp.postService', [])
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
       });
-
       promise = deferred.promise;
       return promise;
+    },
+    singlePostInfoSet: function(data) {
+      singlePostInfo = data;
+    },
+    singlePostInfoGet: function() {
+      return singlePostInfo;
     }
   }
 }]);
