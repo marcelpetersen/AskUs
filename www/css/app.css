@@ -9914,10 +9914,12 @@ a.button {
         float: right; }
 
 #dash-page .page-content .posts-list-container .card.voted.voted-A .vote-A {
-  background-color: green; }
+  background-color: #33cd5f;
+  color: #FFF; }
 
 #dash-page .page-content .posts-list-container .card.voted.voted-B .vote-B {
-  background-color: green; }
+  background-color: #33cd5f;
+  color: #FFF; }
 
 #dash-page .page-content .no-more-cards {
   text-align: center; }

@@ -23,6 +23,10 @@ angular.module('myApp.postService', [])
       postData.userId = userInfo.id;
       postData.userName = userInfo.displayName;
       postData.userPicture = userInfo.profileImageURL;
+      postData.totalVote = 0;
+      postData.voteATotal = 0;
+      postData.voteBTotal = 0;
+
       var d = new Date();
       var n = d.getTime();
       postData.time = n;
