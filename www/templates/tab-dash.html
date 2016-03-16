@@ -28,8 +28,8 @@
               <div class="picture picture-B" ng-style="{'background-image':'url({{::post.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)"></div>
             </div>
             <div class="vote-buttons-container">
-              <button class="button vote-A" on-touch="vote(post.$key, post.userId, 'A')"><i class="ion-checkmark-circled"></i></button>
-              <button class="button vote-B" on-touch="vote(post.$key, post.userId, 'B')"><i class="ion-checkmark-circled"></i></button>
+              <button class="button vote-A" on-touch="vote(post.$key, 'A')"><i class="ion-checkmark-circled"></i></button>
+              <button class="button vote-B" on-touch="vote(post.$key, 'B')"><i class="ion-checkmark-circled"></i></button>
             </div>
           </div>
           <!-- Post content -->

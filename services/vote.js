@@ -1,6 +1,6 @@
 angular.module('myApp.voteService', [])
 
-.factory('Vote', ['$q', '$rootScope', 'FirebaseUrl', function($q, $rootScope, FirebaseUrl) {
+.factory('Vote', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', function($q, $rootScope, FirebaseUrl, currentUserInfos) {
 
   resolve = function(errval, retval, deferred) {
     $rootScope.$apply(function() {
@@ -15,18 +15,23 @@ angular.module('myApp.voteService', [])
   }
 
   return {
-    addVote: function(postId, userId, element) {
+    addVote: function(postId, element) {
+      var user = currentUserInfos.currentUserInfoGet();
       var deferred = $q.defer();
 
       var voterInfo = {};
-      voterInfo[userId] = element;
+      voterInfo[user.id] = element;
+
+      console.log('voter',voterInfo)
 
       var firebase = new Firebase(FirebaseUrl + '/posts/' + postId + "/voters");
-      firebase.set(voterInfo, function(snapshot, error) {
+      firebase.update(voterInfo, function(snapshot, error) {
         if(!error){
           resolve(null, 'ok', deferred);
+          console.log("vote ok")
         } else {
           resolve(error, null, deferred);
+          console.log("vote ko");
         }
       });
       promise = deferred.promise;
