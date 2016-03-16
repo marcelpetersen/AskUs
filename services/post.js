@@ -42,6 +42,7 @@ angular.module('myApp.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('time').limitToLast(5).once("value", function(snapshot) {
+        console.log('first post added');
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -53,6 +54,7 @@ angular.module('myApp.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('time').endAt(timestamp).limitToLast(5).once("value", function(snapshot) {
+        console.log('more post added');
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);

@@ -9913,6 +9913,12 @@ a.button {
       #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-B {
         float: right; }
 
+#dash-page .page-content .posts-list-container .card.voted.voted-A .vote-A {
+  background-color: green; }
+
+#dash-page .page-content .posts-list-container .card.voted.voted-B .vote-B {
+  background-color: green; }
+
 #dash-page .page-content .no-more-cards {
   text-align: center; }
 

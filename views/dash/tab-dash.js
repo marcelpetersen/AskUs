@@ -1,6 +1,6 @@
 angular.module('myApp.dashTab', ['myApp.env'])
 
-.controller('DashCtrl', ['$scope', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', function($scope, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos) {
+.controller('DashCtrl', ['$scope', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', function($scope, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
   $scope.posts;
   $scope.aImages;
@@ -8,12 +8,6 @@ angular.module('myApp.dashTab', ['myApp.env'])
   $rootScope.$on('dashRefresh', function() {
     $scope.doRefresh();
   });
-
-  // Post.getAllPosts().then(function(postsData) {
-  //   console.log('Dash Get Post');
-  //   delete postsData.connected;
-  //   $scope.posts = postsData;
-  // });
 
   $scope.doRefresh = function() {
     angular.element('.icon-refreshing').addClass('spin');
@@ -80,7 +74,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
           angular.element('ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
           Post.getAllPosts().then(function(postsData) {
             console.log('Load first data');
-            delete postsData.connected;
+            // delete postsData.connected;
             for (var first in postsData) {
               $scope.currentLastPost = postsData[first].time;
               break;
@@ -97,9 +91,9 @@ angular.module('myApp.dashTab', ['myApp.env'])
           console.log('Loading more data');
           delete postsData.connected;
           for (var first in postsData) {
-              currentLastPostTemp = postsData[first].time;
-              break;
-            }
+            currentLastPostTemp = postsData[first].time;
+            break;
+          }
 
           if ($scope.currentLastPost === currentLastPostTemp) {
             $scope.noMoreData = true;
@@ -132,10 +126,24 @@ angular.module('myApp.dashTab', ['myApp.env'])
     Post.singlePostInfoSet(postData);
   }
 
-  // $scope.$on('$stateChangeSuccess', function() {
-  //   console.log('routeing');
-  //   $scope.loadMore();
-  // });
+  $scope.vote = function(postId, userId, element) {
+    Vote.addVote(postId, userId, element).then(function(){
+      console.log("vote saved");
+      angular.element('.card[data-postid='+ postId +']').addClass('voted voted-'+ element);
+    }, function(){
+      console.log("vote failed");
+    })
+  }
 
+
+  $scope.checkVote = function(postId, post) {
+    var currentUser = currentUserInfos.currentUserInfoGet();
+    if (post.voters) {
+        if (post.voters[currentUser.id]) {
+          $timeout(function(){angular.element('.card[data-postid='+ postId +']').addClass('voted voted-'+ post.voters[currentUser.id]);}, 0);    
+        }
+    }
+
+  }
 
 }]);

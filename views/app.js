@@ -20,7 +20,8 @@ angular.module('myApp', [
   'myApp.friends',
   'myApp.services',
   'myApp.userPage',
-  'myApp.postPage'
+  'myApp.postPage',
+  'myApp.voteService'
 ])
 
 // .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')

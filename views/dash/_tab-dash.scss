@@ -80,6 +80,18 @@
             }
           }
         }
+        &.voted {
+          &.voted-A {
+            .vote-A {
+              background-color: green;
+            }
+          }
+          &.voted-B {
+            .vote-B {
+              background-color: green;
+            }
+          }
+        }
       }
     }
     .no-more-cards {
