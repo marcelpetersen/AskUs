@@ -33,12 +33,12 @@
               <button class="button vote-B" on-tap="vote(post, 'B')"><i class="ion-checkmark-circled"></i></button>
             </div>
 
-            <div class="results-container">
-              <div class="results results-A">
-                <radial percentage="post.totalA"></radial>
+            <div class="results-container hide">
+              <div class="results results-A" data-postid="{{::post.$key}}">
+                <!-- <radial percentage="post.totalA"></radial> -->
               </div>
-              <div class="results results-B">
-                <radial percentage="post.totalB"></radial>
+              <div class="results results-B" data-postid="{{::post.$key}}">
+                <!-- <radial percentage="post.totalB"></radial> -->
               </div>
             </div>
           </div>
