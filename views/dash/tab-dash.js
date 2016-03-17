@@ -128,74 +128,17 @@ angular.module('myApp.dashTab', ['myApp.env'])
 
   $scope.vote = function(post, element) {
     Vote.addVote(post.$key, element).then(function(){
-      console.log("vote saved");
       angular.element('.card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
       angular.element('.card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
       angular.element('.card[data-postid='+ post.$key +'] .results-container').fadeIn();
 
-      var totalA = post.voteATotal;
-      var totalB = post.voteBTotal;
-      // var total = totalVote;
-      var total = totalA + totalB + 1;
+      (element === "A") ? post.voteATotal++ : post.voteBTotal++;
 
-      if (element === "A") {
-        totalA++;
-      } else {
-        totalB++;
-      }
+      post.totalA = Math.round(post.voteATotal * 100 /(post.voteATotal + post.voteBTotal));
+      post.totalB = Math.round(post.voteBTotal * 100 /(post.voteATotal + post.voteBTotal));
 
-      post.totalA = Math.round(totalA * 100 /(total));
-      post.totalB = Math.round(totalB * 100 /(total));
-      console.log(post.totalA, post.totalB)
-
-      // post.totalA = 30;
-      // post.totalB = 70;
-
-      var a = new RadialProgressChart('.results-A[data-postid='+ post.$key +']', {
-        diameter: 70,
-        max: 100,
-        round: false,
-        series: [{
-          value: post.totalA,
-          color: '#33cd5f'
-        }],
-        animation: {
-            duration: 2500
-        },
-         shadow: {
-        width: 0
-    },
-        stroke: {
-            width: 20,
-            gap: 2
-        },
-        center: function(d) {
-          return post.totalA + ' %'
-        }
-      });
-
-      var b = new RadialProgressChart('.results-B[data-postid='+ post.$key +']', {
-        diameter: 70,
-        max: 100,
-        round: false,
-        series: [{
-          value: post.totalB,
-          color: '#387ef5'
-        }],
-         shadow: {
-        width: 0
-    },
-        stroke: {
-            width: 20,
-            gap: 2
-        },
-        animation: {
-            duration: 2500
-        },
-        center: function(d) {
-          return post.totalB + ' %'
-        }
-      });
+      Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000);
+      Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000);
 
     }, function(){
       console.log("vote failed");
@@ -207,10 +150,17 @@ angular.module('myApp.dashTab', ['myApp.env'])
     var currentUser = currentUserInfos.currentUserInfoGet();
     if (post.voters) {
         if (post.voters[currentUser.id]) {
-          $timeout(function(){angular.element('.card[data-postid='+ postId +']').addClass('voted voted-'+ post.voters[currentUser.id]);}, 0);    
+          post.totalA = Math.round(post.voteATotal * 100 /(post.voteATotal + post.voteBTotal));
+          post.totalB = Math.round(post.voteBTotal * 100 /(post.voteATotal + post.voteBTotal));
+          $timeout(function(){
+            angular.element('.card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
+            angular.element('.card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
+            angular.element('.card[data-postid='+ post.$key +'] .results-container').show();
+            Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1);
+            Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1);
+          }, 0);    
         }
     }
-
   }
 
 }]);
