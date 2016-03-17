@@ -131,8 +131,23 @@ angular.module('myApp.dashTab', ['myApp.env'])
       console.log("vote saved");
       angular.element('.card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
 
-      post.totalA = 30;
-      post.totalB = 70;
+      var totalA = post.voteATotal;
+      var totalB = post.voteBTotal;
+      // var total = totalVote;
+      var total = totalA + totalB + 1;
+
+      if (element === "A") {
+        totalA++;
+      } else {
+        totalB++;
+      }
+
+      post.totalA = Math.round(totalA * 100 /(total));
+      post.totalB = Math.round(totalB * 100 /(total));
+      console.log(post.totalA, post.totalB)
+
+      // post.totalA = 30;
+      // post.totalB = 70;
 
     }, function(){
       console.log("vote failed");
