@@ -66,16 +66,24 @@
             }
             .vote-buttons-container {
               overflow: hidden;
+              position: relative;
+              margin-top: 10px;
+              padding-top: 10px;
+              padding-bottom: 10px;
               button {
-                margin-top: 10px;
                 width: 48%;
                 &.vote-A {
                   float: left;
                 }
                 &.vote-B {
                   float: right;
-
                 }
+              }
+              .vote-loading {
+                z-index: 9;
+                @include absolutePos(0px, 0px, 0px, 0px);
+                @include flexCenter();
+                background-color: rgba(255, 255, 255, 0.8);
               }
             }
             .results-container {

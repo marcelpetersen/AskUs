@@ -90,7 +90,11 @@ angular.module('myApp.dashTab', ['myApp.env'])
 
   // ****** Vote functions ******
   $scope.vote = function(post, element) {
+    angular.element('.card[data-postid='+ post.$key +'] .vote-loading .loading-icon').addClass('spin');
+    angular.element('.card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
     Vote.addVote(post.$key, element).then(function(){
+      angular.element('.card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
+
       angular.element('.card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
 
       // Hide voting button block and show radials
@@ -110,6 +114,8 @@ angular.module('myApp.dashTab', ['myApp.env'])
       Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000);
 
     }, function(){
+      angular.element('.card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
+      angular.element('.card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
       console.log("vote failed");
     })
   };

@@ -10990,14 +10990,35 @@ a.button {
       #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-B {
         float: right; }
   #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container {
-    overflow: hidden; }
+    overflow: hidden;
+    position: relative;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px; }
     #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button {
-      margin-top: 10px;
       width: 48%; }
       #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-A {
         float: left; }
       #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-B {
         float: right; }
+    #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container .vote-loading {
+      z-index: 9;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      display: flex;
+      display: -webkit-flex;
+      display: -moz-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8); }
   #dash-page .page-content .posts-list-container .card .item-body .item-image .results-container {
     margin-top: 20px;
     overflow: hidden; }
@@ -11232,6 +11253,9 @@ a.button {
   .loading .loading-icon {
     font-size: 30px; }
 
+.hide {
+  display: none !important; }
+
 .spin {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite; }
@@ -11243,15 +11267,3 @@ a.button {
   animation-name: fadeEffect;
   -webkit-animation-name: fadeEffect;
   -moz-animation-name: fadeEffect; }
-
-@-webkit-keyframes spin {
-  from {
-    -webkit-transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(360deg); } }
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(360deg); } }

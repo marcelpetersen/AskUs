@@ -43,6 +43,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   }
 }
 
+.hide {
+    display: none !important;
+}
+
 .spin {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
@@ -51,15 +55,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Fade effect custom
 .fadein-effect {
  @include animationEffect(1s, fadeEffect);
-}
-
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-@keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
 }
 
 
