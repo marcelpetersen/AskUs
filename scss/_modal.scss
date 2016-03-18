@@ -29,6 +29,10 @@
               position: fixed;
               right: 0;
               top: 0;
+              // if using background image
+    //           background-repeat: no-repeat;
+    // background-size: 100%;
+    // background-position: center center;
             }
           }
         }
@@ -66,8 +70,11 @@
 }
 
 .mh-slide.ng-enter, .mh-slide > .ng-enter {
-  -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
-  transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms; 
+  // smoother on ios, no picture blink
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms; 
+  // -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
+  // transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms; 
 }
 
 .mh-slide.ng-enter-active, .mh-slide > .ng-enter-active {
