@@ -45,7 +45,8 @@ angular.module('myApp.authService', [])
     Auth.$unauth();
     // Remove facebook stored cookies
     window.cookies.clear(function() {
-      $window.location.href = '#/splash';
+      $window.location.reload();
+      $window.location.href = '#/splash';   
     });
   };
 
