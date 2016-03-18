@@ -43,6 +43,20 @@ angular.module('myApp.postService', [])
       return promise;
     },
 
+    deletePost: function(id) {
+      var deferred = $q.defer();
+      var firebase = new Firebase(FirebaseUrl + '/posts/' + id);
+      firebase.remove(function(error) {
+        if(!error){
+          resolve(null, 'ok', deferred);
+        } else {
+          resolve(error, null, deferred);
+        }
+      });
+      promise = deferred.promise;
+      return promise;
+    },
+
     getAllPosts: function() {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');

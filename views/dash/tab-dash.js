@@ -120,8 +120,9 @@ angular.module('myApp.dashTab', ['myApp.env'])
     })
   };
 
-  $scope.checkVote = function(postId, post) {
+  $scope.checkVote = function(post) {
     var currentUser = currentUserInfos.currentUserInfoGet();
+    // Check if user has vote this post
     if (post.voters) {
       if (post.voters[currentUser.id]) {
         post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
@@ -140,7 +141,23 @@ angular.module('myApp.dashTab', ['myApp.env'])
         }, 0);    
       }
     }
+    // check if user own post
+    if (post.userId === currentUser.id) {
+      $timeout(function(){
+        angular.element('.card[data-postid='+ post.$key +']').addClass('my-post');
+      }, 0);
+    }
   };
+
+  $scope.deletePost = function(id) {
+    Post.deletePost(id).then(function(){
+      angular.element('.card[data-postid='+ id +']').fadeOut(500);
+      $scope.deleteModal.hide();
+    }, function(){
+      $scope.deleteModal.hide();
+      console.log("delete failed");
+    })
+  }
 
   // ****** Modal functions ******
   $scope.modalPictureUpdate =  function(data) {
@@ -151,12 +168,31 @@ angular.module('myApp.dashTab', ['myApp.env'])
     }];
   };
 
+  $scope.postDelete = {};
+
+  $ionicModal.fromTemplateUrl('post-delete-modal.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.deleteModal = modal;
+  });
+
   $ionicModal.fromTemplateUrl('image-modal.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'
   }).then(function(modal) {
     $scope.modal = modal;
   });
+
+  $scope.showDeleteModal = function(key, title) {
+    $scope.postDelete.title = title;
+    $scope.postDelete.id = key;
+    $scope.deleteModal.show();
+  };
+
+  $scope.closeDeleteModal = function() {
+    $scope.deleteModal.hide();
+  };
 
   $scope.openModal = function() {
     $ionicSlideBoxDelegate.slide(0);

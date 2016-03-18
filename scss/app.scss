@@ -21,10 +21,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 // Tools
-@import "scss/tools/modal";
-@import "scss/tools/radial";
 @import "scss/tools/keyframes-animations";
 @import "scss/tools/mixins";
+@import "scss/tools/modal";
+@import "scss/tools/radial";
 
 // Views
 @import "views/splash/splash";

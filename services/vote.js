@@ -48,7 +48,7 @@ angular.module('myApp.voteService', [])
 
     addRadial: function(element, key, color, total, duration) {
       var radial = new RadialProgressChart('.results-'+ element +'[data-postid='+ key +']', {
-        diameter: 70,
+        diameter: 80,
         max: 100,
         round: false,
         series: [{
@@ -62,7 +62,7 @@ angular.module('myApp.voteService', [])
             width: 1
         },
         stroke: {
-            width: 20,
+            width: 10,
             gap: 2
         },
         center: function(d) {

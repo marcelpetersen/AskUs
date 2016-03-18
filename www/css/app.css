@@ -9721,6 +9721,36 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+@keyframes fadeEffect {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes fadeEffect {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-moz-keyframes fadeEffect {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .transparent {
   background: transparent !important; }
 
@@ -9753,6 +9783,38 @@ a.button {
     right: 27px;
     color: white;
     font-size: 30px; }
+
+.edit-delete-modal {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  text-align: center; }
+  .edit-delete-modal .modal-content {
+    padding: 20px; }
+    .edit-delete-modal .modal-content h3, .edit-delete-modal .modal-content p {
+      color: #FFF; }
+    .edit-delete-modal .modal-content h3 {
+      font-size: 20px;
+      margin-bottom: 40px; }
+    .edit-delete-modal .modal-content p {
+      font-size: 16px;
+      margin-bottom: 40px; }
+    .edit-delete-modal .modal-content .buttons-container button {
+      border-radius: 5px;
+      border: none;
+      padding: 10px 20px;
+      margin: 0px 15px; }
+      .edit-delete-modal .modal-content .buttons-container button.cancel {
+        background-color: #f8f8f8; }
+      .edit-delete-modal .modal-content .buttons-container button.delete {
+        color: #FFF;
+        background-color: #ef473a; }
 
 /* Fix modal backdrop for smaller devices */
 @media (max-width: 679px) {
@@ -10838,36 +10900,6 @@ a.button {
   .radial-progress[data-progress="100"] .inset .percentage:before {
     content: "100%"; }
 
-@keyframes fadeEffect {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@-webkit-keyframes fadeEffect {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@-moz-keyframes fadeEffect {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(360deg); } }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg); }
-  100% {
-    transform: rotate(360deg); } }
-
 #splash-page .page-content .section.first {
   display: flex;
   display: -webkit-flex;
@@ -11036,6 +11068,34 @@ a.button {
 #dash-page .page-content .posts-list-container .card.voted.voted-B .vote-B {
   background-color: #33cd5f;
   color: #FFF; }
+
+#dash-page .page-content .posts-list-container .card .edit-delete {
+  display: none;
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  z-index: 9;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: #ef473a;
+  border: none; }
+  #dash-page .page-content .posts-list-container .card .edit-delete i {
+    font-size: 16px;
+    line-height: 16px; }
+
+#dash-page .page-content .posts-list-container .card.my-post .edit-delete {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  text-align: center; }
 
 #dash-page .page-content .no-more-cards {
   text-align: center; }

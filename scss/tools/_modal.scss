@@ -48,6 +48,40 @@
   }
 }
 
+.edit-delete-modal {
+  @include flexCenter();
+  .modal-content {
+    padding: 20px;
+    h3, p {
+      color: #FFF;
+    }
+    h3 {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+    .buttons-container {
+      button {
+        border-radius: 5px;
+        border: none;
+        padding: 10px 20px;
+        margin: 0px 15px;
+        &.cancel {
+          background-color: $stable;
+        }
+        &.delete {
+          color: #FFF;
+          background-color: $assertive;
+        }
+      }
+    }
+  }
+}
+
+
 /* Fix modal backdrop for smaller devices */
 @media (max-width: 679px) {
   .active .modal-backdrop-bg {
