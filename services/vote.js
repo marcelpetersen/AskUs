@@ -7,8 +7,6 @@ angular.module('myApp.voteService', [])
       if (errval) {
         deferred.reject(errval);
       } else {
-        // No Need This
-        // retval.connected = true;
         deferred.resolve(retval);
       }
     });
@@ -21,8 +19,6 @@ angular.module('myApp.voteService', [])
 
       var voterInfo = {};
       voterInfo[user.id] = element;
-
-      console.log('voter',voterInfo)
 
       var firebase = new Firebase(FirebaseUrl + '/posts/' + postId);
       firebase.child("voters").update(voterInfo, function(snapshot, error) {
@@ -40,7 +36,6 @@ angular.module('myApp.voteService', [])
               resolve(null, 'ok', deferred);
               console.log('vote saved db!');
             }
-            console.log("Wilma's data: ", snapshot.val());
           });
         } else {
           resolve(error, null, deferred);
@@ -50,6 +45,7 @@ angular.module('myApp.voteService', [])
       promise = deferred.promise;
       return promise;
     },
+
     addRadial: function(element, key, color, total, duration) {
       var radial = new RadialProgressChart('.results-'+ element +'[data-postid='+ key +']', {
         diameter: 70,
@@ -73,8 +69,11 @@ angular.module('myApp.voteService', [])
           return total + ' %'
         }
       });
-
       return radial;
+    },
+
+    calculTotalRatio: function(a, b) {
+      return Math.round(a * 100 /(a + b));
     }
   }
 

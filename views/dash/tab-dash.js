@@ -31,18 +31,14 @@ angular.module('myApp.dashTab', ['myApp.env'])
     angular.element('.icon-refreshing').addClass('spin');
       if (!$scope.currentLastPost) {
           angular.element('ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+          // Get the previous last 5 posts
           Post.getAllPosts().then(function(postsData) {
             console.log('Load first data');
-          console.log(postsData);
 
-            // delete postsData.connected;
-            for (var first in postsData) {
-              $scope.currentLastPost = postsData[first].time;
-              delete postsData[first];
-              break;
-            }
-
-            $scope.posts = postsData;
+            // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
+            var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
+            $scope.currentLastPost = cleanedData.currentLastPost
+            $scope.posts = cleanedData.obj;
 
             angular.element('.icon-refreshing').removeClass('spin');
             angular.element('ion-infinite-scroll').css('margin-top', '0px');
@@ -50,23 +46,19 @@ angular.module('myApp.dashTab', ['myApp.env'])
         });
       } else {
         Post.getAllPostsInfinite($scope.currentLastPost).then(function(postsData) {
-          var currentLastPostTemp;
-          var lastPostId;
           console.log('Loading more data');
-          // delete postsData.connected;
-          console.log(postsData);
-          for (var first in postsData) {
-            currentLastPostTemp = postsData[first].time;
-            lastPostId = first;
-            break;
-          }
+
+          var firstElement = Post.getFirstElementInObject(postsData);
+          var currentLastPostTemp = firstElement.currentLastPost;
+          var lastPostId = firstElement.id;
+
           if ($scope.currentLastPost === currentLastPostTemp) {
-            console.log(postsData);
             $scope.noMoreData = true;
-            var updatedPost = angular.extend({}, $scope.posts, postsData)
-            $scope.posts = updatedPost;
+            var updatedPostFinal = angular.extend({}, $scope.posts, postsData)
+            $scope.posts = updatedPostFinal;
           } else {
             $scope.currentLastPost = currentLastPostTemp;
+            // Delete the element because already exist in the original Data
             delete postsData[lastPostId];
             var updatedPost = angular.extend({}, $scope.posts, postsData)
             $scope.posts = updatedPost;
@@ -100,14 +92,20 @@ angular.module('myApp.dashTab', ['myApp.env'])
   $scope.vote = function(post, element) {
     Vote.addVote(post.$key, element).then(function(){
       angular.element('.card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
-      angular.element('.card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-      angular.element('.card[data-postid='+ post.$key +'] .results-container').fadeIn();
+
+      // Hide voting button block and show radials
+      post.hasVoted = true;
+
+      // Keep for now
+      // angular.element('.card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
+      // angular.element('.card[data-postid='+ post.$key +'] .results-container').fadeIn();
 
       (element === "A") ? post.voteATotal++ : post.voteBTotal++;
 
-      post.totalA = Math.round(post.voteATotal * 100 /(post.voteATotal + post.voteBTotal));
-      post.totalB = Math.round(post.voteBTotal * 100 /(post.voteATotal + post.voteBTotal));
+      post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
+      post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
 
+      // Create the Radials
       Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000);
       Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000);
 
@@ -120,12 +118,17 @@ angular.module('myApp.dashTab', ['myApp.env'])
     var currentUser = currentUserInfos.currentUserInfoGet();
     if (post.voters) {
       if (post.voters[currentUser.id]) {
-        post.totalA = Math.round(post.voteATotal * 100 /(post.voteATotal + post.voteBTotal));
-        post.totalB = Math.round(post.voteBTotal * 100 /(post.voteATotal + post.voteBTotal));
+        post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
+        post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
+        // Timeout required for updating the view and render the radials
         $timeout(function(){
+          //Show Radial block hide Buttons
+          post.hasVoted = true;
           angular.element('.card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
-          angular.element('.card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-          angular.element('.card[data-postid='+ post.$key +'] .results-container').show();
+
+          // Keep for now
+          // angular.element('.card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
+          // angular.element('.card[data-postid='+ post.$key +'] .results-container').show();
           Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1);
           Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1);
         }, 0);    
@@ -172,6 +175,5 @@ angular.module('myApp.dashTab', ['myApp.env'])
   $scope.slideChanged = function(index) {
     $scope.slideIndex = index;
   };
-
 
 }]);

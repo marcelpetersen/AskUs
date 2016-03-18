@@ -10838,6 +10838,36 @@ a.button {
   .radial-progress[data-progress="100"] .inset .percentage:before {
     content: "100%"; }
 
+@keyframes fadeEffect {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes fadeEffect {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-moz-keyframes fadeEffect {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 #splash-page .page-content .section.first {
   display: flex;
   display: -webkit-flex;
@@ -11205,6 +11235,14 @@ a.button {
 .spin {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite; }
+
+.fadein-effect {
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-name: fadeEffect;
+  -webkit-animation-name: fadeEffect;
+  -moz-animation-name: fadeEffect; }
 
 @-webkit-keyframes spin {
   from {

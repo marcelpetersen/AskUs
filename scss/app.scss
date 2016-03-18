@@ -21,8 +21,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 // Tools
-@import "scss/modal";
-@import "scss/radial";
+@import "scss/tools/modal";
+@import "scss/tools/radial";
+@import "scss/tools/keyframes-animations";
+@import "scss/tools/mixins";
 
 // Views
 @import "views/splash/splash";
@@ -44,6 +46,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .spin {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+}
+
+// Fade effect custom
+.fadein-effect {
+ @include animationEffect(1s, fadeEffect);
 }
 
 @-webkit-keyframes spin {

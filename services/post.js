@@ -9,8 +9,6 @@ angular.module('myApp.postService', [])
       if (errval) {
         deferred.reject(errval);
       } else {
-        // No Need This
-        // retval.connected = true;
         deferred.resolve(retval);
       }
     });
@@ -23,9 +21,11 @@ angular.module('myApp.postService', [])
       postData.userId = userInfo.id;
       postData.userName = userInfo.displayName;
       postData.userPicture = userInfo.profileImageURL;
-      postData.totalVote = 0;
+      postData.totalMessages = 0;
       postData.voteATotal = 0;
       postData.voteBTotal = 0;
+
+      postData.hasVoted = false;
 
       var d = new Date();
       var n = d.getTime();
@@ -42,6 +42,7 @@ angular.module('myApp.postService', [])
       promise = deferred.promise;
       return promise;
     },
+
     getAllPosts: function() {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
@@ -54,6 +55,7 @@ angular.module('myApp.postService', [])
       promise = deferred.promise;
       return promise;
     },
+
     getAllPostsInfinite: function(timestamp) {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
@@ -66,6 +68,7 @@ angular.module('myApp.postService', [])
       promise = deferred.promise;
       return promise;
     },
+
      getPostsById: function(id) {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
@@ -77,11 +80,32 @@ angular.module('myApp.postService', [])
       promise = deferred.promise;
       return promise;
     },
+
     singlePostInfoSet: function(data) {
       singlePostInfo = data;
     },
+
     singlePostInfoGet: function() {
       return singlePostInfo;
+    },
+
+    getAndDeleteFirstElementInObject: function(obj) {
+      var currentLastPost;
+      for (var firstElement in obj) {
+        currentLastPost = obj[firstElement].time;
+        delete obj[firstElement];
+        break;
+      }
+      return { currentLastPost: currentLastPost, obj: obj};
+    },
+
+    getFirstElementInObject: function(obj) {
+      var currentLastPost;
+      for (var firstElement in obj) {
+        currentLastPost = obj[firstElement].time;
+        break;
+      }
+      return { currentLastPost: currentLastPost, id: firstElement};
     }
   }
 }]);
