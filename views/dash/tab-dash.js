@@ -33,11 +33,15 @@ angular.module('myApp.dashTab', ['myApp.env'])
           angular.element('ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
           Post.getAllPosts().then(function(postsData) {
             console.log('Load first data');
-            delete postsData.connected;
+          console.log(postsData);
+
+            // delete postsData.connected;
             for (var first in postsData) {
               $scope.currentLastPost = postsData[first].time;
+              delete postsData[first];
               break;
             }
+
             $scope.posts = postsData;
 
             angular.element('.icon-refreshing').removeClass('spin');
@@ -47,16 +51,23 @@ angular.module('myApp.dashTab', ['myApp.env'])
       } else {
         Post.getAllPostsInfinite($scope.currentLastPost).then(function(postsData) {
           var currentLastPostTemp;
+          var lastPostId;
           console.log('Loading more data');
-          delete postsData.connected;
+          // delete postsData.connected;
+          console.log(postsData);
           for (var first in postsData) {
             currentLastPostTemp = postsData[first].time;
+            lastPostId = first;
             break;
           }
           if ($scope.currentLastPost === currentLastPostTemp) {
+            console.log(postsData);
             $scope.noMoreData = true;
+            var updatedPost = angular.extend({}, $scope.posts, postsData)
+            $scope.posts = updatedPost;
           } else {
             $scope.currentLastPost = currentLastPostTemp;
+            delete postsData[lastPostId];
             var updatedPost = angular.extend({}, $scope.posts, postsData)
             $scope.posts = updatedPost;
           }
