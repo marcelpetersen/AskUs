@@ -50,10 +50,10 @@
           <p class:"description">{{::post.description}}</p>
           <p>
             <a href="#" class="subdued">{{ post.voteATotal + post.voteBTotal}} Votes</a>
-            <a href="#" class="subdued">5 Comments</a>
+            <a href="#" class="subdued">{{ ::post.totalMessages }} Comments</a>
           </p>
         </div>
-        <button class="edit-delete" ng-click="showDeleteModal(post.$key, post.title)"><i class="ion-trash-b"></i></button>
+        <button class="edit-delete-btn" ng-click="showDeleteModal(post.$key, post.title)"><i class="ion-trash-b"></i></button>
       </div>
     </section>
 
@@ -63,6 +63,7 @@
       icon="ion-load-c"
       distance="1%">
     </ion-infinite-scroll>
+
 
     <p class="no-more-cards" ng-if="noMoreData">No more cards</p>
 

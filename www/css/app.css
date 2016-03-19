@@ -11069,7 +11069,7 @@ a.button {
   background-color: #33cd5f;
   color: #FFF; }
 
-#dash-page .page-content .posts-list-container .card .edit-delete {
+#dash-page .page-content .posts-list-container .card .edit-delete-btn {
   display: none;
   position: absolute;
   bottom: 15px;
@@ -11080,22 +11080,18 @@ a.button {
   height: 30px;
   color: white;
   background-color: #ef473a;
-  border: none; }
-  #dash-page .page-content .posts-list-container .card .edit-delete i {
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  line-height: 16px;
+  padding-left: 0px;
+  padding-right: 0px; }
+  #dash-page .page-content .posts-list-container .card .edit-delete-btn i {
     font-size: 16px;
     line-height: 16px; }
 
-#dash-page .page-content .posts-list-container .card.my-post .edit-delete {
-  display: flex;
-  display: -webkit-flex;
-  display: -moz-flex;
-  align-items: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  justify-content: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  text-align: center; }
+#dash-page .page-content .posts-list-container .card.my-post .edit-delete-btn {
+  display: block; }
 
 #dash-page .page-content .no-more-cards {
   text-align: center; }
