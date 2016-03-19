@@ -10968,15 +10968,15 @@ a.button {
     margin: 0 auto;
     border-radius: 5px; }
 
-#dash-page .page-content .posts-list-container .card:first-child {
+.post-pages .page-content .posts-list-container .card:first-child {
   margin-top: 0px; }
 
-#dash-page .page-content .posts-list-container .card:last-child {
+.post-pages .page-content .posts-list-container .card:last-child {
   margin-bottom: 10px; }
 
-#dash-page .page-content .posts-list-container .card .item-avatar {
+.post-pages .page-content .posts-list-container .card .item-avatar {
   padding-right: 50px; }
-  #dash-page .page-content .posts-list-container .card .item-avatar .user-picture {
+  .post-pages .page-content .posts-list-container .card .item-avatar .user-picture {
     position: absolute;
     top: 16px;
     left: 16px;
@@ -10987,7 +10987,7 @@ a.button {
     border-radius: 50%;
     background-size: cover;
     background-position: center center; }
-  #dash-page .page-content .posts-list-container .card .item-avatar .post-link {
+  .post-pages .page-content .posts-list-container .card .item-avatar .post-link {
     position: absolute;
     top: 16px;
     right: 8px;
@@ -10998,19 +10998,19 @@ a.button {
     width: 100%;
     height: 100%;
     border-radius: 50%; }
-    #dash-page .page-content .posts-list-container .card .item-avatar .post-link i {
+    .post-pages .page-content .posts-list-container .card .item-avatar .post-link i {
       font-size: 30px;
       display: block;
       text-align: center;
       margin-top: 12px; }
-      #dash-page .page-content .posts-list-container .card .item-avatar .post-link i::before {
+      .post-pages .page-content .posts-list-container .card .item-avatar .post-link i::before {
         line-height: 20px; }
 
-#dash-page .page-content .posts-list-container .card .item-body .item-image {
+.post-pages .page-content .posts-list-container .card .item-body .item-image {
   padding-bottom: 16px; }
-  #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container {
+  .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container {
     overflow: hidden; }
-    #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture {
+    .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture {
       position: relative;
       background-color: #EEE;
       width: 48%;
@@ -11018,11 +11018,11 @@ a.button {
       background-size: cover;
       background-position: center center;
       border-radius: 3px; }
-      #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-A {
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-A {
         float: left; }
-      #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-B {
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-B {
         float: right; }
-      #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted {
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted {
         display: none;
         position: absolute;
         top: 5px;
@@ -11032,25 +11032,25 @@ a.button {
         height: 20px;
         padding-left: 1px;
         font-size: 19px; }
-        #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-A {
+        .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-A {
           right: 5px;
           color: #33cd5f; }
-        #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-B {
+        .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-B {
           left: 5px;
           color: #387ef5; }
-  #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container {
+  .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container {
     overflow: hidden;
     position: relative;
     margin-top: 10px;
     padding-top: 10px;
     padding-bottom: 10px; }
-    #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button {
+    .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button {
       width: 48%; }
-      #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-A {
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-A {
         float: left; }
-      #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-B {
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-B {
         float: right; }
-    #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container .vote-loading {
+    .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container .vote-loading {
       z-index: 9;
       position: absolute;
       top: 0px;
@@ -11068,31 +11068,31 @@ a.button {
       -moz-justify-content: center;
       text-align: center;
       background-color: rgba(255, 255, 255, 0.8); }
-  #dash-page .page-content .posts-list-container .card .item-body .item-image .results-container {
+  .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container {
     margin-top: 20px;
     overflow: hidden; }
-    #dash-page .page-content .posts-list-container .card .item-body .item-image .results-container .results {
+    .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container .results {
       float: left;
       width: 48%;
       text-align: center; }
-      #dash-page .page-content .posts-list-container .card .item-body .item-image .results-container .results.results-B {
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container .results.results-B {
         float: right; }
 
-#dash-page .page-content .posts-list-container .card.voted.voted-A .vote-A {
+.post-pages .page-content .posts-list-container .card.voted.voted-A .vote-A {
   background-color: #33cd5f;
   color: #FFF; }
 
-#dash-page .page-content .posts-list-container .card.voted.voted-A .has-voted-A {
+.post-pages .page-content .posts-list-container .card.voted.voted-A .has-voted-A {
   display: block !important; }
 
-#dash-page .page-content .posts-list-container .card.voted.voted-B .vote-B {
+.post-pages .page-content .posts-list-container .card.voted.voted-B .vote-B {
   background-color: #33cd5f;
   color: #FFF; }
 
-#dash-page .page-content .posts-list-container .card.voted.voted-B .has-voted-B {
+.post-pages .page-content .posts-list-container .card.voted.voted-B .has-voted-B {
   display: block !important; }
 
-#dash-page .page-content .posts-list-container .card .edit-delete-btn {
+.post-pages .page-content .posts-list-container .card .edit-delete-btn {
   display: none;
   position: absolute;
   bottom: 15px;
@@ -11109,14 +11109,14 @@ a.button {
   line-height: 16px;
   padding-left: 0px;
   padding-right: 0px; }
-  #dash-page .page-content .posts-list-container .card .edit-delete-btn i {
+  .post-pages .page-content .posts-list-container .card .edit-delete-btn i {
     font-size: 16px;
     line-height: 16px; }
 
-#dash-page .page-content .posts-list-container .card.my-post .edit-delete-btn {
+.post-pages .page-content .posts-list-container .card.my-post .edit-delete-btn {
   display: block; }
 
-#dash-page .page-content .no-more-cards {
+.post-pages .page-content .no-more-cards {
   text-align: center; }
 
 #user-page .page-content .user-info {

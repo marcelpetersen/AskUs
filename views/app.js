@@ -18,6 +18,7 @@ angular.module('myApp', [
   'myApp.preferences',
   'myApp.splash',
   'myApp.dashTab',
+  'myApp.dashFilterTab',
   'myApp.friends',
   'myApp.services',
   'myApp.userPage',

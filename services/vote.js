@@ -46,8 +46,8 @@ angular.module('myApp.voteService', [])
       return promise;
     },
 
-    addRadial: function(element, key, color, total, duration) {
-      var radial = new RadialProgressChart('.results-'+ element +'[data-postid='+ key +']', {
+    addRadial: function(element, key, color, total, duration, pageName) {
+      var radial = new RadialProgressChart(pageName + ' .results-'+ element +'[data-postid='+ key +']', {
         diameter: 80,
         max: 100,
         round: false,

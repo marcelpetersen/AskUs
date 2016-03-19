@@ -32,6 +32,18 @@ angular.module('myApp.routingService', [])
     }
   })
 
+  .state('tab.dash-filter', {
+    cache:false,
+    authRequired: true,
+    url: '/dash/filter/:filter',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash-filter.html',
+        controller: 'DashFilterCtrl'
+      }
+    }
+  })
+
   .state('tab.add', {
     cache: false,
     authRequired: false,

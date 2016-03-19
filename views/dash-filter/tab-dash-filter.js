@@ -1,10 +1,10 @@
-angular.module('myApp.dashTab', ['myApp.env'])
+angular.module('myApp.dashFilterTab', ['myApp.env'])
 
-.controller('DashCtrl', 
+.controller('DashFilterCtrl', 
   ['$scope', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
   function($scope, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
-  
-  var pageName = '#dash-page';
+
+    var pageName = '#dash-filter-page';
 
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
