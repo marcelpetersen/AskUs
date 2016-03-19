@@ -26,13 +26,17 @@
         <!-- Pictures and vote action container -->
           <div class="item item-image">
             <div class="images-container">
-              <div class="picture picture-A" ng-style="{'background-image':'url({{::post.pictureA}})'}" ng-click="goToSlide(0); modalPictureUpdate(post)"></div>
-              <div class="picture picture-B" ng-style="{'background-image':'url({{::post.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)"></div>
+              <div class="picture picture-A" ng-style="{'background-image':'url({{::post.pictureA}})'}" ng-click="goToSlide(0); modalPictureUpdate(post)">
+                <i class="ion-checkmark-circled has-voted has-voted-A"></i>
+              </div>
+              <div class="picture picture-B" ng-style="{'background-image':'url({{::post.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)">
+                <i class="ion-checkmark-circled has-voted has-voted-B"></i>
+              </div>
             </div>
 
             <div class="vote-buttons-container" ng-hide="post.hasVoted">
-              <button class="button vote-A" on-tap="vote(post, 'A')"><i class="ion-checkmark-circled"></i></button>
-              <button class="button vote-B" on-tap="vote(post, 'B')"><i class="ion-checkmark-circled"></i></button>
+              <button class="button vote-A" on-tap="vote(post, 'A')">Vote</button>
+              <button class="button vote-B" on-tap="vote(post, 'B')">Vote</button>
               <div class="vote-loading loading hide">
                 <i class="ion ion-load-c loading-icon"></i>
               </div>

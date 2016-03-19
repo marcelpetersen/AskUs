@@ -11011,6 +11011,7 @@ a.button {
   #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container {
     overflow: hidden; }
     #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture {
+      position: relative;
       background-color: #EEE;
       width: 48%;
       padding-bottom: 48%;
@@ -11021,6 +11022,22 @@ a.button {
         float: left; }
       #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-B {
         float: right; }
+      #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted {
+        display: none;
+        position: absolute;
+        top: 5px;
+        background-color: #FFF;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        padding-left: 1px;
+        font-size: 19px; }
+        #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-A {
+          right: 5px;
+          color: #33cd5f; }
+        #dash-page .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-B {
+          left: 5px;
+          color: #387ef5; }
   #dash-page .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container {
     overflow: hidden;
     position: relative;
@@ -11065,9 +11082,15 @@ a.button {
   background-color: #33cd5f;
   color: #FFF; }
 
+#dash-page .page-content .posts-list-container .card.voted.voted-A .has-voted-A {
+  display: block !important; }
+
 #dash-page .page-content .posts-list-container .card.voted.voted-B .vote-B {
   background-color: #33cd5f;
   color: #FFF; }
+
+#dash-page .page-content .posts-list-container .card.voted.voted-B .has-voted-B {
+  display: block !important; }
 
 #dash-page .page-content .posts-list-container .card .edit-delete-btn {
   display: none;
