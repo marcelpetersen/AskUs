@@ -43,18 +43,45 @@
 
   </head>
   <body ng-app="myApp">
-    <!--
-      The nav bar that will be updated as we navigate between views.
-    -->
-    <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-    </ion-nav-bar>
+
+  <ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content drag-content="false">
+      <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+        </ion-nav-buttons>
+      </ion-nav-bar>
+
+      <ion-nav-view></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu
+    side="left"
+    width="80"
+    is-enabled="true" 
+    ng-cloak>
+
+      <ion-header-bar class="bar-assertive">
+        <h1 class="title">Filter</h1>
+      </ion-header-bar>
+      <ion-content>
+        <ul>
+          <li>Menu 1</li>
+          <li>Menu 2</li>
+          <li>Menu 3</li>
+        </ul>
+      </ion-content>
+    </ion-side-menu>
+
+  </ion-side-menus>
+
+
     <!--
       The views will be rendered in the <ion-nav-view> directive below
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
     -->
-    <ion-nav-view></ion-nav-view>
+    <!-- <ion-nav-view></ion-nav-view> -->
   </body>
 </html>
