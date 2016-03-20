@@ -21,7 +21,7 @@ angular.module('myApp.routingService', [])
 
   // Each tab has its own nav history stack:
   .state('tab.dash', {
-    cache:true,
+    cache:false,
     authRequired: true,
     url: '/dash',
     views: {
