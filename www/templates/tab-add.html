@@ -1,6 +1,6 @@
 <ion-view view-title="Add" id="post-add-page">
   <ion-content class="page-content">
-    <h2 style="text-align: center; padding-top: 20px;">Add</h2>
+    <!-- <h2 style="text-align: center; padding-top: 20px;">Add</h2> -->
     
       <div class="picture-container picture-one">
         <button class="button camera" ng-click="takePictureCamera('picture-one')"><i class="icon ion-camera"></i></button>
@@ -16,12 +16,32 @@
 
 
       <div class="list">
-        <label class="item item-input item-floating-label" ng-class="{ 'has-errors' : postForm.title.$invalid, 'no-errors' : postForm.title.$valid}">
-          <span class="input-label">Title</span>
+
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Category
+        </div>
+        <select ng-model="post.category" required>
+          <option selected value="general">General</option>
+          <option value="animals">Animals</option>
+          <option value="art">Art</option>
+          <option value="fashion">Fashion</option>
+          <option value="food">Food</option>
+          <option value="people">People</option>
+          <option value="sport">Sport</option>
+          <option value="travel">Travel</option>
+          <option value="vehicule">Vehicule</option>
+        </select>
+      </label>
+
+
+        <label class="item item-input" ng-class="{ 'has-errors' : postForm.title.$invalid, 'no-errors' : postForm.title.$valid}">
+          <!-- <span class="input-label">Title</span> -->
           <input type="text" name="title" ng-model="post.title" placeholder="Title" required>
         </label>
-        <label class="item item-input item-floating-label" ng-class="{ 'has-errors' : postForm.description.$invalid, 'no-errors' : postForm.description.$valid}">
-          <span class="input-label">Description</span>
+        <label class="item item-input" ng-class="{ 'has-errors' : postForm.description.$invalid, 'no-errors' : postForm.description.$valid}">
+          <!-- <span class="input-label">Description</span> -->
           <!-- <input type="text" placeholder="Last Name"> -->
           <!-- <input type="text" placeholder="Description" rows="4" name="description" ng-model="post.description" required> -->
           <textarea placeholder="Description" rows="3" name="description" ng-model="post.description" required></textarea>
@@ -32,6 +52,17 @@
         Post
       </button>
     </form>
+
+    <script id="picture-upload.html" type="text/ng-template">
+      <div class="picture-upload-modal modal transparent">
+        <div class="modal-content">
+          <div class="loading">
+            <i class="ion ion-load-c loading-icon"></i>
+            <p>Uploading Pictures</p>
+          </div>
+        </div>
+      </div>
+    </script>
 
   </ion-content>
 </ion-view>

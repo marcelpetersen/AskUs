@@ -43,8 +43,8 @@
           }
           .no-errors {
             background-color: $balanced;
-            transition: all 1s ease;
-            span, input, textarea {
+            transition: all 0.5s ease;
+            input, textarea {
               color: white;
               transition: all 0.2s ease;
             }

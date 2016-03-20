@@ -36,6 +36,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "views/account/account";
 @import "views/account/preferences/preferences";
 
+// Android performances related
+// * {
+//   box-shadow: none !important;
+// }
+
 .loading {
   text-align: center;
   .loading-icon {

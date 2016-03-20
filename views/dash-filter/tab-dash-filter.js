@@ -1,14 +1,17 @@
 angular.module('myApp.dashFilterTab', ['myApp.env'])
 
 .controller('DashFilterCtrl', 
-  ['$scope', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
-  function($scope, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
+  ['$scope', '$stateParams', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
+  function($scope, $stateParams, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
-    var pageName = '#dash-filter-page';
+  $scope.parentCategory = $stateParams.filter;
+  console.log($scope.parentCategory);
 
-  $scope.toggleLeft = function() {
+  var pageName = '#dash-filter-page';
+
+  // $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
-  };
+  // };
 
   $scope.posts;
   $scope.aImages;

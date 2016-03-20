@@ -9816,6 +9816,22 @@ a.button {
         color: #FFF;
         background-color: #ef473a; }
 
+.picture-upload-modal {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  text-align: center; }
+  .picture-upload-modal .modal-content .loading {
+    color: #FFF; }
+    .picture-upload-modal .modal-content .loading p {
+      margin-top: 20px; }
+
 /* Fix modal backdrop for smaller devices */
 @media (max-width: 679px) {
   .active .modal-backdrop-bg {
@@ -10959,8 +10975,8 @@ a.button {
     background: none; }
   #post-add-page .page-content form .list .no-errors {
     background-color: #33cd5f;
-    transition: all 1s ease; }
-    #post-add-page .page-content form .list .no-errors span, #post-add-page .page-content form .list .no-errors input, #post-add-page .page-content form .list .no-errors textarea {
+    transition: all 0.5s ease; }
+    #post-add-page .page-content form .list .no-errors input, #post-add-page .page-content form .list .no-errors textarea {
       color: white;
       transition: all 0.2s ease; }
   #post-add-page .page-content form .btn-form-submit {

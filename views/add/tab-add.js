@@ -1,11 +1,16 @@
 angular.module('myApp.addTab', [])
 
-.controller('addCtrl', ['$scope', '$state', 'Post', 'Camera', 's3Uploader', '$http', '$rootScope', '$timeout', 'S3_CDN_URL', function($scope, $state, Post, Camera, s3Uploader, $http, $rootScope, $timeout, S3_CDN_URL) {
+.controller('addCtrl', 
+  ['$scope', '$state', 'Post', 'Camera', '$ionicModal', 's3Uploader', '$http', '$rootScope', '$timeout', 'S3_CDN_URL',
+  function($scope, $state, Post, Camera, $ionicModal, s3Uploader, $http, $rootScope, $timeout, S3_CDN_URL) {
 
   $scope.imageOne;
   $scope.imageTwo;
 
+  // $timeout(function() {$scope.openModal();}, 1000);
+
   $scope.post = {
+    category: 'general',
     title: '',
     description : ''   
   };  
@@ -16,6 +21,8 @@ angular.module('myApp.addTab', [])
   }
    
   $scope.submitPost = function(form) {
+    console.log($scope.post)
+    $scope.openModal();
     if(form.$valid) {
 
       var fileOneName = fileNameGenerator();
@@ -27,19 +34,24 @@ angular.module('myApp.addTab', [])
       s3Uploader.upload($scope.imageOne, fileOneName).then(function() {
         s3Uploader.upload($scope.imageTwo, fileTwoName).then(function() {
           Post.addPost($scope.post).then(function(){
+            $scope.closeModal();
             $timeout(function(){$rootScope.$emit('dashRefresh');}, 200)
             $state.go('tab.dash');
           }, function() {
+            $scope.closeModal();
             console.log("Saving post failed");
           });
         }, function() {
+          $scope.closeModal();
           console.log("Upload Picture 2 failed");
         });
       }, function() {
+        $scope.closeModal();
         console.log("Upload Picture 1 failed")
       });
 
     } else {
+      $scope.closeModal();
       console.log('Form submit error');
     }
   }; 
@@ -50,7 +62,7 @@ angular.module('myApp.addTab', [])
     encodingType: navigator.camera.EncodingType.JPEG,
     targetWidth: 500,
     targetHeight: 500,
-    saveToPhotoAlbum: false
+    saveToPhotoAlbum: true
   };
 
   $scope.takePictureCamera = function(imageNumber) {
@@ -85,5 +97,29 @@ angular.module('myApp.addTab', [])
       console.err('error while taking picture', err);
     });
   };
+
+  // upload modal animation
+
+  $ionicModal.fromTemplateUrl('picture-upload.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.uploadModal = modal;
+  });
+
+  $scope.openModal = function() {
+    $scope.uploadModal.show();
+    angular.element('.picture-upload-modal .loading-icon').addClass('spin');
+  };
+
+  $scope.closeModal = function() {
+    angular.element('.picture-upload-modal .loading-icon').removeClass('spin');
+    $scope.uploadModal.hide();
+  };
+
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.uploadModal.remove();
+  });
 
 }]);
