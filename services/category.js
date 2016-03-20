@@ -1,8 +1,57 @@
 angular.module('myApp.categoriesService', [])
 
-.factory('Categories', ['$rootScope', 'FirebaseUrl', function($rootScope, FirebaseUrl) {
+.factory('Categories', ['$q', '$rootScope', 'FirebaseUrl', function($q, $rootScope, FirebaseUrl) {
+
+  resolve = function(errval, retval, deferred) {
+    $rootScope.$apply(function() {
+      if (errval) {
+        deferred.reject(errval);
+      } else {
+        deferred.resolve(retval);
+      }
+    });
+  }
 
   return {
+    getAllPostsByCategory: function(category, limit) {
+      var deferred = $q.defer();
+      var firebase = new Firebase(FirebaseUrl + '/posts');
+      firebase.orderByChild('category').equalTo(category).limitToLast(limit).once("value", function(snapshot) {
+        console.log('first post added');
+        resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
+      }, function (errorObject) {
+        resolve(errorObject.code, null, deferred);
+      });
+      promise = deferred.promise;
+      return promise;
+    },
+
+    getAllPostsByCategoryInfinite: function(category, actual, limit) {
+      var deferred = $q.defer();
+      var firebase = new Firebase(FirebaseUrl + '/posts');
+      firebase.orderByChild('category').equalTo(category).limitToLast(actual + limit).once("value", function(snapshot) {
+        console.log('more post added');
+        resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
+      }, function (errorObject) {
+        resolve(errorObject.code, null, deferred);
+      });
+      promise = deferred.promise;
+      return promise;
+    },
+
+    getFirstXElements: function(obj, number) {
+      var newObjToAdd = {};
+      var numberMax = 1; 
+      for (var element in obj) {
+        newObjToAdd[element] = obj[element];
+        if ( numberMax === number) {
+          break;
+        }
+        numberMax++;
+      }
+      return newObjToAdd;
+    },
+
     getCategoriesList: function() {
       return [
         {

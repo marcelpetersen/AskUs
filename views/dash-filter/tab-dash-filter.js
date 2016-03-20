@@ -1,8 +1,8 @@
 angular.module('myApp.dashFilterTab', ['myApp.env'])
 
 .controller('DashFilterCtrl', 
-  ['$scope', '$stateParams', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
-  function($scope, $stateParams, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
+  ['$scope', '$stateParams', '$ionicSideMenuDelegate', 'Categories', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
+  function($scope, $stateParams, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
   $scope.parentCategory = $stateParams.filter;
   console.log($scope.parentCategory);
@@ -10,23 +10,23 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   var pageName = '#dash-filter-page';
 
   // $scope.toggleLeft = function() {
-    $ionicSideMenuDelegate.toggleLeft();
+    $ionicSideMenuDelegate.toggleLeft(false);
   // };
 
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
 
-  $rootScope.$on('dashRefresh', function() {
-    $scope.doRefresh();
-  });
+  // $rootScope.$on('dashRefresh', function() {
+  //   $scope.doRefresh();
+  // });
 
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     $scope.noMoreData = false;
     $scope.currentLastPost = null;
     // Get the last 5 posts
-    Post.getAllPosts().then(function(postsData) {
+    Categories.getAllPostsByCategory($stateParams.filter).then(function(postsData) {
       $scope.posts = postsData;
       $scope.$broadcast('scroll.refreshComplete');
       $timeout(function(){
@@ -35,47 +35,55 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     }); 
   };
 
+  var newPostLimit = 2;
+  var postTotalMax = 0;
+  var totalPostNumber = 0;
+  var totalPost;
+  var displayedPost;
+
   $scope.currentLastPost;
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
-      if (!$scope.currentLastPost) {
+      if (totalPostNumber === 0) {
           angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
           // Get the previous last 5 posts
-          Post.getAllPosts().then(function(postsData) {
-            console.log('Load first data');
+          Categories.getAllPostsByCategory($stateParams.filter, newPostLimit).then(function(postsData) {
+            console.log(postsData)
+            postTotalMax += newPostLimit;
+            // totalPost = Categories.objToArray(postsData.values);
+            totalPostNumber = postsData.number;
+            if (totalPostNumber === 0) {
+              $scope.noMoreData = true;
+            }
 
-            // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
-            var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
-            $scope.currentLastPost = cleanedData.currentLastPost
-            $scope.posts = cleanedData.obj;
+            console.log("values", postsData.values);
+            //var firstRange = Categories.getCategoryPostRange(totalPost, counter, 2);
+            // displayedPost = postsData.values;
+
+            $scope.posts = postsData.values  ;
+
+            // counter = firstRange.length
+            // console.log(totalPostNumber, displayedPost.length, displayedPost, counter);
 
             angular.element(pageName +' .icon-refreshing').removeClass('spin');
             angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
             $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       } else {
-        Post.getAllPostsInfinite($scope.currentLastPost).then(function(postsData) {
-          console.log('Loading more data');
+        Categories.getAllPostsByCategoryInfinite($stateParams.filter, totalPostNumber, newPostLimit).then(function(postsData) {
+          postTotalMax += newPostLimit;
+          totalPostNumber = postsData.number;
 
-          var firstElement = Post.getFirstElementInObject(postsData);
-          var currentLastPostTemp = firstElement.currentLastPost;
-          var lastPostId = firstElement.id;
-
-          if ($scope.currentLastPost === currentLastPostTemp) {
+          if( postsData.number !== postTotalMax ) {
             $scope.noMoreData = true;
-            var updatedPostFinal = angular.extend({}, $scope.posts, postsData)
-            $scope.posts = updatedPostFinal;
           } else {
-            $scope.currentLastPost = currentLastPostTemp;
-            // Delete the element because already exist in the original Data
-            delete postsData[lastPostId];
-            var updatedPost = angular.extend({}, $scope.posts, postsData)
+            var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
+            var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
             $scope.posts = updatedPost;
           }
-
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-        $scope.$broadcast('scroll.infiniteScrollComplete');
-      });
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        })
     }
   };
 

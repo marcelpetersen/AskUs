@@ -9721,6 +9721,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.bar-header .title {
+  text-transform: capitalize; }
+
 .menu-left .categories-list .category {
   text-align: center; }
   .menu-left .categories-list .category a {
