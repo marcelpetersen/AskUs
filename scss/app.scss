@@ -20,6 +20,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+// App Miscelanous
+@import "scss/menu";
+
 // Tools
 @import "scss/tools/keyframes-animations";
 @import "scss/tools/mixins";
@@ -59,7 +62,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Fade effect custom
 .fadein-effect {
- @include animationEffect(1s, fadeEffect);
+ @include animationEffect(0.5s, fadeEffect);
 }
 
 

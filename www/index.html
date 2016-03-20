@@ -42,7 +42,7 @@
     <script src="js/services.js"></script> -->
 
   </head>
-  <body ng-app="myApp">
+  <body ng-app="myApp" ng-controller="MainCtrl">
 
   <ion-side-menus enable-menu-with-back-views="false">
     <ion-side-menu-content drag-content="false">
@@ -62,15 +62,21 @@
     is-enabled="true" 
     ng-cloak>
 
-      <ion-header-bar class="bar-assertive">
+      <ion-header-bar class="bar-positive">
         <h1 class="title">Filter</h1>
       </ion-header-bar>
       <ion-content>
-        <ul>
-          <li><a href="#/tab/dash/filter/travel">Link 1</a></li>
-          <li>Menu 2</li>
-          <li>Menu 3</li>
-          <li><a href="#/tab/dash/filter/food">Link 1</a></li>
+        <ul class="categories-list">
+          <li menu-close class="category">
+            <a href="#/tab/dash/">
+              <i class="ion-earth"></i>
+            </a>
+          </li>
+          <li ng-repeat="category in categoriesList" class="category">
+            <a href="#/tab/dash/filter/{{::category.name}}">
+              <i class="{{::category.icon}}"></i>
+            </a>
+          </li>
         </ul>
       </ion-content>
     </ion-side-menu>

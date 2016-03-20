@@ -3,6 +3,7 @@ angular.module('myApp', [
   'ionic',
   'firebase',
   'myApp.env',
+  // Services - Factories
   'myApp.authService',
   'myApp.routingService',
   'myApp.facebookService',
@@ -12,6 +13,9 @@ angular.module('myApp', [
   'myApp.cameraServices',
   'myApp.awsServices',
   'myApp.voteService',
+  'myApp.categoriesService',
+  // Controllers and views
+  'myApp.mainController',
   'myApp.filters',
   'myApp.acountTab',
   'myApp.addTab',

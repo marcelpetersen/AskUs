@@ -9721,6 +9721,14 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.menu-left .categories-list .category {
+  text-align: center; }
+  .menu-left .categories-list .category a {
+    display: block;
+    padding: 20px 0px;
+    font-size: 40px;
+    color: #387ef5; }
+
 @keyframes fadeEffect {
   0% {
     opacity: 0; }
@@ -11356,9 +11364,9 @@ a.button {
   animation: spin 2s linear infinite; }
 
 .fadein-effect {
-  animation-duration: 1s;
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
+  animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
   animation-name: fadeEffect;
   -webkit-animation-name: fadeEffect;
   -moz-animation-name: fadeEffect; }
