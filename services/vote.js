@@ -1,6 +1,6 @@
 angular.module('myApp.voteService', [])
 
-.factory('Vote', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', function($q, $rootScope, FirebaseUrl, currentUserInfos) {
+.factory('Vote', ['$q', '$rootScope', '$timeout', 'FirebaseUrl', 'currentUserInfos', function($q, $rootScope, $timeout, FirebaseUrl, currentUserInfos) {
 
   resolve = function(errval, retval, deferred) {
     $rootScope.$apply(function() {
@@ -10,7 +10,13 @@ angular.module('myApp.voteService', [])
         deferred.resolve(retval);
       }
     });
-  }
+  };
+
+  // List ob post to update when commin back to previous pages
+  var voteUpdateList = {
+    'dash-page':{},
+    'dash-filter-page': {}
+  };
 
   return {
     addVote: function(postId, element) {
@@ -74,6 +80,77 @@ angular.module('myApp.voteService', [])
 
     calculTotalRatio: function(a, b) {
       return Math.round(a * 100 /(a + b));
+    },
+
+    addVoteToUpdate: function(view, id, element, totalA, totalB) {
+      voteUpdateList[view][id] = {
+        element: element,
+        totalA: totalA,
+        totalB: totalB
+      };
+    },
+
+    getVoteUpdateList: function() {
+      return voteUpdateList;
+    },
+
+    voteUpdate: function(pageName) {
+      for (var key in voteUpdateList[pageName]) {
+      
+          //Show Radial block hide Buttons
+          angular.element('#' + pageName +' .card[data-postid='+ key +']').addClass('voted voted-'+ voteUpdateList[pageName][key].element);
+          angular.element('#' + pageName +' .card[data-postid='+ key +'] .vote-buttons-container').addClass('ng-hide');
+          angular.element('#' + pageName +' .card[data-postid='+ key +'] .results-container').removeClass('ng-hide');
+
+          // Keep for now
+          // angular.element('#' + pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
+          // angular.element('#' + pageName +' .card[data-postid='+ post.$key +'] .results-container').show();
+
+          var radialA = new RadialProgressChart('#' + pageName + ' .results-A[data-postid='+ key +']', {
+            diameter: 80,
+            max: 100,
+            round: false,
+            series: [{
+              value: voteUpdateList[pageName][key].totalA,
+              color: '#33cd5f'
+            }],
+            animation: {
+                duration: 1
+            },
+             shadow: {
+                width: 1
+            },
+            stroke: {
+                width: 10,
+                gap: 2
+            },
+            center: voteUpdateList[pageName][key].totalA + ' %'
+          });
+
+          var radialB = new RadialProgressChart('#' + pageName + ' .results-B[data-postid='+ key +']', {
+            diameter: 80,
+            max: 100,
+            round: false,
+            series: [{
+              value: voteUpdateList[pageName][key].totalB,
+              color: '#387ef5'
+            }],
+            animation: {
+                duration: 1
+            },
+             shadow: {
+                width: 1
+            },
+            stroke: {
+                width: 10,
+                gap: 2
+            },
+            center: voteUpdateList[pageName][key].totalB + ' %'
+          });
+      }
+      // Clear the vote to update object
+      voteUpdateList[pageName] = {};
+      return;
     }
   }
 

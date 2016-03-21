@@ -1,9 +1,15 @@
 angular.module('myApp.dashTab', ['myApp.env'])
 
 .controller('DashCtrl', 
-  ['$scope', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
-  function($scope, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
+  ['$scope', '$state', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
+  function($scope, $state, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
   
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+     if (toState.name === "tab.dash") {
+        Vote.voteUpdate("dash-page");
+     }
+   });
+
   var pageName = '#dash-page';
 
   $scope.toggleLeft = function() {
@@ -100,7 +106,6 @@ angular.module('myApp.dashTab', ['myApp.env'])
     angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
     Vote.addVote(post.$key, element).then(function(){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
-
       angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
 
       // Hide voting button block and show radials
@@ -118,6 +123,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
       // Create the Radials
       Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
       Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000, pageName);
+
 
     }, function(){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');

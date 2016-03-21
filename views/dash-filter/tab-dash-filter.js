@@ -1,21 +1,26 @@
 angular.module('myApp.dashFilterTab', ['myApp.env'])
 
 .controller('DashFilterCtrl', 
-  ['$scope', '$stateParams', '$ionicSideMenuDelegate', 'Categories', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
-  function($scope, $stateParams, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
+  ['$scope', '$stateParams', '$state', '$ionicSideMenuDelegate', 'Categories', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
+  function($scope, $stateParams, $state, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
+  // Get route parent
   $scope.parentCategory = $stateParams.filter;
-  console.log($scope.parentCategory);
 
   var pageName = '#dash-filter-page';
 
-  // $scope.toggleLeft = function() {
-    $ionicSideMenuDelegate.toggleLeft(false);
-  // };
+  // Close menu
+  $ionicSideMenuDelegate.toggleLeft(false);
 
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
+
+  var newPostLimit = 2;
+  var postTotalMax = 0;
+  var totalPostNumber = 0;
+  var totalPost;
+  var displayedPost;
 
   // $rootScope.$on('dashRefresh', function() {
   //   $scope.doRefresh();
@@ -24,46 +29,45 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     $scope.noMoreData = false;
-    $scope.currentLastPost = null;
-    // Get the last 5 posts
-    Categories.getAllPostsByCategory($stateParams.filter).then(function(postsData) {
-      $scope.posts = postsData;
-      $scope.$broadcast('scroll.refreshComplete');
-      $timeout(function(){
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-      }, 500);
-    }); 
+    $scope.posts = {};
+
+    newPostLimit = 2;
+    postTotalMax = 0;
+    totalPostNumber = 0;
+    totalPost;
+    displayedPost;
+
+    Categories.getAllPostsByCategory($stateParams.filter, newPostLimit).then(function(postsData) {
+      postTotalMax += newPostLimit;
+
+      totalPostNumber = postsData.number;
+      if (totalPostNumber === 0) {
+        $scope.noMoreData = true;
+      }
+
+      $scope.posts = postsData.values  ;
+    });
+
+    $scope.$broadcast('scroll.refreshComplete');
+     $timeout(function(){
+      angular.element(pageName +' .icon-refreshing').removeClass('spin');
+    }, 500);
   };
 
-  var newPostLimit = 2;
-  var postTotalMax = 0;
-  var totalPostNumber = 0;
-  var totalPost;
-  var displayedPost;
-
-  $scope.currentLastPost;
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
       if (totalPostNumber === 0) {
           angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
           // Get the previous last 5 posts
           Categories.getAllPostsByCategory($stateParams.filter, newPostLimit).then(function(postsData) {
-            console.log(postsData)
             postTotalMax += newPostLimit;
-            // totalPost = Categories.objToArray(postsData.values);
+
             totalPostNumber = postsData.number;
             if (totalPostNumber === 0) {
               $scope.noMoreData = true;
             }
 
-            console.log("values", postsData.values);
-            //var firstRange = Categories.getCategoryPostRange(totalPost, counter, 2);
-            // displayedPost = postsData.values;
-
-            $scope.posts = postsData.values  ;
-
-            // counter = firstRange.length
-            // console.log(totalPostNumber, displayedPost.length, displayedPost, counter);
+            $scope.posts = postsData.values;
 
             angular.element(pageName +' .icon-refreshing').removeClass('spin');
             angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
@@ -111,7 +115,6 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
     Vote.addVote(post.$key, element).then(function(){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
-
       angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
 
       // Hide voting button block and show radials
@@ -125,6 +128,9 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
 
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
       post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
+
+      // Add post to the update list for the Dash page
+      Vote.addVoteToUpdate("dash-page", post.$key, element, post.totalA, post.totalB);
 
       // Create the Radials
       Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
