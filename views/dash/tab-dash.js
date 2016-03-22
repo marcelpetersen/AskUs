@@ -1,8 +1,8 @@
 angular.module('myApp.dashTab', ['myApp.env'])
 
 .controller('DashCtrl', 
-  ['$scope', '$state', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
-  function($scope, $state, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
+  ['$scope', '$state', '$ionicScrollDelegate', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
+  function($scope, $state, $ionicScrollDelegate, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
   
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
      if (toState.name === "tab.dash") {
@@ -19,9 +19,33 @@ angular.module('myApp.dashTab', ['myApp.env'])
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
+  $scope.currentLastPost;
 
   $rootScope.$on('dashRefresh', function() {
     $scope.doRefresh();
+
+    // $scope.posts = {};
+    // $scope.currentLastPost = null;
+    // $scope.noMoreData = false;
+    // $scope.loadMore();
+    // $ionicScrollDelegate.scrollTop();
+
+    // angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+    // // Get the previous last 5 posts
+    // Post.getAllPosts().then(function(postsData) {
+    //   console.log('Load first data');
+
+    //   // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
+    //   var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
+    //   $scope.currentLastPost = cleanedData.currentLastPost
+    //   $scope.posts = cleanedData.obj;
+
+    //   angular.element(pageName +' .icon-refreshing').removeClass('spin');
+    //   angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
+    //   $scope.$broadcast('scroll.infiniteScrollComplete');
+    // });
+
+
   });
 
   $scope.doRefresh = function() {
@@ -30,7 +54,10 @@ angular.module('myApp.dashTab', ['myApp.env'])
     $scope.currentLastPost = null;
     // Get the last 5 posts
     Post.getAllPosts().then(function(postsData) {
-      $scope.posts = postsData;
+      var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
+      $scope.currentLastPost = cleanedData.currentLastPost
+      $scope.posts = cleanedData.obj;
+      // $scope.posts = postsData;
       $scope.$broadcast('scroll.refreshComplete');
       $timeout(function(){
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
@@ -38,7 +65,6 @@ angular.module('myApp.dashTab', ['myApp.env'])
     }); 
   };
 
-  $scope.currentLastPost;
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
       if (!$scope.currentLastPost) {
