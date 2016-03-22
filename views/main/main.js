@@ -1,8 +1,8 @@
 angular.module('myApp.mainController', [])
 
-.controller('MainCtrl', ['$scope', '$rootScope', '$ionicModal', function($scope, $rootScope, $ionicModal) {
-  //$scope.categoriesList = Categories.getCategoriesList();
-
+.controller('MainCtrl', ['$scope', '$rootScope', '$ionicModal', 'Categories', function($scope, $rootScope, $ionicModal, Categories) {
+  // Show all the menu side categories
+  $scope.categoriesList = Categories.getCategoriesList();
 
   $ionicModal.fromTemplateUrl('error-modal.html', {
     scope: $scope,

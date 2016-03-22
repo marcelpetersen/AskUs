@@ -14,7 +14,7 @@ angular.module('myApp.myVotes', ['myApp.env'])
   $scope.aImages;
   $scope.noMoreData = false;
 
-  var newPostLimit = 2;
+  var newPostLimit = 20;
   var postTotalMax = 0;
   var totalPostNumber = 0;
   var totalPost;
@@ -44,7 +44,7 @@ angular.module('myApp.myVotes', ['myApp.env'])
     $scope.noMoreData = false;
     $scope.posts = {};
 
-    newPostLimit = 2;
+    newPostLimit = 20;
     postTotalMax = 0;
     totalPostNumber = 0;
     totalPost;
