@@ -23,6 +23,25 @@ angular.module('myApp.mainController', [])
     $scope.openErrorModal();
   })
 
+  $ionicModal.fromTemplateUrl('no-post-modal.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.noPostModal = modal;
+  });
+
+  $scope.openNoPostModal = function() {
+    $scope.noPostModal.show();
+  };
+
+  $scope.closeNoPostModal = function() {
+    $scope.noPostModal.hide();
+  };
+
+  $rootScope.$on('noPostModal', function() {
+    $scope.openNoPostModal();
+  })
+
 
 
 }]);

@@ -156,12 +156,23 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
       Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
       Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000, pageName);
 
-    }, function(){
+    }, function(error){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
       console.log("vote failed");
-      // Show global error modal
-      $scope.openErrorModal();
+      if (error.noPost) {
+        $scope.openNoPostModal();
+
+        // Add post to the delete list for the Dash & Dash Filter & user pages
+        Post.addPostToDelete("dash-page", post.$key);
+        Post.addPostToDelete("user-page", post.$key);
+        Post.addPostToDelete("my-votes-page", post.$key);
+
+        angular.element(pageName +' .card[data-postid='+ post.$key +']').fadeOut();
+      } else {
+        // Show global error modal
+        $scope.openErrorModal();
+      }
     })
   };
 
