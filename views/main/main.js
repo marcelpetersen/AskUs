@@ -12,12 +12,10 @@ angular.module('myApp.mainController', [])
     }];
   };
 
-  // $scope.postDelete = {};
   $scope.postReport = {};
 
   $scope.reportPost = function(id) {
     Post.reportPost(id).then(function(){
-      // angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
       $scope.reportModal.hide();
     }, function(){
       $scope.reportModal.hide();
@@ -64,23 +62,6 @@ angular.module('myApp.mainController', [])
   $rootScope.$on('noPostModal', function() {
     $scope.openNoPostModal();
   })
-
-  // $ionicModal.fromTemplateUrl('post-delete-modal.html', {
-  //   scope: $scope,
-  //   animation: 'mh-slide' //'slide-in-up'
-  // }).then(function(modal) {
-  //   $scope.deleteModal = modal;
-  // });
-
-  // $scope.showDeleteModal = function(key, title) {
-  //   $scope.postDelete.title = title;
-  //   $scope.postDelete.id = key;
-  //   $scope.deleteModal.show();
-  // };
-
-  // $scope.closeDeleteModal = function() {
-  //   $scope.deleteModal.hide();
-  // };
 
   $ionicModal.fromTemplateUrl('post-report-modal.html', {
     scope: $scope,
@@ -129,7 +110,5 @@ angular.module('myApp.mainController', [])
   $scope.slideChanged = function(index) {
     $scope.slideIndex = index;
   };
-
-
 
 }]);

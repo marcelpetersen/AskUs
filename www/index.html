@@ -20,7 +20,6 @@
 
     <!-- FACEBOOK SDK -->
     <script src="js/facebook-sdk.js"></script>
-    <!-- <script src="https://connect.facebook.net/en_US/sdk.js"></script> -->
 
     <!-- D3 -->
     <script src="js/d3.min.js"></script>
@@ -34,12 +33,6 @@
     <script src="cordova.js"></script>
 
     <script src="js/app.min.js"></script>
-
-    <!-- your app's js -->
- <!--    <script src="js/configFile.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script> -->
 
   </head>
   <body ng-app="myApp" ng-controller="MainCtrl">
@@ -119,7 +112,7 @@
       </div>
     </script>
 
-       <script id="image-modal.html" type="text/ng-template">
+    <script id="image-modal.html" type="text/ng-template">
       <div class="dash-modal modal image-modal transparent" ng-click="closeModal()">
         <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true">
           <ion-slide ng-repeat="oImage in aImages">
@@ -131,19 +124,6 @@
         <i class="icon ion-close-circled close-modal"></i>
       </div>
     </script>
-
-<!--     <script id="post-delete-modal.html" type="text/ng-template">
-      <div class="edit-delete-modal modal transparent">
-      <div class="modal-content">
-        <h3>Want to delete this post?</h3>
-        <p class="post-title">{{postDelete.title}}</p>
-        <div class="buttons-container">
-          <button class="cancel" on-touch="closeDeleteModal()">Cancel</button>
-          <button class="delete" on-touch="deletePost(postDelete.id)">Delete</button>
-        </div>
-        </div>
-      </div>
-    </script> -->
 
     <script id="post-report-modal.html" type="text/ng-template">
       <div class="report-modal modal transparent">

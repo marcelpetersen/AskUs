@@ -11,7 +11,6 @@
       <div class="user-info">
         <div class="background-picture"></div>
         <div class="user-picture" ng-style="{'background-image':'url({{::user.picture}})'}"></div>
-        <!-- <img ng-src="{{::user.picture}}" class='user-picture'> -->
         <h2>{{::user.name}}</h2>
       </div>
 
@@ -28,11 +27,7 @@
 
         <div class="item item-header">
           <h2>{{::post.title}}</h2>
-
-         <!-- <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" href="#/tab/user/{{::post.userName}}" on-touch="userPage(post.userId,post.userName,post.userPicture)"></a> -->
-          <!-- <h2>{{::post.userName}}</h2> -->
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
-          <!-- Test Link -->
           <a href="#/tab/{{::parentCategory}}/post/{{::$id}}/{{::parentCategory}}" class="item post-link" on-touch="postPage($id, post)">
             <i class="icon ion-ios-arrow-right"></i>
           </a>
@@ -57,19 +52,6 @@
 
       </div>
     </section>
-
-<!--     <script id="image-modal.html" type="text/ng-template">
-      <div class="dash-modal modal image-modal transparent" ng-click="closeModal()">
-        <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true">
-          <ion-slide ng-repeat="oImage in aImages">
-            <ion-scroll zooming="true" direction="xy" style="width: 100%; height: 100%" min-zoom="1">
-              <img ng-src="{{oImage.src}}" class="fullscreen-image"/>
-            </ion-scroll>
-          </ion-slide>
-        </ion-slide-box>
-        <i class="icon ion-close-circled close-modal"></i>
-      </div>
-    </script> -->
 
   </ion-content>
 </ion-view>

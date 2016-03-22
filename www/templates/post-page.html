@@ -13,9 +13,6 @@
             </a>
           </h2>
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
-<!--           <a href="#/tab/{{::parentCategory}}/post/{{::post.$key}}/{{::parentCategory}}" class="item post-link" on-touch="postPage(post.$key, post)">
-            <i class="icon ion-ios-arrow-right"></i>
-          </a> -->
         </div>
 
         <div class="item item-body">
@@ -57,59 +54,7 @@
         <button class="report-btn" ng-click="showReportModal(post.$key, post.title)"><i class="ion-alert"></i></button>
 
       </div>
-
-
-
-
-
-
-
-
-
-
-
-<!--       <div class="list card">
-        <div class="item item-avatar">
-          <a class="user-picture" ng-style="{'background-image':'url({{::post.data.userPicture}})'}" on-touch="userPage(post.data.userId,post.data.userName,post.data.userPicture)" href="#/tab/{{::parentCategory}}/user/{{::post.data.userId}}/{{::parentCategory}}"></a>
-          <h2>{{::post.data.userName}}</h2>
-          <p>{{::post.data.time | date : 'MMM d, y HH:mm:ss'}}</p>
-        </div>
-
-        <div class="item item-body">
-          <div class="item item-image">
-            <div class="images-container">
-              <div class="picture picture-A" ng-style="{'background-image':'url({{::post.data.pictureA}})'}" ng-click="goToSlide(0); modalPictureUpdate(post)"></div>
-              <div class="picture picture-B" ng-style="{'background-image':'url({{::post.data.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)"></div>
-            </div>
-            <div class="vote-buttons-container">
-              <button class="button vote-A"><i class="ion-checkmark-circled"></i></button>
-              <button class="button vote-B"><i class="ion-checkmark-circled"></i></button>
-            </div>
-          </div>
-          <h2>{{::post.data.title}}</h2>
-          <p class:"description">{{::post.data.description}}</p>
-          <p>
-            <a href="#" class="subdued">1 Like</a>
-            <a href="#" class="subdued">5 Comments</a>
-          </p>
-        </div>
-
-      </div> -->
     </section>
-
-
-<!--         <script id="image-modal.html" type="text/ng-template">
-      <div class="dash-modal modal image-modal transparent" ng-click="closeModal()">
-        <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true">
-          <ion-slide ng-repeat="oImage in aImages">
-            <ion-scroll zooming="true" direction="xy" style="width: 100%; height: 100%" min-zoom="1">
-              <img ng-src="{{oImage.src}}" class="fullscreen-image"/>
-            </ion-scroll>
-          </ion-slide>
-        </ion-slide-box>
-        <i class="icon ion-close-circled close-modal"></i>
-      </div>
-    </script> -->
 
     <script id="post-delete-modal.html" type="text/ng-template">
       <div class="edit-delete-modal modal transparent">
@@ -123,19 +68,6 @@
         </div>
       </div>
     </script>
-
-<!--     <script id="post-report-modal.html" type="text/ng-template">
-      <div class="report-modal modal transparent">
-      <div class="modal-content">
-        <h3>Report this post?</h3>
-        <p class="post-title">{{postReport.title}}</p>
-        <div class="buttons-container">
-          <button class="cancel" on-touch="closeReportModal()">Cancel</button>
-          <button class="report" on-touch="reportPost(postReport.id)">Report</button>
-        </div>
-        </div>
-      </div>
-    </script> -->
 
   </ion-content>
 </ion-view>
