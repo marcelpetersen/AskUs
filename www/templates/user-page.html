@@ -24,7 +24,7 @@
      <div class="no-post" ng-show="noPost">
        <p>No post yet</p>
      </div>
-      <div class="list card fadein-effect" ng-repeat="post in posts | toArray | orderBy : '-time'">
+      <div class="list card fadein-effect" ng-repeat="post in posts | toArray | orderBy : '-time'" data-postid="{{::post.$key}}">
 
         <div class="item item-header">
           <h2>{{::post.title}}</h2>

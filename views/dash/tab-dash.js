@@ -3,23 +3,27 @@ angular.module('myApp.dashTab', ['myApp.env'])
 .controller('DashCtrl', 
   ['$scope', '$state', '$ionicScrollDelegate', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
   function($scope, $state, $ionicScrollDelegate, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
-  
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-     if (toState.name === "tab.dash") {
-        Vote.voteUpdate("dash-page");
-     }
-   });
 
   var pageName = '#dash-page';
-
-  $scope.toggleLeft = function() {
-    $ionicSideMenuDelegate.toggleLeft();
-  };
+  
+  $scope.postDelete = {};
+  $scope.postReport = {};
 
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
   $scope.currentLastPost;
+
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+     if (toState.name === "tab.dash") {
+        Vote.voteUpdate("dash-page");
+        Post.postToDelete("dash-page");
+     }
+   });
+
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  };
 
   $rootScope.$on('dashRefresh', function() {
     $scope.doRefresh();
@@ -214,9 +218,6 @@ angular.module('myApp.dashTab', ['myApp.env'])
       'src': data.pictureB
     }];
   };
-
-  $scope.postDelete = {};
-  $scope.postReport = {};
 
   $ionicModal.fromTemplateUrl('post-delete-modal.html', {
     scope: $scope,

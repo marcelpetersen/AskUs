@@ -59,6 +59,7 @@
           </p>
         </div>
         <button class="edit-delete-btn" ng-click="showDeleteModal(post.$key, post.title)"><i class="ion-trash-b"></i></button>
+        <button class="report-btn" ng-click="showReportModal(post.$key, post.title)"><i class="ion-alert"></i></button>
       </div>
     </section>
 
@@ -93,6 +94,19 @@
         <div class="buttons-container">
           <button class="cancel" on-touch="closeDeleteModal()">Cancel</button>
           <button class="delete" on-touch="deletePost(postDelete.id)">Delete</button>
+        </div>
+        </div>
+      </div>
+    </script>
+
+    <script id="post-report-modal.html" type="text/ng-template">
+      <div class="report-modal modal transparent">
+      <div class="modal-content">
+        <h3>Report this post?</h3>
+        <p class="post-title">{{postReport.title}}</p>
+        <div class="buttons-container">
+          <button class="cancel" on-touch="closeReportModal()">Cancel</button>
+          <button class="report" on-touch="reportPost(postReport.id)">Report</button>
         </div>
         </div>
       </div>

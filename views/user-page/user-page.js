@@ -7,6 +7,12 @@ angular.module('myApp.userPage', ['myApp.env'])
   $scope.user = usersInfos.singleUserInfoGet();
   angular.element('.loading-icon').addClass('spin');
 
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+     if (toState.name === "tab.user-page" || toState.name === "tab.friend-page") {
+        Post.postToDelete("user-page");
+     }
+   });
+
   Post.getPostsById($scope.user.id).then(function(postsData) {
     if (!!postsData) {
       $scope.posts = postsData;

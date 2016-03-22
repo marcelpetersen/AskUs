@@ -4,13 +4,11 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   ['$scope', '$stateParams', '$state', '$ionicSideMenuDelegate', 'Categories', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
   function($scope, $stateParams, $state, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
-  // Get route parent
-  $scope.parentCategory = $stateParams.filter;
-
   var pageName = '#dash-filter-page';
 
-  // Close menu
-  $ionicSideMenuDelegate.toggleLeft(false);
+
+  $scope.postDelete = {};
+  $scope.postReport = {};
 
   $scope.posts;
   $scope.aImages;
@@ -21,6 +19,19 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   var totalPostNumber = 0;
   var totalPost;
   var displayedPost;
+
+  // Get route parent
+  $scope.parentCategory = $stateParams.filter;
+
+  // Close menu
+  $ionicSideMenuDelegate.toggleLeft(false);
+
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+     if (toState.name === "tab.dash-filter") {
+        Vote.voteUpdate("dash-filter-page");
+        Post.postToDelete("dash-filter-page");
+     }
+   });
 
   // $rootScope.$on('dashRefresh', function() {
   //   $scope.doRefresh();
@@ -176,11 +187,26 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     Post.deletePost(id).then(function(){
       angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
       $scope.deleteModal.hide();
+
+      // Add post to the delete list for the Dash & Dash Filter & user pages
+      Post.addPostToDelete("dash-page", id);
+      Post.addPostToDelete("dash-filter-page", id);
+
     }, function(){
       $scope.deleteModal.hide();
       console.log("delete failed");
     })
-  }
+  };
+
+  $scope.reportPost = function(id) {
+    Post.reportPost(id).then(function(){
+      // angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
+      $scope.reportModal.hide();
+    }, function(){
+      $scope.reportModal.hide();
+      console.log("report failed");
+    })
+  };
 
   // ****** Modal functions ******
   $scope.modalPictureUpdate =  function(data) {
@@ -191,13 +217,18 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     }];
   };
 
-  $scope.postDelete = {};
-
   $ionicModal.fromTemplateUrl('post-delete-modal.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'
   }).then(function(modal) {
     $scope.deleteModal = modal;
+  });
+
+  $ionicModal.fromTemplateUrl('post-report-modal.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.reportModal = modal;
   });
 
   $ionicModal.fromTemplateUrl('image-modal.html', {
@@ -213,8 +244,18 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     $scope.deleteModal.show();
   };
 
+  $scope.showReportModal = function(key, title) {
+    $scope.postReport.title = title;
+    $scope.postReport.id = key;
+    $scope.reportModal.show();
+  };
+
   $scope.closeDeleteModal = function() {
     $scope.deleteModal.hide();
+  };
+  
+  $scope.closeReportModal = function() {
+    $scope.reportModal.hide();
   };
 
   $scope.openModal = function() {

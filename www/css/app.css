@@ -10940,166 +10940,155 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     font-size: 40px;
     color: #387ef5; }
 
-.post-pages .page-content .posts-list-container .card:first-child {
-  margin-top: 0px; }
-
-.post-pages .page-content .posts-list-container .card:last-child {
+.post-pages .page-content .posts-list-container .card {
+  margin-top: 0px;
   margin-bottom: 10px; }
-
-.post-pages .page-content .posts-list-container .card .item-avatar {
-  padding-right: 50px; }
-  .post-pages .page-content .posts-list-container .card .item-avatar .user-picture {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    max-width: 40px;
-    max-height: 40px;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center center; }
-  .post-pages .page-content .posts-list-container .card .item-avatar h2 a {
-    color: inherit;
-    text-decoration: none; }
-  .post-pages .page-content .posts-list-container .card .item-avatar .post-link {
-    position: absolute;
-    top: 16px;
-    right: 8px;
-    padding: 0px;
-    border: none;
-    max-width: 40px;
-    max-height: 40px;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%; }
-    .post-pages .page-content .posts-list-container .card .item-avatar .post-link i {
-      font-size: 30px;
-      display: block;
-      text-align: center;
-      margin-top: 10px; }
-      .post-pages .page-content .posts-list-container .card .item-avatar .post-link i::before {
-        line-height: 20px; }
-
-.post-pages .page-content .posts-list-container .card .item-body .item-image {
-  padding-bottom: 16px; }
-  .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container {
-    overflow: hidden; }
-    .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture {
-      position: relative;
-      background-color: #EEE;
-      width: 48%;
-      padding-bottom: 48%;
-      background-size: cover;
-      background-position: center center;
-      border-radius: 3px; }
-      .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-A {
-        float: left; }
-      .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-B {
-        float: right; }
-      .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted {
-        display: none;
-        position: absolute;
-        top: 5px;
-        background-color: #FFF;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        padding-top: 1px;
-        padding-left: 1px;
-        text-align: center; }
-        .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted::before {
-          font-size: 18px; }
-        .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-A {
-          right: 5px;
-          color: #33cd5f; }
-        .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-B {
-          left: 5px;
-          color: #387ef5; }
-  .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container {
-    overflow: hidden;
-    position: relative;
-    margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px; }
-    .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button {
-      width: 48%; }
-      .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-A {
-        float: left; }
-      .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-B {
-        float: right; }
-    .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container .vote-loading {
-      z-index: 9;
+  .post-pages .page-content .posts-list-container .card .item-avatar {
+    padding-right: 50px; }
+    .post-pages .page-content .posts-list-container .card .item-avatar .user-picture {
       position: absolute;
-      top: 0px;
-      right: 0px;
-      bottom: 0px;
-      left: 0px;
-      display: flex;
-      display: -webkit-flex;
-      display: -moz-flex;
-      align-items: center;
-      -webkit-align-items: center;
-      -moz-align-items: center;
-      justify-content: center;
-      -webkit-justify-content: center;
-      -moz-justify-content: center;
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.8); }
-  .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container {
-    margin-top: 20px;
-    overflow: hidden; }
-    .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container .results {
-      float: left;
-      width: 48%;
-      text-align: center; }
-      .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container .results.results-B {
-        float: right; }
-
-.post-pages .page-content .posts-list-container .card.voted.voted-A .vote-A {
-  background-color: #33cd5f;
-  color: #FFF; }
-
-.post-pages .page-content .posts-list-container .card.voted.voted-A .has-voted-A {
-  display: block !important; }
-
-.post-pages .page-content .posts-list-container .card.voted.voted-B .vote-B {
-  background-color: #33cd5f;
-  color: #FFF; }
-
-.post-pages .page-content .posts-list-container .card.voted.voted-B .has-voted-B {
-  display: block !important; }
-
-.post-pages .page-content .posts-list-container .card .edit-delete-btn, .post-pages .page-content .posts-list-container .card .report-btn {
-  position: absolute;
-  bottom: 15px;
-  right: 10px;
-  z-index: 9;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  color: white;
-  border: none;
-  text-align: center;
-  font-size: 16px;
-  line-height: 16px;
-  padding-left: 0px;
-  padding-right: 0px; }
-  .post-pages .page-content .posts-list-container .card .edit-delete-btn i, .post-pages .page-content .posts-list-container .card .report-btn i {
+      top: 16px;
+      left: 16px;
+      max-width: 40px;
+      max-height: 40px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center center; }
+    .post-pages .page-content .posts-list-container .card .item-avatar h2 a {
+      color: inherit;
+      text-decoration: none; }
+    .post-pages .page-content .posts-list-container .card .item-avatar .post-link {
+      position: absolute;
+      top: 16px;
+      right: 8px;
+      padding: 0px;
+      border: none;
+      max-width: 40px;
+      max-height: 40px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%; }
+      .post-pages .page-content .posts-list-container .card .item-avatar .post-link i {
+        font-size: 30px;
+        display: block;
+        text-align: center;
+        margin-top: 10px; }
+        .post-pages .page-content .posts-list-container .card .item-avatar .post-link i::before {
+          line-height: 20px; }
+  .post-pages .page-content .posts-list-container .card .item-body .item-image {
+    padding-bottom: 16px; }
+    .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container {
+      overflow: hidden; }
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture {
+        position: relative;
+        background-color: #EEE;
+        width: 48%;
+        padding-bottom: 48%;
+        background-size: cover;
+        background-position: center center;
+        border-radius: 3px; }
+        .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-A {
+          float: left; }
+        .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-B {
+          float: right; }
+        .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted {
+          display: none;
+          position: absolute;
+          top: 5px;
+          background-color: #FFF;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          padding-top: 1px;
+          padding-left: 1px;
+          text-align: center; }
+          .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted::before {
+            font-size: 18px; }
+          .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-A {
+            right: 5px;
+            color: #33cd5f; }
+          .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-B {
+            left: 5px;
+            color: #387ef5; }
+    .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container {
+      overflow: hidden;
+      position: relative;
+      margin-top: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px; }
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button {
+        width: 48%; }
+        .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-A {
+          float: left; }
+        .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-B {
+          float: right; }
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container .vote-loading {
+        z-index: 9;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        display: flex;
+        display: -webkit-flex;
+        display: -moz-flex;
+        align-items: center;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        justify-content: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8); }
+    .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container {
+      margin-top: 20px;
+      overflow: hidden; }
+      .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container .results {
+        float: left;
+        width: 48%;
+        text-align: center; }
+        .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container .results.results-B {
+          float: right; }
+  .post-pages .page-content .posts-list-container .card.voted.voted-A .vote-A {
+    background-color: #33cd5f;
+    color: #FFF; }
+  .post-pages .page-content .posts-list-container .card.voted.voted-A .has-voted-A {
+    display: block !important; }
+  .post-pages .page-content .posts-list-container .card.voted.voted-B .vote-B {
+    background-color: #33cd5f;
+    color: #FFF; }
+  .post-pages .page-content .posts-list-container .card.voted.voted-B .has-voted-B {
+    display: block !important; }
+  .post-pages .page-content .posts-list-container .card .edit-delete-btn, .post-pages .page-content .posts-list-container .card .report-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    z-index: 9;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: none;
+    text-align: center;
     font-size: 16px;
-    line-height: 16px; }
-  .post-pages .page-content .posts-list-container .card .edit-delete-btn.edit-delete-btn, .post-pages .page-content .posts-list-container .card .report-btn.edit-delete-btn {
-    display: none;
-    background-color: #ef473a; }
-  .post-pages .page-content .posts-list-container .card .edit-delete-btn.report-btn, .post-pages .page-content .posts-list-container .card .report-btn.report-btn {
-    display: block;
-    background-color: #ffc900; }
-
-.post-pages .page-content .posts-list-container .card.my-post .edit-delete-btn {
-  display: block; }
-
-.post-pages .page-content .posts-list-container .card.my-post .report-btn {
-  display: none; }
+    line-height: 16px;
+    padding-left: 0px;
+    padding-right: 0px; }
+    .post-pages .page-content .posts-list-container .card .edit-delete-btn i, .post-pages .page-content .posts-list-container .card .report-btn i {
+      font-size: 16px;
+      line-height: 16px; }
+    .post-pages .page-content .posts-list-container .card .edit-delete-btn.edit-delete-btn, .post-pages .page-content .posts-list-container .card .report-btn.edit-delete-btn {
+      display: none;
+      background-color: #ef473a; }
+    .post-pages .page-content .posts-list-container .card .edit-delete-btn.report-btn, .post-pages .page-content .posts-list-container .card .report-btn.report-btn {
+      display: block;
+      background-color: #ffc900; }
+  .post-pages .page-content .posts-list-container .card.my-post .edit-delete-btn {
+    display: block; }
+  .post-pages .page-content .posts-list-container .card.my-post .report-btn {
+    display: none; }
 
 #splash-page .page-content .section.first {
   display: flex;

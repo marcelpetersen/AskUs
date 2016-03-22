@@ -12,7 +12,14 @@ angular.module('myApp.postService', [])
         deferred.resolve(retval);
       }
     });
-  }
+  };
+
+  // List ob post to delete when commin back to previous pages
+  var postDeleteList = {
+    'dash-page':{},
+    'dash-filter-page': {},
+    'user-page': {}
+  };
 
   return {
     addPost: function(postData) {
@@ -115,6 +122,20 @@ angular.module('myApp.postService', [])
       });
       promise = deferred.promise;
       return promise;
+    },
+
+    addPostToDelete: function(view, id) {
+      postDeleteList[view][id] = true;
+    },
+
+    postToDelete: function(pageName) {
+      for (var key in postDeleteList[pageName]) {
+        //Remove element from the page
+        angular.element('#' + pageName +' .card[data-postid='+ key +']').fadeOut();      
+      }
+      // Clear the vote to update object
+      postDeleteList[pageName] = {};
+      return;
     },
 
     singlePostInfoSet: function(data) {
