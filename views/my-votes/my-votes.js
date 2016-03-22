@@ -1,18 +1,109 @@
-angular.module('myApp.postPage', ['myApp.env'])
+angular.module('myApp.myVotes', ['myApp.env'])
 
-.controller('postCtrl', 
-  ['$scope', 'Post', '$stateParams', 'currentUserInfos', 'Vote', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicHistory', '$timeout', 'usersInfos', 
-  function($scope, Post, $stateParams, currentUserInfos, Vote, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $timeout, usersInfos) {
-  
-  var pageName = '#post-page';
+.controller('myVotesCtrl', 
+  ['$scope', '$stateParams', '$state', '$ionicSideMenuDelegate', 'Categories', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
+  function($scope, $stateParams, $state, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
+
+  var pageName = '#my-votes-page';
+
+
   $scope.postDelete = {};
-  $scope.postReport = {};
-  $scope.parentCategory = $stateParams.parentCat;
 
-  // Get post info
-  var postData = Post.singlePostInfoGet();
-  $scope.post = postData.data;
+  $scope.posts;
+  $scope.aImages;
+  $scope.noMoreData = false;
 
+  var newPostLimit = 2;
+  var postTotalMax = 0;
+  var totalPostNumber = 0;
+  var totalPost;
+  var displayedPost;
+
+  // Get route parent
+  $scope.userId = $stateParams.userId;
+
+  console.log($scope.userId);
+
+  // Close menu
+  $ionicSideMenuDelegate.toggleLeft(false);
+
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+     if (toState.name === "tab.my-votes") {
+        Vote.voteUpdate("my-votes-page");
+        Post.postToDelete("my-votes-page");
+     }
+   });
+
+  // $rootScope.$on('dashRefresh', function() {
+  //   $scope.doRefresh();
+  // });
+
+  $scope.doRefresh = function() {
+    angular.element(pageName +' .icon-refreshing').addClass('spin');
+    $scope.noMoreData = false;
+    $scope.posts = {};
+
+    newPostLimit = 2;
+    postTotalMax = 0;
+    totalPostNumber = 0;
+    totalPost;
+    displayedPost;
+
+    Post.getAllPostsVoted($scope.userId, newPostLimit).then(function(postsData) {
+      postTotalMax += newPostLimit;
+
+      totalPostNumber = postsData.number;
+      if (totalPostNumber === 0) {
+        $scope.noMoreData = true;
+      }
+
+      $scope.posts = postsData.values  ;
+    });
+
+    $scope.$broadcast('scroll.refreshComplete');
+     $timeout(function(){
+      angular.element(pageName +' .icon-refreshing').removeClass('spin');
+    }, 500);
+  };
+
+  $scope.loadMore = function() {
+    angular.element(pageName +' .icon-refreshing').addClass('spin');
+      if (totalPostNumber === 0) {
+          angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+          // Get the previous last 5 posts
+          Post.getAllPostsVoted($scope.userId, newPostLimit).then(function(postsData) {
+            postTotalMax += newPostLimit;
+
+            totalPostNumber = postsData.number;
+            if (totalPostNumber === 0) {
+              $scope.noMoreData = true;
+            }
+
+            $scope.posts = postsData.values;
+
+            angular.element(pageName +' .icon-refreshing').removeClass('spin');
+            angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+      } else {
+        Post.getAllPostsByCategoryInfinite($scope.userId, totalPostNumber, newPostLimit).then(function(postsData) {
+          postTotalMax += newPostLimit;
+          totalPostNumber = postsData.number;
+
+          if( postsData.number !== postTotalMax ) {
+            $scope.noMoreData = true;
+          } else {
+            var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
+            var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+            $scope.posts = updatedPost;
+          }
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        })
+    }
+  };
+
+  // ****** Next page functions ******
   $scope.userPage = function(userId, userName, userPicture) {
     var user = {
       id: userId,
@@ -22,7 +113,15 @@ angular.module('myApp.postPage', ['myApp.env'])
     usersInfos.singleUserInfoSet(user);
   };
 
-    // ****** Vote functions ******
+  $scope.postPage = function(uid, data) {
+    var postData = {
+      uid: uid,
+      data: data
+    };
+    Post.singlePostInfoSet(postData);
+  };
+
+  // ****** Vote functions ******
   $scope.vote = function(post, element) {
     angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').addClass('spin');
     angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
@@ -42,14 +141,12 @@ angular.module('myApp.postPage', ['myApp.env'])
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
       post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
 
-      // Add post to the update list for the Dash & Dash Filter pages
+      // Add post to the update list for the Dash page
       Vote.addVoteToUpdate("dash-page", post.$key, element, post.totalA, post.totalB);
-      Vote.addVoteToUpdate("dash-filter-page", post.$key, element, post.totalA, post.totalB);
 
       // Create the Radials
       Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
       Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000, pageName);
-
 
     }, function(){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
@@ -58,7 +155,7 @@ angular.module('myApp.postPage', ['myApp.env'])
     })
   };
 
-    $scope.checkVote = function(post) {
+  $scope.checkVote = function(post) {
     var currentUser = currentUserInfos.currentUserInfoGet();
     // Check if user has vote this post
     if (post.voters) {
@@ -95,27 +192,12 @@ angular.module('myApp.postPage', ['myApp.env'])
       // Add post to the delete list for the Dash & Dash Filter & user pages
       Post.addPostToDelete("dash-page", id);
       Post.addPostToDelete("dash-filter-page", id);
-      Post.addPostToDelete("user-page", id);
-      Post.addPostToDelete("my-votes-page", id);
 
-      // Go Back to the previous view
-      $ionicHistory.goBack();
     }, function(){
       $scope.deleteModal.hide();
       console.log("delete failed");
     })
   };
-
-  $scope.reportPost = function(id) {
-    Post.reportPost(id).then(function(){
-      // angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
-      $scope.reportModal.hide();
-    }, function(){
-      $scope.reportModal.hide();
-      console.log("report failed");
-    })
-  };
-
 
   // ****** Modal functions ******
   $scope.modalPictureUpdate =  function(data) {
@@ -162,7 +244,7 @@ angular.module('myApp.postPage', ['myApp.env'])
   $scope.closeDeleteModal = function() {
     $scope.deleteModal.hide();
   };
-
+  
   $scope.closeReportModal = function() {
     $scope.reportModal.hide();
   };
@@ -191,7 +273,4 @@ angular.module('myApp.postPage', ['myApp.env'])
     $scope.slideIndex = index;
   };
 
-
-
-  
 }]);

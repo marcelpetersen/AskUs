@@ -153,6 +153,18 @@ angular.module('myApp.routingService', [])
     }
   })
 
+  .state('tab.my-votes', {
+    cache:true,
+    authRequired: true,
+    url: '/account/my-votes/:userId/:parentCat',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/my-votes.html',
+        controller: 'myVotesCtrl'
+      }
+    }
+  })
+
   .state('tab.preferences', {
     authRequired: true,
     url: '/preferences',
