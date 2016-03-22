@@ -4,7 +4,7 @@ angular.module('myApp.authService', [])
   return $firebaseAuth(rootRef);
 }])
 
-.factory('userAuth', ['Auth', '$http', '$localstorage', '$state', 'FirebaseUrl', '$window', 'currentUserInfos', function(Auth, $http, $localstorage, $state, FirebaseUrl, $window, currentUserInfos) {
+.factory('userAuth', ['Auth', '$http', '$localstorage', '$state', 'FirebaseUrl', '$window', 'currentUserInfos', '$rootScope', function(Auth, $http, $localstorage, $state, FirebaseUrl, $window, currentUserInfos, $rootScope) {
 
   var isAuth = function() {
     return !!$localstorage.get('firebase:session::ionic-fboauth');
@@ -29,6 +29,7 @@ angular.module('myApp.authService', [])
           userRef.push(userDataToSave, function(error, authData) {
             if (error) {
               console.log("saving Failed!", error);
+              $rootScope.$emit('errorModal');
             } else {
               console.log('saving ok');
             }
@@ -38,6 +39,8 @@ angular.module('myApp.authService', [])
         }
       });
       $state.go('tab.dash');
+    }, function() {
+      $rootScope.$emit('errorModal');
     });
   };
 

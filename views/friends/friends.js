@@ -16,7 +16,10 @@ angular.module('myApp.friends', ['myApp.env'])
     //   idList.push(item.id);
     // })
     // facebook.updateFriendsList(idList);
-  })
+  }, function() {
+    // Show global error modal
+    $scope.openErrorModal();
+  });
 
   $scope.doRefresh = function() {
     angular.element('.icon-refreshing').addClass('spin');
@@ -34,6 +37,9 @@ angular.module('myApp.friends', ['myApp.env'])
       $timeout(function(){
         angular.element('.icon-refreshing').removeClass('spin');
       }, 500);
+    }, function() {
+      // Show global error modal
+      $scope.openErrorModal();
     }); 
   };
 

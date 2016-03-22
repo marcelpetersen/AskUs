@@ -55,6 +55,8 @@ angular.module('myApp.postPage', ['myApp.env'])
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
       console.log("vote failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 
@@ -103,6 +105,8 @@ angular.module('myApp.postPage', ['myApp.env'])
     }, function(){
       $scope.deleteModal.hide();
       console.log("delete failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 
@@ -113,6 +117,8 @@ angular.module('myApp.postPage', ['myApp.env'])
     }, function(){
       $scope.reportModal.hide();
       console.log("report failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 

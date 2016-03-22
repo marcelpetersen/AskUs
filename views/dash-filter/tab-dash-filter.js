@@ -57,6 +57,9 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
       }
 
       $scope.posts = postsData.values  ;
+    }, function() {
+      // Show global error modal
+      $scope.openErrorModal();
     });
 
     $scope.$broadcast('scroll.refreshComplete');
@@ -83,6 +86,9 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
             angular.element(pageName +' .icon-refreshing').removeClass('spin');
             angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
             $scope.$broadcast('scroll.infiniteScrollComplete');
+        }, function() {
+          // Show global error modal
+          $scope.openErrorModal();
         });
       } else {
         Categories.getAllPostsByCategoryInfinite($stateParams.filter, totalPostNumber, newPostLimit).then(function(postsData) {
@@ -98,6 +104,9 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
           }
           angular.element(pageName +' .icon-refreshing').removeClass('spin');
           $scope.$broadcast('scroll.infiniteScrollComplete');
+        }, function() {        
+          // Show global error modal
+          $scope.openErrorModal();
         })
     }
   };
@@ -151,6 +160,8 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
       console.log("vote failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 
@@ -195,6 +206,8 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     }, function(){
       $scope.deleteModal.hide();
       console.log("delete failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 
@@ -205,6 +218,8 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     }, function(){
       $scope.reportModal.hide();
       console.log("report failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 

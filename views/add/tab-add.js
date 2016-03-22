@@ -40,19 +40,27 @@ angular.module('myApp.addTab', [])
           }, function() {
             $scope.closeModal();
             console.log("Saving post failed");
+            // Show global error modal
+            $scope.openErrorModal();
           });
         }, function() {
           $scope.closeModal();
           console.log("Upload Picture 2 failed");
+          // Show global error modal
+          $scope.openErrorModal();
         });
       }, function() {
         $scope.closeModal();
         console.log("Upload Picture 1 failed")
+        // Show global error modal
+        $scope.openErrorModal();
       });
 
     } else {
       $scope.closeModal();
       console.log('Form submit error');
+      // Show global error modal
+      $scope.openErrorModal();
     }
   }; 
 
@@ -79,6 +87,8 @@ angular.module('myApp.addTab', [])
 
     }, function(err) {
       console.err('error while taking picture', err);
+      // Show global error modal
+      $scope.openErrorModal();
     });
   };
 
@@ -95,6 +105,8 @@ angular.module('myApp.addTab', [])
 
     }, function(err) {
       console.err('error while taking picture', err);
+      // Show global error modal
+      $scope.openErrorModal();
     });
   };
 

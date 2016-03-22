@@ -59,6 +59,9 @@ angular.module('myApp.myVotes', ['myApp.env'])
       }
 
       $scope.posts = postsData.values  ;
+    }, function() {
+      // Show global error modal
+      $scope.openErrorModal();
     });
 
     $scope.$broadcast('scroll.refreshComplete');
@@ -69,38 +72,44 @@ angular.module('myApp.myVotes', ['myApp.env'])
 
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
-      if (totalPostNumber === 0) {
-          angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
-          // Get the previous last 5 posts
-          Post.getAllPostsVoted($scope.userId, newPostLimit).then(function(postsData) {
-            postTotalMax += newPostLimit;
-
-            totalPostNumber = postsData.number;
-            if (totalPostNumber === 0) {
-              $scope.noMoreData = true;
-            }
-
-            $scope.posts = postsData.values;
-
-            angular.element(pageName +' .icon-refreshing').removeClass('spin');
-            angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-        });
-      } else {
-        Post.getAllPostsByCategoryInfinite($scope.userId, totalPostNumber, newPostLimit).then(function(postsData) {
+    if (totalPostNumber === 0) {
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+        // Get the previous last 5 posts
+        Post.getAllPostsVoted($scope.userId, newPostLimit).then(function(postsData) {
           postTotalMax += newPostLimit;
-          totalPostNumber = postsData.number;
 
-          if( postsData.number !== postTotalMax ) {
+          totalPostNumber = postsData.number;
+          if (totalPostNumber === 0) {
             $scope.noMoreData = true;
-          } else {
-            var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
-            var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
-            $scope.posts = updatedPost;
           }
+
+          $scope.posts = postsData.values;
+
           angular.element(pageName +' .icon-refreshing').removeClass('spin');
+          angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
           $scope.$broadcast('scroll.infiniteScrollComplete');
-        })
+      }, function() {
+        // Show global error modal
+        $scope.openErrorModal();
+      });
+    } else {
+      Post.getAllPostsByCategoryInfinite($scope.userId, totalPostNumber, newPostLimit).then(function(postsData) {
+        postTotalMax += newPostLimit;
+        totalPostNumber = postsData.number;
+
+        if( postsData.number !== postTotalMax ) {
+          $scope.noMoreData = true;
+        } else {
+          var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
+          var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+          $scope.posts = updatedPost;
+        }
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      }, function() {
+        // Show global error modal
+        $scope.openErrorModal();
+      })
     }
   };
 
@@ -153,6 +162,8 @@ angular.module('myApp.myVotes', ['myApp.env'])
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
       console.log("vote failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 
@@ -197,6 +208,8 @@ angular.module('myApp.myVotes', ['myApp.env'])
     }, function(){
       $scope.deleteModal.hide();
       console.log("delete failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 
@@ -207,6 +220,8 @@ angular.module('myApp.myVotes', ['myApp.env'])
     }, function(){
       $scope.reportModal.hide();
       console.log("report failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 
