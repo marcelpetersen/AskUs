@@ -3,8 +3,9 @@ body.menu-open {
     .header-item {
       .left-buttons {
         .side-menu {
-          -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+          -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+          transition: all 0.2s ease;
         }
       }
     }
@@ -18,6 +19,7 @@ body.menu-open {
   .header-item {
     .left-buttons {
       .side-menu {
+        transition: all 0.2s ease;
         &.activated {
           opacity: 1;
         }

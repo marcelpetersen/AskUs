@@ -10920,14 +10920,17 @@ a.button {
     content: "100%"; }
 
 body.menu-open .bar-header .header-item .left-buttons .side-menu {
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg); }
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  transition: all 0.2s ease; }
 
 .bar-header .title, .bar-header .back-button {
   text-transform: capitalize; }
 
-.bar-header .header-item .left-buttons .side-menu.activated {
-  opacity: 1; }
+.bar-header .header-item .left-buttons .side-menu {
+  transition: all 0.2s ease; }
+  .bar-header .header-item .left-buttons .side-menu.activated {
+    opacity: 1; }
 
 .menu-left .categories-list .category {
   text-align: center; }
