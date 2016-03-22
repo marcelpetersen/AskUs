@@ -5,11 +5,11 @@
       <ion-item class="account-tab-user">
         <div class="background-picture"></div>
 
-        <div class="user-pic" ng-style="{'background-image':'url({{::currentUser.profileImageURL}})'}"></div>
-        <h2>{{::currentUser.displayName}}</h2>
+        <div class="user-pic" ng-style="{'background-image':'url({{::user.profileImageURL}})'}"></div>
+        <h2>{{::user.displayName}}</h2>
       </ion-item>
 
-      <a class="item item-icon-left" href="#">
+      <a class="item item-icon-left" on-touch="userPage(user.id,user.displayName,user.profileImageURL)" href="#/tab/account/user/{{::user.id}}/account">
         <i class="icon ion-person"></i>
         My Page
       </a>

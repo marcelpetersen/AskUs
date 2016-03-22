@@ -8,7 +8,7 @@ angular.module('myApp.userPage', ['myApp.env'])
   angular.element('.loading-icon').addClass('spin');
 
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-     if (toState.name === "tab.user-page" || toState.name === "tab.friend-page") {
+     if (toState.name === "tab.user-page" || toState.name === "tab.friend-page" || toState.name === "tab.user-account-page") {
         Post.postToDelete("user-page");
      }
    });

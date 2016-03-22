@@ -1,9 +1,9 @@
 angular.module('myApp.acountTab', ['myApp.env'])
 
-.controller('AccountCtrl', ['$scope', 'userAuth', 'currentUserInfos',function($scope, userAuth, currentUserInfos) {
+.controller('AccountCtrl', ['$scope', 'userAuth', 'currentUserInfos', 'usersInfos', function($scope, userAuth, currentUserInfos, usersInfos) {
 
-  $scope.currentUser = currentUserInfos.currentUserInfoGet();
-  // console.log($scope.currentUser.accessToken)
+  $scope.user = currentUserInfos.currentUserInfoGet();
+  console.log($scope.user)
 
   $scope.logoutFacebook = function() {
     userAuth.logoutFacebook();
@@ -21,5 +21,14 @@ angular.module('myApp.acountTab', ['myApp.env'])
     e.stopPropagation();
     console.log(e.currentTarget);
  });
+
+  $scope.userPage = function(userId, userName, userPicture) {
+    var user = {
+      id: userId,
+      name: userName,
+      picture: userPicture
+    };
+    usersInfos.singleUserInfoSet(user);
+  };
 
 }]);

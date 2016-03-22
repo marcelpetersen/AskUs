@@ -20,7 +20,7 @@
 
         <!-- User infos and post redirection -->
         <div class="item item-avatar">
-          <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" on-touch="::userPage(post.userId,post.userName,post.userPicture)" href="#/tab/dash/user/{{::post.userId}}/dash"></a>
+          <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" on-touch="userPage(post.userId,post.userName,post.userPicture)" href="#/tab/dash/user/{{::post.userId}}/dash"></a>
           <h2>
             <a href="#/tab/dash/user/{{::post.userId}}/dash" on-touch="::userPage(post.userId,post.userName,post.userPicture)"> {{::post.userName}}
             </a>

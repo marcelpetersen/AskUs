@@ -93,6 +93,30 @@ angular.module('myApp.routingService', [])
       }
     })
 
+    .state('tab.user-account-page', {
+      cache: true,
+      authRequired: true,
+      url: '/account/user/:userId/:parentCat',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/user-page.html',
+          controller: 'userPageCtrl'
+        }
+      }
+    })
+
+    .state('tab.account-post-page', {
+      cache: true,
+      authRequired: true,
+      url: '/account/post/:postId/:parentCat',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/post-page.html',
+          controller: 'postCtrl'
+        }
+      }
+    })
+
     .state('tab.dash-post-page', {
       cache: true,
       authRequired: true,
