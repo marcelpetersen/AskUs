@@ -57,6 +57,28 @@ angular.module('myApp.postService', [])
       return promise;
     },
 
+    reportPost: function(id) {
+      var deferred = $q.defer();
+      var firebase = new Firebase(FirebaseUrl + '/reports');
+      var userInfo = currentUserInfos.currentUserInfoGet();
+      var d = new Date();
+      var n = d.getTime();
+      var reportObj = {
+        userId: userInfo.id,
+        postId: id,
+        date: n
+      }
+      firebase.push(reportObj, function(error) {
+        if(!error){
+          resolve(null, 'ok', deferred);
+        } else {
+          resolve(error, null, deferred);
+        }
+      });
+      promise = deferred.promise;
+      return promise;
+    },
+
     getAllPosts: function() {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');

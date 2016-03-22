@@ -28,7 +28,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
     // $scope.currentLastPost = null;
     // $scope.noMoreData = false;
     // $scope.loadMore();
-    // $ionicScrollDelegate.scrollTop();
+    $ionicScrollDelegate.scrollTop();
 
     // angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
     // // Get the previous last 5 posts
@@ -44,7 +44,6 @@ angular.module('myApp.dashTab', ['myApp.env'])
     //   angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
     //   $scope.$broadcast('scroll.infiniteScrollComplete');
     // });
-
 
   });
 
@@ -195,7 +194,17 @@ angular.module('myApp.dashTab', ['myApp.env'])
       $scope.deleteModal.hide();
       console.log("delete failed");
     })
-  }
+  };
+
+  $scope.reportPost = function(id) {
+    Post.reportPost(id).then(function(){
+      // angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
+      $scope.reportModal.hide();
+    }, function(){
+      $scope.reportModal.hide();
+      console.log("report failed");
+    })
+  };
 
   // ****** Modal functions ******
   $scope.modalPictureUpdate =  function(data) {
@@ -207,12 +216,20 @@ angular.module('myApp.dashTab', ['myApp.env'])
   };
 
   $scope.postDelete = {};
+  $scope.postReport = {};
 
   $ionicModal.fromTemplateUrl('post-delete-modal.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'
   }).then(function(modal) {
     $scope.deleteModal = modal;
+  });
+
+  $ionicModal.fromTemplateUrl('post-report-modal.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.reportModal = modal;
   });
 
   $ionicModal.fromTemplateUrl('image-modal.html', {
@@ -228,8 +245,18 @@ angular.module('myApp.dashTab', ['myApp.env'])
     $scope.deleteModal.show();
   };
 
+  $scope.showReportModal = function(key, title) {
+    $scope.postReport.title = title;
+    $scope.postReport.id = key;
+    $scope.reportModal.show();
+  };
+
   $scope.closeDeleteModal = function() {
     $scope.deleteModal.hide();
+  };
+
+  $scope.closeReportModal = function() {
+    $scope.reportModal.hide();
   };
 
   $scope.openModal = function() {

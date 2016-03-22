@@ -1,7 +1,7 @@
 <ion-view view-title="Home" id="dash-page" class="post-pages">
 
   <ion-nav-buttons side="left">
-    <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
+    <button class="button button-icon button-clear side-menu ion-arrow-right-b" ng-click="toggleLeft()">
     </button>
   </ion-nav-buttons>
 
@@ -21,7 +21,10 @@
         <!-- User infos and post redirection -->
         <div class="item item-avatar">
           <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" on-touch="::userPage(post.userId,post.userName,post.userPicture)" href="#/tab/dash/user/{{::post.userId}}/dash"></a>
-          <h2>{{::post.userName}}</h2>
+          <h2>
+            <a href="#/tab/dash/user/{{::post.userId}}/dash" on-touch="::userPage(post.userId,post.userName,post.userPicture)"> {{::post.userName}}
+            </a>
+          </h2>
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
           <a href="#/tab/dash/post/{{::post.$key}}/dash" class="item post-link" on-touch="postPage(post.$key, post)">
             <i class="icon ion-ios-arrow-right"></i>
@@ -64,6 +67,8 @@
           </p>
         </div>
         <button class="edit-delete-btn" ng-click="showDeleteModal(post.$key, post.title)"><i class="ion-trash-b"></i></button>
+        <button class="report-btn" ng-click="showReportModal(post.$key, post.title)"><i class="ion-alert"></i></button>
+
       </div>
     </section>
 
@@ -98,6 +103,19 @@
         <div class="buttons-container">
           <button class="cancel" on-touch="closeDeleteModal()">Cancel</button>
           <button class="delete" on-touch="deletePost(postDelete.id)">Delete</button>
+        </div>
+        </div>
+      </div>
+    </script>
+
+    <script id="post-report-modal.html" type="text/ng-template">
+      <div class="report-modal modal transparent">
+      <div class="modal-content">
+        <h3>Report this post?</h3>
+        <p class="post-title">{{postReport.title}}</p>
+        <div class="buttons-container">
+          <button class="cancel" on-touch="closeReportModal()">Cancel</button>
+          <button class="report" on-touch="reportPost(postReport.id)">Report</button>
         </div>
         </div>
       </div>

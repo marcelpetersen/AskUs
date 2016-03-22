@@ -57,12 +57,12 @@ angular.module('myApp.addTab', [])
   }; 
 
   var options = { 
-    quality : 80, 
+    quality : 90, 
     allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
     encodingType: navigator.camera.EncodingType.JPEG,
-    targetWidth: 500,
-    targetHeight: 500,
-    saveToPhotoAlbum: true
+    targetWidth: 600,
+    targetHeight: 600,
+    saveToPhotoAlbum: false
   };
 
   $scope.takePictureCamera = function(imageNumber) {

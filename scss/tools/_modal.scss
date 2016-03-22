@@ -48,7 +48,7 @@
   }
 }
 
-.edit-delete-modal {
+.edit-delete-modal, .report-modal {
   @include flexCenter();
   .modal-content {
     padding: 20px;
@@ -75,6 +75,10 @@
         &.delete {
           color: #FFF;
           background-color: $assertive;
+        }
+        &.report {
+          color: #FFF;
+          background-color: $energized;
         }
       }
     }

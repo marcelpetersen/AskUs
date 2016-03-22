@@ -1,6 +1,28 @@
+body.menu-open {
+  .bar-header {
+    .header-item {
+      .left-buttons {
+        .side-menu {
+          -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
 .bar-header {
-  .title {
+  .title, .back-button {
     text-transform: capitalize;
+  }
+  .header-item {
+    .left-buttons {
+      .side-menu {
+        &.activated {
+          opacity: 1;
+        }
+      }
+    }
   }
 }
 
