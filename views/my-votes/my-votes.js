@@ -8,6 +8,7 @@ angular.module('myApp.myVotes', ['myApp.env'])
 
 
   $scope.postDelete = {};
+  $scope.postReport = {};
 
   $scope.posts;
   $scope.aImages;
@@ -196,6 +197,16 @@ angular.module('myApp.myVotes', ['myApp.env'])
     }, function(){
       $scope.deleteModal.hide();
       console.log("delete failed");
+    })
+  };
+
+  $scope.reportPost = function(id) {
+    Post.reportPost(id).then(function(){
+      // angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
+      $scope.reportModal.hide();
+    }, function(){
+      $scope.reportModal.hide();
+      console.log("report failed");
     })
   };
 

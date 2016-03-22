@@ -65,15 +65,14 @@ angular.module('myApp', [
     if (toState.authRequired && !userAuth.isAuth()){ //Assuming the AuthService holds authentication logic
       // User isn’t authenticated
       console.log('Please Login');
-      $state.go("splash");
+      // $state.go("splash");
+
+      // $window.location.reload();
+      $window.location.href = '#/splash';  
+
       event.preventDefault(); 
     }
   });
-
-  // // Scroll Auto top
-  // $rootScope.$on("$stateChangeSuccess", function(){
-  //   $ionicScrollDelegate.scrollTop();
-  // });
 
   // Facebook Init
   FB.init({ 
