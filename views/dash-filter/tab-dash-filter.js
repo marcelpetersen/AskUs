@@ -8,7 +8,7 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
 
 
   $scope.postDelete = {};
-  $scope.postReport = {};
+  // $scope.postReport = {};
 
   $scope.posts;
   $scope.aImages;
@@ -222,26 +222,26 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     })
   };
 
-  $scope.reportPost = function(id) {
-    Post.reportPost(id).then(function(){
-      // angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
-      $scope.reportModal.hide();
-    }, function(){
-      $scope.reportModal.hide();
-      console.log("report failed");
-      // Show global error modal
-      $scope.openErrorModal();
-    })
-  };
+  // $scope.reportPost = function(id) {
+  //   Post.reportPost(id).then(function(){
+  //     // angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
+  //     $scope.reportModal.hide();
+  //   }, function(){
+  //     $scope.reportModal.hide();
+  //     console.log("report failed");
+  //     // Show global error modal
+  //     $scope.openErrorModal();
+  //   })
+  // };
 
   // ****** Modal functions ******
-  $scope.modalPictureUpdate =  function(data) {
-    $scope.aImages = [{
-      'src': data.pictureA
-    }, {
-      'src': data.pictureB
-    }];
-  };
+  // $scope.modalPictureUpdate =  function(data) {
+  //   $scope.aImages = [{
+  //     'src': data.pictureA
+  //   }, {
+  //     'src': data.pictureB
+  //   }];
+  // };
 
   $ionicModal.fromTemplateUrl('post-delete-modal.html', {
     scope: $scope,
@@ -250,19 +250,19 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     $scope.deleteModal = modal;
   });
 
-  $ionicModal.fromTemplateUrl('post-report-modal.html', {
-    scope: $scope,
-    animation: 'mh-slide' //'slide-in-up'
-  }).then(function(modal) {
-    $scope.reportModal = modal;
-  });
+  // $ionicModal.fromTemplateUrl('post-report-modal.html', {
+  //   scope: $scope,
+  //   animation: 'mh-slide' //'slide-in-up'
+  // }).then(function(modal) {
+  //   $scope.reportModal = modal;
+  // });
 
-  $ionicModal.fromTemplateUrl('image-modal.html', {
-    scope: $scope,
-    animation: 'mh-slide' //'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
+  // $ionicModal.fromTemplateUrl('image-modal.html', {
+  //   scope: $scope,
+  //   animation: 'mh-slide' //'slide-in-up'
+  // }).then(function(modal) {
+  //   $scope.modal = modal;
+  // });
 
   $scope.showDeleteModal = function(key, title) {
     $scope.postDelete.title = title;
@@ -270,42 +270,42 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     $scope.deleteModal.show();
   };
 
-  $scope.showReportModal = function(key, title) {
-    $scope.postReport.title = title;
-    $scope.postReport.id = key;
-    $scope.reportModal.show();
-  };
+  // $scope.showReportModal = function(key, title) {
+  //   $scope.postReport.title = title;
+  //   $scope.postReport.id = key;
+  //   $scope.reportModal.show();
+  // };
 
   $scope.closeDeleteModal = function() {
     $scope.deleteModal.hide();
   };
   
-  $scope.closeReportModal = function() {
-    $scope.reportModal.hide();
-  };
+  // $scope.closeReportModal = function() {
+  //   $scope.reportModal.hide();
+  // };
 
-  $scope.openModal = function() {
-    $ionicSlideBoxDelegate.slide(0);
-    $scope.modal.show();
-  };
+  // $scope.openModal = function() {
+  //   $ionicSlideBoxDelegate.slide(0);
+  //   $scope.modal.show();
+  // };
 
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
+  // $scope.closeModal = function() {
+  //   $scope.modal.hide();
+  // };
 
-  // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modal.remove();
-  });
+  // // Cleanup the modal when we're done with it!
+  // $scope.$on('$destroy', function() {
+  //   $scope.modal.remove();
+  // });
 
-  $scope.goToSlide = function(index) {
-    $scope.modal.show();
-    $ionicSlideBoxDelegate.slide(index);
-  };
+  // $scope.goToSlide = function(index) {
+  //   $scope.modal.show();
+  //   $ionicSlideBoxDelegate.slide(index);
+  // };
 
-  // Called each time the slide changes
-  $scope.slideChanged = function(index) {
-    $scope.slideIndex = index;
-  };
+  // // Called each time the slide changes
+  // $scope.slideChanged = function(index) {
+  //   $scope.slideIndex = index;
+  // };
 
 }]);
