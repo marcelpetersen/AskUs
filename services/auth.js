@@ -45,7 +45,7 @@ angular.module('myApp.authService', [])
     Auth.$unauth();
     // Remove facebook stored cookies
     window.cookies.clear(function() {
-      //$window.location.reload();
+      $window.location.reload();
       $window.location.href = '#/splash';   
     });
   };
@@ -61,7 +61,7 @@ angular.module('myApp.authService', [])
       // TODO DELETE ACCOUNT AND POST
       // $window.location.href = '#/splash';
       window.cookies.clear(function() {
-        //$window.location.reload();
+        $window.location.reload();
         $window.location.href = '#/splash';   
       });
     });
