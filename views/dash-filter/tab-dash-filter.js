@@ -127,14 +127,6 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     usersInfos.singleUserInfoSet(user);
   };
 
-  $scope.postPage = function(uid, data) {
-    var postData = {
-      uid: uid,
-      data: data
-    };
-    Post.singlePostInfoSet(postData);
-  };
-
   // ****** Vote functions ******
   $scope.vote = function(post, element) {
     angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').addClass('spin');

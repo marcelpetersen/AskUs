@@ -18,7 +18,7 @@
           <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" on-touch="::userPage(post.userId,post.userName,post.userPicture)" href="#/tab/account/user/{{::post.userId}}/account"></a>
           <h2>{{::post.userName}}</h2>
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
-          <a href="#/tab/account/post/{{::post.$key}}/account" class="item post-link" on-touch="postPage(post.$key, post)">
+          <a href="#/tab/account/post/{{::post.$key}}/account" class="item post-link">
             <i class="icon ion-ios-arrow-right"></i>
           </a>
         </div>

@@ -115,12 +115,4 @@ angular.module('myApp.userPage', ['myApp.env'])
     usersInfos.singleUserInfoSet(user);
   }
 
-  $scope.postPage = function(uid, data) {
-    var postData = {
-      uid: uid,
-      data: data
-    };
-    Post.singlePostInfoSet(postData);
-  }
-
 }]);

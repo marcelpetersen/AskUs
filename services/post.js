@@ -2,8 +2,6 @@ angular.module('myApp.postService', [])
 
 .factory('Post', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', '$state', function($q, $rootScope, FirebaseUrl, currentUserInfos, $state) {
 
-  var singlePostInfo = {};
-
   resolve = function(errval, retval, deferred) {
     $rootScope.$apply(function() {
       if (errval) {
@@ -188,14 +186,6 @@ angular.module('myApp.postService', [])
       // Clear the vote to update object
       postDeleteList[pageName] = {};
       return;
-    },
-
-    singlePostInfoSet: function(data) {
-      singlePostInfo = data;
-    },
-
-    singlePostInfoGet: function() {
-      return singlePostInfo;
     },
 
     getAndDeleteFirstElementInObject: function(obj) {
