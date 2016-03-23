@@ -68,7 +68,7 @@ angular.module('myApp.postPage', ['myApp.env'])
     }, 500);
   };
 
-    $scope.loadMore = function() {
+  $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     if (!$scope.currentLastPost) {
       angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
@@ -99,10 +99,13 @@ angular.module('myApp.postPage', ['myApp.env'])
       });
     } else {
       Comments.getCommentsInfinite($scope.postId, $scope.currentLastPost).then(function(commentsData) {
+        console.log(commentsData);
 
         var firstElement = Post.getFirstElementInObject(commentsData);
+        console.log(firstElement);
         var currentLastPostTemp = firstElement.currentLastPost;
         var lastPostId = firstElement.id;
+        console.log($scope.currentLastPost, currentLastPostTemp);
 
         // Check if the last post is equal to the previous one, so the last post in the DB
         if ($scope.currentLastPost === currentLastPostTemp) {
@@ -114,7 +117,7 @@ angular.module('myApp.postPage', ['myApp.env'])
           // Delete the element because already exist in the original Data
           delete commentsData[lastPostId];
           var updatedPost = angular.extend({}, $scope.comments, commentsData)
-          $scope.posts = updatedPost;
+          $scope.comments = updatedPost;
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
@@ -224,6 +227,14 @@ angular.module('myApp.postPage', ['myApp.env'])
     })
   };
 
+  angular.element('body').on('focus', '.message-textarea', function() {
+    angular.element('.form-modal').addClass('focus')
+  })
+
+  angular.element('body').on('focusout', '.message-textarea', function() {
+    angular.element('.form-modal').removeClass('focus')
+  })
+
   // Add Message function
   $scope.submitMessage = function(form) {
     // Show comment sending loading block
@@ -322,7 +333,6 @@ angular.module('myApp.postPage', ['myApp.env'])
   });
 
   $scope.openFormModal = function() {
-    console.log("test");
     $scope.formModal.show();
   };
 

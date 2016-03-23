@@ -93,7 +93,7 @@ angular.module('myApp.myVotes', ['myApp.env'])
       });
 
     } else {
-      Post.getAllPostsByCategoryInfinite($scope.userId, totalPostNumber, newPostLimit).then(function(postsData) {
+      Post.getAllPostsVotedInfinite($scope.userId, totalPostNumber, newPostLimit).then(function(postsData) {
         postTotalMax += newPostLimit;
         totalPostNumber = postsData.number;
         // Less posts than the max possible, then the is no more post available

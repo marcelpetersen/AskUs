@@ -53,6 +53,7 @@
 
 .form-modal {
   form {
+    transition: all 0.3s ease;
     .item {
       position: relative;
       .message-input-loading {
@@ -60,6 +61,13 @@
         @include absolutePos(0px, 0px, 0px, 0px);
         @include flexCenter();
       }
+    }
+  }
+  &.focus {
+    // align-items: flex-start;
+    // -webkit-align-items: flex-start;
+    form {
+      transform: translate3d(0, -75%, 0)
     }
   }
 }

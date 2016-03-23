@@ -137,7 +137,7 @@ angular.module('myApp.postService', [])
       return promise;
     },
 
-    getAllPostsByCategoryInfinite: function(id, actual, limit) {
+    getAllPostsVotedInfinite: function(id, actual, limit) {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild("voters/"+ id).startAt("A").endAt("B").limitToLast(actual + limit).once("value", function(snapshot) {
