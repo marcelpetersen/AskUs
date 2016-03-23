@@ -16,10 +16,6 @@
 
      <section class="posts-list-container">
 
-     <div class="loading">
-      <i class="ion ion-load-c loading-icon"></i>
-     </div>
-
      <div class="no-post" ng-show="noPost">
        <p>No post yet</p>
      </div>
@@ -52,6 +48,13 @@
 
       </div>
     </section>
+
+    <ion-infinite-scroll
+      ng-if="!noMoreData"
+      on-infinite="loadMore()"
+      icon="ion-load-c"
+      distance="1%">
+    </ion-infinite-scroll>
 
   </ion-content>
 </ion-view>

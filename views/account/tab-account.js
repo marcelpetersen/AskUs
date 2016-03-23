@@ -9,18 +9,6 @@ angular.module('myApp.acountTab', ['myApp.env'])
     userAuth.logoutFacebook();
   };
 
- $('.account-tab-user').on('click', function(e){
-  console.log(e.currentTarget);
- });
-
-  $('.account-tab-user h2').on('click', function(e){
-    e.stopPropagation();
-    console.log(e.currentTarget);
- });
-  $('.user-pic').on('click', function(e){
-    e.stopPropagation();
-    console.log(e.currentTarget);
- });
 
   $scope.userPage = function(userId, userName, userPicture) {
     var user = {

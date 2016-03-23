@@ -5,97 +5,108 @@ angular.module('myApp.dashTab', ['myApp.env'])
   function($scope, $state, $ionicScrollDelegate, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
   var pageName = '#dash-page';
-  
-  $scope.postDelete = {};
-
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
   $scope.currentLastPost;
+  $scope.postDelete = {};
 
+  // Check the Post to delete and update when coming back to the page
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-     if (toState.name === "tab.dash") {
-        Vote.voteUpdate("dash-page");
-        Post.postToDelete("dash-page");
-     }
+    if (toState.name === "tab.dash") {
+      Vote.voteUpdate("dash-page");
+      Post.postToDelete("dash-page");
+    }
    });
 
+  // Open / Close side menu
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
   };
 
+  // Refresh the page after addding a new post
   $rootScope.$on('dashRefresh', function() {
     $scope.doRefresh();
-
     $ionicScrollDelegate.scrollTop();
   });
 
+  // Pull to refresh method
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     $scope.noMoreData = false;
     $scope.currentLastPost = null;
-    // Get the last 5 posts
+    // Get the last 10 posts
     Post.getAllPosts().then(function(postsData) {
+      // remove the first element, will be display with the next post call
       var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
       $scope.currentLastPost = cleanedData.currentLastPost
       $scope.posts = cleanedData.obj;
-      $scope.$broadcast('scroll.refreshComplete');
-      $timeout(function(){
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-      }, 500);
+    }, function() {
+      $scope.openErrorModal();
+      $scope.noMoreData = true;
     }); 
+    $scope.$broadcast('scroll.refreshComplete');
+    $timeout(function(){
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+    }, 500);
   };
 
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
-      if (!$scope.currentLastPost) {
-          angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
-          // Get the previous last 5 posts
-          Post.getAllPosts().then(function(postsData) {
-            console.log('Load first data');
+    if (!$scope.currentLastPost) {
+      angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+      // Get the previous last 10 posts
+      Post.getAllPosts().then(function(postsData) {
+        // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
+        var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
+        // Get the last element timestamp
+        $scope.currentLastPost = cleanedData.currentLastPost
+        $scope.posts = cleanedData.obj;
 
-            // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
-            var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
-            $scope.currentLastPost = cleanedData.currentLastPost
-            $scope.posts = cleanedData.obj;
-
-            angular.element(pageName +' .icon-refreshing').removeClass('spin');
-            angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-        }, function() {
-            // Show global error modal
-            $scope.openErrorModal();
-        });
-      } else {
-        Post.getAllPostsInfinite($scope.currentLastPost).then(function(postsData) {
-          console.log('Loading more data');
-
-          var firstElement = Post.getFirstElementInObject(postsData);
-          var currentLastPostTemp = firstElement.currentLastPost;
-          var lastPostId = firstElement.id;
-
-          if ($scope.currentLastPost === currentLastPostTemp) {
-            $scope.noMoreData = true;
-            var updatedPostFinal = angular.extend({}, $scope.posts, postsData)
-            $scope.posts = updatedPostFinal;
-          } else {
-            $scope.currentLastPost = currentLastPostTemp;
-            // Delete the element because already exist in the original Data
-            delete postsData[lastPostId];
-            var updatedPost = angular.extend({}, $scope.posts, postsData)
-            $scope.posts = updatedPost;
-          }
-
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
         $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
       }, function() {
-          // Show global error modal
-          $scope.openErrorModal();
+        // Show global error modal
+        $scope.openErrorModal();
+        $scope.noMoreData = true;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
+      });
+    } else {
+      Post.getAllPostsInfinite($scope.currentLastPost).then(function(postsData) {
+        var firstElement = Post.getFirstElementInObject(postsData);
+        var currentLastPostTemp = firstElement.currentLastPost;
+        var lastPostId = firstElement.id;
+
+        // Check if the last post is equal to the previous one, so the last post in the DB
+        if ($scope.currentLastPost === currentLastPostTemp) {
+          $scope.noMoreData = true;
+          var updatedPostFinal = angular.extend({}, $scope.posts, postsData)
+          $scope.posts = updatedPostFinal;
+        } else {
+          $scope.currentLastPost = currentLastPostTemp;
+          // Delete the element because already exist in the original Data
+          delete postsData[lastPostId];
+          var updatedPost = angular.extend({}, $scope.posts, postsData)
+          $scope.posts = updatedPost;
+        }
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        
+      }, function() {
+        // Show global error modal
+        $scope.openErrorModal();
+        $scope.noMoreData = true;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
       });
     }
   };
 
   // ****** Next page functions ******
+  // Store user info before redirection
   $scope.userPage = function(userId, userName, userPicture) {
     var user = {
       id: userId,
@@ -105,6 +116,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
     usersInfos.singleUserInfoSet(user);
   };
 
+  // Store post info before redirection
   $scope.postPage = function(uid, data) {
     var postData = {
       uid: uid,
@@ -128,15 +140,14 @@ angular.module('myApp.dashTab', ['myApp.env'])
       // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
       // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').fadeIn();
 
+      // Increase votes and get the ratios
       (element === "A") ? post.voteATotal++ : post.voteBTotal++;
-
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
       post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
 
       // Create the Radials
       Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
       Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000, pageName);
-
 
     }, function(error){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');

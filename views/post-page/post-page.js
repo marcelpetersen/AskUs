@@ -12,6 +12,7 @@ angular.module('myApp.postPage', ['myApp.env'])
   var postData = Post.singlePostInfoGet();
   $scope.post = postData.data;
 
+  // Store user data before redirection
   $scope.userPage = function(userId, userName, userPicture) {
     var user = {
       id: userId,
@@ -32,12 +33,8 @@ angular.module('myApp.postPage', ['myApp.env'])
       // Hide voting button block and show radials
       post.hasVoted = true;
 
-      // Keep for now
-      // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-      // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').fadeIn();
-
+      // Increase votes and get the ratios
       (element === "A") ? post.voteATotal++ : post.voteBTotal++;
-
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
       post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
 
@@ -48,7 +45,6 @@ angular.module('myApp.postPage', ['myApp.env'])
       // Create the Radials
       Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
       Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000, pageName);
-
 
     }, function(error){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
@@ -84,10 +80,6 @@ angular.module('myApp.postPage', ['myApp.env'])
           //Show Radial block hide Buttons
           post.hasVoted = true;
           angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
-
-          // Keep for now
-          // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-          // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').show();
           Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1, pageName);
           Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1, pageName);
         }, 0);    

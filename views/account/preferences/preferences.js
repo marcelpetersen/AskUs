@@ -6,7 +6,6 @@ angular.module('myApp.preferences', ['myApp.env'])
   };
 
   $scope.suspendAccountFacebook = function() {
-    console.log('test');
     userAuth.suspendAccountFacebook();
   };
 

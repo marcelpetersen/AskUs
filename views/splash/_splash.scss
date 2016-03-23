@@ -10,15 +10,13 @@
         -webkit-justify-content: center;
         flex-direction:column;
         -webkit-flex-direction:column;
-
-
         background-image:url('../img/account-bg.jpg');
-          background-size: cover;
-          background-position: 50% 50%;
+        background-size: cover;
+        background-position: 50% 50%;
 
-         h2 {
-         color: white;
-           }
+        h2 {
+          color: white;
+        }
 
         button {
           width: 80%;

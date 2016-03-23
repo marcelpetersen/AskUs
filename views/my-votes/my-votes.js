@@ -7,12 +7,10 @@ angular.module('myApp.myVotes', ['myApp.env'])
   var pageName = '#my-votes-page';
 
   $scope.postDelete = {};
-
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
-
-  var newPostLimit = 20;
+  var newPostLimit = 10;
   var postTotalMax = 0;
   var totalPostNumber = 0;
   var totalPost;
@@ -20,8 +18,6 @@ angular.module('myApp.myVotes', ['myApp.env'])
 
   // Get route parent
   $scope.userId = $stateParams.userId;
-
-  console.log($scope.userId);
 
   // Close menu
   $ionicSideMenuDelegate.toggleLeft(false);
@@ -35,62 +31,72 @@ angular.module('myApp.myVotes', ['myApp.env'])
 
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
+    // Reseting data
     $scope.noMoreData = false;
     $scope.posts = {};
-
-    newPostLimit = 20;
+    newPostLimit = 10;
     postTotalMax = 0;
     totalPostNumber = 0;
     totalPost;
     displayedPost;
 
     Post.getAllPostsVoted($scope.userId, newPostLimit).then(function(postsData) {
+      // Increase the total possible number of posts displayed
       postTotalMax += newPostLimit;
-
+      // Check the number of cards retreive
       totalPostNumber = postsData.number;
       if (totalPostNumber === 0) {
         $scope.noMoreData = true;
       }
 
       $scope.posts = postsData.values  ;
+      $scope.$broadcast('scroll.refreshComplete');
+      $timeout(function(){
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+      }, 500);
     }, function() {
       // Show global error modal
       $scope.openErrorModal();
+      $scope.noMoreData = true;
+      $scope.$broadcast('scroll.refreshComplete');
+      $timeout(function(){
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+      }, 500);
     });
-
-    $scope.$broadcast('scroll.refreshComplete');
-     $timeout(function(){
-      angular.element(pageName +' .icon-refreshing').removeClass('spin');
-    }, 500);
   };
 
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     if (totalPostNumber === 0) {
-        angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
-        // Get the previous last 5 posts
-        Post.getAllPostsVoted($scope.userId, newPostLimit).then(function(postsData) {
-          postTotalMax += newPostLimit;
+      angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+      // Get the previous last 5 posts
+      Post.getAllPostsVoted($scope.userId, newPostLimit).then(function(postsData) {
+        // Increase the total possible number of posts displayed
+        postTotalMax += newPostLimit;
+        // Check the number of cards retreive
+        totalPostNumber = postsData.number;
+        if (totalPostNumber === 0) {
+          $scope.noMoreData = true;
+        }
 
-          totalPostNumber = postsData.number;
-          if (totalPostNumber === 0) {
-            $scope.noMoreData = true;
-          }
-
-          $scope.posts = postsData.values;
-
-          angular.element(pageName +' .icon-refreshing').removeClass('spin');
-          angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
-          $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.posts = postsData.values;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
       }, function() {
         // Show global error modal
         $scope.openErrorModal();
+        $scope.noMoreData = true;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
       });
+
     } else {
       Post.getAllPostsByCategoryInfinite($scope.userId, totalPostNumber, newPostLimit).then(function(postsData) {
         postTotalMax += newPostLimit;
         totalPostNumber = postsData.number;
-
+        // Less posts than the max possible, then the is no more post available
         if( postsData.number !== postTotalMax ) {
           $scope.noMoreData = true;
         } else {
@@ -98,11 +104,14 @@ angular.module('myApp.myVotes', ['myApp.env'])
           var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
           $scope.posts = updatedPost;
         }
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
         $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, function() {
         // Show global error modal
         $scope.openErrorModal();
+        $scope.noMoreData = true;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
       })
     }
   };
@@ -136,12 +145,8 @@ angular.module('myApp.myVotes', ['myApp.env'])
       // Hide voting button block and show radials
       post.hasVoted = true;
 
-      // Keep for now
-      // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-      // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').fadeIn();
-
+      // Increase votes and get the ratios
       (element === "A") ? post.voteATotal++ : post.voteBTotal++;
-
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
       post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
 
@@ -184,10 +189,6 @@ angular.module('myApp.myVotes', ['myApp.env'])
           //Show Radial block hide Buttons
           post.hasVoted = true;
           angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
-
-          // Keep for now
-          // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-          // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').show();
           Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1, pageName);
           Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1, pageName);
         }, 0);    

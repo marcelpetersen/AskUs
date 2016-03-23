@@ -1,37 +1,36 @@
 angular.module('myApp.friends', ['myApp.env'])
 
 .controller('friendsCtrl', ['$scope', '$localstorage', 'facebook', '$timeout', 'usersInfos', function($scope, $localstorage, facebook, $timeout, usersInfos) {
+  
   $scope.noFriend = false;
   $scope.friendsList;
-
+  var pageName = "#friends-page";
   var userInfo = $localstorage.get('firebase:session::ionic-fboauth');
 
+  // Animating the loader
+  angular.element(pageName +' .loading').css('margin-top', ((screen.height / 2) - 90) + 'px');
+  angular.element(pageName + ' .loading-icon').addClass('spin');
+
+  // Get Facebook friends list
   facebook.getFriends($scope, userInfo).then(function(data) {
     $scope.friendsList = data;
-    if (data.length === 0) {$scope.noFriend = true;}
-
-    // Save friends list into the user DB
-    // var idList = [];
-    // data.forEach(function(item) {
-    //   idList.push(item.id);
-    // })
-    // facebook.updateFriendsList(idList);
+    if (data.length === 0) {
+      $scope.noFriend = true;
+    }
+    angular.element(pageName +' .loading-icon').removeClass('spin');
+    angular.element(pageName +' .loading').hide();
   }, function() {
     // Show global error modal
     $scope.openErrorModal();
+    angular.element(pageName +' .loading-icon').removeClass('spin');
+    angular.element(pageName +' .loading').hide();
   });
 
+  // Refresh friends list
   $scope.doRefresh = function() {
     angular.element('.icon-refreshing').addClass('spin');
     facebook.getFriends($scope, userInfo).then(function(data) {
       $scope.friendsList = data;
-
-      // Save friends list into the user DB
-      // var idList = [];
-      // data.forEach(function(item) {
-      //   idList.push(item.id);
-      // })
-      // facebook.updateFriendsList(idList);
 
       $scope.$broadcast('scroll.refreshComplete');
       $timeout(function(){
@@ -43,6 +42,7 @@ angular.module('myApp.friends', ['myApp.env'])
     }); 
   };
 
+  // Store friends infos before redirection
   $scope.friendPage = function(user) {
     if (typeof(user.picture) !== "string") {
       user.picture = user.picture.data.url;

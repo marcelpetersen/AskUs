@@ -5,14 +5,12 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   function($scope, $stateParams, $state, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
   var pageName = '#dash-filter-page';
-
-  $scope.postDelete = {};
-
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
+  $scope.postDelete = {};
 
-  var newPostLimit = 2;
+  var newPostLimit = 6;
   var postTotalMax = 0;
   var totalPostNumber = 0;
   var totalPost;
@@ -24,25 +22,27 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   // Close menu
   $ionicSideMenuDelegate.toggleLeft(false);
 
+  // Check the Post to delete and update when coming back to the page
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
      if (toState.name === "tab.dash-filter") {
         Vote.voteUpdate("dash-filter-page");
         Post.postToDelete("dash-filter-page");
      }
-   });
+  });
 
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
+    // Reset all data
     $scope.noMoreData = false;
     $scope.posts = {};
-
-    newPostLimit = 2;
+    newPostLimit = 6;
     postTotalMax = 0;
     totalPostNumber = 0;
     totalPost;
     displayedPost;
 
     Categories.getAllPostsByCategory($stateParams.filter, newPostLimit).then(function(postsData) {
+      // Increase the total possible number of posts displayed
       postTotalMax += newPostLimit;
 
       totalPostNumber = postsData.number;
@@ -50,58 +50,70 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
         $scope.noMoreData = true;
       }
 
-      $scope.posts = postsData.values  ;
+      $scope.posts = postsData.values;
+      $scope.$broadcast('scroll.refreshComplete');
+      $timeout(function(){
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+      }, 500);
     }, function() {
       // Show global error modal
       $scope.openErrorModal();
+      $scope.noMoreData = true;
+      $scope.$broadcast('scroll.refreshComplete');
+      $timeout(function(){
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+      }, 500);
     });
-
-    $scope.$broadcast('scroll.refreshComplete');
-     $timeout(function(){
-      angular.element(pageName +' .icon-refreshing').removeClass('spin');
-    }, 500);
   };
 
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
-      if (totalPostNumber === 0) {
-          angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
-          // Get the previous last 5 posts
-          Categories.getAllPostsByCategory($stateParams.filter, newPostLimit).then(function(postsData) {
-            postTotalMax += newPostLimit;
+    if (totalPostNumber === 0) {
+      angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+      // Get the previous last 5 posts
+      Categories.getAllPostsByCategory($stateParams.filter, newPostLimit).then(function(postsData) {
+        // Increase the total possible number of posts displayed
+        postTotalMax += newPostLimit;
+        // Check the number of cards retreive
+        totalPostNumber = postsData.number;
+        if (totalPostNumber === 0) {
+          $scope.noMoreData = true;
+        }
 
-            totalPostNumber = postsData.number;
-            if (totalPostNumber === 0) {
-              $scope.noMoreData = true;
-            }
+        $scope.posts = postsData.values;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
+      }, function() {
+        // Show global error modal
+        $scope.openErrorModal();
+        $scope.noMoreData = true;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
+      });
 
-            $scope.posts = postsData.values;
-
-            angular.element(pageName +' .icon-refreshing').removeClass('spin');
-            angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-        }, function() {
-          // Show global error modal
-          $scope.openErrorModal();
-        });
-      } else {
-        Categories.getAllPostsByCategoryInfinite($stateParams.filter, totalPostNumber, newPostLimit).then(function(postsData) {
-          postTotalMax += newPostLimit;
-          totalPostNumber = postsData.number;
-
-          if( postsData.number !== postTotalMax ) {
-            $scope.noMoreData = true;
-          } else {
-            var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
-            var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
-            $scope.posts = updatedPost;
-          }
-          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+    } else {
+      Categories.getAllPostsByCategoryInfinite($stateParams.filter, totalPostNumber, newPostLimit).then(function(postsData) {
+        postTotalMax += newPostLimit;
+        totalPostNumber = postsData.number;
+        // Less posts than the max possible, then the is no more post available
+        if( postsData.number !== postTotalMax ) {
+          $scope.noMoreData = true;
+        } else {
+          var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
+          var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+          $scope.posts = updatedPost;
           $scope.$broadcast('scroll.infiniteScrollComplete');
-        }, function() {        
-          // Show global error modal
-          $scope.openErrorModal();
-        })
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }
+      }, function() {        
+        // Show global error modal
+        $scope.openErrorModal();
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.noMoreData = true;
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+      })
     }
   };
 
@@ -134,12 +146,8 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
       // Hide voting button block and show radials
       post.hasVoted = true;
 
-      // Keep for now
-      // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-      // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').fadeIn();
-
+      // Increase votes and get the ratios
       (element === "A") ? post.voteATotal++ : post.voteBTotal++;
-
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
       post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
 
@@ -183,9 +191,6 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
           post.hasVoted = true;
           angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
 
-          // Keep for now
-          // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-          // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').show();
           Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1, pageName);
           Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1, pageName);
         }, 0);    

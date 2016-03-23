@@ -7,27 +7,26 @@ angular.module('myApp.addTab', [])
   $scope.imageOne;
   $scope.imageTwo;
 
-  // $timeout(function() {$scope.openModal();}, 1000);
-
   $scope.post = {
     category: 'general',
     title: '',
     description : ''   
   };  
 
-   // Generate a random name with random characters
+  // Generate a random name with random characters
   var fileNameGenerator = function() {
     return Math.random().toString(36).substr(2, 15) + '.jpg';
   }
    
   $scope.submitPost = function(form) {
-    console.log($scope.post)
+    // Show loading picture and sending form modal
     $scope.openModal();
-    if(form.$valid) {
+    // Check if the form is fully filled
+    if(form.$valid && $scope.imageOne && $scope.imageTwo) {
 
+      // Generate the name and path for the picture before storing in the DB
       var fileOneName = fileNameGenerator();
       var fileTwoName = fileNameGenerator();
-
       $scope.post.pictureA = S3_CDN_URL + fileOneName;
       $scope.post.pictureB = S3_CDN_URL + fileTwoName;
 
@@ -35,6 +34,7 @@ angular.module('myApp.addTab', [])
         s3Uploader.upload($scope.imageTwo, fileTwoName).then(function() {
           Post.addPost($scope.post).then(function(){
             $scope.closeModal();
+            // Redirect to the dash page
             $timeout(function(){$rootScope.$emit('dashRefresh');}, 200)
             $state.go('tab.dash');
           }, function() {
@@ -64,6 +64,7 @@ angular.module('myApp.addTab', [])
     }
   }; 
 
+  // Picture saving options
   var options = { 
     quality : 90, 
     allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
@@ -73,18 +74,16 @@ angular.module('myApp.addTab', [])
     saveToPhotoAlbum: false
   };
 
+  // Native camera access methods
   $scope.takePictureCamera = function(imageNumber) {
     options.sourceType = navigator.camera.PictureSourceType.CAMERA;
-
     Camera.getPicture(options).then(function(imageURI) {
       if (imageNumber === 'picture-one') {
         $scope.imageOne = imageURI;
       } else {
         $scope.imageTwo = imageURI;
       }
-
       angular.element('.picture-container.' + imageNumber).css('background-image', 'url('+imageURI+')' );
-
     }, function(err) {
       console.err('error while taking picture', err);
       // Show global error modal
@@ -92,9 +91,9 @@ angular.module('myApp.addTab', [])
     });
   };
 
+  // Library access methods
   $scope.takePictureLibrary = function(imageNumber) {
     options.sourceType = navigator.camera.PictureSourceType.PHOTOLIBRARY;
-
     Camera.getPicture(options).then(function(imageURI) {
       if (imageNumber === 'picture-one') {
         $scope.imageOne = imageURI;
@@ -102,7 +101,6 @@ angular.module('myApp.addTab', [])
         $scope.imageTwo = imageURI;
       }
       angular.element('.picture-container.' + imageNumber).css('background-image', 'url('+imageURI+')' );
-
     }, function(err) {
       console.err('error while taking picture', err);
       // Show global error modal
@@ -110,8 +108,7 @@ angular.module('myApp.addTab', [])
     });
   };
 
-  // upload modal animation
-
+  // Upload modal animation
   $ionicModal.fromTemplateUrl('picture-upload.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'

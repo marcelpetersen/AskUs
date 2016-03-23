@@ -1,8 +1,6 @@
 #post-page {
   .page-content {
-
-
-        .posts-list-container {
+    .posts-list-container {
       .card {
         &:first-child {
           margin-top: 0px;
@@ -76,7 +74,6 @@
                 }
                 &.vote-B {
                   float: right;
-
                 }
               }
             }
@@ -84,6 +81,5 @@
         }
       }
     }
-   
   }
 }

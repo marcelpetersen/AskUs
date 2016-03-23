@@ -90,8 +90,8 @@ angular.module('myApp.postService', [])
     getAllPosts: function() {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
-      firebase.orderByChild('time').limitToLast(5).once("value", function(snapshot) {
-        console.log('first post added');
+      firebase.orderByChild('time').limitToLast(10).once("value", function(snapshot) {
+        console.log('first posts added');
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -103,8 +103,8 @@ angular.module('myApp.postService', [])
     getAllPostsInfinite: function(timestamp) {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
-      firebase.orderByChild('time').endAt(timestamp).limitToLast(5).once("value", function(snapshot) {
-        console.log('more post added');
+      firebase.orderByChild('time').endAt(timestamp).limitToLast(10).once("value", function(snapshot) {
+        console.log('more posts added');
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -112,19 +112,6 @@ angular.module('myApp.postService', [])
       promise = deferred.promise;
       return promise;
     },
-
-    // getAllPostsVoted: function(id) {
-    //   var deferred = $q.defer();
-    //   var firebase = new Firebase(FirebaseUrl + '/posts');
-    //   firebase.orderByChild("voters/"+id).limitToLast(5).once("value", function(snapshot) {
-    //     console.log('first post added');
-    //     resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
-    //   }, function (errorObject) {
-    //     resolve(errorObject.code, null, deferred);
-    //   });
-    //   promise = deferred.promise;
-    //   return promise;
-    // },
 
     getAllPostsVoted: function(id, limit) {
       var deferred = $q.defer();
@@ -152,12 +139,23 @@ angular.module('myApp.postService', [])
       return promise;
     },
 
-
-     getPostsById: function(id) {
+     getPostsById: function(id, limit) {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
-      firebase.orderByChild('userId').equalTo(id).once("value", function(snapshot) {
-        resolve(null, snapshot.val(), deferred);
+      firebase.orderByChild('userId').equalTo(id).limitToLast(limit).once("value", function(snapshot) {
+        resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
+      }, function (errorObject) {
+        resolve(errorObject.code, null, deferred);
+      });
+      promise = deferred.promise;
+      return promise;
+    },
+
+    getPostsByIdInfinite: function(id, actual, limit) {
+      var deferred = $q.defer();
+      var firebase = new Firebase(FirebaseUrl + '/posts');
+      firebase.orderByChild('userId').equalTo(id).limitToLast(actual + limit).once("value", function(snapshot) {
+        resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
       });
