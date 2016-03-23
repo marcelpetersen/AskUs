@@ -106,7 +106,7 @@ angular.module('myApp.routingService', [])
     })
 
     .state('tab.account-post-page', {
-      cache: true,
+      cache: false,
       authRequired: true,
       url: '/account/post/:postId/:parentCat',
       views: {
@@ -118,7 +118,7 @@ angular.module('myApp.routingService', [])
     })
 
     .state('tab.dash-post-page', {
-      cache: true,
+      cache: false,
       authRequired: true,
       url: '/dash/post/:postId/:parentCat',
       views: {
@@ -130,7 +130,7 @@ angular.module('myApp.routingService', [])
     })
 
     .state('tab.friend-post-page', {
-      cache: true,
+      cache: false,
       authRequired: true,
       url: '/friends/post/:postId/:parentCat',
       views: {

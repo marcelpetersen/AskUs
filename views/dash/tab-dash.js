@@ -17,7 +17,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
       Vote.voteUpdate("dash-page");
       Post.postToDelete("dash-page");
     }
-   });
+  });
 
   // Open / Close side menu
   $scope.toggleLeft = function() {

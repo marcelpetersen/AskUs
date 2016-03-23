@@ -1,4 +1,4 @@
-<ion-view view-title="Post" id="post-page" class="post-pages">
+<ion-view view-title="Post" id="post-page" class="post-pages {{::parentCategory}}">
   <ion-content class="padding page-content" overflow-scroll="true">
 
     <ion-refresher
@@ -62,6 +62,18 @@
       </div>
     </section>
 
+    <section class="comment-form">
+      <form name="messageForm" novalidate="" ng-submit="submitMessage(messageForm)">
+        <label class="item item-input" ng-class="{ 'has-errors' : messageForm.commentObj.$invalid, 'no-errors' : messageForm.commentObj.$valid}">
+          <input type="text" name="message" ng-model="commentObj.message" placeholder="Message" required>
+          <div class="message-input-loading loading" ng-show="commentSending">
+            <i class="ion ion-load-c loading-icon"></i>
+          </div>
+        </label>
+        <button class="button button-full button-positive btn-form-submit" type="submit">Post</button>
+      </form>
+    </section>
+
     <!-- Comments -->
     <section class="comments-container">
       <div class="list card fadein-effect" ng-repeat="comment in comments | toArray | orderBy : '-time'" data-postid="{{::post.$key}}">
@@ -82,18 +94,6 @@
     </ion-infinite-scroll>
 
     <p class="no-more-cards" ng-if="noMoreData">No more messages</p>
-
-    <section class="comment-form">
-        <form name="messageForm" novalidate="" ng-submit="submitMessage(messageForm)">
-          <label class="item item-input" ng-class="{ 'has-errors' : messageForm.commentObj.$invalid, 'no-errors' : messageForm.commentObj.$valid}">
-            <input type="text" name="message" ng-model="commentObj.message" placeholder="Message" required>
-            <div class="message-input-loading loading" ng-show="commentSending">
-              <i class="ion ion-load-c loading-icon"></i>
-            </div>
-          </label>
-          <button class="button button-full button-positive btn-form-submit" type="submit">Post</button>
-      </form>
-    </section>
 
     <script id="post-delete-modal.html" type="text/ng-template">
       <div class="edit-delete-modal modal transparent">
