@@ -1,8 +1,15 @@
 <ion-view view-title="Post" id="post-page" class="post-pages">
   <ion-content class="padding page-content" overflow-scroll="true">
 
-    <section class="posts-list-container">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()" 
+      spinner= "none"
+      refreshing-icon="ion-load-c">
+    </ion-refresher>  
 
+    <!-- Posts Description -->
+    <section class="posts-list-container">
       <div class="list card fadein-effect" data-postid="{{::post.$key}}" ng-init="checkVote(post)">
 
         <!-- User infos and post redirection -->
@@ -47,13 +54,45 @@
           <p class:"description">{{::post.description}}</p>
           <p>
             <a href="#" class="subdued">{{ post.voteATotal + post.voteBTotal}} Votes</a>
-            <a href="#" class="subdued">{{ ::post.totalMessages }} Comments</a>
+            <a href="#" class="subdued">{{ post.totalMessages }} Comments</a>
           </p>
         </div>
         <button class="edit-delete-btn" ng-click="showDeleteModal(post.$key, post.title)"><i class="ion-trash-b"></i></button>
         <button class="report-btn" ng-click="showReportModal(post.$key, post.title)"><i class="ion-alert"></i></button>
-
       </div>
+    </section>
+
+    <!-- Comments -->
+    <section class="comments-container">
+      <div class="list card fadein-effect" ng-repeat="comment in comments | toArray | orderBy : '-time'" data-postid="{{::post.$key}}">
+        <div class="message">
+          <a class="user-picture" ng-style="{'background-image':'url({{::comment.userPicture}})'}" on-touch="::userPage(comment.userId,comment.userName,comment.userPicture)" href="#/tab/{{::parentCategory}}/user/{{::comment.userId}}/{{::parentCategory}}"></a>
+          <p>{{::comment.time}}</p>
+          <p>{{::comment.userName}}</p>
+          <p>{{::comment.comment}}</p>
+        </div>
+      </div>
+    </section>
+
+     <ion-infinite-scroll
+      ng-if="!noMoreData"
+      on-infinite="loadMore()"
+      icon="ion-load-c"
+      distance="1%">
+    </ion-infinite-scroll>
+
+    <p class="no-more-cards" ng-if="noMoreData">No more messages</p>
+
+    <section class="comment-form">
+        <form name="messageForm" novalidate="" ng-submit="submitMessage(messageForm)">
+          <label class="item item-input" ng-class="{ 'has-errors' : messageForm.commentObj.$invalid, 'no-errors' : messageForm.commentObj.$valid}">
+            <input type="text" name="message" ng-model="commentObj.message" placeholder="Message" required>
+            <div class="message-input-loading loading" ng-show="commentSending">
+              <i class="ion ion-load-c loading-icon"></i>
+            </div>
+          </label>
+          <button class="button button-full button-positive btn-form-submit" type="submit">Post</button>
+      </form>
     </section>
 
     <script id="post-delete-modal.html" type="text/ng-template">
@@ -65,6 +104,19 @@
           <button class="cancel" on-touch="closeDeleteModal()">Cancel</button>
           <button class="delete" on-touch="deletePost(postDelete.id)">Delete</button>
         </div>
+        </div>
+      </div>
+    </script>
+
+    <script id="error-form.html" type="text/ng-template">
+      <div class="error-form-modal modal transparent">
+        <div class="modal-content">
+          <div class="loading">
+            <h2>Please fill all the form</h2>
+            <div class="buttons-container">
+              <button class="close" on-touch="closeErrorFormModal()">Close</button>
+            </div>
+          </div>
         </div>
       </div>
     </script>

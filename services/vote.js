@@ -58,29 +58,6 @@ angular.module('myApp.voteService', [])
           console.log("post doesn't exist anymore");
         }
       })
-      // firebase.child("voters").update(voterInfo, function(snapshot, error) {
-      //   if(!error){
-      //     // resolve(null, 'ok', deferred);
-      //     console.log("vote ok")
-      //     firebase.child('vote'+element+'Total').transaction(function(element) {
-      //       return element+1;
-      //     }, function(error, committed, snapshot) {
-      //       if (error) {
-      //         resolve(error, null, deferred);
-      //         console.log('Transaction failed abnormally!', error);
-      //       } else if (!committed) {
-      //         resolve(error, null, deferred);
-      //         console.log('Vote not saved  (because already exists).');
-      //       } else {
-      //         resolve(null, 'ok', deferred);
-      //         console.log('vote saved db!');
-      //       }
-      //     });
-      //   } else {
-      //     resolve(error, null, deferred);
-      //     console.log("vote ko");
-      //   }
-      // });
       promise = deferred.promise;
       return promise;
     },

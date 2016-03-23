@@ -1,12 +1,19 @@
 angular.module('myApp.postPage', ['myApp.env'])
 
 .controller('postCtrl', 
-  ['$scope', 'Post', '$stateParams', 'currentUserInfos', 'Vote', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicHistory', '$timeout', 'usersInfos', 
-  function($scope, Post, $stateParams, currentUserInfos, Vote, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $timeout, usersInfos) {
+  ['$scope', 'Post', 'Comments', '$stateParams', 'currentUserInfos', 'Vote', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicHistory', '$timeout', 'usersInfos', 
+  function($scope, Post, Comments, $stateParams, currentUserInfos, Vote, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $timeout, usersInfos) {
   
   var pageName = '#post-page';
   $scope.postDelete = {};
   $scope.parentCategory = $stateParams.parentCat;
+  $scope.commentSending = false;
+  $scope.commentObj = {
+    message: ""
+  };
+  $scope.currentLastPost;
+  $scope.comments = {};
+  $scope.noMoreData = false;
 
   // Get post info
   var postData = Post.singlePostInfoGet();
@@ -20,6 +27,87 @@ angular.module('myApp.postPage', ['myApp.env'])
       picture: userPicture
     };
     usersInfos.singleUserInfoSet(user);
+  };
+
+  $scope.doRefresh = function() {
+    angular.element(pageName +' .icon-refreshing').addClass('spin');
+    $scope.noMoreData = false;
+    $scope.currentLastPost = null;
+    // Get the last 10 posts
+    Comments.getComments($scope.post.$key).then(function(commentsData) {
+      // remove the first element, will be display with the next post call
+      var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData);
+      $scope.currentLastPost = cleanedData.currentLastPost
+      $scope.comments = cleanedData.obj;
+      console.log(commentsData);
+    }, function() {
+      $scope.openErrorModal();
+      $scope.noMoreData = true;
+    }); 
+    $scope.$broadcast('scroll.refreshComplete');
+    $timeout(function(){
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+    }, 500);
+  };
+
+    $scope.loadMore = function() {
+    angular.element(pageName +' .icon-refreshing').addClass('spin');
+    if (!$scope.currentLastPost) {
+      angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+      // Get the previous last 10 posts
+      Comments.getComments($scope.post.$key).then(function(commentsData) {
+        console.log("get first message");
+      console.log(commentsData);
+
+        // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
+        var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData);
+        // Get the last element timestamp
+        $scope.currentLastPost = cleanedData.currentLastPost
+        $scope.comments = cleanedData.obj;
+
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
+      }, function() {
+        // Show global error modal
+        $scope.openErrorModal();
+        $scope.noMoreData = true;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
+      });
+    } else {
+      Comments.getCommentsInfinite($scope.post.$key, $scope.currentLastPost).then(function(commentsData) {
+        console.log("get more messages");
+      console.log(commentsData);
+
+        var firstElement = Post.getFirstElementInObject(commentsData);
+        var currentLastPostTemp = firstElement.currentLastPost;
+        var lastPostId = firstElement.id;
+
+        // Check if the last post is equal to the previous one, so the last post in the DB
+        if ($scope.currentLastPost === currentLastPostTemp) {
+          $scope.noMoreData = true;
+          var updatedPostFinal = angular.extend({}, $scope.comments, commentsData)
+          $scope.comments = updatedPostFinal;
+        } else {
+          $scope.currentLastPost = currentLastPostTemp;
+          // Delete the element because already exist in the original Data
+          delete commentsData[lastPostId];
+          var updatedPost = angular.extend({}, $scope.comments, commentsData)
+          $scope.posts = updatedPost;
+        }
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        
+      }, function() {
+        // Show global error modal
+        $scope.openErrorModal();
+        $scope.noMoreData = true;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+      });
+    }
   };
 
     // ****** Vote functions ******
@@ -68,7 +156,7 @@ angular.module('myApp.postPage', ['myApp.env'])
     })
   };
 
-    $scope.checkVote = function(post) {
+  $scope.checkVote = function(post) {
     var currentUser = currentUserInfos.currentUserInfoGet();
     // Check if user has vote this post
     if (post.voters) {
@@ -114,6 +202,58 @@ angular.module('myApp.postPage', ['myApp.env'])
     })
   };
 
+  // Add Message function
+  $scope.submitMessage = function(form) {
+    // Show comment sending loading block
+    $scope.commentSending = true;
+    // Check if the form is fully filled
+    if(form.$valid && $scope.commentObj.message !== "") {
+      // Show loading message
+      angular.element(pageName +' .message-input-loading .loading-icon').addClass('spin');
+
+      Comments.addComment($scope.post.$key, $scope.commentObj.message).then(function(){
+
+        // Hide comment sending loading block
+        $scope.commentSending = false;
+
+        angular.element(pageName +' .message-input-loading .loading-icon').removeClass('spin');
+
+        // Increase comments number displayed
+        $scope.post.totalMessages++;
+
+        $scope.commentObj = {
+          message: ""
+        };
+      }, function(error){
+        angular.element(pageName +' .message-input-loading .loading-icon').removeClass('spin');
+        console.log("Comment failed");
+        // Hide comment sending loading block
+        $scope.commentSending = false;
+        if (error.noPost) {
+          $scope.openNoPostModal();
+
+          // Add post to the delete list for the Dash & Dash Filter & user pages
+          Post.addPostToDelete("dash-page", $scope.post.$key);
+          Post.addPostToDelete("dash-filter-page", $scope.post.$key);
+          Post.addPostToDelete("user-page", $scope.post.$key);
+          Post.addPostToDelete("my-votes-page", $scope.post.$key);
+
+          // Go Back to the previous view
+          $ionicHistory.goBack();
+        } else {
+          // Show global error modal
+          $scope.openErrorModal();
+        }
+      })
+    } else {
+      // Show the form empty fields error
+      $scope.openErrorFormModal();
+      console.log('Form submit error');
+      // Hide comment sending loading block
+      $scope.commentSending = false;
+    }
+  }; 
+
   // ****** Modal functions ******
   $ionicModal.fromTemplateUrl('post-delete-modal.html', {
     scope: $scope,
@@ -130,6 +270,21 @@ angular.module('myApp.postPage', ['myApp.env'])
 
   $scope.closeDeleteModal = function() {
     $scope.deleteModal.hide();
+  };
+
+  $ionicModal.fromTemplateUrl('error-form.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.errorFormModal = modal;
+  });
+
+  $scope.openErrorFormModal = function() {
+    $scope.errorFormModal.show();
+  };
+
+  $scope.closeErrorFormModal = function() {
+    $scope.errorFormModal.hide();
   };
 
 }]);
