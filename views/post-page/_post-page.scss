@@ -1,25 +1,64 @@
 #post-page {
   .page-content {
     .comments-container {
-      .message {
-        .user-picture {
-          display: block;
-          width: 30px;
-          height: 30px;
-          @include backgroundImg();
+      .card {
+        margin-bottom: 10px;
+        margin-top: 0px;
+        .message {
+          padding: 10px;
+          .user-infos-container {
+            .user-picture {
+              border-radius: 50%;
+              display: inline-block;
+              width: 30px;
+              height: 30px;
+              @include backgroundImg();
+            }
+            .user {
+              color: inherit;
+              text-decoration: none;
+              position: absolute;
+              top: 10px;
+              left: 50px;
+              right: 10px;
+              font-weight: bold;
+            }
+            .time {
+              position: absolute;
+              top: 25px;
+              left: 50px;
+              right: 10px;
+              font-size: 10px;
+            }
+          }
+          .message-container {
+            padding-top: 5px;
+            .comment {
+
+            }
+          }
         }
       }
     }
-    .comment-form {
-      form {
-        .item {
-          position: relative;
-          .message-input-loading {
-            background-color: rgba(255, 255, 255, 0.8);
-            @include absolutePos(0px, 0px, 0px, 0px);
-            @include flexCenter();
-          }
-        }
+  }
+  .message-form-link {
+    color: $balanced;
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+    z-index: 99;
+    font-size: 50px;
+  }
+}
+
+.form-modal {
+  form {
+    .item {
+      position: relative;
+      .message-input-loading {
+        background-color: rgba(255, 255, 255, 0.8);
+        @include absolutePos(0px, 0px, 0px, 0px);
+        @include flexCenter();
       }
     }
   }

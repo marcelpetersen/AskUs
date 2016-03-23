@@ -39,16 +39,9 @@
       }
     }
   }
-  .close-modal {
-    position: absolute;
-    bottom: 12px;
-    right: 27px;
-    color: white;
-    font-size: 30px;
-  }
 }
 
-.edit-delete-modal, .report-modal {
+.default-modal {
   @include flexCenter();
   .modal-content {
     padding: 20px;
@@ -82,6 +75,19 @@
         }
       }
     }
+  }
+  .close-modal {
+    position: absolute;
+    bottom: 12px;
+    right: 27px;
+    color: white;
+    font-size: 30px;
+  }
+}
+
+.form-modal {
+  .modal-content {
+    width: 100%;
   }
 }
 

@@ -1,4 +1,6 @@
 <ion-view view-title="Post" id="post-page" class="post-pages {{::parentCategory}}">
+    <i class="message-form-link ion-chatbubble-working" on-touch="openFormModal()"></i>
+
   <ion-content class="padding page-content" overflow-scroll="true">
 
     <ion-refresher
@@ -62,7 +64,7 @@
       </div>
     </section>
 
-    <section class="comment-form">
+<!--     <section class="comment-form">
       <form name="messageForm" novalidate="" ng-submit="submitMessage(messageForm)">
         <label class="item item-input" ng-class="{ 'has-errors' : messageForm.commentObj.$invalid, 'no-errors' : messageForm.commentObj.$valid}">
           <input type="text" name="message" ng-model="commentObj.message" placeholder="Message" required>
@@ -72,16 +74,22 @@
         </label>
         <button class="button button-full button-positive btn-form-submit" type="submit">Post</button>
       </form>
-    </section>
+    </section> -->
 
     <!-- Comments -->
     <section class="comments-container">
       <div class="list card fadein-effect" ng-repeat="comment in comments | toArray | orderBy : '-time'" data-postid="{{::postId}}">
         <div class="message">
+          <div class="user-infos-container">
           <a class="user-picture" ng-style="{'background-image':'url({{::comment.userPicture}})'}" on-touch="::userPage(comment.userId,comment.userName,comment.userPicture)" href="#/tab/{{::parentCategory}}/user/{{::comment.userId}}/{{::parentCategory}}"></a>
-          <p>{{::comment.time}}</p>
-          <p>{{::comment.userName}}</p>
-          <p>{{::comment.comment}}</p>
+          <a on-touch="::userPage(comment.userId,comment.userName,comment.userPicture)" href="#/tab/{{::parentCategory}}/user/{{::comment.userId}}/{{::parentCategory}}" class="user">{{::comment.userName}}</a>
+          <p class="time">{{::comment.time | date : 'MMM d, y HH:mm:ss'}}</p>
+          </div>
+          <div class="message-container">
+            <p class="comment" ng-bind-html="::comment.comment | nl2br"></p>
+          </div>
+
+          
         </div>
       </div>
     </section>
@@ -96,20 +104,20 @@
     <p class="no-more-cards" ng-if="noMoreData">No more messages</p>
 
     <script id="post-delete-modal.html" type="text/ng-template">
-      <div class="edit-delete-modal modal transparent">
-      <div class="modal-content">
-        <h3>Want to delete this post?</h3>
-        <p class="post-title">{{postDelete.title}}</p>
-        <div class="buttons-container">
-          <button class="cancel" on-touch="closeDeleteModal()">Cancel</button>
-          <button class="delete" on-touch="deletePost(postDelete.id)">Delete</button>
-        </div>
+      <div class="default-modal modal transparent">
+        <div class="modal-content">
+          <h3>Want to delete this post?</h3>
+          <p class="post-title">{{postDelete.title}}</p>
+          <div class="buttons-container">
+            <button class="cancel" on-touch="closeDeleteModal()">Cancel</button>
+            <button class="delete" on-touch="deletePost(postDelete.id)">Delete</button>
+          </div>
         </div>
       </div>
     </script>
 
     <script id="error-form.html" type="text/ng-template">
-      <div class="error-form-modal modal transparent">
+      <div class="default-modal modal transparent">
         <div class="modal-content">
           <div class="loading">
             <h2>Please fill all the form</h2>
@@ -118,6 +126,23 @@
             </div>
           </div>
         </div>
+      </div>
+    </script>
+
+    <script id="display-form.html" type="text/ng-template">
+      <div class="default-modal form-modal modal transparent">
+        <div class="modal-content">
+            <form name="messageForm" novalidate="" ng-submit="submitMessage(messageForm)">
+              <label class="item item-input" ng-class="{ 'has-errors' : messageForm.commentObj.$invalid, 'no-errors' : messageForm.commentObj.$valid}">
+                <textarea maxlength="200" placeholder="Type your message" rows="4" name="message" ng-model="commentObj.message" required></textarea>
+                <div class="message-input-loading loading" ng-show="commentSending">
+                  <i class="ion ion-load-c loading-icon"></i>
+                </div>
+              </label>
+              <button class="button button-full button-positive btn-form-submit" type="submit">Post</button>
+            </form>
+        </div>
+        <i class="icon ion-close-circled close-modal" on-touch="closeFormModal()"></i>
       </div>
     </script>
 

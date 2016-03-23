@@ -231,14 +231,14 @@ angular.module('myApp.postPage', ['myApp.env'])
     // Check if the form is fully filled
     if(form.$valid && $scope.commentObj.message !== "") {
       // Show loading message
-      angular.element(pageName +' .message-input-loading .loading-icon').addClass('spin');
+      angular.element('.form-modal .message-input-loading .loading-icon').addClass('spin');
 
       Comments.addComment($scope.postId, $scope.commentObj.message).then(function(){
 
         // Hide comment sending loading block
         $scope.commentSending = false;
 
-        angular.element(pageName +' .message-input-loading .loading-icon').removeClass('spin');
+        angular.element('.form-modal .message-input-loading .loading-icon').removeClass('spin');
 
         // Increase comments number displayed
         $scope.post.totalMessages++;
@@ -248,12 +248,14 @@ angular.module('myApp.postPage', ['myApp.env'])
         };
 
         $scope.doRefresh();
+        $scope.closeFormModal();
       }, function(error){
-        angular.element(pageName +' .message-input-loading .loading-icon').removeClass('spin');
+        angular.element('.form-modal .message-input-loading .loading-icon').removeClass('spin');
         console.log("Comment failed");
         // Hide comment sending loading block
         $scope.commentSending = false;
         if (error.noPost) {
+          $scope.closeFormModal();
           $scope.openNoPostModal();
 
           // Add post to the delete list for the Dash & Dash Filter & user pages
@@ -265,6 +267,7 @@ angular.module('myApp.postPage', ['myApp.env'])
           // Go Back to the previous view
           $ionicHistory.goBack();
         } else {
+          $scope.closeFormModal();
           // Show global error modal
           $scope.openErrorModal();
         }
@@ -309,6 +312,22 @@ angular.module('myApp.postPage', ['myApp.env'])
 
   $scope.closeErrorFormModal = function() {
     $scope.errorFormModal.hide();
+  };
+
+  $ionicModal.fromTemplateUrl('display-form.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.formModal = modal;
+  });
+
+  $scope.openFormModal = function() {
+    console.log("test");
+    $scope.formModal.show();
+  };
+
+  $scope.closeFormModal = function() {
+    $scope.formModal.hide();
   };
 
 }]);
