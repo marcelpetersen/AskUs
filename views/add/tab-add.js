@@ -19,11 +19,10 @@ angular.module('myApp.addTab', [])
   }
    
   $scope.submitPost = function(form) {
-    // Show loading picture and sending form modal
-    $scope.openModal();
     // Check if the form is fully filled
     if(form.$valid && $scope.imageOne && $scope.imageTwo) {
-
+      // Show loading picture and sending form modal
+      $scope.openModal();
       // Generate the name and path for the picture before storing in the DB
       var fileOneName = fileNameGenerator();
       var fileTwoName = fileNameGenerator();
@@ -57,10 +56,9 @@ angular.module('myApp.addTab', [])
       });
 
     } else {
-      $scope.closeModal();
+      // Show the form empty fields error
+      $scope.openErrorFormModal();
       console.log('Form submit error');
-      // Show global error modal
-      $scope.openErrorModal();
     }
   }; 
 
@@ -68,7 +66,7 @@ angular.module('myApp.addTab', [])
   var options = { 
     quality : 90, 
     allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
-    encodingType: navigator.camera.EncodingType.JPEG,
+    //encodingType: navigator.camera.EncodingType.JPEG,
     targetWidth: 600,
     targetHeight: 600,
     saveToPhotoAlbum: false
@@ -124,6 +122,21 @@ angular.module('myApp.addTab', [])
   $scope.closeModal = function() {
     angular.element('.picture-upload-modal .loading-icon').removeClass('spin');
     $scope.uploadModal.hide();
+  };
+
+  $ionicModal.fromTemplateUrl('error-form.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.errorFormModal = modal;
+  });
+
+  $scope.openErrorFormModal = function() {
+    $scope.errorFormModal.show();
+  };
+
+  $scope.closeErrorFormModal = function() {
+    $scope.errorFormModal.hide();
   };
 
   // Cleanup the modal when we're done with it!
