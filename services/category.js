@@ -71,6 +71,10 @@ angular.module('myApp.categoriesService', [])
           icon: "ion-icecream"
         },
         {
+          name: 'game',
+          icon: "ion-ios-game-controller-b"
+        },
+        {
           name: "nature",
           icon: "ion-ios-flower"
         },
@@ -81,6 +85,10 @@ angular.module('myApp.categoriesService', [])
         {
           name: "sport",
           icon: "ion-ios-basketball"
+        },
+        {
+          name: "technology",
+          icon: "ion-laptop"
         },
         {
           name: "travel",
