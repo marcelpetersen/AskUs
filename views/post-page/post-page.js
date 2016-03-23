@@ -7,6 +7,7 @@ angular.module('myApp.postPage', ['myApp.env'])
   var pageName = '#post-page';
   $scope.postDelete = {};
   $scope.parentCategory = $stateParams.parentCat;
+  $scope.postId = $stateParams.postId;
   $scope.commentSending = false;
   $scope.commentObj = {
     message: ""
@@ -14,15 +15,28 @@ angular.module('myApp.postPage', ['myApp.env'])
   $scope.currentLastPost;
   $scope.comments = {};
   $scope.noMoreData = false;
+  $scope.gotPost = false;
 
   var currentUser = currentUserInfos.currentUserInfoGet();
 
   // Get post info
-  var postData = Post.singlePostInfoGet();
-  $scope.post = postData.data;
-  if(!$scope.post.voters) {
-    $scope.post.voters = {};
-  }
+  $scope.getPost = function() {
+    Post.getPost($scope.postId).then(function(postData) {
+      $scope.gotPost = true;
+      $scope.post = postData;
+      if(!$scope.post.voters) {
+        $scope.post.voters = {};
+      }
+    $timeout(function(){
+      $scope.checkVote($scope.post)
+    }, 0);
+    
+    }, function() {
+      // Show global error modal
+      $scope.openErrorModal();
+      $scope.noMoreData = true;
+    });
+  };
 
   // Store user data before redirection
   $scope.userPage = function(userId, userName, userPicture) {
@@ -39,7 +53,7 @@ angular.module('myApp.postPage', ['myApp.env'])
     $scope.noMoreData = false;
     $scope.currentLastPost = null;
     // Get the last 10 posts
-    Comments.getComments($scope.post.$key).then(function(commentsData) {
+    Comments.getComments($scope.postId).then(function(commentsData) {
       // remove the first element, will be display with the next post call
       var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData);
       $scope.currentLastPost = cleanedData.currentLastPost
@@ -59,13 +73,18 @@ angular.module('myApp.postPage', ['myApp.env'])
     if (!$scope.currentLastPost) {
       angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
       // Get the previous last 10 posts
-      Comments.getComments($scope.post.$key).then(function(commentsData) {
+      Comments.getComments($scope.postId).then(function(commentsData) {
 
         // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
         var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData);
         // Get the last element timestamp
         $scope.currentLastPost = cleanedData.currentLastPost
         $scope.comments = cleanedData.obj;
+
+        //If no messages
+        if(!cleanedData.currentLastPost) {
+           $scope.noMoreData = true;
+        }
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
@@ -79,7 +98,7 @@ angular.module('myApp.postPage', ['myApp.env'])
         angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
       });
     } else {
-      Comments.getCommentsInfinite($scope.post.$key, $scope.currentLastPost).then(function(commentsData) {
+      Comments.getCommentsInfinite($scope.postId, $scope.currentLastPost).then(function(commentsData) {
 
         var firstElement = Post.getFirstElementInObject(commentsData);
         var currentLastPostTemp = firstElement.currentLastPost;
@@ -112,11 +131,11 @@ angular.module('myApp.postPage', ['myApp.env'])
 
     // ****** Vote functions ******
   $scope.vote = function(post, element) {
-    angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').addClass('spin');
-    angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
-    Vote.addVote(post.$key, element).then(function(){
-      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
-      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
+    angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading .loading-icon').addClass('spin');
+    angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading').removeClass('hide');
+    Vote.addVote($scope.postId, element).then(function(){
+      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading .loading-icon').removeClass('spin');
+      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +']').addClass('voted voted-'+ element);
 
       // Hide voting button block and show radials
       post.hasVoted = true;
@@ -126,29 +145,29 @@ angular.module('myApp.postPage', ['myApp.env'])
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
       post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
 
-      // Update post object
-      $scope.post.voters[currentUser.id] = element;
+      // // Update post object
+      // $scope.post.voters[currentUser.id] = element;
 
       // Add post to the update list for the Dash & Dash Filter pages
-      Vote.addVoteToUpdate("dash-page", post.$key, element, post.totalA, post.totalB);
-      Vote.addVoteToUpdate("dash-filter-page", post.$key, element, post.totalA, post.totalB);
+      Vote.addVoteToUpdate("dash-page", $scope.postId, element, post.totalA, post.totalB);
+      Vote.addVoteToUpdate("dash-filter-page", $scope.postId, element, post.totalA, post.totalB);
 
       // Create the Radials
-      Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName + '.'+ $scope.parentCategory);
-      Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000, pageName + '.'+ $scope.parentCategory);
+      Vote.addRadial("A", $scope.postId, '#33cd5f', post.totalA, 1000, pageName + '.'+ $scope.parentCategory);
+      Vote.addRadial("B", $scope.postId, '#387ef5', post.totalB, 1000, pageName + '.'+ $scope.parentCategory);
 
     }, function(error){
-      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
-      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
+      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading').addClass('hide');
+      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading .loading-icon').removeClass('spin');
       console.log("vote failed");
       if (error.noPost) {
         $scope.openNoPostModal();
 
         // Add post to the delete list for the Dash & Dash Filter & user pages
-        Post.addPostToDelete("dash-page", post.$key);
-        Post.addPostToDelete("dash-filter-page", post.$key);
-        Post.addPostToDelete("user-page", post.$key);
-        Post.addPostToDelete("my-votes-page", post.$key);
+        Post.addPostToDelete("dash-page", $scope.postId);
+        Post.addPostToDelete("dash-filter-page", $scope.postId);
+        Post.addPostToDelete("user-page", $scope.postId);
+        Post.addPostToDelete("my-votes-page", $scope.postId);
 
         // Go Back to the previous view
         $ionicHistory.goBack();
@@ -162,7 +181,6 @@ angular.module('myApp.postPage', ['myApp.env'])
   $scope.checkVote = function(post) {
     var currentUser = currentUserInfos.currentUserInfoGet();
     // Check if user has vote this post
-    // if (!post.hasVoted) {
       if (post.voters) {
         if (post.voters[currentUser.id]) {
           post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
@@ -171,17 +189,16 @@ angular.module('myApp.postPage', ['myApp.env'])
           $timeout(function(){
             //Show Radial block hide Buttons
             post.hasVoted = true;
-            angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
-            Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1, pageName + '.'+ $scope.parentCategory);
-            Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1, pageName + '.'+ $scope.parentCategory);
+            angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +']').addClass('voted voted-'+ post.voters[currentUser.id]);
+            Vote.addRadial("A", $scope.postId, '#33cd5f', post.totalA, 1, pageName + '.'+ $scope.parentCategory);
+            Vote.addRadial("B", $scope.postId, '#387ef5', post.totalB, 1, pageName + '.'+ $scope.parentCategory);
           }, 0);    
         }
       }
-    // }
     // check if user own post
     if (post.userId === currentUser.id) {
       $timeout(function(){
-        angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('my-post');
+        angular.element(pageName +' .card[data-postid='+ $scope.postId +']').addClass('my-post');
       }, 0);
     }
   };
@@ -216,7 +233,7 @@ angular.module('myApp.postPage', ['myApp.env'])
       // Show loading message
       angular.element(pageName +' .message-input-loading .loading-icon').addClass('spin');
 
-      Comments.addComment($scope.post.$key, $scope.commentObj.message).then(function(){
+      Comments.addComment($scope.postId, $scope.commentObj.message).then(function(){
 
         // Hide comment sending loading block
         $scope.commentSending = false;
@@ -240,10 +257,10 @@ angular.module('myApp.postPage', ['myApp.env'])
           $scope.openNoPostModal();
 
           // Add post to the delete list for the Dash & Dash Filter & user pages
-          Post.addPostToDelete("dash-page", $scope.post.$key);
-          Post.addPostToDelete("dash-filter-page", $scope.post.$key);
-          Post.addPostToDelete("user-page", $scope.post.$key);
-          Post.addPostToDelete("my-votes-page", $scope.post.$key);
+          Post.addPostToDelete("dash-page", $scope.postId);
+          Post.addPostToDelete("dash-filter-page", $scope.postId);
+          Post.addPostToDelete("user-page", $scope.postId);
+          Post.addPostToDelete("my-votes-page", $scope.postId);
 
           // Go Back to the previous view
           $ionicHistory.goBack();

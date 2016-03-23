@@ -87,6 +87,19 @@ angular.module('myApp.postService', [])
       return promise;
     },
 
+    getPost: function(id) {
+      var deferred = $q.defer();
+      var firebase = new Firebase(FirebaseUrl + '/posts/' + id );
+      firebase.once("value", function(snapshot) {
+        console.log('first posts added');
+        resolve(null, snapshot.val(), deferred);
+      }, function (errorObject) {
+        resolve(errorObject.code, null, deferred);
+      });
+      promise = deferred.promise;
+      return promise;
+    },
+
     getAllPosts: function() {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');

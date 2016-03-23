@@ -10,11 +10,11 @@
 
     <!-- Posts Description -->
     <section class="posts-list-container">
-      <div class="list card fadein-effect" data-postid="{{::post.$key}}" ng-init="checkVote(post)">
+      <div class="list card fadein-effect" ng-show="gotPost" ng-init="getPost()" data-postid="{{::postId}}">
 
         <!-- User infos and post redirection -->
         <div class="item item-avatar">
-          <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" on-touch="::userPage(post.userId,post.userName,post.userPicture)" href="#/tab/{{::parentCategory}}/user/{{::post.userId}}/{{::parentCategory}}"></a>
+          <a class="user-picture" ng-style="{'background-image':'url(' + post.userPicture + ')'}" on-touch="::userPage(post.userId,post.userName,post.userPicture)" href="#/tab/{{::parentCategory}}/user/{{::post.userId}}/{{::parentCategory}}"></a>
           <h2>
             <a href="#/tab/{{::parentCategory}}/user/{{::post.userId}}/{{::parentCategory}}" on-touch="::userPage(post.userId,post.userName,post.userPicture)"> {{::post.userName}}
             </a>
@@ -26,10 +26,10 @@
         <!-- Pictures and vote action container -->
           <div class="item item-image">
             <div class="images-container">
-              <div class="picture picture-A" ng-style="{'background-image':'url({{::post.pictureA}})'}" ng-click="goToSlide(0); modalPictureUpdate(post)">
+              <div class="picture picture-A" ng-style="{'background-image':'url('+ post.pictureA +')'}" ng-click="goToSlide(0); modalPictureUpdate(post)">
                 <i class="ion-checkmark-circled has-voted has-voted-A"></i>
               </div>
-              <div class="picture picture-B" ng-style="{'background-image':'url({{::post.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)">
+              <div class="picture picture-B" ng-style="{'background-image':'url('+ post.pictureB +')'}" ng-click="goToSlide(1); modalPictureUpdate(post)">
                 <i class="ion-checkmark-circled has-voted has-voted-B"></i>
               </div>
             </div>
@@ -43,9 +43,9 @@
             </div>
 
             <div class="results-container" ng-show="post.hasVoted">
-              <div class="results results-A" data-postid="{{::post.$key}}">
+              <div class="results results-A" data-postid="{{::postId}}">
               </div>
-              <div class="results results-B" data-postid="{{::post.$key}}">
+              <div class="results results-B" data-postid="{{::postId}}">
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@
 
     <!-- Comments -->
     <section class="comments-container">
-      <div class="list card fadein-effect" ng-repeat="comment in comments | toArray | orderBy : '-time'" data-postid="{{::post.$key}}">
+      <div class="list card fadein-effect" ng-repeat="comment in comments | toArray | orderBy : '-time'" data-postid="{{::postId}}">
         <div class="message">
           <a class="user-picture" ng-style="{'background-image':'url({{::comment.userPicture}})'}" on-touch="::userPage(comment.userId,comment.userName,comment.userPicture)" href="#/tab/{{::parentCategory}}/user/{{::comment.userId}}/{{::parentCategory}}"></a>
           <p>{{::comment.time}}</p>
