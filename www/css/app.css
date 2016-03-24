@@ -11318,9 +11318,12 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       -webkit-justify-content: center;
       -moz-justify-content: center;
       text-align: center; }
+  .form-modal form .error-form-message {
+    margin-bottom: 10px;
+    margin-top: 0px; }
 
 .form-modal.focus form {
-  transform: translate3d(0, -75%, 0); }
+  margin-top: -75%; }
 
 #account-page .page-content .list .account-tab-user {
   display: flex;

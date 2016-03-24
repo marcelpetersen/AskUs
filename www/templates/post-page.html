@@ -116,7 +116,7 @@
       </div>
     </script>
 
-    <script id="error-form.html" type="text/ng-template">
+<!--     <script id="error-form.html" type="text/ng-template">
       <div class="default-modal modal transparent">
         <div class="modal-content">
           <div class="loading">
@@ -127,12 +127,13 @@
           </div>
         </div>
       </div>
-    </script>
+    </script> -->
 
     <script id="display-form.html" type="text/ng-template">
       <div class="default-modal form-modal modal transparent">
         <div class="modal-content">
             <form name="messageForm" novalidate="" ng-submit="submitMessage(messageForm)">
+              <p ng-show="postFormError" class="error-form-message">Please add a message</p>
               <label class="item item-input" ng-class="{ 'has-errors' : messageForm.commentObj.$invalid, 'no-errors' : messageForm.commentObj.$valid}">
                 <textarea class="message-textarea" maxlength="200" placeholder="Type your message" rows="4" name="message" ng-model="commentObj.message" required></textarea>
                 <div class="message-input-loading loading" ng-show="commentSending">

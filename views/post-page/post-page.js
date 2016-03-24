@@ -16,6 +16,7 @@ angular.module('myApp.postPage', ['myApp.env'])
   $scope.comments = {};
   $scope.noMoreData = false;
   $scope.gotPost = false;
+  $scope.postFormError = false;
 
   var currentUser = currentUserInfos.currentUserInfoGet();
 
@@ -238,6 +239,7 @@ angular.module('myApp.postPage', ['myApp.env'])
     $scope.commentSending = true;
     // Check if the form is fully filled
     if(form.$valid && $scope.commentObj.message !== "") {
+      $scope.postFormError = false;
       // Show loading message
       angular.element('.form-modal .message-input-loading .loading-icon').addClass('spin');
 
@@ -282,7 +284,8 @@ angular.module('myApp.postPage', ['myApp.env'])
       })
     } else {
       // Show the form empty fields error
-      $scope.openErrorFormModal();
+      // $scope.openErrorFormModal();
+      $scope.postFormError = true;
       console.log('Form submit error');
       // Hide comment sending loading block
       $scope.commentSending = false;
@@ -307,20 +310,20 @@ angular.module('myApp.postPage', ['myApp.env'])
     $scope.deleteModal.hide();
   };
 
-  $ionicModal.fromTemplateUrl('error-form.html', {
-    scope: $scope,
-    animation: 'mh-slide' //'slide-in-up'
-  }).then(function(modal) {
-    $scope.errorFormModal = modal;
-  });
+  // $ionicModal.fromTemplateUrl('error-form.html', {
+  //   scope: $scope,
+  //   animation: 'mh-slide' //'slide-in-up'
+  // }).then(function(modal) {
+  //   $scope.errorFormModal = modal;
+  // });
 
-  $scope.openErrorFormModal = function() {
-    $scope.errorFormModal.show();
-  };
+  // $scope.openErrorFormModal = function() {
+  //   $scope.errorFormModal.show();
+  // };
 
-  $scope.closeErrorFormModal = function() {
-    $scope.errorFormModal.hide();
-  };
+  // $scope.closeErrorFormModal = function() {
+  //   $scope.errorFormModal.hide();
+  // };
 
   $ionicModal.fromTemplateUrl('display-form.html', {
     scope: $scope,
