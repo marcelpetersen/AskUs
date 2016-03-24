@@ -46,7 +46,7 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
       postTotalMax += newPostLimit;
 
       totalPostNumber = postsData.number;
-      if (totalPostNumber === 0) {
+      if (totalPostNumber === 0 || postsData.number < postTotalMax) {
         $scope.noMoreData = true;
       }
 
@@ -76,7 +76,7 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
         postTotalMax += newPostLimit;
         // Check the number of cards retreive
         totalPostNumber = postsData.number;
-        if (totalPostNumber === 0) {
+        if (totalPostNumber === 0 || postsData.number < postTotalMax) {
           $scope.noMoreData = true;
         }
 
@@ -97,16 +97,27 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
       Categories.getAllPostsByCategoryInfinite($stateParams.filter, totalPostNumber, newPostLimit).then(function(postsData) {
         postTotalMax += newPostLimit;
         totalPostNumber = postsData.number;
+        var newObjToAdd;
+        var updatedPost;
         // Less posts than the max possible, then the is no more post available
         if( postsData.number !== postTotalMax ) {
           $scope.noMoreData = true;
+          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit - (postTotalMax - postsData.number))
+          // updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+          // $scope.posts = updatedPost;
+          // $scope.$broadcast('scroll.infiniteScrollComplete');
+          // angular.element(pageName +' .icon-refreshing').removeClass('spin');
         } else {
-          var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
-          var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
-          $scope.posts = updatedPost;
-          $scope.$broadcast('scroll.infiniteScrollComplete');
-          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
+          // updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+          // $scope.posts = updatedPost;
+          // $scope.$broadcast('scroll.infiniteScrollComplete');
+          // angular.element(pageName +' .icon-refreshing').removeClass('spin');
         }
+        updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+        $scope.posts = updatedPost;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, function() {        
         // Show global error modal
         $scope.openErrorModal();
