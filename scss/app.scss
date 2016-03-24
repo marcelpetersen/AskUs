@@ -14,6 +14,8 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 
+$bg-color: #e9eaed;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
@@ -43,9 +45,13 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "views/my-votes/my-votes";
 
 // Android performances related
-// * {
-//   box-shadow: none !important;
-// }
+* {
+  box-shadow: none !important;
+}
+
+.pane, .view {
+  background-color: $bg-color;
+}
 
 .loading {
   text-align: center;

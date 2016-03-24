@@ -99,13 +99,10 @@ angular.module('myApp.postPage', ['myApp.env'])
       });
     } else {
       Comments.getCommentsInfinite($scope.postId, $scope.currentLastPost).then(function(commentsData) {
-        console.log(commentsData);
 
         var firstElement = Post.getFirstElementInObject(commentsData);
-        console.log(firstElement);
         var currentLastPostTemp = firstElement.currentLastPost;
         var lastPostId = firstElement.id;
-        console.log($scope.currentLastPost, currentLastPostTemp);
 
         // Check if the last post is equal to the previous one, so the last post in the DB
         if ($scope.currentLastPost === currentLastPostTemp) {

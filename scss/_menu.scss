@@ -30,13 +30,14 @@ body.menu-open {
 
 .menu-left {
   .categories-list {
+    background-color: $positive;
     .category {
       text-align: center;
       a {
         display: block;
         padding:  20px 0px;
         font-size: 40px;
-        color: $positive;
+        color: #FFF;
         i {
 
         }
