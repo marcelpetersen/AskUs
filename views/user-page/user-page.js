@@ -65,12 +65,11 @@ angular.module('myApp.userPage', ['myApp.env'])
         postTotalMax += newPostLimit;
         // Check the number of cards retreive
         totalPostNumber = postsData.number;
-        if (totalPostNumber === 0) {
+        if (totalPostNumber === 0 || postsData.number < postTotalMax) {
           $scope.noMoreData = true;
         }
 
         $scope.posts = postsData.values;
-
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
         angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
@@ -89,14 +88,25 @@ angular.module('myApp.userPage', ['myApp.env'])
         // Less posts than the max possible, then the is no more post available
         if( postsData.number !== postTotalMax ) {
           $scope.noMoreData = true;
+
+          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit - (postTotalMax - postsData.number))
+
         } else {
-          var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
-          var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
-          $scope.posts = updatedPost;
+          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
+
+          // var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
+          // var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+          // $scope.posts = updatedPost;
         }
+        updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+        $scope.posts = updatedPost;
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        // $scope.$broadcast('scroll.infiniteScrollComplete');
+        // angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, function() {
+        $scope.noMoreData = true;
+        
         // Show global error modal
         $scope.openErrorModal();
         $scope.$broadcast('scroll.infiniteScrollComplete');
