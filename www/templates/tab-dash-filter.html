@@ -52,7 +52,7 @@
           </div>
           <!-- Post content -->
           <h2>{{::post.title}}</h2>
-          <p class:"description">{{::post.description}}</p>
+          <p class:"description" ng-bind-html="::post.description | nl2br"></p>
           <p>
             <a href="#" class="subdued">{{ post.voteATotal + post.voteBTotal}} Votes</a>
             <a href="#" class="subdued">{{ ::post.totalMessages }} Comments</a>
