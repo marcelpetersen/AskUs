@@ -3,7 +3,7 @@ angular.module('myApp.postPage', ['myApp.env'])
 .controller('postCtrl', 
   ['$scope', 'Post', 'Comments', '$stateParams', 'currentUserInfos', 'Vote', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicHistory', '$timeout', 'usersInfos', 
   function($scope, Post, Comments, $stateParams, currentUserInfos, Vote, $ionicSlideBoxDelegate, $ionicModal, $ionicHistory, $timeout, usersInfos) {
-  
+
   var pageName = '#post-page';
   $scope.postDelete = {};
   $scope.parentCategory = $stateParams.parentCat;
@@ -55,10 +55,14 @@ angular.module('myApp.postPage', ['myApp.env'])
     $scope.currentLastPost = null;
     // Get the last 10 posts
     Comments.getComments($scope.postId).then(function(commentsData) {
-      // remove the first element, will be display with the next post call
-      var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData);
-      $scope.currentLastPost = cleanedData.currentLastPost
-      $scope.comments = cleanedData.obj;
+      if (commentsData.number < 10) {
+        $scope.comments = commentsData.values;
+      } else {
+        // remove the first element, will be display with the next post call
+        var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData.values);
+        $scope.currentLastPost = cleanedData.currentLastPost
+        $scope.comments = cleanedData.obj;
+      }
     }, function() {
       $scope.openErrorModal();
       $scope.noMoreData = true;
@@ -76,16 +80,21 @@ angular.module('myApp.postPage', ['myApp.env'])
       // Get the previous last 10 posts
       Comments.getComments($scope.postId).then(function(commentsData) {
 
-        // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
-        var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData);
-        // Get the last element timestamp
-        $scope.currentLastPost = cleanedData.currentLastPost
-        $scope.comments = cleanedData.obj;
-
-        //If no messages
-        if(!cleanedData.currentLastPost) {
-           $scope.noMoreData = true;
+        if (commentsData.number < 10) {
+          $scope.comments = commentsData.values;
+          $scope.noMoreData = true;
+        } else {
+          // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
+          var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData.values);
+          // Get the last element timestamp
+          $scope.currentLastPost = cleanedData.currentLastPost
+          $scope.comments = cleanedData.obj;
         }
+
+        // //If no messages
+        // if(!cleanedData.currentLastPost) {
+        //    $scope.noMoreData = true;
+        // }
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
@@ -101,20 +110,20 @@ angular.module('myApp.postPage', ['myApp.env'])
     } else {
       Comments.getCommentsInfinite($scope.postId, $scope.currentLastPost).then(function(commentsData) {
 
-        var firstElement = Post.getFirstElementInObject(commentsData);
+        var firstElement = Post.getFirstElementInObject(commentsData.values);
         var currentLastPostTemp = firstElement.currentLastPost;
         var lastPostId = firstElement.id;
 
         // Check if the last post is equal to the previous one, so the last post in the DB
         if ($scope.currentLastPost === currentLastPostTemp) {
           $scope.noMoreData = true;
-          var updatedPostFinal = angular.extend({}, $scope.comments, commentsData)
+          var updatedPostFinal = angular.extend({}, $scope.comments, commentsData.values)
           $scope.comments = updatedPostFinal;
         } else {
           $scope.currentLastPost = currentLastPostTemp;
           // Delete the element because already exist in the original Data
           delete commentsData[lastPostId];
-          var updatedPost = angular.extend({}, $scope.comments, commentsData)
+          var updatedPost = angular.extend({}, $scope.comments, commentsData.values)
           $scope.comments = updatedPost;
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -236,6 +245,7 @@ angular.module('myApp.postPage', ['myApp.env'])
   // Add Message function
   $scope.submitMessage = function(form) {
     // Show comment sending loading block
+    angular.element('.form-modal .btn-form-submit').prop("disabled",true);
     $scope.commentSending = true;
     // Check if the form is fully filled
     if(form.$valid && $scope.commentObj.message !== "") {
@@ -259,6 +269,7 @@ angular.module('myApp.postPage', ['myApp.env'])
 
         $scope.doRefresh();
         $scope.closeFormModal();
+        angular.element('.form-modal .btn-form-submit').prop("disabled",false);
       }, function(error){
         angular.element('.form-modal .message-input-loading .loading-icon').removeClass('spin');
         console.log("Comment failed");
@@ -266,6 +277,7 @@ angular.module('myApp.postPage', ['myApp.env'])
         $scope.commentSending = false;
         if (error.noPost) {
           $scope.closeFormModal();
+          angular.element('.form-modal .btn-form-submit').prop("disabled",false);
           $scope.openNoPostModal();
 
           // Add post to the delete list for the Dash & Dash Filter & user pages
@@ -278,6 +290,7 @@ angular.module('myApp.postPage', ['myApp.env'])
           $ionicHistory.goBack();
         } else {
           $scope.closeFormModal();
+          angular.element('.form-modal .btn-form-submit').prop("disabled",false);
           // Show global error modal
           $scope.openErrorModal();
         }
@@ -309,21 +322,6 @@ angular.module('myApp.postPage', ['myApp.env'])
   $scope.closeDeleteModal = function() {
     $scope.deleteModal.hide();
   };
-
-  // $ionicModal.fromTemplateUrl('error-form.html', {
-  //   scope: $scope,
-  //   animation: 'mh-slide' //'slide-in-up'
-  // }).then(function(modal) {
-  //   $scope.errorFormModal = modal;
-  // });
-
-  // $scope.openErrorFormModal = function() {
-  //   $scope.errorFormModal.show();
-  // };
-
-  // $scope.closeErrorFormModal = function() {
-  //   $scope.errorFormModal.hide();
-  // };
 
   $ionicModal.fromTemplateUrl('display-form.html', {
     scope: $scope,

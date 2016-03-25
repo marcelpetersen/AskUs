@@ -33,8 +33,8 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     // Reset all data
-    $scope.noMoreData = false;
-    $scope.posts = {};
+    // $scope.noMoreData = false;
+    // $scope.posts = {};
     newPostLimit = 6;
     postTotalMax = 0;
     totalPostNumber = 0;
@@ -49,10 +49,12 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
       if (totalPostNumber === 0 || postsData.number < postTotalMax) {
         $scope.noMoreData = true;
       }
-
       $scope.posts = postsData.values;
       $scope.$broadcast('scroll.refreshComplete');
       $timeout(function(){
+        // BUG: If User find the last card, refreshing call loadmore() until it had all card
+        // Limit to 2 extra calls
+        $scope.noMoreData = false;
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, 500);
     }, function() {

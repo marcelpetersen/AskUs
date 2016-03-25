@@ -70,7 +70,7 @@ angular.module('myApp.commentsService', [])
       var firebase = new Firebase(FirebaseUrl + '/comments');
       firebase.child(postId).orderByChild('time').limitToLast(10).once("value", function(snapshot) {
         console.log('first message function');
-        resolve(null, snapshot.val(), deferred);
+        resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
       });
@@ -83,7 +83,7 @@ angular.module('myApp.commentsService', [])
       var firebase = new Firebase(FirebaseUrl + '/comments');
       firebase.child(postId).orderByChild('time').endAt(timestamp).limitToLast(10).once("value", function(snapshot) {
         console.log('more posts function');
-        resolve(null, snapshot.val(), deferred);
+        resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
       });
