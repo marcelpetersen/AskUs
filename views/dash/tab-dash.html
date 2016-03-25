@@ -5,6 +5,11 @@
     </button>
   </ion-nav-buttons>
 
+<!--   <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear side-menu ion-ios-search-strong" ng-click="openSearchModal()">
+    </button>
+  </ion-nav-buttons> -->
+
   <ion-content class="padding page-content" overflow-scroll="true">
 
     <ion-refresher
@@ -92,6 +97,16 @@
           <button class="delete" on-touch="deletePost(postDelete.id)">Delete</button>
         </div>
         </div>
+      </div>
+    </script>
+
+    <script id="search-modal.html" type="text/ng-template">
+      <div class="default-modal modal transparent">
+      <div class="modal-content">
+        <form class="search-form">
+          <input type="text"></input>
+          <button class="button button-full button-positive btn-search-submit" type="submit">Search</button>
+        </form>
       </div>
     </script>
 

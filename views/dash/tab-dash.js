@@ -219,4 +219,21 @@ angular.module('myApp.dashTab', ['myApp.env'])
     $scope.deleteModal.hide();
   };
 
+  // $ionicModal.fromTemplateUrl('search-modal.html', {
+  //   scope: $scope,
+  //   animation: 'slide-in-up'
+  // }).then(function(modal) {
+  //   $scope.searchModal = modal;
+  // });
+
+  // $scope.showSearchModal = function(key, title) {
+  //   $scope.postDelete.title = title;
+  //   $scope.postDelete.id = key;
+  //   $scope.searchModal.show();
+  // };
+
+  // $scope.closeSearchModal = function() {
+  //   $scope.searchModal.hide();
+  // };
+
 }]);
