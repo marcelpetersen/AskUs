@@ -15,6 +15,7 @@ angular.module('myApp', [
   'myApp.voteService',
   'myApp.categoriesService',
   'myApp.commentsService',
+  'myApp.searchService',
   // Controllers and views
   'myApp.mainController',
   'myApp.filters',

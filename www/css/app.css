@@ -9866,6 +9866,13 @@ a.button {
   -webkit-transition: all ease-in-out 250ms;
   transition: all ease-in-out 250ms; }
 
+.search-modal .modal-content .close-modal-container {
+  padding: 10px;
+  text-align: right; }
+  .search-modal .modal-content .close-modal-container i {
+    color: black;
+    font-size: 30px; }
+
 .radial-progress {
   display: inline-block;
   width: 120px;

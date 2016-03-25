@@ -1,8 +1,8 @@
 angular.module('myApp.dashTab', ['myApp.env'])
 
 .controller('DashCtrl', 
-  ['$scope', '$state', '$ionicScrollDelegate', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
-  function($scope, $state, $ionicScrollDelegate, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
+  ['$scope', '$state', 'Search', '$ionicScrollDelegate', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
+  function($scope, $state, Search, $ionicScrollDelegate, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
   var pageName = '#dash-page';
   $scope.posts;
@@ -189,6 +189,24 @@ angular.module('myApp.dashTab', ['myApp.env'])
     }
   };
 
+  $scope.searchResults = {};
+  $scope.noResults = false;
+
+  $scope.submitSearch = function(form) {
+    $scope.searchResults = {};
+    if(form.$valid) {
+      Search.searchFunction(form.term).then(function(searchData){
+        if (!searchData) {
+          $scope.noResults = true;
+        }
+        $scope.searchResults = searchData;
+        $scope.noResults = false;
+      }, function(error) {
+          $scope.noResults = true;
+      })
+    }
+  }
+
   $scope.deletePost = function(id) {
     Post.deletePost(id).then(function(){
       angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
@@ -219,21 +237,21 @@ angular.module('myApp.dashTab', ['myApp.env'])
     $scope.deleteModal.hide();
   };
 
-  // $ionicModal.fromTemplateUrl('search-modal.html', {
-  //   scope: $scope,
-  //   animation: 'slide-in-up'
-  // }).then(function(modal) {
-  //   $scope.searchModal = modal;
-  // });
+  $ionicModal.fromTemplateUrl('search-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.searchModal = modal;
+  });
 
-  // $scope.showSearchModal = function(key, title) {
-  //   $scope.postDelete.title = title;
-  //   $scope.postDelete.id = key;
-  //   $scope.searchModal.show();
-  // };
+  $scope.showSearchModal = function(key, title) {
+    $scope.postDelete.title = title;
+    $scope.postDelete.id = key;
+    $scope.searchModal.show();
+  };
 
-  // $scope.closeSearchModal = function() {
-  //   $scope.searchModal.hide();
-  // };
+  $scope.closeSearchModal = function() {
+    $scope.searchModal.hide();
+  };
 
 }]);

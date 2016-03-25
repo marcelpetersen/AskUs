@@ -5,10 +5,10 @@
     </button>
   </ion-nav-buttons>
 
-<!--   <ion-nav-buttons side="right">
-    <button class="button button-icon button-clear side-menu ion-ios-search-strong" ng-click="openSearchModal()">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear side-menu ion-ios-search-strong" ng-click="showSearchModal()">
     </button>
-  </ion-nav-buttons> -->
+  </ion-nav-buttons>
 
   <ion-content class="padding page-content" overflow-scroll="true">
 
@@ -101,12 +101,29 @@
     </script>
 
     <script id="search-modal.html" type="text/ng-template">
-      <div class="default-modal modal transparent">
+      <div class="search-modal modal">
       <div class="modal-content">
-        <form class="search-form">
-          <input type="text"></input>
+        <div class="close-modal-container">
+          <i class="ion-close-circled" ng-click="closeSearchModal()"></i>
+        </div>
+        <form class="search-form" name="searchForm" novalidate="" ng-submit="submitSearch(searchForm)">
+          <label class="item item-input" ng-class="{ 'has-errors' : searchForm.term.$invalid, 'no-errors' : searchForm.term.$valid}">
+            <input type="text" name="search" ng-model="searchForm.term" placeholder="Search" required>
+          </label>
           <button class="button button-full button-positive btn-search-submit" type="submit">Search</button>
         </form>
+
+        <div class="posts-results-container">
+          <ion-list>
+            <ion-item class="item-avatar item-icon-right fadein-effect" ng-repeat="result in searchResults | toArray" on-touch="closeSearchModal()" type="item-text-wrap" href="#/tab/dash/post/{{::result.$key}}/dash">
+              <img ng-src="{{::result.userPicture}}">
+              <h2>{{::result.title}}</h2>
+              <p>{{::result.time | date : 'MMM d, y HH:mm:ss'}}</p>
+              <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+          </ion-list>
+        <p ng-show="noResults">No results</p>
+
       </div>
     </script>
 
