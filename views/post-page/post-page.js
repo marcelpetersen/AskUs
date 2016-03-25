@@ -57,6 +57,7 @@ angular.module('myApp.postPage', ['myApp.env'])
     Comments.getComments($scope.postId).then(function(commentsData) {
       if (commentsData.number < 10) {
         $scope.comments = commentsData.values;
+        $scope.noMoreData = true;
       } else {
         // remove the first element, will be display with the next post call
         var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData.values);
