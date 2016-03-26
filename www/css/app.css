@@ -9873,6 +9873,25 @@ a.button {
     color: black;
     font-size: 30px; }
 
+.search-modal .modal-content .search-selector {
+  text-align: center;
+  margin-bottom: 10px; }
+  .search-modal .modal-content .search-selector .btn {
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px 4px 10px;
+    transition: all 0.3s ease; }
+    .search-modal .modal-content .search-selector .btn.active {
+      background-color: #387ef5;
+      color: white; }
+    .search-modal .modal-content .search-selector .btn.inactive {
+      background-color: #EEE;
+      color: #AAA; }
+
+.search-modal .modal-content .posts-results-container .search-results.users-results h2 {
+  margin-top: 10px; }
+
 .radial-progress {
   display: inline-block;
   width: 120px;

@@ -189,20 +189,49 @@ angular.module('myApp.dashTab', ['myApp.env'])
     }
   };
 
-  $scope.searchResults = {};
+  $scope.searchPostsResults = {};
+  $scope.searchUsersResults = {};
   $scope.noResults = false;
+  $scope.searchPost = true;
 
-  $scope.submitSearch = function(form) {
-    $scope.searchResults = {};
+  $scope.submitSearch = function(form, searchByPost) {
+    var resultsContainer = angular.element('.posts-results-container').offset();
+    console.log(resultsContainer);
+    angular.element('.posts-results-container .list').css('height', screen.height - resultsContainer.top + 'px');
+    var searchByItem;
+    var searchByKey;
+    if (searchByPost) {
+      $scope.searchPostsResults = {};
+      searchByKey = 'title',
+      searchByItem = '/posts'
+    } else {
+      $scope.searchUsersResults = {};
+      searchByKey = 'displayName',
+      searchByItem = '/users'
+    }
+
     if(form.$valid) {
-      Search.searchFunction(form.term).then(function(searchData){
+      Search.searchFunction(form.term, searchByItem, searchByKey).then(function(searchData){
         if (!searchData) {
-          $scope.noResults = true;
+          if (searchByPost) {
+            $scope.noPostsResults = true; 
+          } else {
+            $scope.noUsersResults = true; 
+          }
         }
-        $scope.searchResults = searchData;
-        $scope.noResults = false;
+        if (searchByPost) {
+          $scope.searchPostsResults = searchData;
+          $scope.noPostsResults = false;  
+        } else {
+          $scope.searchUsersResults = searchData;
+          $scope.noUsersResults = false; 
+        }
       }, function(error) {
-          $scope.noResults = true;
+          if (searchByPost) {
+            $scope.noPostsResults = true; 
+          } else {
+            $scope.noUsersResults = true; 
+          }
       })
     }
   }

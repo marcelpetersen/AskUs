@@ -8,9 +8,33 @@
         font-size: 30px;
       }
     }
-  }
-
-  .posts-results-container {
-
+    .search-selector {
+      text-align: center;
+      margin-bottom: 10px;
+      .btn {
+        display: inline-block;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px 4px 10px;
+        transition: all 0.3s ease;
+        &.active {
+          background-color: $positive;
+          color: white;
+        }
+        &.inactive {
+          background-color: #EEE;
+          color: #AAA;
+        }
+      }
+    }
+    .posts-results-container {
+      .search-results {
+        &.users-results {
+          h2 {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
   }
 }
