@@ -16,8 +16,6 @@ angular.module('myApp.searchService', [])
     searchFunction: function(input, item, key) {
       var deferred = $q.defer();
 
-      console.log(input, item, key);
-
       var firebase = new Firebase(FirebaseUrl + item);
       var inputUpperCase = input.toUpperCase();
       var inputLowerCase = input.toLowerCase();
@@ -36,7 +34,7 @@ angular.module('myApp.searchService', [])
           updatedSeach = angular.extend({}, strictSearch, largeSearch);
 
           if(Object.keys(updatedSeach).length === 0) {
-            resolve({error: true}, null, deferred);
+            resolve({empty: true}, null, deferred);
           }
           resolve(null, updatedSeach, deferred);
         }, function (errorObject) {

@@ -191,12 +191,12 @@ angular.module('myApp.dashTab', ['myApp.env'])
 
   $scope.searchPostsResults = {};
   $scope.searchUsersResults = {};
-  $scope.noResults = false;
+  $scope.noPostsResults = false;
+  $scope.noUsersResults = false;
   $scope.searchPost = true;
 
   $scope.submitSearch = function(form, searchByPost) {
     var resultsContainer = angular.element('.posts-results-container').offset();
-    console.log(resultsContainer);
     angular.element('.posts-results-container .list').css('height', screen.height - resultsContainer.top + 'px');
     var searchByItem;
     var searchByKey;
@@ -212,13 +212,6 @@ angular.module('myApp.dashTab', ['myApp.env'])
 
     if(form.$valid) {
       Search.searchFunction(form.term, searchByItem, searchByKey).then(function(searchData){
-        if (!searchData) {
-          if (searchByPost) {
-            $scope.noPostsResults = true; 
-          } else {
-            $scope.noUsersResults = true; 
-          }
-        }
         if (searchByPost) {
           $scope.searchPostsResults = searchData;
           $scope.noPostsResults = false;  

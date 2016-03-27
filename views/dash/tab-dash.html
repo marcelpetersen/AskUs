@@ -118,22 +118,24 @@
           </form>
 
           <div class="posts-results-container">
-            <ion-scroll direction="y" class="list">
-              <ion-item ng-show="searchPost" class="item item-avatar item-icon-right fadein-effect search-results posts-results" ng-repeat="result in searchPostsResults | toArray" ng-click="closeSearchModal()" type="item-text-wrap" href="#/tab/dash/post/{{::result.$key}}/dash">
+           <p ng-show="searchPost && noPostsResults">No post found</p>
+            <p ng-show="!searchPost && noUsersResults">No user found</p>
+            <ion-scroll ng-show="searchPost" direction="y" class="list">
+              <ion-item class="item item-avatar item-icon-right fadein-effect search-results posts-results" ng-repeat="result in searchPostsResults | toArray" ng-click="closeSearchModal()" type="item-text-wrap" href="#/tab/dash/post/{{::result.$key}}/dash">
                 <img ng-src="{{::result.userPicture}}">
                 <h2>{{::result.title}}</h2>
                 <p>{{::result.time | date : 'MMM d, y HH:mm:ss'}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
               </ion-item>
+            </ion-scroll>
 
-              <ion-item ng-show="!searchPost" class="item item-avatar item-icon-right fadein-effect search-results users-results" ng-repeat="result in searchUsersResults | toArray" ng-click="closeSearchModal(); userPage(result.id,result.displayName,result.profileImageURL)" type="item-text-wrap" href="#/tab/dash/user/{{::result.id}}/dash">
+            <ion-scroll ng-show="!searchPost" direction="y" class="list">
+              <ion-item class="item item-avatar item-icon-right fadein-effect search-results users-results" ng-repeat="result in searchUsersResults | toArray" ng-click="closeSearchModal(); userPage(result.id,result.displayName,result.profileImageURL)" type="item-text-wrap" href="#/tab/dash/user/{{::result.id}}/dash">
                 <img ng-src="{{::result.profileImageURL}}">
                 <h2>{{::result.displayName}}</h2>
                 <i class="icon ion-chevron-right icon-accessory"></i>
               </ion-item>
             </ion-scroll>
-            <p ng-show="searchPost && noPostsResults">No post found</p>
-            <p ng-show="!searchPost && noUsersResults">No user found</p>
           </div>
         </div>
       </div>
