@@ -1,16 +1,10 @@
 .search-modal {
   .modal-content {
-    .close-modal-container {
-      padding: 10px;
-      text-align: right;
-      i {
-        color: black;
-        font-size: 30px;
-      }
-    }
     .search-selector {
+      margin-top: 30px;
       text-align: center;
       margin-bottom: 10px;
+      position: relative;
       .btn {
         display: inline-block;
         border: none;
@@ -25,6 +19,13 @@
           background-color: #EEE;
           color: #AAA;
         }
+      }
+      .ion-close-circled {
+        color: $positive;
+        font-size: 30px;
+        position: absolute;
+        bottom: 0px;
+        right: 10px;
       }
     }
     .posts-results-container {

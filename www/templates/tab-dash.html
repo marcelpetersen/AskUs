@@ -103,12 +103,10 @@
     <script id="search-modal.html" type="text/ng-template">
       <div class="search-modal modal">
         <div class="modal-content">
-          <div class="close-modal-container">
-            <i class="ion-close-circled" ng-click="closeSearchModal()"></i>
-          </div>
           <div class="search-selector">
             <button class="btn-search btn" ng-class="searchPost ? 'active' : 'inactive'" ng-click="searchPost=true">Post Title</button>
             <button class="btn-search btn" ng-class="searchPost ? 'inactive' : 'active'" ng-click="searchPost=false">User Name</button>
+            <i class="ion-close-circled" ng-click="closeSearchModal()"></i>
           </div>
           <form class="search-form" name="searchForm" novalidate="" ng-submit="submitSearch(searchForm, searchPost)">
             <label class="item item-input" ng-class="{ 'has-errors' : searchForm.term.$invalid, 'no-errors' : searchForm.term.$valid}">
