@@ -10962,7 +10962,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   .bar-header .header-item .left-buttons .side-menu.activated {
     opacity: 1; }
 
-.menu-left .categories-list {
+.menu-left {
   background-color: #387ef5; }
   .menu-left .categories-list .category {
     text-align: center; }
