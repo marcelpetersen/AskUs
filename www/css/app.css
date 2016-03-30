@@ -9893,6 +9893,9 @@ a.button {
 .search-modal .modal-content .posts-results-container .search-results.users-results h2 {
   margin-top: 10px; }
 
+.search-modal .modal-content .posts-results-container .no-search-result {
+  text-align: center; }
+
 .radial-progress {
   display: inline-block;
   width: 120px;

@@ -116,8 +116,8 @@
           </form>
 
           <div class="posts-results-container">
-           <p ng-show="searchPost && noPostsResults">No post found</p>
-            <p ng-show="!searchPost && noUsersResults">No user found</p>
+           <p class="no-search-result" ng-show="searchPost && noPostsResults">No post found</p>
+            <p class="no-search-result" ng-show="!searchPost && noUsersResults">No user found</p>
             <ion-scroll ng-show="searchPost" direction="y" class="list">
               <ion-item class="item item-avatar item-icon-right fadein-effect search-results posts-results" ng-repeat="result in searchPostsResults | toArray" ng-click="closeSearchModal()" type="item-text-wrap" href="#/tab/dash/post/{{::result.$key}}/dash">
                 <img ng-src="{{::result.userPicture}}">
