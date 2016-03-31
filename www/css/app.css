@@ -11119,7 +11119,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       background-color: #ef473a; }
     .post-pages .page-content .posts-list-container .card .edit-delete-btn.report-btn, .post-pages .page-content .posts-list-container .card .report-btn.report-btn {
       display: block;
-      background-color: #ffc900; }
+      background-color: #ffc900;
+      width: 25px;
+      height: 25px; }
   .post-pages .page-content .posts-list-container .card.my-post .edit-delete-btn {
     display: block; }
   .post-pages .page-content .posts-list-container .card.my-post .report-btn {
