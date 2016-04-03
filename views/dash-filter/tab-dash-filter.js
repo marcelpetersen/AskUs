@@ -105,16 +105,8 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
         if( postsData.number !== postTotalMax ) {
           $scope.noMoreData = true;
           newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit - (postTotalMax - postsData.number))
-          // updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
-          // $scope.posts = updatedPost;
-          // $scope.$broadcast('scroll.infiniteScrollComplete');
-          // angular.element(pageName +' .icon-refreshing').removeClass('spin');
         } else {
           newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
-          // updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
-          // $scope.posts = updatedPost;
-          // $scope.$broadcast('scroll.infiniteScrollComplete');
-          // angular.element(pageName +' .icon-refreshing').removeClass('spin');
         }
         updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
         $scope.posts = updatedPost;

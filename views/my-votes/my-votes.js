@@ -32,8 +32,8 @@ angular.module('myApp.myVotes', ['myApp.env'])
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     // Reseting data
-    $scope.noMoreData = false;
-    $scope.posts = {};
+    // $scope.noMoreData = false;
+    // $scope.posts = {};
     newPostLimit = 10;
     postTotalMax = 0;
     totalPostNumber = 0;
@@ -52,6 +52,9 @@ angular.module('myApp.myVotes', ['myApp.env'])
       $scope.posts = postsData.values  ;
       $scope.$broadcast('scroll.refreshComplete');
       $timeout(function(){
+        // BUG: If User find the last card, refreshing call loadmore() until it had all card
+        // Limit to 2 extra calls
+        $scope.noMoreData = false;
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, 500);
     }, function() {
@@ -78,7 +81,6 @@ angular.module('myApp.myVotes', ['myApp.env'])
         if (totalPostNumber === 0) {
           $scope.noMoreData = true;
         }
-
         $scope.posts = postsData.values;
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
