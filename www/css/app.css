@@ -9890,6 +9890,17 @@ a.button {
     bottom: 0px;
     right: 10px; }
 
+.search-modal .modal-content .posts-results-container .search-results:first-child {
+  border-top: 0px; }
+  .search-modal .modal-content .posts-results-container .search-results:first-child::before {
+    display: block;
+    content: "Best Results";
+    text-align: center;
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
+    color: #DDD;
+    font-size: 12px; }
+
 .search-modal .modal-content .posts-results-container .search-results.users-results h2 {
   margin-top: 10px; }
 

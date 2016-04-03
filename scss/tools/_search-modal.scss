@@ -30,6 +30,18 @@
     }
     .posts-results-container {
       .search-results {
+        &:first-child { 
+            border-top: 0px;
+            &::before {
+              display: block;
+              content: "Best Results";
+              text-align: center;
+              border-bottom: 1px solid #DDD;
+              padding-bottom: 10px;
+              color: #DDD;
+              font-size: 12px;
+            }
+        }
         &.users-results {
           h2 {
             margin-top: 10px;
