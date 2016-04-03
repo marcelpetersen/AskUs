@@ -33,7 +33,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
   // Pull to refresh method
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
-    $scope.noMoreData = false;
+    $scope.noMoreData = true;
     $scope.currentLastPost = null;
     // Get the last 10 posts
     Post.getAllPosts().then(function(postsData) {
@@ -41,6 +41,10 @@ angular.module('myApp.dashTab', ['myApp.env'])
       var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
       $scope.currentLastPost = cleanedData.currentLastPost
       $scope.posts = cleanedData.obj;
+      $timeout(function(){
+        // Bug refresh when hit the last post, limit to 2 load more calls
+        $scope.noMoreData = false;
+      }, 500);
     }, function() {
       $scope.openErrorModal();
       $scope.noMoreData = true;
