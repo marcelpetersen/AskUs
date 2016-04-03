@@ -146,6 +146,13 @@
             }
           }
         }
+        .votes-messages-count {
+          .subdued {
+            padding-right: 10px;
+            color: #888;
+            text-decoration: none;
+          }
+        }
         .edit-delete-btn, .report-btn {
           position: absolute;
           bottom: 15px;

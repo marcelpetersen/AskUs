@@ -54,9 +54,9 @@
           <!-- Post content -->
           <h2>{{::post.title}}</h2>
           <p class:"description" ng-bind-html="::post.description | nl2br"></p>
-          <p>
-            <a href="#" class="subdued">{{ post.voteATotal + post.voteBTotal}} Votes</a>
-            <a href="#" class="subdued">{{ post.totalMessages }} Comments</a>
+          <p class="votes-messages-count">
+            <span class="subdued"><i class="ion-android-checkmark-circle"></i> {{post.voteATotal + post.voteBTotal}}</span>
+            <span class="subdued"><i class="ion-chatbubbles"></i> {{post.totalMessages}}</span>
           </p>
         </div>
         <button class="edit-delete-btn" ng-click="showDeleteModal(postId, post.title)"><i class="ion-trash-b"></i></button>
@@ -88,8 +88,6 @@
           <div class="message-container">
             <p class="comment" ng-bind-html="::comment.comment | nl2br"></p>
           </div>
-
-          
         </div>
       </div>
     </section>
@@ -101,7 +99,7 @@
       distance="1%">
     </ion-infinite-scroll>
 
-    <p class="no-more-cards" ng-if="noMoreData">No more messages</p>
+    <p class="no-more-messages" ng-if="noMoreData">No more messages</p>
 
     <script id="post-delete-modal.html" type="text/ng-template">
       <div class="default-modal modal transparent">
