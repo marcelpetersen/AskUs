@@ -38,6 +38,8 @@ angular.module('myApp', [
   // Modify global animation ios/android/none
   // $ionicConfigProvider.views.transition('android')
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+  // Tabs position IOS and Android
+  $ionicConfigProvider.tabs.position('bottom');
 }])
 .run(['$ionicPlatform', '$window', 'FBAppId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate) { 
   $ionicPlatform.ready(function() {
@@ -51,7 +53,9 @@ angular.module('myApp', [
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      // StatusBar.styleDefault();
+      $cordovaStatusbar.overlaysWebView(true)
+      $cordovaStatusBar.style(1) //Light
     }
 
     // Redirect the user if authenticate
