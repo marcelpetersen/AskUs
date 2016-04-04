@@ -10868,12 +10868,15 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       max-height: 40px;
       width: 100%;
       height: 100%;
-      border-radius: 50%; }
+      border-radius: 50%;
+      background-color: #FF4E50;
+      color: #fff; }
       .post-pages .page-content .posts-list-container .card .item-avatar .post-link i {
         font-size: 30px;
         display: block;
         text-align: center;
-        margin-top: 10px; }
+        margin-top: 10px;
+        padding-left: 2px; }
         .post-pages .page-content .posts-list-container .card .item-avatar .post-link i::before {
           line-height: 20px; }
   .post-pages .page-content .posts-list-container .card .item-body .item-image {
@@ -10900,17 +10903,16 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
           border-radius: 50%;
           width: 20px;
           height: 20px;
-          padding-top: 1px;
-          padding-left: 1px;
           text-align: center; }
           .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted::before {
-            font-size: 18px; }
+            font-size: 16px;
+            line-height: 16px; }
           .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-A {
             right: 5px;
-            color: #33cd5f; }
+            color: #FF4E50; }
           .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture .has-voted.has-voted-B {
             left: 5px;
-            color: #387ef5; }
+            color: #FF4E50; }
     .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container {
       overflow: hidden;
       position: relative;
@@ -10953,19 +10955,13 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
         text-align: center; }
         .post-pages .page-content .posts-list-container .card .item-body .item-image .results-container .results.results-B {
           float: right; }
-  .post-pages .page-content .posts-list-container .card.voted.voted-A .vote-A {
-    background-color: #33cd5f;
-    color: #FFF; }
   .post-pages .page-content .posts-list-container .card.voted.voted-A .has-voted-A {
     display: block !important; }
-  .post-pages .page-content .posts-list-container .card.voted.voted-B .vote-B {
-    background-color: #33cd5f;
-    color: #FFF; }
   .post-pages .page-content .posts-list-container .card.voted.voted-B .has-voted-B {
     display: block !important; }
   .post-pages .page-content .posts-list-container .card .votes-messages-count .subdued {
     padding-right: 10px;
-    color: #888;
+    color: #FF4E50;
     text-decoration: none; }
   .post-pages .page-content .posts-list-container .card .edit-delete-btn, .post-pages .page-content .posts-list-container .card .report-btn {
     position: absolute;
@@ -11196,6 +11192,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 #friends-page h2 {
   margin-top: 10px; }
 
+#friends-page .item-content .icon {
+  color: #FF4E50; }
+
 #post-add-page .page-content .picture-container {
   max-width: 500%;
   width: 100%;
@@ -11311,12 +11310,15 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     max-height: 40px;
     width: 100%;
     height: 100%;
-    border-radius: 50%; }
+    border-radius: 50%;
+    background-color: #FF4E50;
+    color: #fff; }
     #user-page .page-content .posts-list-container .card .item-header .post-link i {
       font-size: 30px;
       display: block;
       text-align: center;
-      margin-top: 10px; }
+      margin-top: 10px;
+      padding-left: 2px; }
       #user-page .page-content .posts-list-container .card .item-header .post-link i::before {
         line-height: 20px; }
 
