@@ -98,6 +98,9 @@
               padding-bottom: 10px;
               button {
                 width: 48%;
+                background-color: $mainColor;
+                color: $light;
+                font-weight: bold;
                 &.vote-A {
                   float: left;
                 }

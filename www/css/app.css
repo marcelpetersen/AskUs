@@ -1,10 +1,4 @@
 @charset "UTF-8";
-/*
-To customize the look and feel of Ionic, you can override the variables
-in ionic's _variables.scss file.
-
-For example, you might change some of the default colors:
-*/
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -9751,162 +9745,6 @@ a.button {
   100% {
     transform: rotate(360deg); } }
 
-.transparent {
-  background: transparent !important; }
-
-.image-modal {
-  width: 100% !important;
-  height: 100%;
-  top: 0 !important;
-  left: 0 !important; }
-  .image-modal .slider {
-    width: 100%;
-    height: 100%; }
-    .image-modal .slider .slider-pager-page {
-      color: #FFF; }
-    .image-modal .slider .slider-slides .slider-slide .scroll-view .scroll {
-      width: 100%;
-      height: 100%; }
-      .image-modal .slider .slider-slides .slider-slide .scroll-view .scroll .fullscreen-image {
-        max-width: 100%;
-        max-height: 100%;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        overflow: auto;
-        position: fixed;
-        right: 0;
-        top: 0; }
-
-.default-modal {
-  display: flex;
-  display: -webkit-flex;
-  display: -moz-flex;
-  align-items: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  justify-content: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  text-align: center; }
-  .default-modal .modal-content {
-    padding: 20px; }
-    .default-modal .modal-content h3, .default-modal .modal-content p {
-      color: #FFF; }
-    .default-modal .modal-content h3 {
-      font-size: 20px;
-      margin-bottom: 40px; }
-    .default-modal .modal-content p {
-      font-size: 16px;
-      margin-bottom: 40px; }
-    .default-modal .modal-content .buttons-container button {
-      border-radius: 5px;
-      border: none;
-      padding: 10px 20px;
-      margin: 0px 15px; }
-      .default-modal .modal-content .buttons-container button.cancel {
-        background-color: #f8f8f8; }
-      .default-modal .modal-content .buttons-container button.delete {
-        color: #FFF;
-        background-color: #ef473a; }
-      .default-modal .modal-content .buttons-container button.report {
-        color: #FFF;
-        background-color: #ffc900; }
-  .default-modal .close-modal {
-    position: absolute;
-    bottom: 12px;
-    right: 27px;
-    color: white;
-    font-size: 30px; }
-
-.form-modal .modal-content {
-  width: 100%; }
-
-.picture-upload-modal {
-  display: flex;
-  display: -webkit-flex;
-  display: -moz-flex;
-  align-items: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  justify-content: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  text-align: center; }
-  .picture-upload-modal .modal-content .loading {
-    color: #FFF; }
-    .picture-upload-modal .modal-content .loading p {
-      margin-top: 20px; }
-
-/* Fix modal backdrop for smaller devices */
-@media (max-width: 679px) {
-  .active .modal-backdrop-bg {
-    opacity: .8; }
-  .modal-backdrop-bg {
-    -webkit-transition: opacity 300ms ease-in-out;
-    transition: opacity 300ms ease-in-out;
-    background-color: #000;
-    opacity: 0; } }
-
-.mh-slide {
-  -webkit-transform: translate3d(0, 0, 0) scale(0);
-  transform: translate3d(0, 0, 0) scale(0);
-  opacity: 0; }
-
-.mh-slide.ng-enter, .mh-slide > .ng-enter {
-  -webkit-transition: all ease 400ms;
-  transition: all ease 400ms; }
-
-.mh-slide.ng-enter-active, .mh-slide > .ng-enter-active {
-  -webkit-transform: translate3d(0, 0, 0) scale(1);
-  transform: translate3d(0, 0, 0) scale(1);
-  opacity: 1; }
-
-.mh-slide.ng-leave, .mh-slide > .ng-leave {
-  -webkit-transition: all ease-in-out 250ms;
-  transition: all ease-in-out 250ms; }
-
-.search-modal .modal-content .search-selector {
-  margin-top: 30px;
-  text-align: center;
-  margin-bottom: 10px;
-  position: relative; }
-  .search-modal .modal-content .search-selector .btn {
-    display: inline-block;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px 4px 10px;
-    transition: all 0.3s ease; }
-    .search-modal .modal-content .search-selector .btn.active {
-      background-color: #387ef5;
-      color: white; }
-    .search-modal .modal-content .search-selector .btn.inactive {
-      background-color: #EEE;
-      color: #AAA; }
-  .search-modal .modal-content .search-selector .ion-close-circled {
-    color: #387ef5;
-    font-size: 30px;
-    position: absolute;
-    bottom: 0px;
-    right: 10px; }
-
-.search-modal .modal-content .posts-results-container .search-results:first-child {
-  border-top: 0px; }
-  .search-modal .modal-content .posts-results-container .search-results:first-child::before {
-    display: block;
-    content: "Best Results";
-    text-align: center;
-    border-bottom: 1px solid #DDD;
-    padding-bottom: 10px;
-    color: #DDD;
-    font-size: 12px; }
-
-.search-modal .modal-content .posts-results-container .search-results.users-results h2 {
-  margin-top: 10px; }
-
-.search-modal .modal-content .posts-results-container .no-search-result {
-  text-align: center; }
-
 .radial-progress {
   display: inline-block;
   width: 120px;
@@ -10968,23 +10806,38 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   transform: rotate(90deg);
   transition: all 0.2s ease; }
 
-.bar-header .title, .bar-header .back-button {
-  text-transform: capitalize; }
-
-.bar-header .header-item .left-buttons .side-menu {
-  transition: all 0.2s ease; }
-  .bar-header .header-item .left-buttons .side-menu.activated {
-    opacity: 1; }
+.bar.bar-header {
+  background-color: #FF4E50; }
+  .bar.bar-header * {
+    color: #fff !important; }
+  .bar.bar-header .title, .bar.bar-header .back-button {
+    text-transform: capitalize; }
+  .bar.bar-header .header-item .left-buttons .side-menu {
+    transition: all 0.2s ease; }
+    .bar.bar-header .header-item .left-buttons .side-menu.activated {
+      opacity: 1; }
 
 .menu-left {
-  background-color: #387ef5; }
+  background-color: #fff; }
+  .menu-left .bar-header {
+    background-color: #FF4E50; }
+    .menu-left .bar-header .title {
+      color: #fff; }
   .menu-left .categories-list .category {
     text-align: center; }
     .menu-left .categories-list .category a {
       display: block;
       padding: 20px 0px;
       font-size: 40px;
-      color: #FFF; }
+      color: #FF4E50; }
+
+.tabs {
+  background-color: #FF4E50; }
+  .tabs .tab-item {
+    color: #f8f8f8;
+    opacity: 1; }
+    .tabs .tab-item.tab-item-active {
+      color: #fff; }
 
 .post-pages .page-content .posts-list-container .card {
   margin-top: 0px;
@@ -11065,7 +10918,10 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       padding-top: 10px;
       padding-bottom: 10px; }
       .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button {
-        width: 48%; }
+        width: 48%;
+        background-color: #FF4E50;
+        color: #fff;
+        font-weight: bold; }
         .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-A {
           float: left; }
         .post-pages .page-content .posts-list-container .card .item-body .item-image .vote-buttons-container button.vote-B {
@@ -11142,6 +10998,175 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   .post-pages .page-content .posts-list-container .card.my-post .report-btn {
     display: none; }
 
+.transparent {
+  background: transparent !important; }
+
+.image-modal {
+  width: 100% !important;
+  height: 100%;
+  top: 0 !important;
+  left: 0 !important; }
+  .image-modal .slider {
+    width: 100%;
+    height: 100%; }
+    .image-modal .slider .slider-pager-page {
+      color: #FFF; }
+    .image-modal .slider .slider-slides .slider-slide .scroll-view .scroll {
+      width: 100%;
+      height: 100%; }
+      .image-modal .slider .slider-slides .slider-slide .scroll-view .scroll .fullscreen-image {
+        max-width: 100%;
+        max-height: 100%;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        overflow: auto;
+        position: fixed;
+        right: 0;
+        top: 0; }
+
+.default-modal {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  text-align: center; }
+  .default-modal .modal-content {
+    padding: 20px; }
+    .default-modal .modal-content h3, .default-modal .modal-content p {
+      color: #FFF; }
+    .default-modal .modal-content h3 {
+      font-size: 20px;
+      margin-bottom: 40px; }
+    .default-modal .modal-content p {
+      font-size: 16px;
+      margin-bottom: 40px; }
+    .default-modal .modal-content .buttons-container button {
+      border-radius: 5px;
+      border: none;
+      padding: 10px 20px;
+      margin: 0px 15px; }
+      .default-modal .modal-content .buttons-container button.cancel {
+        background-color: #f8f8f8; }
+      .default-modal .modal-content .buttons-container button.delete {
+        color: #FFF;
+        background-color: #ef473a; }
+      .default-modal .modal-content .buttons-container button.report {
+        color: #FFF;
+        background-color: #ffc900; }
+  .default-modal .close-modal {
+    position: absolute;
+    bottom: 12px;
+    right: 27px;
+    color: white;
+    font-size: 30px; }
+
+.form-modal .modal-content {
+  width: 100%; }
+
+.picture-upload-modal {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  text-align: center; }
+  .picture-upload-modal .modal-content .loading {
+    color: #FFF; }
+    .picture-upload-modal .modal-content .loading p {
+      margin-top: 20px; }
+
+/* Fix modal backdrop for smaller devices */
+@media (max-width: 679px) {
+  .active .modal-backdrop-bg {
+    opacity: .8; }
+  .modal-backdrop-bg {
+    -webkit-transition: opacity 300ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
+    background-color: #000;
+    opacity: 0; } }
+
+.mh-slide {
+  -webkit-transform: translate3d(0, 0, 0) scale(0);
+  transform: translate3d(0, 0, 0) scale(0);
+  opacity: 0; }
+
+.mh-slide.ng-enter, .mh-slide > .ng-enter {
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms; }
+
+.mh-slide.ng-enter-active, .mh-slide > .ng-enter-active {
+  -webkit-transform: translate3d(0, 0, 0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1; }
+
+.mh-slide.ng-leave, .mh-slide > .ng-leave {
+  -webkit-transition: all ease-in-out 250ms;
+  transition: all ease-in-out 250ms; }
+
+.search-modal .modal-content .search-selector {
+  margin-top: 30px;
+  text-align: center;
+  margin-bottom: 10px;
+  position: relative; }
+  .search-modal .modal-content .search-selector .btn {
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px 4px 10px;
+    transition: all 0.3s ease; }
+    .search-modal .modal-content .search-selector .btn.active {
+      background-color: #FF4E50;
+      color: white; }
+    .search-modal .modal-content .search-selector .btn.inactive {
+      background-color: #EEE;
+      color: #AAA; }
+  .search-modal .modal-content .search-selector .ion-close-circled {
+    color: #FF4E50;
+    font-size: 30px;
+    position: absolute;
+    bottom: 0px;
+    right: 10px; }
+
+.search-modal .modal-content .posts-results-container .search-results .user-picture {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%; }
+
+.search-modal .modal-content .posts-results-container .search-results:first-child {
+  border-top: 0px; }
+  .search-modal .modal-content .posts-results-container .search-results:first-child::before {
+    display: block;
+    content: "Best Results";
+    text-align: center;
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
+    color: #DDD;
+    font-size: 12px; }
+
+.search-modal .modal-content .posts-results-container .search-results.users-results h2 {
+  margin-top: 10px; }
+
+.search-modal .modal-content .posts-results-container .no-search-result {
+  text-align: center; }
+
 #splash-page .page-content .section.first {
   display: flex;
   display: -webkit-flex;
@@ -11190,7 +11215,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     margin: 0px 40px;
     width: 50px;
     height: 50px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #FF4E50;
     color: #EEE; }
 
 #post-add-page .page-content form {
@@ -11451,6 +11476,11 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 
 .hide {
   display: none !important; }
+
+.button.btn-form-submit, .button.btn-search-submit, .button.btn[type="submit"] {
+  background-color: #FF4E50; }
+  .button.btn-form-submit.activated, .button.btn-search-submit.activated, .button.btn[type="submit"].activated {
+    background-color: #ff6869; }
 
 .spin {
   -webkit-animation: spin 2s linear infinite;

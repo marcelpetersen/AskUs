@@ -12,7 +12,7 @@
         padding: 5px 10px 4px 10px;
         transition: all 0.3s ease;
         &.active {
-          background-color: $positive;
+          background-color: $mainColor;
           color: white;
         }
         &.inactive {
@@ -21,7 +21,7 @@
         }
       }
       .ion-close-circled {
-        color: $positive;
+        color: $mainColor;
         font-size: 30px;
         position: absolute;
         bottom: 0px;
@@ -30,6 +30,17 @@
     }
     .posts-results-container {
       .search-results {
+        .user-picture {
+          position: absolute;
+          top: 16px;
+          left: 16px;
+          max-width: 40px;
+          max-height: 40px;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          @include backgroundImg();
+        }
         &:first-child { 
           border-top: 0px;
           &::before {

@@ -69,7 +69,7 @@ angular.module('myApp.voteService', [])
         round: false,
         series: [{
           value: total,
-          color: color
+          color: '#FF4E50' //color
         }],
         animation: {
             duration: duration
@@ -122,7 +122,7 @@ angular.module('myApp.voteService', [])
             round: false,
             series: [{
               value: voteUpdateList[pageName][key].totalA,
-              color: '#33cd5f'
+              color: '#FF4E50' //'#33cd5f'
             }],
             animation: {
                 duration: 1
@@ -143,7 +143,7 @@ angular.module('myApp.voteService', [])
             round: false,
             series: [{
               value: voteUpdateList[pageName][key].totalB,
-              color: '#387ef5'
+              color: '#FF4E50' //'#387ef5'
             }],
             animation: {
                 duration: 1

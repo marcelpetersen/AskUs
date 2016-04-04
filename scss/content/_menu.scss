@@ -1,4 +1,6 @@
-// Main Menu
+// Main Menu 
+
+// When Side menu open
 body.menu-open {
   .bar-header {
     .header-item {
@@ -13,7 +15,11 @@ body.menu-open {
   }
 }
 
-.bar-header {
+.bar.bar-header {
+  background-color: $mainColor;
+  * {
+    color: $light !important;
+  }
   .title, .back-button {
     text-transform: capitalize;
   }
@@ -31,7 +37,13 @@ body.menu-open {
 
 // Left side menu style
 .menu-left {
-  background-color: $positive;
+  background-color: $light;
+  .bar-header {
+    background-color: $mainColor;
+    .title {
+      color: $light;
+    }
+  }
   .categories-list {
     .category {
       text-align: center;
@@ -39,8 +51,22 @@ body.menu-open {
         display: block;
         padding:  20px 0px;
         font-size: 40px;
-        color: #FFF;
+        color: $mainColor;
       }
     }
   }
 }
+
+// Tabs 
+.tabs {
+  background-color: $mainColor;
+  .tab-item {
+    color: $stable;
+    opacity: 1;
+    &.tab-item-active {
+      color: $light;
+    }
+  }
+}
+
+
