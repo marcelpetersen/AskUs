@@ -10146,7 +10146,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 #post-add-page .page-content .picture-container {
   max-width: 500%;
   width: 100%;
-  background-color: #EEE;
+  background-color: #fff;
   display: flex;
   display: -webkit-flex;
   align-items: center;
@@ -10175,7 +10175,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   #post-add-page .page-content form .list span, #post-add-page .page-content form .list input, #post-add-page .page-content form .list textarea {
     background: none; }
   #post-add-page .page-content form .list .no-errors {
-    background-color: #33cd5f;
+    background-color: #FF4E50;
     transition: all 0.5s ease; }
     #post-add-page .page-content form .list .no-errors input, #post-add-page .page-content form .list .no-errors textarea {
       color: white;
