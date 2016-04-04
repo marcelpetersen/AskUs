@@ -10991,8 +10991,11 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     .post-pages .page-content .posts-list-container .card .edit-delete-btn.report-btn, .post-pages .page-content .posts-list-container .card .report-btn.report-btn {
       display: block;
       background-color: #ffc900;
-      width: 25px;
-      height: 25px; }
+      width: 22px;
+      height: 22px; }
+      .post-pages .page-content .posts-list-container .card .edit-delete-btn.report-btn i, .post-pages .page-content .posts-list-container .card .report-btn.report-btn i {
+        font-size: 14px;
+        line-height: 14px; }
   .post-pages .page-content .posts-list-container .card.my-post .edit-delete-btn {
     display: block; }
   .post-pages .page-content .posts-list-container .card.my-post .report-btn {

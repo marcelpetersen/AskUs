@@ -182,8 +182,12 @@
           &.report-btn {
             display: block;
             background-color: $energized;
-            width: 25px;
-            height: 25px;
+            width: 22px;
+            height: 22px;
+            i {
+              font-size: 14px;
+              line-height: 14px;
+            }
           }
         }
         &.my-post {
