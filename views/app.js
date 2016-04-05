@@ -42,9 +42,18 @@ angular.module('myApp', [
   // Tabs position IOS and Android
   $ionicConfigProvider.tabs.position('bottom');
 }])
-.run(['$ionicPlatform', '$window', 'FBAppId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', '$ionicNavBarDelegate', function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate, $ionicNavBarDelegate) { 
+.run(['$ionicPlatform', '$window', 'FBAppId', 'GoogleAnalyticsId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', '$ionicNavBarDelegate', function($ionicPlatform, $window, FBAppId, GoogleAnalyticsId, userAuth, $rootScope, $state, $ionicScrollDelegate, $ionicNavBarDelegate) { 
+
   $ionicPlatform.ready(function() {
     console.log("App launch Device Ready");
+
+    // Set Google Analytics tracking
+    if (window.cordova) {
+      window.analytics.startTrackerWithId(GoogleAnalyticsId);
+      window.analytics.setUserId(device.uuid);
+      window.analytics.trackView($state.current.url); 
+    }
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -71,21 +80,32 @@ angular.module('myApp', [
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
     if (toState.authRequired && !userAuth.isAuth()){ //Assuming the AuthService holds authentication logic
       // User isn’t authenticated
-      console.log('Please Login');
       $state.go("splash");
-
-      //$window.location.reload();
-      //$window.location.href = '#/splash';  
-
       event.preventDefault(); 
     }
   });
 
   //stateChange success event
   $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams){
+
+    //Update Google Analytics tracking
+    if (window.cordova) {
+      var view;
+      if (toParams.postId) {
+        view = "/post/" + toParams.postId;
+      } else if (toParams.userId) {
+        view = "/user/" + toParams.userId;
+      } else if (toParams.filter) {
+        view = "/filter/" + toParams.filter;
+      } else {
+        view = toState.url;
+      }
+      window.analytics.trackView(view); 
+    }
+
     if (fromState.hideBackButton && !toState.hideBackButton) {
-        // Enable back history button
-        $ionicNavBarDelegate.showBackButton(true);
+      // Enable back history button
+      $ionicNavBarDelegate.showBackButton(true);
     }
   });
 

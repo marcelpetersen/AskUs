@@ -16,9 +16,7 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreenDuration" value="500" />
-    <!-- IOS version target -->
     <preference name="deployment-target" value="7.0" />
-    <!-- device orientation and type - Mobile -->
     <preference name="target-device" value="handset" />
     <preference name="Orientation" value="portrait" />
     <feature name="StatusBar">
@@ -82,4 +80,6 @@
     <plugin name="cordova-plugin-file-transfer" spec="~1.5.0" />
     <plugin name="cordova-plugin-camera" spec="~2.1.0" />
     <plugin name="com.bez4pieci.cookies" spec="https://github.com/bez4pieci/Phonegap-Cookies-Plugin.git" />
+    <plugin name="cordova-plugin-google-analytics" spec="~0.8.1" />
+    <plugin name="cordova-plugin-device" spec="~1.1.1" />
 </widget>
