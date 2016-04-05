@@ -33,7 +33,9 @@ angular.module('myApp.dashTab', ['myApp.env'])
   // Pull to refresh method
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
-    $scope.noMoreData = true;
+    // $scope.noMoreData = true;
+    $scope.noMoreData = false;
+
     $scope.currentLastPost = null;
     // Get the last 10 posts
     Post.getAllPosts().then(function(postsData) {
