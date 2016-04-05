@@ -1,0 +1,29 @@
+#how-to-use-page {
+  .page-content {
+    .scroll {
+      width: 100%;
+      height: 100%;
+      .slider {
+        height: 100%;
+        .slider-slides {
+          .slider-slide {
+            @include flexCenter();
+            .button {
+              margin-top: 30px;
+              background-color: $mainColor;
+              color: $light;
+              padding-top: 1px
+            }
+          }
+        }
+        .slider-pager {
+          .slider-pager-page {
+            &.active {
+              color: $mainColor;
+            }
+          }
+        }
+      }
+    }
+  }
+}

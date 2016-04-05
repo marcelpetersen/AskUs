@@ -10417,6 +10417,30 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 #my-votes-page .page-content .no-more-cards {
   text-align: center; }
 
+#how-to-use-page .page-content .scroll {
+  width: 100%;
+  height: 100%; }
+  #how-to-use-page .page-content .scroll .slider {
+    height: 100%; }
+    #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide {
+      display: flex;
+      display: -webkit-flex;
+      display: -moz-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      text-align: center; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .button {
+        margin-top: 30px;
+        background-color: #FF4E50;
+        color: #fff;
+        padding-top: 1px; }
+    #how-to-use-page .page-content .scroll .slider .slider-pager .slider-pager-page.active {
+      color: #FF4E50; }
+
 * {
   box-shadow: none !important; }
 

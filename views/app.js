@@ -17,6 +17,7 @@ angular.module('myApp', [
   'myApp.commentsService',
   'myApp.searchService',
   // Controllers and views
+  'myApp.howToUsePage',
   'myApp.mainController',
   'myApp.filters',
   'myApp.acountTab',

@@ -19,6 +19,14 @@ angular.module('myApp.routingService', [])
     controller: 'splashCtrl'
   })
 
+  // How to use the app and welcome
+  .state('how-to-use', {
+    authRequired: true,
+    templateUrl: 'templates/how-to-use.html',
+    url: '/how-to-use',
+    controller: 'howToUseCtrl'
+  })
+
   // Each tab has its own nav history stack:
   .state('tab.dash', {
     cache:true,
