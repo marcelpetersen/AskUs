@@ -10111,6 +10111,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 .search-modal .modal-content .posts-results-container .search-results.users-results h2 {
   margin-top: 10px; }
 
+.search-modal .modal-content .posts-results-container .search-results .icon {
+  color: #FF4E50; }
+
 .search-modal .modal-content .posts-results-container .no-search-result {
   text-align: center; }
 

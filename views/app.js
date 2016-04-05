@@ -83,7 +83,6 @@ angular.module('myApp', [
 
   //stateChange success event
   $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams){
-    console.log(fromState, toState);
     if (fromState.hideBackButton && !toState.hideBackButton) {
         // Enable back history button
         $ionicNavBarDelegate.showBackButton(true);
