@@ -66,7 +66,7 @@ angular.module('myApp.addTab', [])
   var options = { 
     quality : 90, 
     allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
-    encodingType: navigator.camera.EncodingType.JPEG,
+    // encodingType: navigator.camera.EncodingType.JPEG,
     targetWidth: 600,
     targetHeight: 600,
     saveToPhotoAlbum: false

@@ -29,10 +29,6 @@
               position: fixed;
               right: 0;
               top: 0;
-              // if using background image
-    //           background-repeat: no-repeat;
-    // background-size: 100%;
-    // background-position: center center;
             }
           }
         }
@@ -99,6 +95,20 @@
       p {
         margin-top: 20px;
       }
+    }
+  }
+}
+
+.error-form-modal {
+  @include flexCenter();
+  .modal-content {
+    h2 {
+      color: $light;
+    }
+    button {
+      margin-top: 30px !important;
+      background-color: $mainColor;
+      color: $light;
     }
   }
 }
