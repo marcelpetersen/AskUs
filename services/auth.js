@@ -32,13 +32,16 @@ angular.module('myApp.authService', [])
               $rootScope.$emit('errorModal');
             } else {
               console.log('saving ok');
+              // Redirection to the how to use page
+              $state.go('how-to-use');
             }
           });
         } else {
           console.log('user already exists');
+          // Redirect to Dash page
+          $state.go('tab.dash');
         }
       });
-      $state.go('tab.dash');
     }, function() {
       $rootScope.$emit('errorModal');
     });

@@ -1,5 +1,5 @@
 angular.module('myApp.howToUsePage', [])
 
-.controller('howToUseCtrl', ['$scope', '$ionicSlideBoxDelegate' , function($scope, $ionicSlideBoxDelegate) {
-
+.controller('howToUseCtrl', ['$scope', '$ionicSlideBoxDelegate', '$ionicNavBarDelegate', function($scope, $ionicSlideBoxDelegate, $ionicNavBarDelegate) {
+  $ionicNavBarDelegate.showBackButton(false);
 }]);

@@ -22,6 +22,7 @@ angular.module('myApp.routingService', [])
   // How to use the app and welcome
   .state('how-to-use', {
     authRequired: true,
+    hideBackButton: true,
     templateUrl: 'templates/how-to-use.html',
     url: '/how-to-use',
     controller: 'howToUseCtrl'

@@ -42,7 +42,7 @@ angular.module('myApp', [
   // Tabs position IOS and Android
   $ionicConfigProvider.tabs.position('bottom');
 }])
-.run(['$ionicPlatform', '$window', 'FBAppId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate) { 
+.run(['$ionicPlatform', '$window', 'FBAppId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', '$ionicNavBarDelegate', function($ionicPlatform, $window, FBAppId, userAuth, $rootScope, $state, $ionicScrollDelegate, $ionicNavBarDelegate) { 
   $ionicPlatform.ready(function() {
     console.log("App launch Device Ready");
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -78,6 +78,15 @@ angular.module('myApp', [
       //$window.location.href = '#/splash';  
 
       event.preventDefault(); 
+    }
+  });
+
+  //stateChange success event
+  $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams){
+    console.log(fromState, toState);
+    if (fromState.hideBackButton && !toState.hideBackButton) {
+        // Enable back history button
+        $ionicNavBarDelegate.showBackButton(true);
     }
   });
 

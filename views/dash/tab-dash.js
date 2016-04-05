@@ -1,8 +1,8 @@
 angular.module('myApp.dashTab', ['myApp.env'])
 
 .controller('DashCtrl', 
-  ['$scope', '$state', 'Search', '$ionicScrollDelegate', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 
-  function($scope, $state, Search, $ionicScrollDelegate, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
+  ['$scope', '$state', 'Search', '$ionicScrollDelegate', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', '$ionicNavBarDelegate', 
+  function($scope, $state, Search, $ionicScrollDelegate, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos, $ionicNavBarDelegate) {
 
   var pageName = '#dash-page';
   $scope.posts;
