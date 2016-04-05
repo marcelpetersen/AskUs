@@ -63,14 +63,16 @@ angular.module('myApp.addTab', [])
   }; 
 
   // Picture saving options
-  var options = { 
-    quality : 90, 
-    allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
-    // encodingType: navigator.camera.EncodingType.JPEG,
-    targetWidth: 600,
-    targetHeight: 600,
-    saveToPhotoAlbum: false
-  };
+  if (window.cordova) {
+    var options = { 
+      quality : 90, 
+      allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
+      encodingType: navigator.camera.EncodingType.JPEG,
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: false
+    };
+  }
 
   // Native camera access methods
   $scope.takePictureCamera = function(imageNumber) {
