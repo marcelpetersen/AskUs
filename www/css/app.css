@@ -10050,6 +10050,28 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     background-color: #FF4E50;
     color: #fff; }
 
+.special-announcement-modal {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  text-align: center; }
+  .special-announcement-modal .modal-content h2 {
+    font-size: 18px;
+    line-height: 25px;
+    color: #fff;
+    padding: 10px 10px;
+    word-break: break-word; }
+  .special-announcement-modal .modal-content .buttons-container button {
+    margin-top: 30px !important;
+    background-color: #FF4E50;
+    color: #fff; }
+
 /* Fix modal backdrop for smaller devices */
 @media (max-width: 679px) {
   .active .modal-backdrop-bg {

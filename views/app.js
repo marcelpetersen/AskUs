@@ -16,6 +16,7 @@ angular.module('myApp', [
   'myApp.categoriesService',
   'myApp.commentsService',
   'myApp.searchService',
+  'myApp.announcementService',
   // Controllers and views
   'myApp.howToUsePage',
   'myApp.mainController',
@@ -42,7 +43,7 @@ angular.module('myApp', [
   // Tabs position IOS and Android
   $ionicConfigProvider.tabs.position('bottom');
 }])
-.run(['$ionicPlatform', '$window', 'FBAppId', 'GoogleAnalyticsId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', '$ionicNavBarDelegate', function($ionicPlatform, $window, FBAppId, GoogleAnalyticsId, userAuth, $rootScope, $state, $ionicScrollDelegate, $ionicNavBarDelegate) { 
+.run(['$ionicPlatform', '$window', 'FBAppId', 'GoogleAnalyticsId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', '$ionicNavBarDelegate', 'Announcement', function($ionicPlatform, $window, FBAppId, GoogleAnalyticsId, userAuth, $rootScope, $state, $ionicScrollDelegate, $ionicNavBarDelegate, Announcement) { 
 
   $ionicPlatform.ready(function() {
     console.log("App launch Device Ready");
@@ -54,8 +55,7 @@ angular.module('myApp', [
       window.analytics.trackView($state.current.url); 
     }
 
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard, for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       // cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
@@ -74,6 +74,16 @@ angular.module('myApp', [
     } else {
       $state.go("splash");
     }
+
+    // Check special announcement
+    Announcement.getSpecialAnnouncement().then(function(announcement) {
+      if (announcement.enable) {
+        $rootScope.announcement = announcement;
+        $rootScope.$emit('announcementModal');
+      }
+    }, function(error) {
+
+    });
   });
 
   //stateChange event
@@ -87,7 +97,6 @@ angular.module('myApp', [
 
   //stateChange success event
   $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams){
-
     //Update Google Analytics tracking
     if (window.cordova) {
       var view;

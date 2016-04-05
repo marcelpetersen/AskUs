@@ -113,6 +113,26 @@
   }
 }
 
+.special-announcement-modal {
+  @include flexCenter();
+  .modal-content {
+    h2 {
+      font-size: 18px;
+      line-height: 25px;
+      color: $light;
+      padding: 10px 10px;
+      word-break: break-word;
+    }
+    .buttons-container {
+      button {
+        margin-top: 30px !important;
+        background-color: $mainColor;
+        color: $light;
+      } 
+    }
+  }
+}
+
 /* Fix modal backdrop for smaller devices */
 @media (max-width: 679px) {
   .active .modal-backdrop-bg {

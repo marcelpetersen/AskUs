@@ -44,6 +44,25 @@ angular.module('myApp.mainController', [])
     $scope.openErrorModal();
   })
 
+  $ionicModal.fromTemplateUrl('special-announcement-modal.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.announcementModal = modal;
+  });
+
+  $scope.openAnnouncementModal = function() {
+    $scope.announcementModal.show();
+  };
+
+  $scope.closeAnnouncementModal = function() {
+    $scope.announcementModal.hide();
+  };
+
+  $rootScope.$on('announcementModal', function() {
+    $scope.openAnnouncementModal();
+  })
+
   $ionicModal.fromTemplateUrl('no-post-modal.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'
