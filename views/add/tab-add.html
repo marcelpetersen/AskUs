@@ -13,31 +13,27 @@
       </div>
 
     <form name="postForm" novalidate="" ng-submit="submitPost(postForm)">
-
-
       <div class="list">
 
-
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Category
-        </div>
-        <select ng-model="post.category" required>
-          <option selected value="general">General</option>
-          <option value="animals">Animals</option>
-          <option value="art">Art</option>
-          <option value="fashion">Fashion</option>
-          <option value="food">Food</option>
-          <option value="game">Game</option>
-          <option value="nature">Nature</option>
-          <option value="people">People</option>
-          <option value="sport">Sport</option>
-          <option value="technology">Technology</option>
-          <option value="travel">Travel</option>
-          <option value="vehicule">Vehicule</option>
-        </select>
-      </label>
-
+        <label class="item item-input item-select categories-select">
+          <div class="input-label">
+            Category
+          </div>
+          <select ng-model="post.category" required>
+            <option selected value="general">General</option>
+            <option value="animals">Animals</option>
+            <option value="art">Art</option>
+            <option value="fashion">Fashion</option>
+            <option value="food">Food</option>
+            <option value="game">Game</option>
+            <option value="nature">Nature</option>
+            <option value="people">People</option>
+            <option value="sport">Sport</option>
+            <option value="technology">Technology</option>
+            <option value="travel">Travel</option>
+            <option value="vehicule">Vehicule</option>
+          </select>
+        </label>
 
         <label class="item item-input" ng-class="{ 'has-errors' : postForm.title.$invalid, 'no-errors' : postForm.title.$valid}">
           <!-- <span class="input-label">Title</span> -->

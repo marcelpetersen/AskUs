@@ -10191,6 +10191,8 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 
 #post-add-page .page-content form {
   padding-bottom: 20px; }
+  #post-add-page .page-content form .list .categories-select {
+    margin-bottom: 10px; }
   #post-add-page .page-content form .list textarea {
     padding-top: 10px; }
   #post-add-page .page-content form .list span, #post-add-page .page-content form .list input, #post-add-page .page-content form .list textarea {
