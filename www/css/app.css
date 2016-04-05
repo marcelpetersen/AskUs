@@ -10293,6 +10293,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   text-decoration: none;
   color: #FF4E50; }
 
+#user-page .page-content .no-more-cards {
+  text-align: center; }
+
 #post-page .page-content .comments-container .card {
   margin-bottom: 10px;
   margin-top: 0px; }
