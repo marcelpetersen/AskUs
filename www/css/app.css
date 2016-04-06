@@ -10243,10 +10243,8 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 
 #user-page .page-content .user-info {
   position: relative;
-  display: flex;
-  display: -webkit-flex;
-  align-items: center;
-  -webkit-align-items: center;
+  display: block;
+  text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 10px; }
@@ -10256,20 +10254,19 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background: -webkit-linear-gradient(45deg, #ea5507 1%, #f7bc5d 100%);
+    background: -webkit-linear-gradient(180deg, #FF4E50 1%, #ff8182 100%);
     /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(45deg, #ea5507 1%, #f7bc5d 100%);
+    background: linear-gradient(180deg, #FF4E50 1%, #ff8182 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     z-index: -1; }
   #user-page .page-content .user-info .user-picture {
     border-radius: 50%;
+    display: inline-block;
     width: 20%;
     padding-bottom: 20%;
-    margin-left: 5%;
     background-size: cover;
     background-position: center center; }
   #user-page .page-content .user-info h2 {
-    width: 75%;
     padding: 0% 5%;
     font-size: 20px;
     margin-top: 10px;
