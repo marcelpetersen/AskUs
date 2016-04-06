@@ -10473,6 +10473,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     line-height: 30px;
     width: 100%; }
 
+#preferences-page .page-content .loading {
+  margin-top: 20px; }
+
 #my-votes-page .page-content .no-more-cards {
   text-align: center; }
 

@@ -2,18 +2,19 @@
   <ion-content class="page-content">
     <ion-list>
 
-      <ion-toggle  ng-model="settings.enableNotifications">
-        Notifications
-      </ion-toggle>
-
       <ion-item class="item-icon-right suspend-item" on-touch="suspendAccountFacebook()">
-        <button class="button button-assertive">
+        <button class="button button-assertive suspend">
           Suspend my account
         </button>
         <i class="icon ion-close"></i>
       </ion-item>
 
     </ion-list>
+
+    <div class="loading">
+      <i class="ion ion-load-c loading-icon"></i>
+    </div> 
+
   </ion-content>
 </ion-view>
 
