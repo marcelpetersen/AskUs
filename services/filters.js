@@ -21,6 +21,12 @@ angular.module('myApp.filters', [])
  };
 }])
 
+.filter('html', ['$sce', function($sce){
+    return function(input){
+        return $sce.trustAsHtml(input);
+    }
+}])
+
 .filter('toArray', function () {
   return function (obj, addKey) {
     if (!angular.isObject(obj)) return obj;

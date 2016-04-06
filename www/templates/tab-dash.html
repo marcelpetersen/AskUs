@@ -65,7 +65,7 @@
           </div>
           <!-- Post content -->
           <h2>{{::post.title}}</h2>
-          <p class:"description" ng-bind-html="::post.description | nl2br"></p>
+          <p class:"description"><pre>{{::post.description}}</pre></p>
           <p class="votes-messages-count">
             <span class="subdued"><i class="ion-android-checkmark-circle"></i> {{post.voteATotal + post.voteBTotal}}</span>
             <span class="subdued"><i class="ion-chatbubbles"></i> {{::post.totalMessages}}</span>

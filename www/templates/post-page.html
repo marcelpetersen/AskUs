@@ -86,7 +86,7 @@
           <p class="time">{{::comment.time | date : 'MMM d, y HH:mm:ss'}}</p>
           </div>
           <div class="message-container">
-            <p class="comment" ng-bind-html="::comment.comment | nl2br"></p>
+            <p class="comment"><pre>{{::comment.comment}}</pre></p>
           </div>
         </div>
       </div>

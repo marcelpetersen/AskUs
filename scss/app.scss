@@ -47,6 +47,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   }
 }
 
+pre {
+  font-family: inherit;
+}
+
 .ion-load-c {
   color: $mainColor !important;
 }
@@ -54,6 +58,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .hide {
     display: none !important;
 }
+
 .button.btn-form-submit, .button.btn-search-submit, .button.btn[type="submit"] {
   background-color: $mainColor;
   &.activated {

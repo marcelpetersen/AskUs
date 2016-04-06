@@ -10500,6 +10500,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   .loading .loading-icon {
     font-size: 30px; }
 
+pre {
+  font-family: inherit; }
+
 .ion-load-c {
   color: #FF4E50 !important; }
 
