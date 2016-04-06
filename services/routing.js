@@ -162,6 +162,30 @@ angular.module('myApp.routingService', [])
     }
   })
 
+  .state('tab.support', {
+    cache:true,
+    authRequired: true,
+    url: '/account/support',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/support.html',
+        controller: 'supportCtrl'
+      }
+    }
+  })
+
+  .state('tab.legals', {
+    cache:true,
+    authRequired: true,
+    url: '/account/support/legals',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/legals.html',
+        controller: 'legalsCtrl'
+      }
+    }
+  })
+  
   .state('tab.my-votes', {
     cache:true,
     authRequired: true,
