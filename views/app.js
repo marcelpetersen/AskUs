@@ -35,6 +35,7 @@ angular.module('myApp', [
   'myApp.postPage',
   'myApp.myVotes',
   'myApp.support',
+  'myApp.terms',
   'myApp.legals'
 ])
 

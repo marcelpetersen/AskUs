@@ -187,6 +187,18 @@ angular.module('myApp.routingService', [])
       }
     }
   })
+
+  .state('tab.terms', {
+    cache: false,
+    authRequired: true,
+    url: '/account/support/terms',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/terms.html',
+        controller: 'termsCtrl'
+      }
+    }
+  })
   
   .state('tab.my-votes', {
     cache:true,

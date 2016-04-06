@@ -10493,6 +10493,17 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     text-decoration: none;
     border-radius: 5px; }
 
+#terms-page .page-content .terms-content {
+  margin: 10px;
+  padding: 10px;
+  background-color: #fff; }
+  #terms-page .page-content .terms-content h3 {
+    font-size: 18px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #AAA; }
+  #terms-page .page-content .terms-content h4 {
+    font-size: 16px; }
+
 #legals-page .page-content .privacy-content {
   margin: 10px;
   padding: 10px;
