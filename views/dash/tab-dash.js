@@ -239,6 +239,10 @@ angular.module('myApp.dashTab', ['myApp.env'])
     Post.deletePost(id).then(function(){
       angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
       $scope.deleteModal.hide();
+
+      Post.addPostToDelete("my-votes-page", id);
+      Post.addPostToDelete("user-page", id);
+      
     }, function(){
       $scope.deleteModal.hide();
       console.log("delete failed");

@@ -17,6 +17,8 @@ angular.module('myApp', [
   'myApp.commentsService',
   'myApp.searchService',
   'myApp.announcementService',
+  // Directives
+  'myApp.directive',
   // Controllers and views
   'myApp.howToUsePage',
   'myApp.mainController',

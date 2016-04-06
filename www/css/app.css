@@ -9788,6 +9788,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       color: #fff; }
 
 .post-pages .page-content .posts-list-container .card {
+  display: block;
   margin-top: 0px;
   margin-bottom: 10px; }
   .post-pages .page-content .posts-list-container .card .item-avatar {

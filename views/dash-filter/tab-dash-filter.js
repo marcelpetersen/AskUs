@@ -208,7 +208,9 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
 
       // Add post to the delete list for the Dash & Dash Filter & user pages
       Post.addPostToDelete("dash-page", id);
-      Post.addPostToDelete("dash-filter-page", id);
+      //Post.addPostToDelete("dash-filter-page", id);
+      Post.addPostToDelete("my-votes-page", id);
+      Post.addPostToDelete("user-page", id);
 
     }, function(){
       $scope.deleteModal.hide();
