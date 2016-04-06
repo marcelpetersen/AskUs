@@ -2,7 +2,7 @@
   <ion-content class="page-content">
     <ion-list>
 
-      <ion-item class="item-icon-right suspend-item" on-touch="suspendAccountFacebook()">
+      <ion-item class="item-icon-right suspend-item" on-touch="showDeleteModal()">
         <button class="button button-assertive suspend">
           Suspend my account
         </button>
@@ -14,6 +14,20 @@
     <div class="loading">
       <i class="ion ion-load-c loading-icon"></i>
     </div> 
+
+
+    <script id="suspend-account-modal.html" type="text/ng-template">
+      <div class="default-modal modal suspend-account-modal transparent">
+      <div class="modal-content">
+        <h3>Want to delete Your account?</h3>
+        <p>If you suspend your account, your profile and all your posts will be deleted</p>
+        <div class="buttons-container">
+          <button class="cancel" on-touch="closeSuspendModal()">Cancel</button>
+          <button class="delete" on-touch="suspendAccountFacebook()">Delete</button>
+        </div>
+        </div>
+      </div>
+    </script>
 
   </ion-content>
 </ion-view>

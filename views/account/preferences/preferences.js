@@ -1,12 +1,13 @@
 angular.module('myApp.preferences', ['myApp.env'])
 
-.controller('preferencesCtrl', ['$scope', 'userAuth', 'currentUserInfos', function($scope, userAuth, currentUserInfos) {
+.controller('preferencesCtrl', ['$scope', 'userAuth', 'currentUserInfos', '$ionicModal', function($scope, userAuth, currentUserInfos, $ionicModal) {
 
   var pageName = "#preferences-page";
   angular.element(pageName + " .loading").hide();
   var userInfos = currentUserInfos.currentUserInfoGet();
 
   $scope.suspendAccountFacebook = function() {
+    $scope.closeSuspendModal();
     angular.element(pageName + " .loading").show();
     angular.element(pageName +' .loading-icon').addClass('spin');
     angular.element(pageName + ' .button.suspend').prop("disabled",true);
@@ -26,6 +27,22 @@ angular.module('myApp.preferences', ['myApp.env'])
         $scope.openErrorModal();
       }
     });
+  };
+
+  // ****** Modal functions ******
+  $ionicModal.fromTemplateUrl('suspend-account-modal.html', {
+    scope: $scope,
+    animation: 'mh-slide' //'slide-in-up'
+  }).then(function(modal) {
+    $scope.suspendModal = modal;
+  });
+
+  $scope.showDeleteModal = function(key, title) {
+    $scope.suspendModal.show();
+  };
+
+  $scope.closeSuspendModal = function() {
+    $scope.suspendModal.hide();
   };
 
 }]);
