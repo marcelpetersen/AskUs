@@ -10,7 +10,7 @@
         -webkit-justify-content: center;
         flex-direction:column;
         -webkit-flex-direction:column;
-
+        border:none;
         padding-top: 20px;
         padding-bottom: 20px;
 
@@ -23,8 +23,13 @@
           right: 0px;
           // background: -webkit-linear-gradient(45deg, #1e5799 0%,#2989d8 48%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
           // background: linear-gradient(45deg, #1e5799 0%,#2989d8 48%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          background: -webkit-linear-gradient(45deg, #ea5507 1%,#f7bc5d 100%); /* Chrome10-25,Safari5.1-6 */
-          background: linear-gradient(45deg, #ea5507 1%,#f7bc5d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          // background: -webkit-linear-gradient(45deg, #ea5507 1%,#f7bc5d 100%); /* Chrome10-25,Safari5.1-6 */
+          // background: linear-gradient(45deg, #ea5507 1%,#f7bc5d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+          background: -webkit-linear-gradient(180deg, $mainColor 1%,lighten($mainColor, 10%) 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(180deg, $mainColor 1%,lighten($mainColor, 10%) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+
 
           // ***** With Image *****
           // background-image:url('../img/account-bg.jpg');

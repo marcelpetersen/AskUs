@@ -16,6 +16,9 @@ body.menu-open {
 }
 
 .bar.bar-header {
+  // Remove header bottom border
+  background-image: none;
+  
   background-color: $mainColor;
   * {
     color: $light !important;

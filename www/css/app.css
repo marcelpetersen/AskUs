@@ -9755,6 +9755,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   transition: all 0.2s ease; }
 
 .bar.bar-header {
+  background-image: none;
   background-color: #FF4E50; }
   .bar.bar-header * {
     color: #fff !important; }
@@ -10424,6 +10425,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   -webkit-justify-content: center;
   flex-direction: column;
   -webkit-flex-direction: column;
+  border: none;
   padding-top: 20px;
   padding-bottom: 20px;
   position: relative; }
@@ -10433,9 +10435,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background: -webkit-linear-gradient(45deg, #ea5507 1%, #f7bc5d 100%);
+    background: -webkit-linear-gradient(180deg, #FF4E50 1%, #ff8182 100%);
     /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(45deg, #ea5507 1%, #f7bc5d 100%);
+    background: linear-gradient(180deg, #FF4E50 1%, #ff8182 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     z-index: -1; }
   #account-page .page-content .list .account-tab-user .user-pic {
@@ -10541,6 +10543,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 
 * {
   box-shadow: none !important; }
+
+.scroll-content {
+  padding-top: 0px; }
 
 .pane, .view {
   background-color: #e9eaed; }
