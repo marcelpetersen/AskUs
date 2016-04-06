@@ -12,7 +12,7 @@ angular.module('myApp.preferences', ['myApp.env'])
     angular.element(pageName +' .loading-icon').addClass('spin');
     angular.element(pageName + ' .button.suspend').prop("disabled",true);
     userAuth.suspendAccountFacebook(userInfos.id).then(function(response) {
-      console.log("account and post deleted");
+      console.log("account and posts deleted");
     }, function(error) {
       console.log(error);
       angular.element(pageName + " .loading").hide();

@@ -1,5 +1,23 @@
 #support-page {
   .page-content {
-
+    section {
+      margin: 10px;
+      background-color: $light;
+      padding: 10px;
+      p.last {
+        margin-bottom: 20px;
+      }
+      .link {
+        margin:10px auto;
+        display: block;
+        width: 70%;
+        text-align: center;
+        background-color: $mainColor;
+        color: $light;
+        padding: 12px 15px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+    }
   }
 }

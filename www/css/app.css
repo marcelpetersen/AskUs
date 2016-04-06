@@ -10476,6 +10476,28 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 #preferences-page .page-content .loading {
   margin-top: 20px; }
 
+#support-page .page-content section {
+  margin: 10px;
+  background-color: #fff;
+  padding: 10px; }
+  #support-page .page-content section p.last {
+    margin-bottom: 20px; }
+  #support-page .page-content section .link {
+    margin: 10px auto;
+    display: block;
+    width: 70%;
+    text-align: center;
+    background-color: #FF4E50;
+    color: #fff;
+    padding: 12px 15px 10px;
+    text-decoration: none;
+    border-radius: 5px; }
+
+#legals-page .page-content .privacy-content {
+  margin: 10px;
+  padding: 10px;
+  background-color: #fff; }
+
 #my-votes-page .page-content .no-more-cards {
   text-align: center; }
 
