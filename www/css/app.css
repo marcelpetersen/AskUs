@@ -10497,6 +10497,12 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   margin: 10px;
   padding: 10px;
   background-color: #fff; }
+  #legals-page .page-content .privacy-content h3 {
+    font-size: 18px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #AAA; }
+  #legals-page .page-content .privacy-content h4 {
+    font-size: 16px; }
 
 #my-votes-page .page-content .no-more-cards {
   text-align: center; }
