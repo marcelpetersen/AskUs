@@ -14,6 +14,7 @@ angular.module('myApp.routingService', [])
   // Splash Screen & Login
   .state('splash', {
     authRequired: false,
+    cache: false,
     templateUrl: 'templates/splash.html',
     url: '/splash',
     controller: 'splashCtrl'
@@ -21,6 +22,7 @@ angular.module('myApp.routingService', [])
 
   // How to use the app and welcome
   .state('how-to-use', {
+    cache: false,
     authRequired: true,
     hideBackButton: true,
     templateUrl: 'templates/how-to-use.html',
@@ -163,7 +165,7 @@ angular.module('myApp.routingService', [])
   })
 
   .state('tab.support', {
-    cache:true,
+    cache: false,
     authRequired: true,
     url: '/account/support',
     views: {
@@ -175,7 +177,7 @@ angular.module('myApp.routingService', [])
   })
 
   .state('tab.legals', {
-    cache:true,
+    cache: false,
     authRequired: true,
     url: '/account/support/legals',
     views: {
@@ -200,6 +202,7 @@ angular.module('myApp.routingService', [])
 
   .state('tab.preferences', {
     authRequired: true,
+    cache: false,
     url: '/preferences',
     views: {
       'tab-account': {
