@@ -9907,6 +9907,10 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     display: block !important; }
   .post-pages .page-content .posts-list-container .card.voted.voted-B .has-voted-B {
     display: block !important; }
+  .post-pages .page-content .posts-list-container .card .post-title {
+    font-weight: bold; }
+  .post-pages .page-content .posts-list-container .card .post-description {
+    font-size: 14px; }
   .post-pages .page-content .posts-list-container .card .votes-messages-count .subdued {
     padding-right: 10px;
     color: #FF4E50;
@@ -10328,6 +10332,12 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       float: left; }
     #user-page .page-content .posts-list-container .card .item-body .item-image .picture.picture-B {
       float: right; }
+
+#user-page .page-content .posts-list-container .card .item-body .post-title {
+  font-weight: bold; }
+
+#user-page .page-content .posts-list-container .card .item-body .post-description {
+  font-size: 14px; }
 
 #user-page .page-content .posts-list-container .card .item-body .votes-messages-count .subdued {
   padding-right: 10px;

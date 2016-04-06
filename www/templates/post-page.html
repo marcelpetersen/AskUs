@@ -52,8 +52,8 @@
             </div>
           </div>
           <!-- Post content -->
-          <h2>{{::post.title}}</h2>
-          <p class:"description" ng-bind-html="::post.description | nl2br"></p>
+          <h2 class="post-title">{{::post.title}}</h2>
+          <pre class="post-description">{{::post.description}}</pre>
           <p class="votes-messages-count">
             <span class="subdued"><i class="ion-android-checkmark-circle"></i> {{post.voteATotal + post.voteBTotal}}</span>
             <span class="subdued"><i class="ion-chatbubbles"></i> {{post.totalMessages}}</span>
@@ -86,7 +86,7 @@
           <p class="time">{{::comment.time | date : 'MMM d, y HH:mm:ss'}}</p>
           </div>
           <div class="message-container">
-            <p class="comment"><pre>{{::comment.comment}}</pre></p>
+            <pre class="comment">{{::comment.comment}}</pre>
           </div>
         </div>
       </div>

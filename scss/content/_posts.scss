@@ -135,23 +135,21 @@
         }
         &.voted {
           &.voted-A {
-            // .vote-A {
-            //   background-color: $balanced;
-            //   color: #FFF;
-            // }
             .has-voted-A {
               display: block !important;
             }
           }
           &.voted-B {
-            // .vote-B {
-            //   background-color: $balanced;
-            //   color: #FFF;
-            // }
             .has-voted-B {
               display: block !important;
             }
           }
+        }
+        .post-title {
+          font-weight: bold;
+        }
+        .post-description {
+          font-size: 14px;
         }
         .votes-messages-count {
           .subdued {
