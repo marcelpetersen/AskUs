@@ -68,10 +68,13 @@ angular.module('myApp.authService', [])
       url: ProductionAPI + '/api/user/delete/'+ id
     }).success(function successCallback(response) {
         console.log('delete success');
+
         FB.api('/me/permissions?access_token=' + currentUserFBToken, 'delete', function(responseFB) {
-          console.log(responseFB);
           Auth.$unauth();
-          // $window.location.href = '#/splash';
+          angular.element("#preferences-page .loading").hide();
+          angular.element("#preferences-page .loading-icon").removeClass('spin');
+          angular.element("#preferences-page .button.suspend").prop("disabled",false);
+          
           window.cookies.clear(function() {
             $window.location.reload();
             $window.location.href = '#/splash';   
