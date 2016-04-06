@@ -4,7 +4,9 @@ angular.module('myApp.authService', [])
   return $firebaseAuth(rootRef);
 }])
 
-.factory('userAuth', ['Auth', '$http', '$localstorage', '$state', 'FirebaseUrl', '$window', 'currentUserInfos', '$rootScope', function(Auth, $http, $localstorage, $state, FirebaseUrl, $window, currentUserInfos, $rootScope) {
+.factory('userAuth', [
+  'Auth', '$http', '$localstorage', '$state', 'FirebaseUrl', '$window', 'currentUserInfos', '$rootScope', 'DevelopmentAPI', 'ProductionAPI',
+  function(Auth, $http, $localstorage, $state, FirebaseUrl, $window, currentUserInfos, $rootScope, DevelopmentAPI, ProductionAPI) {
 
   var isAuth = function() {
     return !!$localstorage.get('firebase:session::ionic-fboauth');
@@ -56,20 +58,29 @@ angular.module('myApp.authService', [])
     });
   };
 
-  var suspendAccountFacebook = function() {
+  var suspendAccountFacebook = function(id) {
     //Get FB access token for removeing app permission
     var currentUser = currentUserInfos.currentUserInfoGet();
     var currentUserFBToken = currentUser.accessToken;
 
-    FB.api('/me/permissions?access_token=' + currentUserFBToken, 'delete', function(response) {
-      console.log(response);
-      Auth.$unauth();
-      // TODO DELETE ACCOUNT AND POST
-      // $window.location.href = '#/splash';
-      window.cookies.clear(function() {
-        $window.location.reload();
-        $window.location.href = '#/splash';   
-      });
+    return $http({
+      method: 'DELETE',
+      url: ProductionAPI + '/api/user/delete/'+ id
+    }).success(function successCallback(response) {
+        console.log('delete success');
+        FB.api('/me/permissions?access_token=' + currentUserFBToken, 'delete', function(responseFB) {
+          console.log(responseFB);
+          Auth.$unauth();
+          // $window.location.href = '#/splash';
+          window.cookies.clear(function() {
+            $window.location.reload();
+            $window.location.href = '#/splash';   
+          });
+        });
+
+      return response;
+    }).error(function(response) {
+      console.log('error deleting user')
     });
   };
 
@@ -81,5 +92,3 @@ angular.module('myApp.authService', [])
   };
 
 }]);
-
-
