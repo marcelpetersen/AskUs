@@ -5,7 +5,7 @@ angular.module('myApp.myVotes', ['myApp.env'])
   function($scope, $stateParams, $state, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
   var pageName = '#my-votes-page';
-
+  $scope.pageOriginName = 'account';
   $scope.postDelete = {};
   $scope.posts;
   $scope.aImages;

@@ -5,6 +5,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
   function($scope, $state, Search, $ionicScrollDelegate, $ionicSideMenuDelegate, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos, $ionicNavBarDelegate) {
 
   var pageName = '#dash-page';
+  $scope.pageOriginName = 'dash';
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
@@ -242,7 +243,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
 
       Post.addPostToDelete("my-votes-page", id);
       Post.addPostToDelete("user-page", id);
-      
+
     }, function(){
       $scope.deleteModal.hide();
       console.log("delete failed");

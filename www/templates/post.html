@@ -1,11 +1,11 @@
        <div class="item item-avatar">
-          <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" on-touch="userPage(post.userId,post.userName,post.userPicture)" href="#/tab/dash/user/{{::post.userId}}/dash"></a>
+          <a class="user-picture" ng-style="{'background-image':'url({{::post.userPicture}})'}" on-touch="userPage(post.userId,post.userName,post.userPicture)" href="#/tab/{{::pageOriginName}}/user/{{::post.userId}}/{{::pageOriginName}}"></a>
           <h2>
-            <a href="#/tab/dash/user/{{::post.userId}}/dash" on-touch="::userPage(post.userId,post.userName,post.userPicture)"> {{::post.userName}}
+            <a href="#/tab/{{::pageOriginName}}/user/{{::post.userId}}/{{::pageOriginName}}" on-touch="::userPage(post.userId,post.userName,post.userPicture)"> {{::post.userName}}
             </a>
           </h2>
           <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
-          <a href="#/tab/dash/post/{{::post.$key}}/dash" class="item post-link">
+          <a href="#/tab/{{::pageOriginName}}/post/{{::post.$key}}/{{::pageOriginName}}" class="item post-link">
             <i class="icon ion-ios-arrow-right"></i>
           </a>
         </div>

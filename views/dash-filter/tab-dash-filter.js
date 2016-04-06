@@ -5,6 +5,7 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   function($scope, $stateParams, $state, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
   var pageName = '#dash-filter-page';
+  $scope.pageOriginName = 'dash';
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
