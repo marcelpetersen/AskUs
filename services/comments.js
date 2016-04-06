@@ -16,7 +16,6 @@ angular.module('myApp.commentsService', [])
 
     addComment: function(postId, comment) {
       var user = currentUserInfos.currentUserInfoGet();
-      console.log(user);
       var deferred = $q.defer();
 
       var commentInfo = {};
@@ -91,5 +90,4 @@ angular.module('myApp.commentsService', [])
       return promise;
     },
   }
-
-  }]);
+}]);
