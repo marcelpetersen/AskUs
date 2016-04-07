@@ -34,28 +34,25 @@ angular.module('myApp.dashTab', ['myApp.env'])
   // Pull to refresh method
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
-    // $scope.noMoreData = true;
-    $scope.noMoreData = false;
-
-    $scope.currentLastPost = null;
-    // Get the last 10 posts
+    $scope.noMoreData = true;
+    // Get the lastest posts
     Post.getAllPosts().then(function(postsData) {
+      $scope.posts = {};
       // remove the first element, will be display with the next post call
       var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
       $scope.currentLastPost = cleanedData.currentLastPost
       $scope.posts = cleanedData.obj;
+      $scope.$broadcast('scroll.refreshComplete');
+
       $timeout(function(){
-        // Bug refresh when hit the last post, limit to 2 load more calls
         $scope.noMoreData = false;
-      }, 500);
+        angular.element(pageName +' .icon-refreshing').removeClass('spin');
+      }, 1500);
     }, function() {
       $scope.openErrorModal();
-      $scope.noMoreData = true;
+      $scope.$broadcast('scroll.refreshComplete');
+      angular.element(pageName +' .icon-refreshing').removeClass('spin');
     }); 
-    $scope.$broadcast('scroll.refreshComplete');
-    $timeout(function(){
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-    }, 500);
   };
 
   $scope.loadMore = function() {
@@ -113,7 +110,7 @@ angular.module('myApp.dashTab', ['myApp.env'])
   };
 
   // ****** Next page functions ******
-  // Store user info before redirection
+  // Store user infos before redirection
   $scope.userPage = function(userId, userName, userPicture) {
     var user = {
       id: userId,

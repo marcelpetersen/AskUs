@@ -34,8 +34,7 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     // Reset all data
-    // $scope.noMoreData = false;
-    // $scope.posts = {};
+    $scope.noMoreData = true;
     newPostLimit = 6;
     postTotalMax = 0;
     totalPostNumber = 0;
@@ -43,29 +42,28 @@ angular.module('myApp.dashFilterTab', ['myApp.env'])
     displayedPost;
 
     Categories.getAllPostsByCategory($stateParams.filter, newPostLimit).then(function(postsData) {
+      $scope.posts = {};
       // Increase the total possible number of posts displayed
       postTotalMax += newPostLimit;
-
+      $scope.posts = postsData.values;
       totalPostNumber = postsData.number;
+      $scope.$broadcast('scroll.refreshComplete');
+
       if (totalPostNumber === 0 || postsData.number < postTotalMax) {
         $scope.noMoreData = true;
+        $timeout(function(){
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
+      } else {
+        $timeout(function(){
+          $scope.noMoreData = false;
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
       }
-      $scope.posts = postsData.values;
-      $scope.$broadcast('scroll.refreshComplete');
-      $timeout(function(){
-        // BUG: If User find the last card, refreshing call loadmore() until it had all card
-        // Limit to 2 extra calls
-        $scope.noMoreData = false;
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-      }, 500);
     }, function() {
-      // Show global error modal
       $scope.openErrorModal();
-      $scope.noMoreData = true;
       $scope.$broadcast('scroll.refreshComplete');
-      $timeout(function(){
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-      }, 500);
+      angular.element(pageName +' .icon-refreshing').removeClass('spin');
     });
   };
 

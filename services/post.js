@@ -128,7 +128,7 @@ angular.module('myApp.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild("voters/" + id).startAt("A").endAt("B").limitToLast(limit).once("value", function(snapshot) {
-        console.log('first post added');
+        console.log('first posts added');
         resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);

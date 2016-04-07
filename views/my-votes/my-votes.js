@@ -32,8 +32,7 @@ angular.module('myApp.myVotes', ['myApp.env'])
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     // Reseting data
-    // $scope.noMoreData = false;
-    // $scope.posts = {};
+    $scope.noMoreData = true;
     newPostLimit = 10;
     postTotalMax = 0;
     totalPostNumber = 0;
@@ -41,30 +40,29 @@ angular.module('myApp.myVotes', ['myApp.env'])
     displayedPost;
 
     Post.getAllPostsVoted($scope.userId, newPostLimit).then(function(postsData) {
+      $scope.posts = {};
       // Increase the total possible number of posts displayed
       postTotalMax += newPostLimit;
       // Check the number of cards retreive
       totalPostNumber = postsData.number;
+      $scope.posts = postsData.values;
+      $scope.$broadcast('scroll.refreshComplete');
+
       if (totalPostNumber === 0) {
         $scope.noMoreData = true;
+        $timeout(function(){
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
+      } else {
+        $timeout(function(){
+          $scope.noMoreData = false;
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
       }
-
-      $scope.posts = postsData.values  ;
-      $scope.$broadcast('scroll.refreshComplete');
-      $timeout(function(){
-        // BUG: If User find the last card, refreshing call loadmore() until it had all card
-        // Limit to 2 extra calls
-        $scope.noMoreData = false;
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-      }, 500);
     }, function() {
-      // Show global error modal
       $scope.openErrorModal();
-      $scope.noMoreData = true;
       $scope.$broadcast('scroll.refreshComplete');
-      $timeout(function(){
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-      }, 500);
+      angular.element(pageName +' .icon-refreshing').removeClass('spin');
     });
   };
 
@@ -101,11 +99,12 @@ angular.module('myApp.myVotes', ['myApp.env'])
         // Less posts than the max possible, then the is no more post available
         if( postsData.number !== postTotalMax ) {
           $scope.noMoreData = true;
+          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit - (postTotalMax - postsData.number))
         } else {
-          var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
-          var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
-          $scope.posts = updatedPost;
+          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
         }
+        updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
+        $scope.posts = updatedPost;
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, function() {

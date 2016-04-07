@@ -51,27 +51,32 @@ angular.module('myApp.postPage', ['myApp.env'])
 
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
-    $scope.noMoreData = false;
-    $scope.currentLastPost = null;
-    // Get the last 10 posts
+    $scope.noMoreData = true;
+
+    // Get the last 10 messages
     Comments.getComments($scope.postId).then(function(commentsData) {
+      $scope.comments = {};
+      $scope.$broadcast('scroll.refreshComplete');
       if (commentsData.number < 10) {
         $scope.comments = commentsData.values;
-        $scope.noMoreData = true;
+        $timeout(function(){
+            angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
       } else {
         // remove the first element, will be display with the next post call
         var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData.values);
         $scope.currentLastPost = cleanedData.currentLastPost
         $scope.comments = cleanedData.obj;
+        $timeout(function(){
+            $scope.noMoreData = false;
+            angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
       }
     }, function() {
       $scope.openErrorModal();
-      $scope.noMoreData = true;
+      $scope.$broadcast('scroll.refreshComplete');
+      angular.element(pageName +' .icon-refreshing').removeClass('spin');
     }); 
-    $scope.$broadcast('scroll.refreshComplete');
-    $timeout(function(){
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-    }, 500);
   };
 
   $scope.loadMore = function() {

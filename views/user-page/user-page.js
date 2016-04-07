@@ -22,8 +22,7 @@ angular.module('myApp.userPage', ['myApp.env'])
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     // Reset all data
-    $scope.noMoreData = false;
-    $scope.posts = {};
+    $scope.noMoreData = true;
     newPostLimit = 6;
     postTotalMax = 0;
     totalPostNumber = 0;
@@ -31,27 +30,28 @@ angular.module('myApp.userPage', ['myApp.env'])
     displayedPost;
 
     Post.getPostsById($scope.user.id, newPostLimit).then(function(postsData) {
+      $scope.posts = {};
       // Increase the total possible number of posts displayed
       postTotalMax += newPostLimit;
-
       totalPostNumber = postsData.number;
-      if (totalPostNumber === 0) {
-        $scope.noMoreData = true;
-      }
-
       $scope.posts = postsData.values;
       $scope.$broadcast('scroll.refreshComplete');
-      $timeout(function(){
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-      }, 500);
+
+      if (totalPostNumber === 0 || postsData.number < postTotalMax) {
+        $scope.noMoreData = true;
+        $timeout(function(){
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
+      } else {
+        $timeout(function(){
+          $scope.noMoreData = false;
+          angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
+      }      
     }, function() {
-      // Show global error modal
       $scope.openErrorModal();
-      $scope.noMoreData = true;
       $scope.$broadcast('scroll.refreshComplete');
-      $timeout(function(){
-        angular.element(pageName +' .icon-refreshing').removeClass('spin');
-      }, 500);
+      angular.element(pageName +' .icon-refreshing').removeClass('spin');
     });
   };
 
