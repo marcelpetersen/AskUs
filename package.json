@@ -1,7 +1,7 @@
 {
-  "name": "firebase-social-login",
-  "version": "1.1.1",
-  "description": "firebase-social-login: An Ionic project",
+  "name": "askus-app",
+  "version": "1.0.0",
+  "description": "askus-app",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-concat": "^2.6.0",
