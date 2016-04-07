@@ -1,4 +1,4 @@
-angular.module('myApp.usersServices', [])
+angular.module('AskUs.usersServices', [])
 
 .factory('usersInfos', ['$window', function($window) {
   var singleUserInfo = {};

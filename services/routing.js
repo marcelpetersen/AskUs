@@ -1,4 +1,4 @@
-angular.module('myApp.routingService', [])
+angular.module('AskUs.routingService', [])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 

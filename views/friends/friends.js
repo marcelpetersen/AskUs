@@ -1,11 +1,11 @@
-angular.module('myApp.friends', ['myApp.env'])
+angular.module('AskUs.friends', ['AskUs.env'])
 
 .controller('friendsCtrl', ['$scope', '$localstorage', 'facebook', '$timeout', 'usersInfos', function($scope, $localstorage, facebook, $timeout, usersInfos) {
   
   $scope.noFriend = false;
   $scope.friendsList;
   var pageName = "#friends-page";
-  var userInfo = $localstorage.get('firebase:session::ionic-fboauth');
+  var userInfo = $localstorage.get('firebase:session::askus-app');
 
   // Animating the loader
   angular.element(pageName +' .loading').css('margin-top', ((screen.height / 2) - 90) + 'px');

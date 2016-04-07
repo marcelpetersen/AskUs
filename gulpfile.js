@@ -39,7 +39,7 @@ gulp.task('copy', function() {
 
 gulp.task('config-files', function () {
   gulp.src('configFile.json')
-  .pipe(gulpNgConfig('myApp.env'))
+  .pipe(gulpNgConfig('AskUs.env'))
   .pipe(gulp.dest('./views'))
 });
 

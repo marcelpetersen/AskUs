@@ -1,4 +1,4 @@
-angular.module('myApp.categoriesService', [])
+angular.module('AskUs.categoriesService', [])
 
 .factory('Categories', ['$q', '$rootScope', 'FirebaseUrl', function($q, $rootScope, FirebaseUrl) {
 

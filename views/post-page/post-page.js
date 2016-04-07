@@ -1,4 +1,4 @@
-angular.module('myApp.postPage', ['myApp.env'])
+angular.module('AskUs.postPage', ['AskUs.env'])
 
 .controller('postCtrl', 
   ['$scope', 'Post', 'Comments', '$stateParams', 'currentUserInfos', 'Vote', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicHistory', '$timeout', 'usersInfos', 

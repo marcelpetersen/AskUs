@@ -1,4 +1,4 @@
-angular.module('myApp.facebookService', [])
+angular.module('AskUs.facebookService', [])
 
 .factory('facebook', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', function($q, $rootScope, FirebaseUrl, currentUserInfos) {
 

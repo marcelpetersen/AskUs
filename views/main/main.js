@@ -1,4 +1,4 @@
-angular.module('myApp.mainController', [])
+angular.module('AskUs.mainController', [])
 
 .controller('MainCtrl', ['$scope', '$rootScope', '$ionicModal', 'Categories', '$ionicSlideBoxDelegate', 'Post', function($scope, $rootScope, $ionicModal, Categories, $ionicSlideBoxDelegate, Post) {
   // Show all the menu side categories

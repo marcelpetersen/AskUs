@@ -1,4 +1,4 @@
-angular.module('myApp.terms', ['myApp.env'])
+angular.module('AskUs.terms', ['AskUs.env'])
 
 .controller('termsCtrl', ['$scope', function($scope) {
 

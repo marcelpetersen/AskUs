@@ -1,4 +1,4 @@
-angular.module('myApp.postService', [])
+angular.module('AskUs.postService', [])
 
 .factory('Post', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', '$state', function($q, $rootScope, FirebaseUrl, currentUserInfos, $state) {
 

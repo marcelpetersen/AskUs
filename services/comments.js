@@ -1,4 +1,4 @@
-angular.module('myApp.commentsService', [])
+angular.module('AskUs.commentsService', [])
 
 .factory('Comments', ['$q', '$rootScope', 'FirebaseUrl', 'currentUserInfos', function($q, $rootScope, FirebaseUrl, currentUserInfos) {
 

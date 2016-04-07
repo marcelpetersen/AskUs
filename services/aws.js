@@ -1,4 +1,4 @@
-angular.module('myApp.awsServices', [])
+angular.module('AskUs.awsServices', [])
 
 .factory('s3Uploader', ['$q','$http', 'DevelopmentAPI', 'ProductionAPI', function($q, $http, DevelopmentAPI, ProductionAPI) {
  

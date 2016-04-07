@@ -1,4 +1,4 @@
-angular.module('myApp.preferences', ['myApp.env'])
+angular.module('AskUs.preferences', ['AskUs.env'])
 
 .controller('preferencesCtrl', ['$scope', 'userAuth', 'currentUserInfos', '$ionicModal', function($scope, userAuth, currentUserInfos, $ionicModal) {
 

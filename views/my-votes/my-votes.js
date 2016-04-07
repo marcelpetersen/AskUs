@@ -1,4 +1,4 @@
-angular.module('myApp.myVotes', ['myApp.env'])
+angular.module('AskUs.myVotes', ['AskUs.env'])
 
 .controller('myVotesCtrl', 
   ['$scope', '$stateParams', '$state', '$ionicSideMenuDelegate', 'Categories', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 

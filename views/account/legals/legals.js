@@ -1,4 +1,4 @@
-angular.module('myApp.legals', ['myApp.env'])
+angular.module('AskUs.legals', ['AskUs.env'])
 
 .controller('legalsCtrl', ['$scope', function($scope) {
 

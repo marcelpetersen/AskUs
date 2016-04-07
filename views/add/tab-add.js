@@ -1,4 +1,4 @@
-angular.module('myApp.addTab', [])
+angular.module('AskUs.addTab', [])
 
 .controller('addCtrl', 
   ['$scope', '$state', 'Post', 'Camera', '$ionicModal', 's3Uploader', '$http', '$rootScope', '$timeout', 'S3_CDN_URL',

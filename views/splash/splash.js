@@ -1,4 +1,4 @@
-angular.module('myApp.splash', ['myApp.env'])
+angular.module('AskUs.splash', ['AskUs.env'])
 
 .controller('splashCtrl', ['$scope', 'userAuth', function($scope, userAuth) {
   

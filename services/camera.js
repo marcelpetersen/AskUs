@@ -1,4 +1,4 @@
-angular.module('myApp.cameraServices', [])
+angular.module('AskUs.cameraServices', [])
 
 .factory('Camera', ['$q', function($q) {
   return {

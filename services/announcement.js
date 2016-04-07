@@ -1,4 +1,4 @@
-angular.module('myApp.announcementService', [])
+angular.module('AskUs.announcementService', [])
 
 .factory('Announcement', ['$q', '$rootScope', '$timeout', 'FirebaseUrl', function($q, $rootScope, $timeout, FirebaseUrl) {
 

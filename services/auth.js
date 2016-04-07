@@ -1,4 +1,4 @@
-angular.module('myApp.authService', [])
+angular.module('AskUs.authService', [])
 
 .factory('Auth', ['rootRef', '$firebaseAuth', function(rootRef, $firebaseAuth) {
   return $firebaseAuth(rootRef);
@@ -9,7 +9,7 @@ angular.module('myApp.authService', [])
   function(Auth, $http, $localstorage, $state, FirebaseUrl, $window, currentUserInfos, $rootScope, DevelopmentAPI, ProductionAPI) {
 
   var isAuth = function() {
-    return !!$localstorage.get('firebase:session::ionic-fboauth');
+    return !!$localstorage.get('firebase:session::askus-app');
   };
 
   var loginWithFacebook = function() {

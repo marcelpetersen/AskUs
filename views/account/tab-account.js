@@ -1,4 +1,4 @@
-angular.module('myApp.acountTab', ['myApp.env'])
+angular.module('AskUs.acountTab', ['AskUs.env'])
 
 .controller('AccountCtrl', ['$scope', 'userAuth', 'currentUserInfos', 'usersInfos', function($scope, userAuth, currentUserInfos, usersInfos) {
 

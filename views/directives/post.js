@@ -1,4 +1,4 @@
-angular.module('myApp.directive', [])
+angular.module('AskUs.directive', [])
 
 .directive('post', function() {
   return {

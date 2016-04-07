@@ -1,4 +1,4 @@
-angular.module('myApp.searchService', [])
+angular.module('AskUs.searchService', [])
 
 .factory('Search', ['$q', '$rootScope', 'FirebaseUrl', function($q, $rootScope, FirebaseUrl) {
 

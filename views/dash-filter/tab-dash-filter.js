@@ -1,4 +1,4 @@
-angular.module('myApp.dashFilterTab', ['myApp.env'])
+angular.module('AskUs.dashFilterTab', ['AskUs.env'])
 
 .controller('DashFilterCtrl', 
   ['$scope', '$stateParams', '$state', '$ionicSideMenuDelegate', 'Categories', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', 

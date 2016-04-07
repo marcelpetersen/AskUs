@@ -1,4 +1,4 @@
-angular.module('myApp.voteService', [])
+angular.module('AskUs.voteService', [])
 
 .factory('Vote', ['$q', '$rootScope', '$timeout', 'FirebaseUrl', 'currentUserInfos', function($q, $rootScope, $timeout, FirebaseUrl, currentUserInfos) {
 

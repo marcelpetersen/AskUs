@@ -1,4 +1,4 @@
-angular.module('myApp.userPage', ['myApp.env'])
+angular.module('AskUs.userPage', ['AskUs.env'])
 
 .controller('userPageCtrl', ['$scope', '$stateParams', 'usersInfos', 'Post', '$timeout', '$ionicModal', '$ionicSlideBoxDelegate', 'Categories', function($scope, $stateParams, usersInfos, Post, $timeout, $ionicModal, $ionicSlideBoxDelegate, Categories) {
   $scope.parentCategory = $stateParams.parentCat;

@@ -1,4 +1,4 @@
-angular.module('myApp.dashTab', ['myApp.env'])
+angular.module('AskUs.dashTab', ['AskUs.env'])
 
 .controller('DashCtrl', 
   ['$scope', '$state', 'Search', '$ionicScrollDelegate', '$ionicSideMenuDelegate', 'Post', '$timeout', '$rootScope', '$ionicModal', '$ionicSlideBoxDelegate', 'usersInfos', 'Vote', 'currentUserInfos', '$ionicNavBarDelegate', 

@@ -1,4 +1,4 @@
-angular.module('myApp.filters', [])
+angular.module('AskUs.filters', [])
 
 .filter('orderObjectBy', function() {
   return function(items, field, reverse) {

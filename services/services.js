@@ -1,4 +1,4 @@
-angular.module('myApp.services', [])
+angular.module('AskUs.services', [])
 
 .factory('$localstorage', ['$window', function($window) {
   return {
