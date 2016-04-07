@@ -9792,6 +9792,8 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   display: block;
   margin-top: 0px;
   margin-bottom: 10px; }
+  .post-pages .page-content .posts-list-container .card:first-child {
+    margin-top: 10px; }
   .post-pages .page-content .posts-list-container .card .item-avatar {
     padding-right: 50px; }
     .post-pages .page-content .posts-list-container .card .item-avatar .user-picture {
@@ -10282,67 +10284,63 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 #user-page .page-content .posts-list-container .loading {
   margin-top: 40px; }
 
-#user-page .page-content .posts-list-container .card:first-child {
-  margin-top: 0px; }
-
-#user-page .page-content .posts-list-container .card:last-child {
-  margin-bottom: 10px; }
-
-#user-page .page-content .posts-list-container .card .item-header {
-  padding-right: 50px; }
-  #user-page .page-content .posts-list-container .card .item-header h2 {
-    font-size: 18px;
-    font-weight: bold;
-    white-space: normal;
-    white-space: nowrap; }
-  #user-page .page-content .posts-list-container .card .item-header .post-link {
-    position: absolute;
-    top: 50%;
-    margin-top: -20px;
-    right: 8px;
-    padding: 0px;
-    border: none;
-    max-width: 40px;
-    max-height: 40px;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #FF4E50;
-    color: #fff; }
-    #user-page .page-content .posts-list-container .card .item-header .post-link i {
-      font-size: 30px;
-      display: block;
-      text-align: center;
-      margin-top: 10px;
-      padding-left: 2px; }
-      #user-page .page-content .posts-list-container .card .item-header .post-link i::before {
-        line-height: 20px; }
-
-#user-page .page-content .posts-list-container .card .item-body .item-image {
-  padding-bottom: 16px; }
-  #user-page .page-content .posts-list-container .card .item-body .item-image .picture {
-    background-color: #EEE;
-    width: 48%;
-    padding-bottom: 48%;
-    background-size: cover;
-    background-position: center center;
-    border-radius: 3px; }
-    #user-page .page-content .posts-list-container .card .item-body .item-image .picture.picture-A {
-      float: left; }
-    #user-page .page-content .posts-list-container .card .item-body .item-image .picture.picture-B {
-      float: right; }
-
-#user-page .page-content .posts-list-container .card .item-body .post-title {
-  font-weight: bold; }
-
-#user-page .page-content .posts-list-container .card .item-body .post-description {
-  font-size: 14px; }
-
-#user-page .page-content .posts-list-container .card .item-body .votes-messages-count .subdued {
-  padding-right: 10px;
-  color: #888;
-  text-decoration: none;
-  color: #FF4E50; }
+#user-page .page-content .posts-list-container .card {
+  margin-top: 10px; }
+  #user-page .page-content .posts-list-container .card:first-child {
+    margin-top: 0px; }
+  #user-page .page-content .posts-list-container .card:last-child {
+    margin-bottom: 10px; }
+  #user-page .page-content .posts-list-container .card .item-header {
+    padding-right: 50px; }
+    #user-page .page-content .posts-list-container .card .item-header h2 {
+      font-size: 18px;
+      font-weight: bold;
+      white-space: normal;
+      white-space: nowrap; }
+    #user-page .page-content .posts-list-container .card .item-header .post-link {
+      position: absolute;
+      top: 50%;
+      margin-top: -20px;
+      right: 8px;
+      padding: 0px;
+      border: none;
+      max-width: 40px;
+      max-height: 40px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: #FF4E50;
+      color: #fff; }
+      #user-page .page-content .posts-list-container .card .item-header .post-link i {
+        font-size: 30px;
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        padding-left: 2px; }
+        #user-page .page-content .posts-list-container .card .item-header .post-link i::before {
+          line-height: 20px; }
+  #user-page .page-content .posts-list-container .card .item-body .item-image {
+    padding-bottom: 16px; }
+    #user-page .page-content .posts-list-container .card .item-body .item-image .picture {
+      background-color: #EEE;
+      width: 48%;
+      padding-bottom: 48%;
+      background-size: cover;
+      background-position: center center;
+      border-radius: 3px; }
+      #user-page .page-content .posts-list-container .card .item-body .item-image .picture.picture-A {
+        float: left; }
+      #user-page .page-content .posts-list-container .card .item-body .item-image .picture.picture-B {
+        float: right; }
+  #user-page .page-content .posts-list-container .card .item-body .post-title {
+    font-weight: bold; }
+  #user-page .page-content .posts-list-container .card .item-body .post-description {
+    font-size: 14px; }
+  #user-page .page-content .posts-list-container .card .item-body .votes-messages-count .subdued {
+    padding-right: 10px;
+    color: #888;
+    text-decoration: none;
+    color: #FF4E50; }
 
 #user-page .page-content .no-more-cards {
   text-align: center; }
@@ -10543,6 +10541,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 
 * {
   box-shadow: none !important; }
+
+.overflow-scroll .scroll {
+  height: auto; }
 
 .scroll-content {
   padding-top: 0px; }

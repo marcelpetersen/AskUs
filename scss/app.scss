@@ -39,6 +39,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   box-shadow: none !important;
 }
 
+// Override height rule on scroll containers
+.overflow-scroll .scroll {
+  height: auto;
+}
+
 // Remove extra top padding, remove white line between header and content
 .scroll-content {
   padding-top: 0px;

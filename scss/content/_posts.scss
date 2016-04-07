@@ -2,6 +2,9 @@
   .page-content {
     .posts-list-container {
       .card {
+        &:first-child {
+          margin-top: 10px;
+        }
         display: block;
         margin-top: 0px;
         margin-bottom: 10px;
