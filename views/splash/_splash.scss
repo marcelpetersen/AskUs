@@ -10,12 +10,16 @@
         -webkit-justify-content: center;
         flex-direction:column;
         -webkit-flex-direction:column;
-        background-image:url('../img/account-bg.jpg');
-        background-size: cover;
-        background-position: 50% 50%;
+        // background-image:url('../img/account-bg.jpg');
+        // background-size: cover;
+        // background-position: 50% 50%;
+        background: -webkit-linear-gradient(135deg, $mainColor 1%,lighten($mainColor, 10%) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, $mainColor 1%,lighten($mainColor, 10%) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
-        h2 {
+        h1 {
           color: white;
+          font-size: 60px;
+          margin-bottom: 30px;
         }
 
         button {
@@ -23,7 +27,7 @@
           background-color: #3b5998;
           color: #FFFFFF;
           font-weight: bold;
-          border: 1px solid #8b9dc3;
+          border: 1px solid #AAA;
           i {
             margin-right: 20px;
           }
