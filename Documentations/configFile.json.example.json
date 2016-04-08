@@ -1,0 +1,8 @@
+{
+  "FBAppId": "YourFacebookAppId",
+  "FirebaseUrl": "YourFirebaseURL",
+  "S3_CDN_URL": "YourAWSCdnUrl",
+  "DevelopmentAPI": "http://127.0.0.1:8000_or_YourDevServerApiUrl",
+  "ProductionAPI": "YourProductionServerApiUrl",
+  "GoogleAnalyticsId": "YourGoogleAnalyticsTrackingId"
+}

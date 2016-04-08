@@ -1,0 +1,54 @@
+// Improve performance
+* {
+  box-shadow: none !important;
+}
+
+// Override height rule on scroll containers
+.overflow-scroll .scroll {
+  height: auto;
+}
+
+// Remove extra top padding, remove white line between header and content
+.scroll-content {
+  padding-top: 0px;
+}
+
+.pane, .view {
+  background-color: $bg-color;
+}
+
+.loading {
+  text-align: center;
+  .loading-icon {
+    font-size: 30px;
+  }
+}
+
+pre {
+  font-family: inherit;
+}
+
+.ion-load-c {
+  color: $mainColor !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.button.btn-form-submit, .button.btn-search-submit, .button.btn[type="submit"] {
+  background-color: $mainColor;
+  &.activated {
+    background-color:lighten( $mainColor, 5% );
+  }
+}
+
+.spin {
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+// Fade effect custom
+.fadein-effect {
+ @include animationEffect(0.5s, fadeEffect);
+}

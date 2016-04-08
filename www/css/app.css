@@ -9749,6 +9749,49 @@ a.button {
   fill: #FF4E50;
   font-weight: bold; }
 
+* {
+  box-shadow: none !important; }
+
+.overflow-scroll .scroll {
+  height: auto; }
+
+.scroll-content {
+  padding-top: 0px; }
+
+.pane, .view {
+  background-color: #e9eaed; }
+
+.loading {
+  text-align: center; }
+  .loading .loading-icon {
+    font-size: 30px; }
+
+pre {
+  font-family: inherit; }
+
+.ion-load-c {
+  color: #FF4E50 !important; }
+
+.hide {
+  display: none !important; }
+
+.button.btn-form-submit, .button.btn-search-submit, .button.btn[type="submit"] {
+  background-color: #FF4E50; }
+  .button.btn-form-submit.activated, .button.btn-search-submit.activated, .button.btn[type="submit"].activated {
+    background-color: #ff6869; }
+
+.spin {
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite; }
+
+.fadein-effect {
+  animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  animation-name: fadeEffect;
+  -webkit-animation-name: fadeEffect;
+  -moz-animation-name: fadeEffect; }
+
 body.menu-open .bar-header .header-item .left-buttons .side-menu {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
@@ -10541,46 +10584,3 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
         padding-top: 1px; }
     #how-to-use-page .page-content .scroll .slider .slider-pager .slider-pager-page.active {
       color: #FF4E50; }
-
-* {
-  box-shadow: none !important; }
-
-.overflow-scroll .scroll {
-  height: auto; }
-
-.scroll-content {
-  padding-top: 0px; }
-
-.pane, .view {
-  background-color: #e9eaed; }
-
-.loading {
-  text-align: center; }
-  .loading .loading-icon {
-    font-size: 30px; }
-
-pre {
-  font-family: inherit; }
-
-.ion-load-c {
-  color: #FF4E50 !important; }
-
-.hide {
-  display: none !important; }
-
-.button.btn-form-submit, .button.btn-search-submit, .button.btn[type="submit"] {
-  background-color: #FF4E50; }
-  .button.btn-form-submit.activated, .button.btn-search-submit.activated, .button.btn[type="submit"].activated {
-    background-color: #ff6869; }
-
-.spin {
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite; }
-
-.fadein-effect {
-  animation-duration: 0.5s;
-  -webkit-animation-duration: 0.5s;
-  -moz-animation-duration: 0.5s;
-  animation-name: fadeEffect;
-  -webkit-animation-name: fadeEffect;
-  -moz-animation-name: fadeEffect; }
