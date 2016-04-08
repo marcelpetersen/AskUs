@@ -58,7 +58,7 @@ angular.module('AskUs.userPage', ['AskUs.env'])
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     if (totalPostNumber === 0) {
-      angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
+      angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 130) + 'px');
       // Get the previous last 5 posts
       Post.getPostsById($scope.user.id, newPostLimit).then(function(postsData) {
         // Increase the total possible number of posts displayed

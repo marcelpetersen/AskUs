@@ -21,7 +21,7 @@
             <a href="#/tab/{{::parentCategory}}/user/{{::post.userId}}/{{::parentCategory}}" on-touch="::userPage(post.userId,post.userName,post.userPicture)"> {{::post.userName}}
             </a>
           </h2>
-          <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
+          <p>{{::post.time | date : 'MMM d, HH:mm'}}</p>
         </div>
 
         <div class="item item-body">
@@ -87,7 +87,7 @@
       distance="1%">
     </ion-infinite-scroll>
 
-    <p class="no-more-messages" ng-if="noMoreData">No more messages</p>
+    <p class="no-more-messages" ng-if="noMoreData">No more comments</p>
 
     <script id="post-delete-modal.html" type="text/ng-template">
       <div class="default-modal modal transparent">

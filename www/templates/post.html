@@ -4,7 +4,7 @@
             <a href="#/tab/{{::pageOriginName}}/user/{{::post.userId}}/{{::pageOriginName}}" on-touch="::userPage(post.userId,post.userName,post.userPicture)"> {{::post.userName}}
             </a>
           </h2>
-          <p>{{::post.time | date : 'MMM d, y HH:mm:ss'}}</p>
+          <p>{{::post.time | date : 'MMM d, HH:mm'}}</p>
           <a href="#/tab/{{::pageOriginName}}/post/{{::post.$key}}/{{::pageOriginName}}" class="item post-link">
             <i class="icon ion-ios-arrow-right"></i>
           </a>
