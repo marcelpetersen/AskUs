@@ -15,24 +15,10 @@
         bottom: 0px;
         left: 0px;
         right: 0px;
-        // background-color: $mainColor;
-        // background: -webkit-linear-gradient(45deg, #1e5799 0%,#2989d8 48%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
-        // background: linear-gradient(45deg, #1e5799 0%,#2989d8 48%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        // background: -webkit-linear-gradient(180deg, $mainColor 1%,#f7bc5d 100%); /* Chrome10-25,Safari5.1-6 */
-        // background: linear-gradient(180deg, $mainColor 1%,#f7bc5d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
-        background: -webkit-linear-gradient(180deg, $mainColor 1%,lighten($mainColor, 10%) 100%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(180deg, $mainColor 1%,lighten($mainColor, 10%) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        background: -webkit-linear-gradient(180deg, $mainColor 1%,lighten($mainColor, 10%) 100%);
+        background: linear-gradient(180deg, $mainColor 1%,lighten($mainColor, 10%) 100%);
 
-        // ***** With Image *****
-        // background-image:url('../img/account-bg.jpg');
-        // background-size: cover;
-        // background-position: 50% 50%;
-        // -webkit-filter: blur(2px);
-        // -moz-filter: blur(2px);
-        // -o-filter: blur(2px);
-        // -ms-filter: blur(2px);
-        // filter: blur(2px);
         z-index: -1;
       }
       .user-picture {
@@ -40,16 +26,14 @@
         display: inline-block;
         width: 20%;
         padding-bottom: 20%;
-        // margin-left: 5%;
         background-size: cover;
         background-position: center center;
       }
       h2 {
-        // width: 75%;
         padding:0% 5%;
         font-size: 20px;
         margin-top: 10px;
-        color: white;
+        color: $light;
         font-weight: bold;
       }
     }
@@ -82,7 +66,6 @@
           }
           .post-link {
             position: absolute;
-            // top: 16px;
             top: 50%;
             margin-top: -20px;
             right: 8px;

@@ -9760,14 +9760,15 @@ a.button {
 
 .pane, .view {
   background-color: #e9eaed; }
+  .pane .card, .view .card {
+    border-radius: 5px !important; }
+  .pane pre, .view pre {
+    font-family: inherit; }
 
 .loading {
   text-align: center; }
   .loading .loading-icon {
     font-size: 30px; }
-
-pre {
-  font-family: inherit; }
 
 .ion-load-c {
   color: #FF4E50 !important; }
@@ -9848,8 +9849,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       width: 100%;
       height: 100%;
       border-radius: 50%;
+      background-repeat: no-repeat;
       background-size: cover;
-      background-position: center center; }
+      background-position: 50% 50%; }
     .post-pages .page-content .posts-list-container .card .item-avatar h2 a {
       color: inherit;
       text-decoration: none; }
@@ -9883,8 +9885,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
         background-color: #EEE;
         width: 48%;
         padding-bottom: 48%;
+        background-repeat: no-repeat;
         background-size: cover;
-        background-position: center center;
+        background-position: 50% 50%;
         border-radius: 3px; }
         .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture.picture-A {
           float: left; }
@@ -9894,7 +9897,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
           display: none;
           position: absolute;
           top: 5px;
-          background-color: #FFF;
+          background-color: #fff;
           border-radius: 50%;
           width: 20px;
           height: 20px;
@@ -9970,7 +9973,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    color: white;
+    color: #fff;
     border: none;
     text-align: center;
     font-size: 16px;
@@ -10218,9 +10221,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   flex-direction: column;
   -webkit-flex-direction: column;
   background: -webkit-linear-gradient(135deg, #FF4E50 1%, #ff8182 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #FF4E50 1%, #ff8182 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ }
+  background: linear-gradient(135deg, #FF4E50 1%, #ff8182 100%); }
   #splash-page .page-content .section.first h1 {
     color: white;
     font-size: 60px;
@@ -10228,7 +10229,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   #splash-page .page-content .section.first button {
     width: 80%;
     background-color: #3b5998;
-    color: #FFFFFF;
+    color: #fff;
     font-weight: bold;
     border: 1px solid #AAA; }
     #splash-page .page-content .section.first button i {
@@ -10277,7 +10278,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     background-color: #FF4E50;
     transition: all 0.5s ease; }
     #post-add-page .page-content form .list .no-errors input, #post-add-page .page-content form .list .no-errors textarea {
-      color: white;
+      color: #fff;
       transition: all 0.2s ease; }
   #post-add-page .page-content form .btn-form-submit {
     width: 60%;
@@ -10304,9 +10305,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     left: 0px;
     right: 0px;
     background: -webkit-linear-gradient(180deg, #FF4E50 1%, #ff8182 100%);
-    /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(180deg, #FF4E50 1%, #ff8182 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     z-index: -1; }
   #user-page .page-content .user-info .user-picture {
     border-radius: 50%;
@@ -10319,7 +10318,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     padding: 0% 5%;
     font-size: 20px;
     margin-top: 10px;
-    color: white;
+    color: #fff;
     font-weight: bold; }
 
 #user-page .page-content .posts-list-container .no-post  {
@@ -10480,9 +10479,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     left: 0px;
     right: 0px;
     background: -webkit-linear-gradient(180deg, #FF4E50 1%, #ff8182 100%);
-    /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(180deg, #FF4E50 1%, #ff8182 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     z-index: -1; }
   #account-page .page-content .list .account-tab-user .user-pic {
     background-size: cover;
@@ -10495,7 +10492,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       margin-top: 100%; }
   #account-page .page-content .list .account-tab-user h2 {
     margin-top: 20px;
-    color: white;
+    color: #fff;
     font-weight: bold; }
 
 #account-page .page-content .list .item.logout-item {
@@ -10582,5 +10579,56 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
         background-color: #FF4E50;
         color: #fff;
         padding-top: 1px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box .icon-box {
+        display: inline-block;
+        background-color: #FF4E50;
+        width: 80px;
+        padding: 10px 0px;
+        border-radius: 50%; }
+        #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box .icon-box i {
+          color: #e9eaed;
+          font-size: 60px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.start h2 {
+        padding: 0px 10px;
+        margin-bottom: 40px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.start .content i {
+        font-size: 70px;
+        color: #FF4E50; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.start .content p {
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 30px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.facebook h2 {
+        padding: 0px 10px;
+        margin-bottom: 40px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.facebook p {
+        font-size: 20px;
+        line-height: 25px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        padding: 0 20px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.posts .expand-desc {
+        margin-bottom: 50px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.posts .icon-box {
+        margin-bottom: 20px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.posts p {
+        padding: 0 20px;
+        font-size: 20px;
+        line-height: 25px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms .icon-box {
+        padding: 8px 0 12px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms h2 {
+        text-decoration: underline;
+        margin-bottom: 40px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms ul li {
+        font-size: 25px;
+        margin-bottom: 15px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms p {
+        margin-top: 60px;
+        padding: 0px 10px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.lets-go h2 {
+        padding: 0 10px;
+        line-height: 50px; }
     #how-to-use-page .page-content .scroll .slider .slider-pager .slider-pager-page.active {
       color: #FF4E50; }

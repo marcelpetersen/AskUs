@@ -28,10 +28,9 @@ angular.module('AskUs.postPage', ['AskUs.env'])
       if(!$scope.post.voters) {
         $scope.post.voters = {};
       }
-    $timeout(function(){
-      $scope.checkVote($scope.post)
-    }, 0);
-    
+      $timeout(function(){
+        $scope.checkVote($scope.post)
+      }, 0);
     }, function() {
       // Show global error modal
       $scope.openErrorModal();
@@ -96,11 +95,6 @@ angular.module('AskUs.postPage', ['AskUs.env'])
           $scope.currentLastPost = cleanedData.currentLastPost
           $scope.comments = cleanedData.obj;
         }
-
-        // //If no messages
-        // if(!cleanedData.currentLastPost) {
-        //    $scope.noMoreData = true;
-        // }
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
@@ -303,7 +297,6 @@ angular.module('AskUs.postPage', ['AskUs.env'])
       })
     } else {
       // Show the form empty fields error
-      // $scope.openErrorFormModal();
       $scope.postFormError = true;
       console.log('Form submit error');
       // Hide comment sending loading block
@@ -312,6 +305,7 @@ angular.module('AskUs.postPage', ['AskUs.env'])
   }; 
 
   // ****** Modal functions ******
+  // --- Delete Modal Form ---
   $ionicModal.fromTemplateUrl('post-delete-modal.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'
@@ -329,6 +323,7 @@ angular.module('AskUs.postPage', ['AskUs.env'])
     $scope.deleteModal.hide();
   };
 
+  // --- Comment Modal Form ---
   $ionicModal.fromTemplateUrl('display-form.html', {
     scope: $scope,
     animation: 'slide-in-up'

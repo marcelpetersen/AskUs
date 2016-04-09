@@ -14,6 +14,89 @@
               color: $light;
               padding-top: 1px
             }
+            .box {
+              .icon-box {
+                display: inline-block;
+                background-color: $mainColor;
+                width: 80px;
+                padding:10px 0px;
+                border-radius: 50%;
+                i {
+                  color: $bg-color;
+                  font-size: 60px;
+                }
+              }
+              &.start {
+                h2 {
+                  padding: 0px 10px;
+                  margin-bottom: 40px;
+                }
+                .content {
+                  i {
+                    font-size: 70px;
+                    color: $mainColor
+                  }
+                  p {
+                    font-weight: bold;
+                    font-size: 20px;
+                    margin-top: 10px;
+                    margin-bottom: 30px;
+                  }
+                }
+              }
+              &.facebook {
+                h2 {
+                  padding: 0px 10px;
+                  margin-bottom: 40px;
+                }
+                p {
+                  font-size: 20px;
+                  line-height: 25px;
+                  margin-top: 20px;
+                  margin-bottom: 30px;
+                  padding: 0 20px;
+                } 
+              }
+              &.posts {
+                .expand-desc {
+                    margin-bottom: 50px;
+                }
+
+                .icon-box {
+                  margin-bottom: 20px;
+                }
+                p {
+                  padding: 0 20px;
+                  font-size: 20px;
+                  line-height: 25px;
+                }
+              }
+              &.terms {
+                .icon-box {
+                  padding: 8px 0 12px;
+                }
+                h2 {
+                  text-decoration: underline;
+                  margin-bottom: 40px;
+                }
+                ul {
+                  li {
+                    font-size: 25px;
+                    margin-bottom: 15px;
+                  }
+                }
+                p {
+                  margin-top: 60px;
+                  padding: 0px 10px;
+                }
+              }
+              &.lets-go {
+                h2 {
+                  padding: 0 10px;
+                  line-height: 50px;
+                }
+              }
+            }
           }
         }
         .slider-pager {

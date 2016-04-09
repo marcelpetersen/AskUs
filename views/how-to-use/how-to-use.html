@@ -2,23 +2,74 @@
   <ion-content class="page-content">
 
     <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true">
+          
       <ion-slide>
-        <div class="box blue">
-          <h1>Page 1</h1>
+        <div class="box start">
+          <h2>AskUs is helping people to make a choice</h2>
+          <div class="content">
+            <i class="ion-plus-circled"></i>
+            <p>Add new post</p>
+            <i class="ion-checkmark-circled"></i>
+            <p>Vote</p>
+            <i class="ion-pie-graph"></i>
+            <p>Check the results</p>
+          </div>
         </div>
       </ion-slide>
-      <ion-slide>
-        <div class="box yellow">
-          <h1>Page 2</h1>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box pink">
-          <h1>Page 3</h1>
 
-          <a href="#/tab/dash/" class="button dash-redirection">Got it</a>
+      <ion-slide>
+        <div class="box facebook">
+          <div class="icon-box fb-icon"> 
+            <i class="ion-social-facebook"></i>
+          </div>
+          <h2>Your <b>Facebook</b> friends</h2>
+          <p>Check their activities</p>
+          <p>Vote their posts</p>
+          <p>Add comments and explain your vote</p>
         </div>
       </ion-slide>
+
+      <ion-slide>
+        <div class="box posts">
+          <div class="icon-box expand"> 
+            <i class="ion-arrow-expand"></i>
+          </div>
+          <p class="expand-desc">Touch a picture to Zoom</p>
+        
+          <div class="icon-box vote"> 
+            <i class="ion-checkmark-circled"></i>
+          </div>
+          <p>Touch a Vote Box to add your choice</p>
+          <p>And see what the community has voted</p>
+
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <div class="box terms">
+          <div class="icon-box alert-icon"> 
+            <i class="ion-alert-circled"></i>
+          </div>
+          <h2>Please No</h2>
+          <ul>
+            <li>Hate speeches</li>
+            <li>Threatenings</li>
+            <li>Pornographic contents</li>
+            <li>Incitement to violence</li>
+            <li>Nudity</li>
+            <li>Gratuitous violence</li>
+          </ul>
+          <p>Please check our Terms & Conditions agreements in the Informations section</p>
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <div class="box lets-go">
+          <h2>Are you ready to Share, Help and Vote?</h2>
+          <a href="#/tab/dash/" class="button dash-redirection">Let's Go!</a>
+        </div>
+      </ion-slide>
+
     </ion-slide-box>
 
   </ion-content>

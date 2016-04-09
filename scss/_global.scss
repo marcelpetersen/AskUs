@@ -1,4 +1,4 @@
-// Improve performance
+// Improve performances
 * {
   box-shadow: none !important;
 }
@@ -15,27 +15,33 @@
 
 .pane, .view {
   background-color: $bg-color;
+  .card {
+    border-radius: 5px !important;
+  }
+
+  // Keep posts and comments style and new lines
+  pre {
+    font-family: inherit;
+  }
 }
 
+// Loading block and icons
 .loading {
   text-align: center;
   .loading-icon {
     font-size: 30px;
   }
 }
-
-pre {
-  font-family: inherit;
-}
-
 .ion-load-c {
   color: $mainColor !important;
 }
 
+// Hide global 
 .hide {
     display: none !important;
 }
 
+// Form style
 .button.btn-form-submit, .button.btn-search-submit, .button.btn[type="submit"] {
   background-color: $mainColor;
   &.activated {
@@ -43,6 +49,8 @@ pre {
   }
 }
 
+
+// Animations
 .spin {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;

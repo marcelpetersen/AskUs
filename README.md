@@ -1,6 +1,6 @@
 # AskUs Application
 
-Get the App here at :
+Get the App here :
 [AskUs on AppStore](https://URL)
 
 Please check the website at :
@@ -15,6 +15,7 @@ AskUs is available only on mobile devices.
 
 * FRONT
 	* **Ionic** Framework	
+  * **Cordova**
 	* **AngularJS** Framework
 	* **Sass** for CSS
 * BACK
