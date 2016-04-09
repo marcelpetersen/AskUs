@@ -59,7 +59,7 @@
               }
               &.posts {
                 .expand-desc {
-                    margin-bottom: 50px;
+                  margin-bottom: 50px;
                 }
 
                 .icon-box {
@@ -103,6 +103,54 @@
           .slider-pager-page {
             &.active {
               color: $mainColor;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-height: 481px) {
+    .page-content {
+      .scroll {
+        .slider {
+          .slider-slides {
+            .slider-slide {
+              .box {
+                h2 {
+                  font-size: 20px;
+                }
+                .content {
+                  i {
+                    font-size: 30px !important;
+                  }
+                }
+                &.posts {
+                  .icon-box {
+                    width: 60px;
+                  }
+                  i {
+                    font-size: 40px !important;
+                  }
+                }
+                &.terms {
+                  .icon-box {
+                    width: 60px;
+                  }
+                  i {
+                    font-size: 40px !important;
+                  }
+                  h2 {
+                    margin: 20px 0px;
+                  }
+                  ul li {
+                    font-size: 15px !important;
+                  }
+                  p {
+                    margin-top: 20px;
+                    font-size: 12px;
+                  }
+                }
+              }
             }
           }
         }

@@ -10632,3 +10632,24 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
         line-height: 50px; }
     #how-to-use-page .page-content .scroll .slider .slider-pager .slider-pager-page.active {
       color: #FF4E50; }
+
+@media (max-height: 481px) {
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box h2 {
+    font-size: 20px; }
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box .content i {
+    font-size: 30px !important; }
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.posts .icon-box {
+    width: 60px; }
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.posts i {
+    font-size: 40px !important; }
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms .icon-box {
+    width: 60px; }
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms i {
+    font-size: 40px !important; }
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms h2 {
+    margin: 20px 0px; }
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms ul li {
+    font-size: 15px !important; }
+  #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.terms p {
+    margin-top: 20px;
+    font-size: 12px; } }
