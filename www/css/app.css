@@ -10260,7 +10260,8 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 
 #friends-page .noFriends {
   text-align: center;
-  margin-top: 20px; }
+  margin-top: 20px;
+  color: #999; }
 
 #friends-page .item-content .icon {
   color: #FF4E50; }
@@ -10310,10 +10311,13 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     border-radius: 5px; }
 
 #dash-page .page-content .no-more-cards {
-  text-align: center; }
+  text-align: center;
+  color: #999; }
 
-#dash-filter-page .page-content .no-more-cards {
-  text-align: center; }
+#dash-filter-page .page-content .no-more-posts, #dash-filter-page .page-content .no-post {
+  text-align: center;
+  margin-top: 20px;
+  color: #999; }
 
 #user-page .page-content .user-info {
   position: relative;
@@ -10348,7 +10352,8 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 #user-page .page-content .posts-list-container .no-post  {
   margin-top: 40px;
   text-align: center;
-  font-size: 16px; }
+  font-size: 16px;
+  color: #999; }
 
 #user-page .page-content .posts-list-container .loading {
   margin-top: 40px; }
@@ -10412,7 +10417,8 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     color: #FF4E50; }
 
 #user-page .page-content .no-more-cards {
-  text-align: center; }
+  text-align: center;
+  color: #999; }
 
 #post-page .page-content .comments-container .card {
   margin-bottom: 10px;
@@ -10447,11 +10453,13 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       padding-top: 5px; }
 
 #post-page .page-content .no-more-messages {
-  text-align: center; }
+  text-align: center;
+  color: #999; }
 
 #post-page .noComments {
   text-align: center;
-  margin-top: 20px; }
+  margin-top: 20px;
+  color: #999; }
 
 #post-page .message-form-link {
   color: #33cd5f;
@@ -10601,7 +10609,8 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 
 #my-votes-page .page-content .no-more-cards, #my-votes-page .page-content .no-votes {
   margin-top: 20px;
-  text-align: center; }
+  text-align: center;
+  color: #999; }
 
 #how-to-use-page .page-content .scroll {
   width: 100%;

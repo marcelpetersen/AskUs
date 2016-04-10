@@ -9,6 +9,7 @@ angular.module('AskUs.dashFilterTab', ['AskUs.env'])
   $scope.posts;
   $scope.aImages;
   $scope.noMoreData = false;
+  $scope.noPost = false;
   $scope.postDelete = {};
 
   var newPostLimit = 6;
@@ -49,6 +50,10 @@ angular.module('AskUs.dashFilterTab', ['AskUs.env'])
       totalPostNumber = postsData.number;
       $scope.$broadcast('scroll.refreshComplete');
 
+      if( totalPostNumber === 0) {
+        $scope.noPost = true;
+      }
+
       if (totalPostNumber === 0 || postsData.number < postTotalMax) {
         $scope.noMoreData = true;
         $timeout(function(){
@@ -77,6 +82,11 @@ angular.module('AskUs.dashFilterTab', ['AskUs.env'])
         postTotalMax += newPostLimit;
         // Check the number of cards retreive
         totalPostNumber = postsData.number;
+
+        if (totalPostNumber === 0) {
+          $scope.noPost = true;
+        }
+
         if (totalPostNumber === 0 || postsData.number < postTotalMax) {
           $scope.noMoreData = true;
         }

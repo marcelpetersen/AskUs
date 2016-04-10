@@ -22,8 +22,8 @@
       distance="1%">
     </ion-infinite-scroll>
 
-
-    <p class="no-more-cards" ng-if="noMoreData">No more cards</p>
+    <p class="no-post" ng-show="noPost">No post yet in this category</p>
+    <p class="no-more-posts" ng-hide="noPost" ng-if="noMoreData">No more posts</p>
 
     <script id="post-delete-modal.html" type="text/ng-template">
       <div class="default-modal modal transparent">
