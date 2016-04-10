@@ -36,14 +36,10 @@
         </label>
 
         <label class="item item-input" ng-class="{ 'has-errors' : postForm.title.$invalid, 'no-errors' : postForm.title.$valid}">
-          <!-- <span class="input-label">Title</span> -->
-          <input type="text" name="title" ng-model="post.title" placeholder="Title" required>
+          <input type="text" name="title" maxlength="150" ng-model="post.title" placeholder="Title" required>
         </label>
         <label class="item item-input" ng-class="{ 'has-errors' : postForm.description.$invalid, 'no-errors' : postForm.description.$valid}">
-          <!-- <span class="input-label">Description</span> -->
-          <!-- <input type="text" placeholder="Last Name"> -->
-          <!-- <input type="text" placeholder="Description" rows="4" name="description" ng-model="post.description" required> -->
-          <textarea placeholder="Description" rows="3" name="description" ng-model="post.description" required></textarea>
+          <textarea placeholder="Description" maxlength="200" rows="3" name="description" ng-model="post.description" required></textarea>
         </label>
       </div>
 
