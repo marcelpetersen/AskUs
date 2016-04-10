@@ -12,7 +12,7 @@
     <i class="ion ion-load-c loading-icon"></i>
   </div>
 
-  <p ng-show="noFriend">No Friends</p>
+  <p class="noFriends" ng-show="noFriend">No friends yet</p>
 
     <ion-list>
       <ion-item class="item-avatar item-icon-right fadein-effect" ng-repeat="friend in friendsList" on-touch="friendPage(friend)" type="item-text-wrap" href="#/tab/friends/user/{{::friend.id}}/friends">

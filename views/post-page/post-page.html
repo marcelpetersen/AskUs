@@ -87,7 +87,8 @@
       distance="1%">
     </ion-infinite-scroll>
 
-    <p class="no-more-messages" ng-if="noMoreData">No more comments</p>
+    <p class="no-more-messages" ng-hide="noComments" ng-if="noMoreData">No more comments</p>
+    <p class="noComments" ng-show="noComments">No comments yet</p>
 
     <script id="post-delete-modal.html" type="text/ng-template">
       <div class="default-modal modal transparent">

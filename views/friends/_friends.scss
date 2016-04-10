@@ -1,6 +1,14 @@
 #friends-page {
+  img {
+    @include backgroundImg();
+    background-image: url('../img/user-default-small.png');
+  }
   h2 {
     margin-top: 10px;
+  }
+  .noFriends {
+    text-align: center;
+    margin-top: 20px;
   }
   .item-content {
     .icon {

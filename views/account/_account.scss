@@ -32,10 +32,20 @@
           background-position: 50% 50%;
           border-radius: 50%;
           width: 30%;
-          &:after {
+          position: relative;
+
+          &::after {
             content:"";
             display: block;
             margin-top: 100%;
+          }
+          &::before {
+            @include absolutePos(0px, 0px, 0px, 0px);
+            content:"";
+            display: block;
+            @include backgroundImg();
+            background-image: url('../img/user-default.png');
+            z-index: -1;
           }
         }
         h2 {

@@ -8,11 +8,13 @@
           padding: 10px;
           .user-infos-container {
             .user-picture {
+              position: relative;
               border-radius: 50%;
               display: inline-block;
               width: 30px;
               height: 30px;
               @include backgroundImg();
+              background-image: url('../img/user-default-small.png');
             }
             .user {
               color: inherit;
@@ -40,6 +42,10 @@
     .no-more-messages {
       text-align: center;
     }
+  }
+  .noComments {
+    text-align: center;
+    margin-top: 20px;
   }
   .message-form-link {
     color: $balanced;

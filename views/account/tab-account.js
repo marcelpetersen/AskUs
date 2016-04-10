@@ -4,6 +4,8 @@ angular.module('AskUs.acountTab', ['AskUs.env'])
 
   $scope.user = currentUserInfos.currentUserInfoGet();
 
+  console.log($scope.user);
+
   $scope.logoutFacebook = function() {
     userAuth.logoutFacebook();
   };

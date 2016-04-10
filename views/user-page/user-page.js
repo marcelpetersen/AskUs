@@ -37,6 +37,10 @@ angular.module('AskUs.userPage', ['AskUs.env'])
       $scope.posts = postsData.values;
       $scope.$broadcast('scroll.refreshComplete');
 
+      if (totalPostNumber === 0) {
+          $scope.noPost = true;
+      }
+
       if (totalPostNumber === 0 || postsData.number < postTotalMax) {
         $scope.noMoreData = true;
         $timeout(function(){
@@ -67,6 +71,10 @@ angular.module('AskUs.userPage', ['AskUs.env'])
         totalPostNumber = postsData.number;
         if (totalPostNumber === 0 || postsData.number < postTotalMax) {
           $scope.noMoreData = true;
+        }
+
+        if (totalPostNumber === 0) {
+          $scope.noPost = true;
         }
 
         $scope.posts = postsData.values;

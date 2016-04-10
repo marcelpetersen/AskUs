@@ -9,6 +9,7 @@ angular.module('AskUs.postPage', ['AskUs.env'])
   $scope.parentCategory = $stateParams.parentCat;
   $scope.postId = $stateParams.postId;
   $scope.commentSending = false;
+  $scope.noComments = false;
   $scope.commentObj = {
     message: ""
   };
@@ -56,12 +57,20 @@ angular.module('AskUs.postPage', ['AskUs.env'])
     Comments.getComments($scope.postId).then(function(commentsData) {
       $scope.comments = {};
       $scope.$broadcast('scroll.refreshComplete');
-      if (commentsData.number < 10) {
+
+      if (commentsData.number === 0) {
+        $scope.noComments = true;
+        $timeout(function(){
+            angular.element(pageName +' .icon-refreshing').removeClass('spin');
+        }, 1500);
+      } else if (commentsData.number < 10) {
+        $scope.noComments = false;
         $scope.comments = commentsData.values;
         $timeout(function(){
             angular.element(pageName +' .icon-refreshing').removeClass('spin');
         }, 1500);
       } else {
+        $scope.noComments = false;
         // remove the first element, will be display with the next post call
         var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData.values);
         $scope.currentLastPost = cleanedData.currentLastPost
@@ -85,10 +94,18 @@ angular.module('AskUs.postPage', ['AskUs.env'])
       // Get the previous last 10 posts
       Comments.getComments($scope.postId).then(function(commentsData) {
 
-        if (commentsData.number < 10) {
+        if (commentsData.number === 0) {
+          $scope.noComments = true;
+          $scope.noMoreData = true;
+          $timeout(function(){
+              angular.element(pageName +' .icon-refreshing').removeClass('spin');
+          }, 1500);
+        } else if (commentsData.number < 10) {
+          $scope.noComments = false;
           $scope.comments = commentsData.values;
           $scope.noMoreData = true;
         } else {
+          $scope.noComments = false;
           // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
           var cleanedData = Post.getAndDeleteFirstElementInObject(commentsData.values);
           // Get the last element timestamp

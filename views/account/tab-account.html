@@ -5,7 +5,9 @@
       <ion-item class="account-tab-user">
         <div class="background-picture"></div>
 
-        <div class="user-pic" ng-style="{'background-image':'url({{::user.profileImageURL}})'}"></div>
+        <!-- <div class="user-pic" ng-style="{'background-image':'url({{::user.profileImageURL}})'}"></div> -->
+        <div class="user-pic" ng-style="{'background-image':'url(//graph.facebook.com/{{::user.id}}/picture?width=250&height=250)'}"></div>
+
         <h2>{{::user.displayName}}</h2>
       </ion-item>
 

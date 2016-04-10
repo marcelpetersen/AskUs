@@ -5,6 +5,7 @@ angular.module('AskUs.myVotes', ['AskUs.env'])
   function($scope, $stateParams, $state, $ionicSideMenuDelegate, Categories, Post, $timeout, $rootScope, $ionicModal, $ionicSlideBoxDelegate, usersInfos, Vote, currentUserInfos) {
 
   var pageName = '#my-votes-page';
+  $scope.noVotes = false;
   $scope.pageOriginName = 'account';
   $scope.postDelete = {};
   $scope.posts;
@@ -49,11 +50,13 @@ angular.module('AskUs.myVotes', ['AskUs.env'])
       $scope.$broadcast('scroll.refreshComplete');
 
       if (totalPostNumber === 0) {
+        $scope.noVotes = true;
         $scope.noMoreData = true;
         $timeout(function(){
           angular.element(pageName +' .icon-refreshing').removeClass('spin');
         }, 1500);
       } else {
+        $scope.noVotes = false;
         $timeout(function(){
           $scope.noMoreData = false;
           angular.element(pageName +' .icon-refreshing').removeClass('spin');
@@ -77,6 +80,7 @@ angular.module('AskUs.myVotes', ['AskUs.env'])
         // Check the number of cards retreive
         totalPostNumber = postsData.number;
         if (totalPostNumber === 0) {
+          $scope.noVotes = true;
           $scope.noMoreData = true;
         }
         $scope.posts = postsData.values;

@@ -1,6 +1,7 @@
 #my-votes-page {
   .page-content {
-    .no-more-cards {
+    .no-more-cards, .no-votes {
+      margin-top: 20px;
       text-align: center;
     }
   }

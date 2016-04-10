@@ -20,6 +20,15 @@
             height: 100%;
             border-radius: 50%;
             @include backgroundImg();
+            &::before {
+              border-radius: 50%;
+              @include absolutePos(0px, 0px, 0px, 0px);
+              content:"";
+              display: block;
+              @include backgroundImg();
+              background-image: url('../img/user-default-small.png');
+              z-index: -1;
+            }
           }
           h2 {
             a {
