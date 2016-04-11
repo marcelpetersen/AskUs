@@ -10630,11 +10630,6 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
       -webkit-justify-content: center;
       -moz-justify-content: center;
       text-align: center; }
-      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .button {
-        margin-top: 30px;
-        background-color: #FF4E50;
-        color: #fff;
-        padding-top: 1px; }
       #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box .logo {
         width: 100%;
         max-width: 150px; }
@@ -10688,7 +10683,15 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
         padding: 0px 10px; }
       #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.lets-go h2 {
         padding: 0 10px;
-        line-height: 50px; }
+        line-height: 20px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.lets-go .logo {
+        margin-top: 50px;
+        display: block; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box.lets-go .button {
+        margin-top: 50px;
+        background-color: #FF4E50;
+        color: #fff;
+        padding-top: 1px; }
     #how-to-use-page .page-content .scroll .slider .slider-pager .slider-pager-page.active {
       color: #FF4E50; }
 

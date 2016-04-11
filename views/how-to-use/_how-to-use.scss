@@ -8,12 +8,6 @@
         .slider-slides {
           .slider-slide {
             @include flexCenter();
-            .button {
-              margin-top: 30px;
-              background-color: $mainColor;
-              color: $light;
-              padding-top: 1px
-            }
             .box {
               .logo {
                 width: 100%;
@@ -97,7 +91,17 @@
               &.lets-go {
                 h2 {
                   padding: 0 10px;
-                  line-height: 50px;
+                  line-height: 20px;
+                }
+                .logo {
+                  margin-top: 50px;
+                  display: block;
+                }
+                .button {
+                  margin-top: 50px;
+                  background-color: $mainColor;
+                  color: $light;
+                  padding-top: 1px
                 }
               }
             }
