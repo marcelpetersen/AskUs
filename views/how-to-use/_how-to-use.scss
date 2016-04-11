@@ -15,6 +15,10 @@
               padding-top: 1px
             }
             .box {
+              .logo {
+                width: 100%;
+                max-width: 150px;
+              }
               .icon-box {
                 display: inline-block;
                 background-color: $mainColor;

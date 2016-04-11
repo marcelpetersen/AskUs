@@ -14,10 +14,15 @@
         background: -webkit-linear-gradient(135deg, $mainColor 1%,lighten($mainColor, 10%) 100%);
         background: linear-gradient(135deg, $mainColor 1%,lighten($mainColor, 10%) 100%);
 
-        h1 {
-          color: white;
-          font-size: 60px;
-          margin-bottom: 30px;
+        .logo {
+          max-width: 250px;
+          width: 100%;
+        }
+
+        p {
+          margin-bottom: 100px;
+          color: $light;
+          font-weight: bold;
         }
 
         button {
@@ -25,7 +30,6 @@
           background-color: #3b5998;
           color: $light;
           font-weight: bold;
-          border: 1px solid #AAA;
           i {
             margin-right: 20px;
           }

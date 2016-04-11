@@ -35,6 +35,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     $scope.noMoreData = true;
+
     // Get the lastest posts
     Post.getAllPosts().then(function(postsData) {
       $scope.posts = {};

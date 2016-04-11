@@ -10236,16 +10236,18 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   -webkit-flex-direction: column;
   background: -webkit-linear-gradient(135deg, #FF4E50 1%, #ff8182 100%);
   background: linear-gradient(135deg, #FF4E50 1%, #ff8182 100%); }
-  #splash-page .page-content .section.first h1 {
-    color: white;
-    font-size: 60px;
-    margin-bottom: 30px; }
+  #splash-page .page-content .section.first .logo {
+    max-width: 250px;
+    width: 100%; }
+  #splash-page .page-content .section.first p {
+    margin-bottom: 100px;
+    color: #fff;
+    font-weight: bold; }
   #splash-page .page-content .section.first button {
     width: 80%;
     background-color: #3b5998;
     color: #fff;
-    font-weight: bold;
-    border: 1px solid #AAA; }
+    font-weight: bold; }
     #splash-page .page-content .section.first button i {
       margin-right: 20px; }
 
@@ -10633,6 +10635,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
         background-color: #FF4E50;
         color: #fff;
         padding-top: 1px; }
+      #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box .logo {
+        width: 100%;
+        max-width: 150px; }
       #how-to-use-page .page-content .scroll .slider .slider-slides .slider-slide .box .icon-box {
         display: inline-block;
         background-color: #FF4E50;
