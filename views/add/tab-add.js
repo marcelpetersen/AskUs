@@ -68,8 +68,8 @@ angular.module('AskUs.addTab', [])
       quality : 90, 
       allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
       encodingType: navigator.camera.EncodingType.JPEG,
-      targetWidth: 600,
-      targetHeight: 600,
+      targetWidth: 700,
+      targetHeight: 700,
       saveToPhotoAlbum: false
     };
   }

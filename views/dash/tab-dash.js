@@ -36,7 +36,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     $scope.noMoreData = true;
 
-    // Get the lastest posts
+    // Get the lastest 7 posts
     Post.getAllPosts().then(function(postsData) {
       $scope.posts = {};
       // remove the first element, will be display with the next post call
@@ -60,7 +60,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     if (!$scope.currentLastPost) {
       angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
-      // Get the previous last 10 posts
+      // Get the previous last 7 posts
       Post.getAllPosts().then(function(postsData) {
         // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
         var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
