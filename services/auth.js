@@ -18,28 +18,24 @@ angular.module('AskUs.authService', [])
 
       var userDataToSave = authData.facebook;
       var firebase = new Firebase(FirebaseUrl + '/');
-      // ********* Previous *********
-      // var userRef = firebase.child("users/" + authData.facebook.id);
       var userRef = firebase.child("users/");
 
       // Check if the user exist in the DB
       userRef.orderByChild("id").equalTo(authData.facebook.id).once("value", function(snapshot) {
-        console.log(snapshot.exists());
         if (!snapshot.exists()) {
           // Create new user in the database
-          // ******** Previous used push() otherwise set() *********
           userRef.push(userDataToSave, function(error, authData) {
             if (error) {
-              console.log("saving Failed!", error);
+              //console.log("saving Failed!", error);
               $rootScope.$emit('errorModal');
             } else {
-              console.log('saving ok');
+              //console.log('saving ok');
               // Redirection to the how to use page
               $state.go('how-to-use');
             }
           });
         } else {
-          console.log('user already exists');
+          //console.log('user already exists');
           // Redirect to Dash page
           $state.go('tab.dash');
         }
@@ -59,7 +55,7 @@ angular.module('AskUs.authService', [])
   };
 
   var suspendAccountFacebook = function(id) {
-    //Get FB access token for removeing app permission
+    // Get FB access token for removeing app permission
     var currentUser = currentUserInfos.currentUserInfoGet();
     var currentUserFBToken = currentUser.accessToken;
 
@@ -67,7 +63,7 @@ angular.module('AskUs.authService', [])
       method: 'DELETE',
       url: ProductionAPI + '/api/user/delete/'+ id
     }).success(function successCallback(response) {
-        console.log('delete success');
+        //console.log('delete success');
 
         FB.api('/me/permissions?access_token=' + currentUserFBToken, 'delete', function(responseFB) {
           Auth.$unauth();
@@ -83,7 +79,7 @@ angular.module('AskUs.authService', [])
 
       return response;
     }).error(function(response) {
-      console.log('error deleting user')
+      //console.log('error deleting user')
     });
   };
 
@@ -93,5 +89,4 @@ angular.module('AskUs.authService', [])
     logoutFacebook: logoutFacebook,
     suspendAccountFacebook: suspendAccountFacebook
   };
-
 }]);

@@ -20,13 +20,15 @@ angular.module('AskUs.searchService', [])
       var inputUpperCase = input.toUpperCase();
       var inputLowerCase = input.toLowerCase();
 
-      firebase.orderByChild(key).startAt(input).endAt(input + "~").limitToFirst(5).once("value", function(snapshot) {  // strict
+      // Strict Seach
+      firebase.orderByChild(key).startAt(input).endAt(input + "~").limitToFirst(5).once("value", function(snapshot) {
         var strictSearch = snapshot.val();
         if (!strictSearch) {
           strictSearch = {};
         }
 
-        firebase.orderByChild(key).startAt(inputUpperCase).endAt(inputLowerCase + "~").limitToFirst(10).once("value", function(largeSnapshot) {  // large
+        // Large Search
+        firebase.orderByChild(key).startAt(inputUpperCase).endAt(inputLowerCase + "~").limitToFirst(10).once("value", function(largeSnapshot) {
           var largeSearch = largeSnapshot.val();
           if (!largeSearch) {
             largeSearch = {};

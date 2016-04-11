@@ -10,9 +10,7 @@
     </ion-refresher>  
 
     <section class="posts-list-container">
-
-    <post class="list card fadein-effect" ng-repeat="post in posts | toArray | orderBy : '-time'" data-postid="{{::post.$key}}" ng-init="checkVote(post)"></post>
-
+      <post class="list card fadein-effect" ng-repeat="post in posts | toArray | orderBy : '-time'" data-postid="{{::post.$key}}" ng-init="checkVote(post)"></post>
     </section>
 
     <ion-infinite-scroll

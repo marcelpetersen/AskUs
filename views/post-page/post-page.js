@@ -172,9 +172,6 @@ angular.module('AskUs.postPage', ['AskUs.env'])
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
       post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
 
-      // // Update post object
-      // $scope.post.voters[currentUser.id] = element;
-
       // Add post to the update list for the Dash & Dash Filter pages
       Vote.addVoteToUpdate("dash-page", $scope.postId, element, post.totalA, post.totalB);
       Vote.addVoteToUpdate("dash-filter-page", $scope.postId, element, post.totalA, post.totalB);
@@ -186,7 +183,7 @@ angular.module('AskUs.postPage', ['AskUs.env'])
     }, function(error){
       angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading').addClass('hide');
       angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading .loading-icon').removeClass('spin');
-      console.log("vote failed");
+      //console.log("vote failed");
       if (error.noPost) {
         $scope.openNoPostModal();
 
@@ -289,7 +286,7 @@ angular.module('AskUs.postPage', ['AskUs.env'])
         angular.element('.form-modal .btn-form-submit').prop("disabled",false);
       }, function(error){
         angular.element('.form-modal .message-input-loading .loading-icon').removeClass('spin');
-        console.log("Comment failed");
+        //console.log("Comment failed");
         // Hide comment sending loading block
         $scope.commentSending = false;
         if (error.noPost) {
@@ -315,7 +312,7 @@ angular.module('AskUs.postPage', ['AskUs.env'])
     } else {
       // Show the form empty fields error
       $scope.postFormError = true;
-      console.log('Form submit error');
+      //console.log('Form submit error');
       // Hide comment sending loading block
       $scope.commentSending = false;
     }

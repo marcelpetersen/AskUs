@@ -8,7 +8,6 @@ angular.module('AskUs.acountTab', ['AskUs.env'])
     userAuth.logoutFacebook();
   };
 
-
   $scope.userPage = function(userId, userName, userPicture) {
     var user = {
       id: userId,

@@ -88,7 +88,6 @@ List of all the plugins
 * "cordova-plugin-splashscreen",
 * "cordova-plugin-statusbar",
 * "ionic-plugin-keyboard",
-* \<plugin name="cordova-plugin-inappbrowser" spec="~1.2.1" />
 * \<plugin name="cordova-plugin-file" spec="~4.1.1" />
 * \<plugin name="cordova-plugin-file-transfer" spec="~1.5.0" />
 * \<plugin name="cordova-plugin-camera" spec="~2.1.0" />

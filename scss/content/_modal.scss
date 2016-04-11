@@ -2,6 +2,7 @@
   background: transparent !important;
 }
 
+// Modal for the 2 pictures
 .image-modal {
   width: 100% !important;
   height: 100%;
@@ -11,7 +12,7 @@
     width: 100%;
     height: 100%;
     .slider-pager-page {
-      color: #FFF;
+      color: $light;
     }
     .slider-slides {
       .slider-slide {
@@ -37,12 +38,13 @@
   }
 }
 
+// Default model for modals
 .default-modal {
   @include flexCenter();
   .modal-content {
     padding: 20px;
     h3, p {
-      color: #FFF;
+      color: $light;
     }
     h3 {
       font-size: 20px;
@@ -62,11 +64,11 @@
           background-color: $stable;
         }
         &.delete {
-          color: #FFF;
+          color: $light;
           background-color: $assertive;
         }
         &.report {
-          color: #FFF;
+          color: $light;
           background-color: $energized;
         }
       }
@@ -81,17 +83,19 @@
   }
 }
 
+// Form modal
 .form-modal {
   .modal-content {
     width: 100%;
   }
 }
 
+// Picture upload modal
 .picture-upload-modal {
     @include flexCenter();
   .modal-content {
     .loading {
-      color: #FFF;
+      color: $light;
       p {
         margin-top: 20px;
       }
@@ -99,6 +103,7 @@
   }
 }
 
+// Error form modal
 .error-form-modal {
   @include flexCenter();
   .modal-content {
@@ -146,12 +151,12 @@
   }
 }
 
-// Animation Modal 
+// Zoom in Animation Modal 
 .mh-slide {
   -webkit-transform: translate3d(0, 0, 0) scale(0);
   transform: translate3d(0, 0, 0) scale(0);
-  opacity: 0
-/*    transform: rotate(0deg) scale(0.761) skew(1deg) translate(0px);*/
+  opacity: 0;
+  /* transform: rotate(0deg) scale(0.761) skew(1deg) translate(0px);*/
 }
 
 .mh-slide.ng-enter, .mh-slide > .ng-enter {

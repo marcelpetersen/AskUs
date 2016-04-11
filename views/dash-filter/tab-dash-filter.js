@@ -223,7 +223,7 @@ angular.module('AskUs.dashFilterTab', ['AskUs.env'])
 
     }, function(){
       $scope.deleteModal.hide();
-      console.log("delete failed");
+      //console.log("delete failed");
       // Show global error modal
       $scope.openErrorModal();
     })

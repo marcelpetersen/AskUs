@@ -38,19 +38,19 @@ angular.module('AskUs.addTab', [])
             $state.go('tab.dash');
           }, function() {
             $scope.closeModal();
-            console.log("Saving post failed");
+            //console.log("Saving post failed");
             // Show global error modal
             $scope.openErrorModal();
           });
         }, function() {
           $scope.closeModal();
-          console.log("Upload Picture 2 failed");
+          //console.log("Upload Picture 2 failed");
           // Show global error modal
           $scope.openErrorModal();
         });
       }, function() {
         $scope.closeModal();
-        console.log("Upload Picture 1 failed")
+        //console.log("Upload Picture 1 failed")
         // Show global error modal
         $scope.openErrorModal();
       });
@@ -58,7 +58,7 @@ angular.module('AskUs.addTab', [])
     } else {
       // Show the form empty fields error
       $scope.openErrorFormModal();
-      console.log('Form submit error');
+      //console.log('Form submit error');
     }
   }; 
 
@@ -66,7 +66,7 @@ angular.module('AskUs.addTab', [])
   if (window.cordova) {
     var options = { 
       quality : 90, 
-      allowEdit : false, // set to true to allow editing -*** BUG IOS on Camera pictures croping, not on Library pictures
+      allowEdit : false, // set to true to allow editing - *** BUG IOS on Camera pictures croping, not on Library pictures
       encodingType: navigator.camera.EncodingType.JPEG,
       targetWidth: 700,
       targetHeight: 700,
@@ -85,7 +85,7 @@ angular.module('AskUs.addTab', [])
       }
       angular.element('.picture-container.' + imageNumber).css('background-image', 'url('+imageURI+')' );
     }, function(err) {
-      console.err('error while taking picture', err);
+      //console.err('error while taking picture', err);
       // Show global error modal
       $scope.openErrorModal();
     });
@@ -102,7 +102,7 @@ angular.module('AskUs.addTab', [])
       }
       angular.element('.picture-container.' + imageNumber).css('background-image', 'url('+imageURI+')' );
     }, function(err) {
-      console.err('error while taking picture', err);
+      //console.err('error while taking picture', err);
       // Show global error modal
       $scope.openErrorModal();
     });

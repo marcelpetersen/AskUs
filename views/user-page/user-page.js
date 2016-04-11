@@ -101,17 +101,11 @@ angular.module('AskUs.userPage', ['AskUs.env'])
 
         } else {
           newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
-
-          // var newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
-          // var updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
-          // $scope.posts = updatedPost;
         }
         updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
         $scope.posts = updatedPost;
         $scope.$broadcast('scroll.infiniteScrollComplete');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
-        // $scope.$broadcast('scroll.infiniteScrollComplete');
-        // angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, function() {
         $scope.noMoreData = true;
         
@@ -129,7 +123,7 @@ angular.module('AskUs.userPage', ['AskUs.env'])
       name: userName,
       picture: userPicture
     }
-    console.log(user);
+    //console.log(user);
     usersInfos.singleUserInfoSet(user);
   }
 

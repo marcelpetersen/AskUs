@@ -19,11 +19,15 @@ angular.module('AskUs.mainController', [])
       $scope.reportModal.hide();
     }, function(){
       $scope.reportModal.hide();
-      console.log("report failed");
+      //console.log("report failed");
       // Show global error modal
       $scope.openErrorModal();
     })
   };
+
+  // ********************
+  // *** Error Modal  ***
+  // ********************
 
   $ionicModal.fromTemplateUrl('error-modal.html', {
     scope: $scope,
@@ -44,6 +48,10 @@ angular.module('AskUs.mainController', [])
     $scope.openErrorModal();
   })
 
+  // *************************
+  // *** Annoucement Modal ***
+  // *************************
+
   $ionicModal.fromTemplateUrl('special-announcement-modal.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'
@@ -62,6 +70,10 @@ angular.module('AskUs.mainController', [])
   $rootScope.$on('announcementModal', function() {
     $scope.openAnnouncementModal();
   })
+
+  // *********************
+  // *** No Post Modal ***
+  // *********************
 
   $ionicModal.fromTemplateUrl('no-post-modal.html', {
     scope: $scope,
@@ -82,6 +94,10 @@ angular.module('AskUs.mainController', [])
     $scope.openNoPostModal();
   })
 
+  // ********************
+  // *** Report Modal ***
+  // ********************
+
   $ionicModal.fromTemplateUrl('post-report-modal.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'
@@ -98,6 +114,10 @@ angular.module('AskUs.mainController', [])
   $scope.closeReportModal = function() {
     $scope.reportModal.hide();
   };
+
+  // ********************
+  // *** Images Modal ***
+  // ********************
 
   $ionicModal.fromTemplateUrl('image-modal.html', {
     scope: $scope,

@@ -68,7 +68,6 @@
             <p class="no-search-result" ng-show="!searchPost && noUsersResults">No user found</p>
             <ion-scroll ng-show="searchPost" direction="y" class="list">
               <ion-item class="item item-avatar item-icon-right fadein-effect search-results posts-results" ng-repeat="result in searchPostsResults | toArray" ng-click="closeSearchModal()" type="item-text-wrap" href="#/tab/dash/post/{{::result.$key}}/dash">
-                <!-- <img ng-src="{{::result.userPicture}}"> -->
                 <div class="user-picture" ng-style="{'background-image':'url({{::result.userPicture}})'}"></div>
                 <h2>{{::result.title}}</h2>
                 <p>{{::result.time | date : 'MMM d, y HH:mm:ss'}}</p>
@@ -78,9 +77,7 @@
 
             <ion-scroll ng-show="!searchPost" direction="y" class="list">
               <ion-item class="item item-avatar item-icon-right fadein-effect search-results users-results" ng-repeat="result in searchUsersResults | toArray" ng-click="closeSearchModal(); userPage(result.id,result.displayName,result.profileImageURL)" type="item-text-wrap" href="#/tab/dash/user/{{::result.id}}/dash">
-                <!-- <img ng-src="{{::result.profileImageURL}}"> -->
                 <div class="user-picture" ng-style="{'background-image':'url({{::result.profileImageURL}})'}"></div>
-
                 <h2>{{::result.displayName}}</h2>
                 <i class="icon ion-chevron-right icon-accessory"></i>
               </ion-item>

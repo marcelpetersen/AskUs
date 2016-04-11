@@ -135,10 +135,6 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
       // Hide voting button block and show radials
       post.hasVoted = true;
 
-      // Keep for now
-      // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-      // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').fadeIn();
-
       // Increase votes and get the ratios
       (element === "A") ? post.voteATotal++ : post.voteBTotal++;
       post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
@@ -151,7 +147,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
     }, function(error){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
-      console.log("vote failed");
+      //console.log("vote failed");
       if (error.noPost) {
         $scope.openNoPostModal();
 
@@ -180,10 +176,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
           //Show Radial block hide Buttons
           post.hasVoted = true;
           angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
-
-          // Keep for now
-          // angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-buttons-container').hide();
-          // angular.element(pageName +' .card[data-postid='+ post.$key +'] .results-container').show();
+          // Add radials votes results
           Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1, pageName);
           Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1, pageName);
         }, 0);    
@@ -247,9 +240,9 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
 
     }, function(){
       $scope.deleteModal.hide();
-      console.log("delete failed");
-        // Show global error modal
-        $scope.openErrorModal();
+      //console.log("delete failed");
+      // Show global error modal
+      $scope.openErrorModal();
     })
   };
 

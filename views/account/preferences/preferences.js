@@ -6,15 +6,17 @@ angular.module('AskUs.preferences', ['AskUs.env'])
   angular.element(pageName + " .loading").hide();
   var userInfos = currentUserInfos.currentUserInfoGet();
 
+  // Delete account and post from the user, and disconnect from Facebok App
   $scope.suspendAccountFacebook = function() {
     $scope.closeSuspendModal();
     angular.element(pageName + " .loading").show();
     angular.element(pageName +' .loading-icon').addClass('spin');
     angular.element(pageName + ' .button.suspend').prop("disabled",true);
+
     userAuth.suspendAccountFacebook(userInfos.id).then(function(response) {
-      console.log("account and posts deleted");
+      //console.log("account and posts deleted");
     }, function(error) {
-      console.log(error);
+      //console.log(error);
       angular.element(pageName + " .loading").hide();
       angular.element(pageName +' .loading-icon').removeClass('spin');
       angular.element(pageName + ' .button.suspend').prop("disabled",false);

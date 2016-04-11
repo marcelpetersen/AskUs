@@ -7,7 +7,6 @@ angular.module('AskUs.facebookService', [])
       if (errval) {
         deferred.reject(errval);
       } else {
-        // retval.connected = true;
         deferred.resolve(retval);
       }
     });
@@ -35,19 +34,20 @@ angular.module('AskUs.facebookService', [])
     
       return promise;
     },
+    
     updateFriendsList: function(friendsList) {
       if (friendsList.length > 0) {
-      var userId = currentUserInfos.currentUserInfoGet();
-      userId = userId.id;
+        var userId = currentUserInfos.currentUserInfoGet();
+        userId = userId.id;
 
-      var firebase = new Firebase(FirebaseUrl + '/');
-      var userRef = firebase.child("users/" + userId + "/friends/");
-      userRef.set(friendsList, function(snapshot) {
-        console.log('friend list saved');
-      });
-    } else {
-      console.log('no friend to store');
-    }
+        var firebase = new Firebase(FirebaseUrl + '/');
+        var userRef = firebase.child("users/" + userId + "/friends/");
+        userRef.set(friendsList, function(snapshot) {
+          //console.log('friend list saved');
+        });
+      } else {
+        //console.log('no friend to store');
+      }
     }
   }
 }]);

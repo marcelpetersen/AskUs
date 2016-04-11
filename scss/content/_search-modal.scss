@@ -13,7 +13,7 @@
         transition: all 0.3s ease;
         &.active {
           background-color: $mainColor;
-          color: white;
+          color: $light;
         }
         &.inactive {
           background-color: #EEE;

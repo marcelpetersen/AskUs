@@ -157,7 +157,7 @@ angular.module('AskUs.myVotes', ['AskUs.env'])
     }, function(error){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
-      console.log("vote failed");
+      //console.log("vote failed");
       if (error.noPost) {
         $scope.openNoPostModal();
 
@@ -211,7 +211,7 @@ angular.module('AskUs.myVotes', ['AskUs.env'])
 
     }, function(){
       $scope.deleteModal.hide();
-      console.log("delete failed");
+      //console.log("delete failed");
       // Show global error modal
       $scope.openErrorModal();
     })

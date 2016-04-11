@@ -71,7 +71,7 @@
                 background-color: #EEE;
                 width: 48%;
                 padding-bottom: 48%;
-                @include backgroundImg()
+                @include backgroundImg();
                 border-radius: 3px;
                 &.picture-A {
                   float: left;

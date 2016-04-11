@@ -15,23 +15,21 @@ angular.module('AskUs.announcementService', [])
   return {
     getSpecialAnnouncement: function() {
       var deferred = $q.defer();
-
       var announcement;
 
       var firebase = new Firebase(FirebaseUrl + '/announcement');
       firebase.once('value', function(snapshot, error) {
         if(!error){
-          console.log('getting announcement');
+          //console.log('getting announcement');
           var data = snapshot.val();
           resolve(null, data, deferred);
         } else {
           resolve(error, null, deferred);
-          console.log("error getting announcement")
+          //console.log("error getting announcement")
         }
       })
       promise = deferred.promise;
       return promise;
     }
   }
-
 }]);

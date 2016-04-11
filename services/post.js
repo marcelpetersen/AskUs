@@ -89,7 +89,7 @@ angular.module('AskUs.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts/' + id );
       firebase.once("value", function(snapshot) {
-        console.log('first posts added');
+        //console.log('Post added');
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -102,7 +102,7 @@ angular.module('AskUs.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('time').limitToLast(7).once("value", function(snapshot) {
-        console.log('first posts added');
+        // console.log('First posts added');
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -115,7 +115,7 @@ angular.module('AskUs.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('time').endAt(timestamp).limitToLast(7).once("value", function(snapshot) {
-        console.log('more posts added');
+        //console.log('More posts added');
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -128,7 +128,7 @@ angular.module('AskUs.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild("voters/" + id).startAt("A").endAt("B").limitToLast(limit).once("value", function(snapshot) {
-        console.log('first posts added');
+        // console.log('First posts added');
         resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -141,7 +141,7 @@ angular.module('AskUs.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild("voters/"+ id).startAt("A").endAt("B").limitToLast(actual + limit).once("value", function(snapshot) {
-        console.log('more post added');
+        // console.log('More posts added');
         resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);

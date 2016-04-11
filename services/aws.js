@@ -15,6 +15,7 @@ angular.module('AskUs.awsServices', [])
       options.mimeType = "image/jpeg";
       options.chunkedMode = false;
  
+      // Get the signature from the the server
       $http.post(signingURI, {"fileName": fileName})
           .then(function (data) {
               options.params = {
@@ -25,18 +26,18 @@ angular.module('AskUs.awsServices', [])
                   "signature": data.data.signature,
                   "Content-Type": "image/jpeg"
               };
-
+              // Upload pictures
               ft.upload(imageURI, "https://" + data.data.bucket + ".s3.amazonaws.com/",
                   function (e) {
                       q.resolve(e);
                   },
                   function (e) {
-                      alert("Upload failed");
+                      //alert("Upload failed");
                       q.reject(e);
                   }, options);
 
           }, function (error) {
-              console.log('fail', JSON.stringify(error));
+              //console.log('fail', JSON.stringify(error));
           });
       return q.promise;
     }
@@ -44,7 +45,4 @@ angular.module('AskUs.awsServices', [])
     return {
         upload: upload
     }
-
 }]);
-
-

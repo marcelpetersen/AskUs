@@ -19,10 +19,6 @@ var DEVELOPMENT_FILES = ['views/**/*.js', 'services/**/*.js'];
 var SASS_FILES = ['./scss/**/*.scss', 'views/**/*.scss'];
 var HTML_FILES = ['views/**/*.html'];
 
-// var paths = {
-//   sass: ['./scss/**/*.scss']
-// };
-
 gulp.task('ios', function (cb) {
   exec('ionic run ios --target="iPhone-6"', function (err, stdout, stderr) {
     console.log(stdout);
