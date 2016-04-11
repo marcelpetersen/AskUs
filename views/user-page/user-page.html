@@ -16,9 +16,10 @@
 
      <section class="posts-list-container">
 
-     <div class="no-post" ng-show="noPost">
-       <p>No post yet</p>
-     </div>
+      <div class="no-post" ng-show="noPost">
+        <p>No post yet</p>
+      </div>
+
       <div class="list card fadein-effect" ng-repeat="post in posts | toArray | orderBy : '-time'" data-postid="{{::post.$key}}">
 
         <div class="item item-header">
@@ -36,7 +37,7 @@
             <div class="picture picture-B" ng-style="{'background-image':'url({{::post.pictureB}})'}" ng-click="goToSlide(1); modalPictureUpdate(post)"></div>
           </div>
 
-          <h2 class="post-title">{{::post.title}}</h2>
+          <!-- <h2 class="post-title">{{::post.title}}</h2> -->
           <pre class="post-description">{{::post.description}}</pre>
           <p class="votes-messages-count">
             <span class="subdued"><i class="ion-android-checkmark-circle"></i> {{post.voteATotal + post.voteBTotal}}</span>
@@ -45,6 +46,8 @@
         </div>
 
       </div>
+      <p class="no-more-cards" ng-hide="noPost" ng-if="noMoreData">No more posts</p>
+      
     </section>
 
     <ion-infinite-scroll
@@ -52,10 +55,7 @@
       on-infinite="loadMore()"
       icon="ion-load-c"
       distance="1%">
-    </ion-infinite-scroll>
-
-    <p class="no-more-cards" ng-hide="noPost" ng-if="noMoreData">No more posts</p>
-    
+    </ion-infinite-scroll>    
 
   </ion-content>
 </ion-view>

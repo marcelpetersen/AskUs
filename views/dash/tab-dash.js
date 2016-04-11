@@ -35,6 +35,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
   $scope.doRefresh = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     $scope.noMoreData = true;
+    angular.element(pageName +' .no-more-cards').addClass('hide-refresh');
 
     // Get the lastest 7 posts
     Post.getAllPosts().then(function(postsData) {
@@ -47,11 +48,13 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
 
       $timeout(function(){
         $scope.noMoreData = false;
+        angular.element(pageName +' .no-more-cards').removeClass('hide-refresh');
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, 1500);
     }, function() {
       $scope.openErrorModal();
       $scope.$broadcast('scroll.refreshComplete');
+      angular.element(pageName +' .no-more-cards').removeClass('hide-refresh');
       angular.element(pageName +' .icon-refreshing').removeClass('spin');
     }); 
   };

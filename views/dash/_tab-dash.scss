@@ -3,6 +3,9 @@
     .no-more-cards {
       text-align: center;
       color: $grey;
+      &.hide-refresh {
+        display: none !important;
+      }
     }
   }
 }

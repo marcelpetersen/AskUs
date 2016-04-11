@@ -10225,6 +10225,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 .search-modal .modal-content .posts-results-container .no-search-result {
   text-align: center; }
 
+#splash-page .scroll-content {
+  padding-top: 1px; }
+
 #splash-page .page-content .section.first {
   display: flex;
   display: -webkit-flex;
@@ -10315,6 +10318,8 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
 #dash-page .page-content .no-more-cards {
   text-align: center;
   color: #999; }
+  #dash-page .page-content .no-more-cards.hide-refresh {
+    display: none !important; }
 
 #dash-filter-page .page-content .no-more-posts, #dash-filter-page .page-content .no-post {
   text-align: center;
@@ -10408,10 +10413,9 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
         float: left; }
       #user-page .page-content .posts-list-container .card .item-body .item-image .picture.picture-B {
         float: right; }
-  #user-page .page-content .posts-list-container .card .item-body .post-title {
-    font-weight: bold; }
   #user-page .page-content .posts-list-container .card .item-body .post-description {
-    font-size: 14px; }
+    font-size: 14px;
+    margin-top: 15px; }
   #user-page .page-content .posts-list-container .card .item-body .votes-messages-count .subdued {
     padding-right: 10px;
     color: #888;
