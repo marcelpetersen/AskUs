@@ -95,5 +95,8 @@ List of all the plugins
 * \<plugin name="com.bez4pieci.cookies" spec="https://github.com/bez4pieci/Phonegap-Cookies-Plugin.git" />
 * \<plugin name="cordova-plugin-google-analytics" spec="~0.8.1" />
 * \<plugin name="cordova-plugin-device" spec="~1.1.1" />
+* \<plugin name="cordova-plugin-statusbar" spec="~2.1.2" />
+* \<plugin name="cordova-plugin-splashscreen" spec="~3.2.1" />
+* \<plugin name="cordova-plugin-inappbrowser" spec="~1.3.0" />
 
 
