@@ -67,8 +67,9 @@
             .images-container {
               overflow: hidden;
               .picture {
+                border: 1px solid $lightGrey;
                 position: relative;
-                background-color: #EEE;
+                background-color: $lightGrey;
                 width: 48%;
                 padding-bottom: 48%;
                 @include backgroundImg();

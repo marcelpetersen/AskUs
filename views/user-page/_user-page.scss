@@ -92,7 +92,8 @@
           .item-image {
             padding-bottom: 16px;
             .picture {
-              background-color: #EEE;
+              border: 1px solid $lightGrey;
+              background-color: $lightGrey;
               width: 48%;
               padding-bottom: 48%;
               background-size: cover;

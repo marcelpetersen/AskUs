@@ -9895,6 +9895,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
     .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container {
       overflow: hidden; }
       .post-pages .page-content .posts-list-container .card .item-body .item-image .images-container .picture {
+        border: 1px solid #EEE;
         position: relative;
         background-color: #EEE;
         width: 48%;
@@ -10404,6 +10405,7 @@ body.menu-open .bar-header .header-item .left-buttons .side-menu {
   #user-page .page-content .posts-list-container .card .item-body .item-image {
     padding-bottom: 16px; }
     #user-page .page-content .posts-list-container .card .item-body .item-image .picture {
+      border: 1px solid #EEE;
       background-color: #EEE;
       width: 48%;
       padding-bottom: 48%;

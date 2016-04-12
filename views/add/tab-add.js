@@ -65,11 +65,11 @@ angular.module('AskUs.addTab', [])
   // Picture saving options
   if (window.cordova) {
     var options = { 
-      quality : 90, 
+      quality : 50, // 90
       allowEdit : false, // set to true to allow editing - *** BUG IOS on Camera pictures croping, not on Library pictures
       encodingType: navigator.camera.EncodingType.JPEG,
-      targetWidth: 700,
-      targetHeight: 700,
+      targetWidth: 1300, //750-800
+      targetHeight: 1300, //750-800
       saveToPhotoAlbum: false
     };
   }

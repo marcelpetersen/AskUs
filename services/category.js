@@ -75,8 +75,8 @@ angular.module('AskUs.categoriesService', [])
           icon: "ion-ios-game-controller-b"
         },
         {
-          name: "nature",
-          icon: "ion-ios-flower"
+          name: "movies",
+          icon: "ion-ios-film"
         },
         {
           name: "people",

@@ -214,8 +214,8 @@ angular.module('AskUs.postPage', ['AskUs.env'])
             //Show Radial block hide Buttons
             post.hasVoted = true;
             angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +']').addClass('voted voted-'+ post.voters[currentUser.id]);
-            Vote.addRadial("A", $scope.postId, '#33cd5f', post.totalA, 1, pageName + '.'+ $scope.parentCategory);
-            Vote.addRadial("B", $scope.postId, '#387ef5', post.totalB, 1, pageName + '.'+ $scope.parentCategory);
+            Vote.addRadial("A", $scope.postId, '#33cd5f', post.totalA, 1000, pageName + '.'+ $scope.parentCategory);
+            Vote.addRadial("B", $scope.postId, '#387ef5', post.totalB, 1000, pageName + '.'+ $scope.parentCategory);
           }, 0);    
         }
       }
