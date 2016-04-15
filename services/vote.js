@@ -1,6 +1,6 @@
 angular.module('AskUs.voteService', [])
 
-.factory('Vote', ['$q', '$rootScope', '$timeout', 'FirebaseUrl', 'currentUserInfos', function($q, $rootScope, $timeout, FirebaseUrl, currentUserInfos) {
+.factory('Vote', ['$q', '$rootScope', '$timeout', 'FirebaseUrl', 'currentUserInfos', 'Post', function($q, $rootScope, $timeout, FirebaseUrl, currentUserInfos, Post) {
 
   resolve = function(errval, retval, deferred) {
     $rootScope.$apply(function() {
@@ -156,6 +156,75 @@ angular.module('AskUs.voteService', [])
       // Clear the vote to update object
       voteUpdateList[pageName] = {};
       return;
+    },
+
+    postVote: function(post, element, pageName, scope) {
+      scope.openNoPostModal();
+      scope.openErrorModal();
+      angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').addClass('spin');
+      angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
+      var that = this;
+      this.addVote(post.$key, element).then(function(){
+        angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
+        angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
+
+        // Hide voting button block and show radials
+        post.hasVoted = true;
+
+        // Increase votes and get the ratios
+        (element === "A") ? post.voteATotal++ : post.voteBTotal++;
+        post.totalA = that.calculTotalRatio(post.voteATotal, post.voteBTotal);
+        post.totalB = that.calculTotalRatio(post.voteBTotal, post.voteATotal);
+
+        // Create the Radials
+        that.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
+        that.addRadial("B", post.$key, '#387ef5', post.totalB, 1000, pageName);
+
+      }, function(error){
+        angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
+        angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
+        //console.log("vote failed");
+        if (error.noPost) {
+          scope.openNoPostModal();
+
+          // Add post to the delete list for the Dash & Dash Filter & user pages
+          Post.addPostToDelete("dash-filter-page", post.$key);
+          Post.addPostToDelete("user-page", post.$key);
+          Post.addPostToDelete("my-votes-page", post.$key);
+
+          angular.element(pageName +' .card[data-postid='+ post.$key +']').fadeOut();
+        } else {
+          // Show global error modal
+          scope.openErrorModal();
+        }
+      })
+    },
+
+    checkVote: function(post, pageName) {
+      var currentUser = currentUserInfos.currentUserInfoGet();
+      // Check if user has vote this post
+      if (post.voters) {
+        if (post.voters[currentUser.id]) {
+          post.totalA = this.calculTotalRatio(post.voteATotal, post.voteBTotal);
+          post.totalB = this.calculTotalRatio(post.voteBTotal, post.voteATotal);
+          // Timeout required for updating the view and render the radials
+          var that = this;
+          $timeout(function(){
+            //Show Radial block hide Buttons
+            post.hasVoted = true;
+            angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
+            // Add radials votes results
+            that.addRadial("A", post.$key, '#33cd5f', post.totalA, 1, pageName);
+            that.addRadial("B", post.$key, '#387ef5', post.totalB, 1, pageName);
+          }, 0);    
+        }
+      }
+      // check if user own post
+      if (post.userId === currentUser.id) {
+        $timeout(function(){
+          angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('my-post');
+        }, 0);
+      }
     }
   }
 

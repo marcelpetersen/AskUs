@@ -11,6 +11,12 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
   $scope.noMoreData = false;
   $scope.currentLastPost;
   $scope.postDelete = {};
+  // Search Variables
+  $scope.searchPostsResults = {};
+  $scope.searchUsersResults = {};
+  $scope.noPostsResults = false;
+  $scope.noUsersResults = false;
+  $scope.searchPost = true;
 
   // Check the Post to delete and update when coming back to the page
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
@@ -125,77 +131,17 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
   };
 
   // ****** Vote functions ******
+  // Save User's vote and display results
   $scope.vote = function(post, element) {
-    angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').addClass('spin');
-    angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
-    Vote.addVote(post.$key, element).then(function(){
-      angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
-      angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ element);
+    Vote.postVote(post, element, pageName, $scope);
+  }
 
-      // Hide voting button block and show radials
-      post.hasVoted = true;
-
-      // Increase votes and get the ratios
-      (element === "A") ? post.voteATotal++ : post.voteBTotal++;
-      post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
-      post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
-
-      // Create the Radials
-      Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
-      Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1000, pageName);
-
-    }, function(error){
-      angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
-      angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
-      //console.log("vote failed");
-      if (error.noPost) {
-        $scope.openNoPostModal();
-
-        // Add post to the delete list for the Dash & Dash Filter & user pages
-        Post.addPostToDelete("dash-filter-page", post.$key);
-        Post.addPostToDelete("user-page", post.$key);
-        Post.addPostToDelete("my-votes-page", post.$key);
-
-        angular.element(pageName +' .card[data-postid='+ post.$key +']').fadeOut();
-      } else {
-        // Show global error modal
-        $scope.openErrorModal();
-      }
-    })
-  };
-
+  // Check User's vote
   $scope.checkVote = function(post) {
-    var currentUser = currentUserInfos.currentUserInfoGet();
-    // Check if user has vote this post
-    if (post.voters) {
-      if (post.voters[currentUser.id]) {
-        post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
-        post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
-        // Timeout required for updating the view and render the radials
-        $timeout(function(){
-          //Show Radial block hide Buttons
-          post.hasVoted = true;
-          angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
-          // Add radials votes results
-          Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1, pageName);
-          Vote.addRadial("B", post.$key, '#387ef5', post.totalB, 1, pageName);
-        }, 0);    
-      }
-    }
-    // check if user own post
-    if (post.userId === currentUser.id) {
-      $timeout(function(){
-        angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('my-post');
-      }, 0);
-    }
+    Vote.checkVote(post, pageName);
   };
 
-  $scope.searchPostsResults = {};
-  $scope.searchUsersResults = {};
-  $scope.noPostsResults = false;
-  $scope.noUsersResults = false;
-  $scope.searchPost = true;
-
+  // ****** Search functions ******
   $scope.submitSearch = function(form, searchByPost) {
     var resultsContainer = angular.element('.posts-results-container').offset();
     angular.element('.posts-results-container .list').css('height', screen.height - resultsContainer.top + 'px');
@@ -230,6 +176,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
     }
   }
 
+  // ****** Delete post function ******
   $scope.deletePost = function(id) {
     Post.deletePost(id).then(function(){
       angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);
@@ -237,7 +184,6 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
 
       Post.addPostToDelete("my-votes-page", id);
       Post.addPostToDelete("user-page", id);
-
     }, function(){
       $scope.deleteModal.hide();
       //console.log("delete failed");
@@ -247,6 +193,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
   };
 
   // ****** Modal functions ******
+  // Delete post modal
   $ionicModal.fromTemplateUrl('post-delete-modal.html', {
     scope: $scope,
     animation: 'mh-slide' //'slide-in-up'
@@ -264,6 +211,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
     $scope.deleteModal.hide();
   };
 
+  // Post or user search modal
   $ionicModal.fromTemplateUrl('search-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
