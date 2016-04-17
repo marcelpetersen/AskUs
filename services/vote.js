@@ -103,64 +103,7 @@ angular.module('AskUs.voteService', [])
       return voteUpdateList;
     },
 
-    voteUpdate: function(pageName) {
-      for (var key in voteUpdateList[pageName]) {
-      
-          //Show Radial block hide Buttons
-          angular.element('#' + pageName +' .card[data-postid='+ key +']').addClass('voted voted-'+ voteUpdateList[pageName][key].element);
-          angular.element('#' + pageName +' .card[data-postid='+ key +'] .vote-buttons-container').addClass('ng-hide');
-          angular.element('#' + pageName +' .card[data-postid='+ key +'] .results-container').removeClass('ng-hide');
-
-          var radialA = new RadialProgressChart('#' + pageName + ' .results-A[data-postid='+ key +']', {
-            diameter: 80,
-            max: 100,
-            round: false,
-            series: [{
-              value: voteUpdateList[pageName][key].totalA,
-              color: '#FF4E50' //'#33cd5f'
-            }],
-            animation: {
-                duration: 1
-            },
-             shadow: {
-                width: 1
-            },
-            stroke: {
-                width: 10,
-                gap: 2
-            },
-            center: voteUpdateList[pageName][key].totalA + ' %'
-          });
-
-          var radialB = new RadialProgressChart('#' + pageName + ' .results-B[data-postid='+ key +']', {
-            diameter: 80,
-            max: 100,
-            round: false,
-            series: [{
-              value: voteUpdateList[pageName][key].totalB,
-              color: '#FF4E50' //'#387ef5'
-            }],
-            animation: {
-                duration: 1
-            },
-             shadow: {
-                width: 1
-            },
-            stroke: {
-                width: 10,
-                gap: 2
-            },
-            center: voteUpdateList[pageName][key].totalB + ' %'
-          });
-      }
-      // Clear the vote to update object
-      voteUpdateList[pageName] = {};
-      return;
-    },
-
     postVote: function(post, element, pageName, scope) {
-      scope.openNoPostModal();
-      scope.openErrorModal();
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').addClass('spin');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
       var that = this;
@@ -225,6 +168,64 @@ angular.module('AskUs.voteService', [])
           angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('my-post');
         }, 0);
       }
+    },
+
+    voteUpdate: function(pageName) {
+      for (var key in voteUpdateList[pageName]) {
+      
+          //Show Radial block hide Buttons
+          angular.element('#' + pageName +' .card[data-postid='+ key +']').addClass('voted voted-'+ voteUpdateList[pageName][key].element);
+          angular.element('#' + pageName +' .card[data-postid='+ key +'] .vote-buttons-container').addClass('ng-hide');
+          angular.element('#' + pageName +' .card[data-postid='+ key +'] .results-container').removeClass('ng-hide');
+
+          this.addRadial("A", key, '#33cd5f', voteUpdateList[pageName][key].totalA, 1, '#' + pageName);
+          this.addRadial("B", key, '#387ef5', voteUpdateList[pageName][key].totalB, 1, '#' + pageName);
+
+          // var radialA = new RadialProgressChart('#' + pageName + ' .results-A[data-postid='+ key +']', {
+          //   diameter: 80,
+          //   max: 100,
+          //   round: false,
+          //   series: [{
+          //     value: voteUpdateList[pageName][key].totalA,
+          //     color: '#FF4E50' //'#33cd5f'
+          //   }],
+          //   animation: {
+          //       duration: 1
+          //   },
+          //    shadow: {
+          //       width: 1
+          //   },
+          //   stroke: {
+          //       width: 10,
+          //       gap: 2
+          //   },
+          //   center: voteUpdateList[pageName][key].totalA + ' %'
+          // });
+
+          // var radialB = new RadialProgressChart('#' + pageName + ' .results-B[data-postid='+ key +']', {
+          //   diameter: 80,
+          //   max: 100,
+          //   round: false,
+          //   series: [{
+          //     value: voteUpdateList[pageName][key].totalB,
+          //     color: '#FF4E50' //'#387ef5'
+          //   }],
+          //   animation: {
+          //       duration: 1
+          //   },
+          //    shadow: {
+          //       width: 1
+          //   },
+          //   stroke: {
+          //       width: 10,
+          //       gap: 2
+          //   },
+          //   center: voteUpdateList[pageName][key].totalB + ' %'
+          // });
+      }
+      // Clear the vote to update object
+      voteUpdateList[pageName] = {};
+      return;
     }
   }
 

@@ -48,7 +48,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
       $scope.posts = {};
       // remove the first element, will be display with the next post call
       var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
-      $scope.currentLastPost = cleanedData.currentLastPost
+      $scope.currentLastPost = cleanedData.currentLastPost;
       $scope.posts = cleanedData.obj;
       $scope.$broadcast('scroll.refreshComplete');
 
@@ -74,7 +74,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
         // Delete the last element, will be added by the next loadmore call (Firebase returns the last element of the time range)
         var cleanedData = Post.getAndDeleteFirstElementInObject(postsData);
         // Get the last element timestamp
-        $scope.currentLastPost = cleanedData.currentLastPost
+        $scope.currentLastPost = cleanedData.currentLastPost;
         $scope.posts = cleanedData.obj;
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -97,13 +97,13 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
         // Check if the last post is equal to the previous one, so the last post in the DB
         if ($scope.currentLastPost === currentLastPostTemp) {
           $scope.noMoreData = true;
-          var updatedPostFinal = angular.extend({}, $scope.posts, postsData)
+          var updatedPostFinal = angular.extend({}, $scope.posts, postsData);
           $scope.posts = updatedPostFinal;
         } else {
           $scope.currentLastPost = currentLastPostTemp;
           // Delete the element because already exist in the original Data
           delete postsData[lastPostId];
-          var updatedPost = angular.extend({}, $scope.posts, postsData)
+          var updatedPost = angular.extend({}, $scope.posts, postsData);
           $scope.posts = updatedPost;
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');

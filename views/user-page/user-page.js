@@ -63,7 +63,7 @@ angular.module('AskUs.userPage', ['AskUs.env'])
     angular.element(pageName +' .icon-refreshing').addClass('spin');
     if (totalPostNumber === 0) {
       angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 130) + 'px');
-      // Get the previous last 5 posts
+      // Get the last 5 posts
       Post.getPostsById($scope.user.id, newPostLimit).then(function(postsData) {
         // Increase the total possible number of posts displayed
         postTotalMax += newPostLimit;
@@ -90,17 +90,16 @@ angular.module('AskUs.userPage', ['AskUs.env'])
         angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
       });
     } else {
+      // Get the previous last 5 posts
       Post.getPostsByIdInfinite($scope.user.id, totalPostNumber, newPostLimit).then(function(postsData) {
         postTotalMax += newPostLimit;
         totalPostNumber = postsData.number;
-        // Less posts than the max possible, then the is no more post available
+        // Less posts than the max possible, then there is no more post available
         if( postsData.number !== postTotalMax ) {
           $scope.noMoreData = true;
-
-          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit - (postTotalMax - postsData.number))
-
+          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit - (postTotalMax - postsData.number));
         } else {
-          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit)
+          newObjToAdd = Categories.getFirstXElements(postsData.values , newPostLimit);
         }
         updatedPost = angular.extend({}, $scope.posts, newObjToAdd);
         $scope.posts = updatedPost;
@@ -108,7 +107,6 @@ angular.module('AskUs.userPage', ['AskUs.env'])
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
       }, function() {
         $scope.noMoreData = true;
-        
         // Show global error modal
         $scope.openErrorModal();
         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -123,7 +121,6 @@ angular.module('AskUs.userPage', ['AskUs.env'])
       name: userName,
       picture: userPicture
     }
-    //console.log(user);
     usersInfos.singleUserInfoSet(user);
   }
 

@@ -39,7 +39,6 @@ angular.module('AskUs', [
   'AskUs.legals'
 ])
 
-// .constant('FirebaseUrl', 'https://ionic-fboauth.firebaseio.com/')
 .service('rootRef', ['FirebaseUrl', Firebase])
 .config(['$compileProvider', '$ionicConfigProvider', function($compileProvider, $ionicConfigProvider){
   // Modify global animation ios/android/none
