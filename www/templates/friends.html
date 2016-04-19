@@ -16,7 +16,7 @@
 
     <ion-list>
     
-      <ion-item class="item-avatar item-icon-right fadein-effect" ng-repeat="friend in friendsList" on-touch="friendPage(friend)" type="item-text-wrap" href="#/tab/friends/user/{{::friend.id}}/friends">
+      <ion-item class="item-avatar item-icon-right fadein-effect" ng-repeat="friend in friendsList | orderBy : 'name'" on-touch="friendPage(friend)" type="item-text-wrap" href="#/tab/friends/user/{{::friend.id}}/friends">
         <img ng-src="{{::friend.picture.data.url}}">
         <h2>{{::friend.name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
