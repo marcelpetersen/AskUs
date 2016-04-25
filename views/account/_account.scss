@@ -2,12 +2,7 @@
   .page-content {
     .list {
       .account-tab-user {
-        display: flex;
-        display: -webkit-flex;
-        align-items: center;
-        -webkit-align-items: center;
-        justify-content: center;
-        -webkit-justify-content: center;
+        @include flexCenter();
         flex-direction:column;
         -webkit-flex-direction:column;
         border:none;
@@ -24,7 +19,6 @@
 
           background: -webkit-linear-gradient(180deg, $mainColor 1%,lighten($mainColor, 10%) 100%);
           background: linear-gradient(180deg, $mainColor 1%,lighten($mainColor, 10%) 100%);
-
           z-index: -1;
         }
         .user-pic {

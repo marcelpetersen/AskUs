@@ -41,8 +41,7 @@ angular.module('AskUs', [
 
 .service('rootRef', ['FirebaseUrl', Firebase])
 .config(['$compileProvider', '$ionicConfigProvider', function($compileProvider, $ionicConfigProvider){
-  // Modify global animation ios/android/none
-  // $ionicConfigProvider.views.transition('android')
+  // $ionicConfigProvider.views.transition('android')   // Modify global animation ios/android/none
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
   // Tabs position IOS and Android
   $ionicConfigProvider.tabs.position('bottom');
@@ -50,7 +49,7 @@ angular.module('AskUs', [
 .run(['$ionicPlatform', '$window', 'FBAppId', 'GoogleAnalyticsId', 'userAuth', '$rootScope', '$state', '$ionicScrollDelegate', '$ionicNavBarDelegate', 'Announcement', function($ionicPlatform, $window, FBAppId, GoogleAnalyticsId, userAuth, $rootScope, $state, $ionicScrollDelegate, $ionicNavBarDelegate, Announcement) { 
 
   $ionicPlatform.ready(function() {
-    console.log("App launch Device Ready");
+    // console.log("App launch Device Ready");
 
     // Check special announcement
     Announcement.getSpecialAnnouncement().then(function(announcement) {

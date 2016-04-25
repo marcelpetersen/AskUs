@@ -13,25 +13,25 @@ angular.module('AskUs.facebookService', [])
   }
   return {
     getFriends: function($scope, userDetail) {
-        var deferred = $q.defer();
-        if (userDetail) {
-          userDetail = JSON.parse(userDetail);
-          // FACEBOOK GET FRIENDS LIST
-          FB.api(
-            "/" + userDetail.facebook.id + "/friends?access_token=" + userDetail.facebook.accessToken + "&fields=name,id,email,picture.width(200).height(200)",
-            function (response) {
-              if (response && !response.error) {
-                resolve(null, response.data, deferred);
-              } else {
-                resolve(response.error, null, deferred);
-              }
+      var deferred = $q.defer();
+
+      if (userDetail) {
+        userDetail = JSON.parse(userDetail);
+        // FACEBOOK GET FRIENDS LIST
+        FB.api(
+          "/" + userDetail.facebook.id + "/friends?access_token=" + userDetail.facebook.accessToken + "&fields=name,id,email,picture.width(200).height(200)",
+          function (response) {
+            if (response && !response.error) {
+              resolve(null, response.data, deferred);
+            } else {
+              resolve(response.error, null, deferred);
             }
-          );
-        } else {
-          resolve(null, "no friend", deferred);
-        }
-         promise = deferred.promise;
-    
+          }
+        );
+      } else {
+        resolve(null, "no friend", deferred);
+      }
+      promise = deferred.promise;
       return promise;
     },
     
@@ -43,10 +43,10 @@ angular.module('AskUs.facebookService', [])
         var firebase = new Firebase(FirebaseUrl + '/');
         var userRef = firebase.child("users/" + userId + "/friends/");
         userRef.set(friendsList, function(snapshot) {
-          //console.log('friend list saved');
+        // console.log('friend list saved');
         });
       } else {
-        //console.log('no friend to store');
+        // console.log('no friend to store');
       }
     }
   }

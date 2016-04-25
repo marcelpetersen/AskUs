@@ -189,14 +189,6 @@ angular.module('AskUs.postPage', ['AskUs.env'])
     })
   };
 
-  angular.element('body').on('focus', '.message-textarea', function() {
-    angular.element('.form-modal').addClass('focus')
-  })
-
-  angular.element('body').on('focusout', '.message-textarea', function() {
-    angular.element('.form-modal').removeClass('focus')
-  })
-
   // Add Message function
   $scope.submitMessage = function(form) {
     // Show comment sending loading block
@@ -258,6 +250,14 @@ angular.module('AskUs.postPage', ['AskUs.env'])
       $scope.commentSending = false;
     }
   }; 
+
+  angular.element('body').on('focus', '.message-textarea', function() {
+    angular.element('.form-modal').addClass('focus')
+  })
+
+  angular.element('body').on('focusout', '.message-textarea', function() {
+    angular.element('.form-modal').removeClass('focus')
+  })
 
   // ****** Modal functions ******
   // --- Delete Modal Form ---

@@ -25,7 +25,7 @@ angular.module('AskUs.announcementService', [])
           resolve(null, data, deferred);
         } else {
           resolve(error, null, deferred);
-          //console.log("error getting announcement")
+          // console.log("error getting announcement")
         }
       })
       promise = deferred.promise;

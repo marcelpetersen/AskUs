@@ -67,6 +67,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
 
   $scope.loadMore = function() {
     angular.element(pageName +' .icon-refreshing').addClass('spin');
+    // First call on page load
     if (!$scope.currentLastPost) {
       angular.element(pageName +' ion-infinite-scroll').css('margin-top', ((screen.height / 2) - 90) + 'px');
       // Get the previous last 7 posts
@@ -88,6 +89,7 @@ angular.module('AskUs.dashTab', ['AskUs.env'])
         angular.element(pageName +' .icon-refreshing').removeClass('spin');
         angular.element(pageName +' ion-infinite-scroll').css('margin-top', '0px');
       });
+    // Load more data
     } else {
       Post.getAllPostsInfinite($scope.currentLastPost).then(function(postsData) {
         var firstElement = Post.getFirstElementInObject(postsData);

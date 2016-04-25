@@ -157,7 +157,7 @@ angular.module('AskUs.myVotes', ['AskUs.env'])
     }, function(error){
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').addClass('hide');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').removeClass('spin');
-      //console.log("vote failed");
+      // console.log("vote failed");
       if (error.noPost) {
         $scope.openNoPostModal();
 
@@ -183,7 +183,7 @@ angular.module('AskUs.myVotes', ['AskUs.env'])
         post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
         // Timeout required for updating the view and render the radials
         $timeout(function(){
-          //Show Radial block hide Buttons
+          // Show Radial block hide Buttons
           post.hasVoted = true;
           angular.element(pageName +' .card[data-postid='+ post.$key +']').addClass('voted voted-'+ post.voters[currentUser.id]);
           Vote.addRadial("A", post.$key, '#33cd5f', post.totalA, 1, pageName);
@@ -211,7 +211,7 @@ angular.module('AskUs.myVotes', ['AskUs.env'])
 
     }, function(){
       $scope.deleteModal.hide();
-      //console.log("delete failed");
+      // console.log("delete failed");
       // Show global error modal
       $scope.openErrorModal();
     })

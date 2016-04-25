@@ -17,7 +17,7 @@ angular.module('AskUs.categoriesService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('category').equalTo(category).limitToLast(limit).once("value", function(snapshot) {
-        //console.log('First posts added');
+        // console.log('First posts added');
         resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -30,7 +30,7 @@ angular.module('AskUs.categoriesService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('category').equalTo(category).limitToLast(actual + limit).once("value", function(snapshot) {
-        //console.log('More posts added');
+        // console.log('More posts added');
         resolve(null, {values: snapshot.val(), number: snapshot.numChildren()}, deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);

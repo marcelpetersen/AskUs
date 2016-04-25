@@ -115,7 +115,7 @@ angular.module('AskUs.postService', [])
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('time').endAt(timestamp).limitToLast(7).once("value", function(snapshot) {
-        //console.log('More posts added');
+        // console.log('More posts added');
         resolve(null, snapshot.val(), deferred);
       }, function (errorObject) {
         resolve(errorObject.code, null, deferred);
@@ -180,7 +180,7 @@ angular.module('AskUs.postService', [])
 
     postToDelete: function(pageName) {
       for (var key in postDeleteList[pageName]) {
-        //Remove element from the page
+        // Remove element from the page
         angular.element('#' + pageName +' .card[data-postid='+ key +']').fadeOut();      
       }
       // Clear the vote to update object

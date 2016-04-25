@@ -202,5 +202,4 @@ angular.module('AskUs.voteService', [])
       return;
     }
   }
-
 }]);

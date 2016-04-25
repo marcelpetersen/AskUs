@@ -38,24 +38,24 @@ angular.module('AskUs.commentsService', [])
               }, function(error, committed, snapshot) {
                 if (error) {
                   resolve(error, null, deferred);
-                  //console.log('Transaction failed abnormally!', error);
+                  // console.log('Transaction failed abnormally!', error);
                 } else if (!committed) {
                   resolve(error, null, deferred);
-                  //console.log('comment not saved (because already exists).');
+                  // console.log('comment not saved (because already exists).');
                 } else {
                   resolve(null, 'ok', deferred);
-                  //console.log('comment saved db!');
+                  // console.log('comment saved db!');
                 }
               });
             } else {
               resolve(error, null, deferred);
-              //console.log("comment ko");
+              // console.log("comment ko");
             }
           });
         } else {
-          var noPostErr = {noPost: true} 
+          var noPostErr = {noPost: true};
           resolve(noPostErr, null, deferred);
-          //console.log("post doesn't exist anymore");
+          // console.log("post doesn't exist anymore");
         }
       })
       promise = deferred.promise;
