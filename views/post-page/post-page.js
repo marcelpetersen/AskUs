@@ -156,77 +156,18 @@ angular.module('AskUs.postPage', ['AskUs.env'])
     }
   };
 
-    // ****** Vote functions ******
+  // ****** Vote functions ******
+  // Save User's vote and display results
   $scope.vote = function(post, element) {
-    angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading .loading-icon').addClass('spin');
-    angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading').removeClass('hide');
-    Vote.addVote($scope.postId, element).then(function(){
-      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading .loading-icon').removeClass('spin');
-      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +']').addClass('voted voted-'+ element);
+    Vote.postVote(post, element, pageName, $scope, $scope.postId);
+  }
 
-      // Hide voting button block and show radials
-      post.hasVoted = true;
-
-      // Increase votes and get the ratios
-      (element === "A") ? post.voteATotal++ : post.voteBTotal++;
-      post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
-      post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
-
-      // Add post to the update list for the Dash & Dash Filter pages
-      Vote.addVoteToUpdate("dash-page", $scope.postId, element, post.totalA, post.totalB);
-      Vote.addVoteToUpdate("dash-filter-page", $scope.postId, element, post.totalA, post.totalB);
-
-      // Create the Radials
-      Vote.addRadial("A", $scope.postId, '#33cd5f', post.totalA, 1000, pageName + '.'+ $scope.parentCategory);
-      Vote.addRadial("B", $scope.postId, '#387ef5', post.totalB, 1000, pageName + '.'+ $scope.parentCategory);
-
-    }, function(error){
-      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading').addClass('hide');
-      angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +'] .vote-loading .loading-icon').removeClass('spin');
-      //console.log("vote failed");
-      if (error.noPost) {
-        $scope.openNoPostModal();
-
-        // Add post to the delete list for the Dash & Dash Filter & user pages
-        Post.addPostToDelete("dash-page", $scope.postId);
-        Post.addPostToDelete("dash-filter-page", $scope.postId);
-        Post.addPostToDelete("user-page", $scope.postId);
-        Post.addPostToDelete("my-votes-page", $scope.postId);
-
-        // Go Back to the previous view
-        $ionicHistory.goBack();
-      } else {
-        // Show global error modal
-        $scope.openErrorModal();
-      }
-    })
-  };
-
+  // Check User's vote
   $scope.checkVote = function(post) {
-    var currentUser = currentUserInfos.currentUserInfoGet();
-    // Check if user has vote this post
-      if (post.voters) {
-        if (post.voters[currentUser.id]) {
-          post.totalA = Vote.calculTotalRatio(post.voteATotal, post.voteBTotal);
-          post.totalB = Vote.calculTotalRatio(post.voteBTotal, post.voteATotal);
-          // Timeout required for updating the view and render the radials
-          $timeout(function(){
-            //Show Radial block hide Buttons
-            post.hasVoted = true;
-            angular.element(pageName + '.'+ $scope.parentCategory +' .card[data-postid='+ $scope.postId +']').addClass('voted voted-'+ post.voters[currentUser.id]);
-            Vote.addRadial("A", $scope.postId, '#33cd5f', post.totalA, 1, pageName + '.'+ $scope.parentCategory);
-            Vote.addRadial("B", $scope.postId, '#387ef5', post.totalB, 1, pageName + '.'+ $scope.parentCategory);
-          }, 0);    
-        }
-      }
-    // check if user own post
-    if (post.userId === currentUser.id) {
-      $timeout(function(){
-        angular.element(pageName +' .card[data-postid='+ $scope.postId +']').addClass('my-post');
-      }, 0);
-    }
+    Vote.checkVote(post, pageName, $scope.postId);
   };
 
+  // Delete post function
   $scope.deletePost = function(id) {
     Post.deletePost(id).then(function(){
       angular.element(pageName +' .card[data-postid='+ id +']').fadeOut(500);

@@ -103,7 +103,11 @@ angular.module('AskUs.voteService', [])
       return voteUpdateList;
     },
 
-    postVote: function(post, element, pageName, scope) {
+    postVote: function(post, element, pageName, scope, postId) {
+      if (postId) {
+        post.$key = postId;
+      }
+
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading .loading-icon').addClass('spin');
       angular.element(pageName +' .card[data-postid='+ post.$key +'] .vote-loading').removeClass('hide');
       var that = this;
@@ -118,6 +122,14 @@ angular.module('AskUs.voteService', [])
         (element === "A") ? post.voteATotal++ : post.voteBTotal++;
         post.totalA = that.calculTotalRatio(post.voteATotal, post.voteBTotal);
         post.totalB = that.calculTotalRatio(post.voteBTotal, post.voteATotal);
+
+        // Add post to the update list
+        if(pageName === "#dash-filter-page") {
+          that.addVoteToUpdate("dash-page", post.$key, element, post.totalA, post.totalB);
+        } else if (pageName === "#post-page") {
+          that.addVoteToUpdate("dash-page", post.$key, element, post.totalA, post.totalB);
+          that.addVoteToUpdate("dash-filter-page", post.$key, element, post.totalA, post.totalB);
+        }
 
         // Create the Radials
         that.addRadial("A", post.$key, '#33cd5f', post.totalA, 1000, pageName);
@@ -134,6 +146,7 @@ angular.module('AskUs.voteService', [])
           Post.addPostToDelete("dash-filter-page", post.$key);
           Post.addPostToDelete("user-page", post.$key);
           Post.addPostToDelete("my-votes-page", post.$key);
+          Post.addPostToDelete("dash-page", post.$key);
 
           angular.element(pageName +' .card[data-postid='+ post.$key +']').fadeOut();
         } else {
@@ -143,7 +156,11 @@ angular.module('AskUs.voteService', [])
       })
     },
 
-    checkVote: function(post, pageName) {
+    checkVote: function(post, pageName, postId) {
+      if (postId) {
+        post.$key = postId;
+      }
+
       var currentUser = currentUserInfos.currentUserInfoGet();
       // Check if user has vote this post
       if (post.voters) {
@@ -172,7 +189,6 @@ angular.module('AskUs.voteService', [])
 
     voteUpdate: function(pageName) {
       for (var key in voteUpdateList[pageName]) {
-      
           //Show Radial block hide Buttons
           angular.element('#' + pageName +' .card[data-postid='+ key +']').addClass('voted voted-'+ voteUpdateList[pageName][key].element);
           angular.element('#' + pageName +' .card[data-postid='+ key +'] .vote-buttons-container').addClass('ng-hide');
@@ -180,48 +196,6 @@ angular.module('AskUs.voteService', [])
 
           this.addRadial("A", key, '#33cd5f', voteUpdateList[pageName][key].totalA, 1, '#' + pageName);
           this.addRadial("B", key, '#387ef5', voteUpdateList[pageName][key].totalB, 1, '#' + pageName);
-
-          // var radialA = new RadialProgressChart('#' + pageName + ' .results-A[data-postid='+ key +']', {
-          //   diameter: 80,
-          //   max: 100,
-          //   round: false,
-          //   series: [{
-          //     value: voteUpdateList[pageName][key].totalA,
-          //     color: '#FF4E50' //'#33cd5f'
-          //   }],
-          //   animation: {
-          //       duration: 1
-          //   },
-          //    shadow: {
-          //       width: 1
-          //   },
-          //   stroke: {
-          //       width: 10,
-          //       gap: 2
-          //   },
-          //   center: voteUpdateList[pageName][key].totalA + ' %'
-          // });
-
-          // var radialB = new RadialProgressChart('#' + pageName + ' .results-B[data-postid='+ key +']', {
-          //   diameter: 80,
-          //   max: 100,
-          //   round: false,
-          //   series: [{
-          //     value: voteUpdateList[pageName][key].totalB,
-          //     color: '#FF4E50' //'#387ef5'
-          //   }],
-          //   animation: {
-          //       duration: 1
-          //   },
-          //    shadow: {
-          //       width: 1
-          //   },
-          //   stroke: {
-          //       width: 10,
-          //       gap: 2
-          //   },
-          //   center: voteUpdateList[pageName][key].totalB + ' %'
-          // });
       }
       // Clear the vote to update object
       voteUpdateList[pageName] = {};

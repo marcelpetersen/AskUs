@@ -150,7 +150,7 @@ angular.module('AskUs.postService', [])
       return promise;
     },
 
-     getPostsById: function(id, limit) {
+    getPostsById: function(id, limit) {
       var deferred = $q.defer();
       var firebase = new Firebase(FirebaseUrl + '/posts');
       firebase.orderByChild('userId').equalTo(id).limitToLast(limit).once("value", function(snapshot) {
