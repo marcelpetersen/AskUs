@@ -1,14 +1,17 @@
 # AskUs Application
 
-Get the App here :
+AskUs is available only on mobile iOS devices<br>
+Get the iOS App here :
 [AskUs on AppStore](https://itunes.apple.com/us/app/askus/id1102293993)
 
 Please check the website at :
 [AskUs Website](https://askus-app.herokuapp.com/#/)
 
-AskUs application helps people to share post and ask the community to make a choice between 2 elements of a post by voting.<br>
+AskUs application, helps people to share post and ask the community to make a choice between 2 elements of a post by voting.
+
 AskUs uses Facebook for user login. User can check if their friends are using the application and check their posts<br>
-AskUs is available only on mobile devices.
+
+![AskUs Pictures](Documentations/readme-app-pictures.png?raw=true "AskUs Pictures")
 
 ## Technologies Stack
 ---
@@ -82,20 +85,17 @@ Install the ios 4.1.0 version `cordova platform add ios@4.1.0`
 
 List of all the plugins
 
-* "cordova-plugin-device",
 * "cordova-plugin-console",
 * "cordova-plugin-whitelist",
-* "cordova-plugin-splashscreen",
-* "cordova-plugin-statusbar",
 * "ionic-plugin-keyboard",
-* \<plugin name="cordova-plugin-file" spec="~4.1.1" />
-* \<plugin name="cordova-plugin-file-transfer" spec="~1.5.0" />
-* \<plugin name="cordova-plugin-camera" spec="~2.1.0" />
-* \<plugin name="com.bez4pieci.cookies" spec="https://github.com/bez4pieci/Phonegap-Cookies-Plugin.git" />
-* \<plugin name="cordova-plugin-google-analytics" spec="~0.8.1" />
-* \<plugin name="cordova-plugin-device" spec="~1.1.1" />
-* \<plugin name="cordova-plugin-statusbar" spec="~2.1.2" />
-* \<plugin name="cordova-plugin-splashscreen" spec="~3.2.1" />
-* \<plugin name="cordova-plugin-inappbrowser" spec="~1.3.0" />
+* "cordova-plugin-file", "~4.1.1"
+* "cordova-plugin-file-transfer", "~1.5.0"
+* "cordova-plugin-camera", "~2.1.0"
+* "com.bez4pieci.cookies", "https://github.com/bez4pi/Phonegap-Cookies-Plugin.git" />
+* "cordova-plugin-google-analytics", "~0.8.1"
+* "cordova-plugin-device", "~1.1.1"
+* "cordova-plugin-statusbar", "~2.1.2"
+* "cordova-plugin-splashscreen", "~3.2.1"
+* "cordova-plugin-inappbrowser", "~1.3.0"
 
 
